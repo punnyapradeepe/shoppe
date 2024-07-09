@@ -1,12 +1,25 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import LoginScreen from './App/Screens/LoginScreen';
+import { useFonts } from 'expo-font';
 
+let customFonts = {
+  'Raleway': require('./assets/Fonts/Raleway-Regular.ttf'),
+  'RalewayM':require('./assets/Fonts/Raleway-Medium.ttf'),
+  'RalewayEL':require('./assets/Fonts/Raleway-ExtraBold.ttf'),
+  'RalewayB':require('./assets/Fonts/Raleway-Bold.ttf')
+};
 export default function App() {
+  const [isLoaded] = useFonts(customFonts);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <>
+    {isLoaded?<View style={styles.container}>
+      <LoginScreen/>
       <StatusBar style="auto" />
-    </View>
+    </View>:
+    <ActivityIndicator />}
+    </>
   );
 }
 
