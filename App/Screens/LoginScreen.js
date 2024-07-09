@@ -9,26 +9,31 @@ export default function LoginScreen() {
 
   return (
     <View style={styles.container}>
+      <View style={{alignItems:'center' ,paddingTop:80}}>
       <View style={styles.ellipse}>
         <Image source={require('./../../assets/Images/loginImg.png')} style={styles.loginImg} />
       </View>
       <Text style={styles.text}>Shoppe</Text>
       <View style={{ alignItems: 'center', padding: 10 }}>
-        <Text>Beautiful eCommerce UI Kit</Text>
-        <Text style={{ padding: 10 }}>for your online store</Text>
+        <Text style={{fontSize:20}}>Beautiful eCommerce UI Kit</Text>
+        <Text style={{ padding: 10 ,fontSize:20}}>for your online store</Text>
       </View>
       <View>
+      </View >
+      <View style={{paddingTop:50}}>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('createAcc')}>
           <Text style={styles.buttonText}>Let's Get Started</Text>
         </TouchableOpacity>
         <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: 50 }}>
           <Text style={{ padding: 10 }}>I already have an account</Text>
-          <TouchableOpacity style={styles.circleButton}>
+          <TouchableOpacity style={styles.circleButton} onPress={() => navigation.navigate('signIn')}>
             <AntDesign name="arrowright" size={24} color={Colors.WHITE} />
           </TouchableOpacity>
+          </View>
         </View>
       </View>
-    </View>
+      </View>
+    
   );
 }
 
@@ -45,6 +50,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
+    elevation: 20,
+    shadowColor: '#52006A',
+    shadowColor: '#171717',
+    shadowOffset: {width: 0, height: 8},
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   },
   loginImg: {
     width: 90,
@@ -72,6 +83,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'Regular',
   },
+  
   circleButton: {
     width: 30,
     height: 30,
