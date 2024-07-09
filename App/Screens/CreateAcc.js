@@ -1,8 +1,11 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, TextInput, Button } from 'react-native';
 import React from 'react';
 import Colors from '../Utils/Colors';
+import { ShowPassword } from '../Utils/SvgIcons';
+import { useNavigation } from '@react-navigation/core';
 
 export default function CreateAcc() {
+  const navigation = useNavigation();
   return (
     <View style={styles.mainContainer}>
       <View style={{ position: 'relative' }}>
@@ -15,11 +18,13 @@ export default function CreateAcc() {
         <TextInput placeholder='Email' style={styles.textInput} />
         <View style={styles.passwordContainer}>
           <TextInput placeholder='Password' style={styles.passwordInput} />
-          <Image style={styles.eyeIcon} source={require('./../../assets/Images/eye-slash.png')} />
+        
+          <ShowPassword />
+         
         </View>
         <View style={styles.numberSection}>
           <View style={styles.imageContainer}>
-            <Image style={styles.phoneIcon} source={require('./../../assets/Images/india.png')} />
+            <Image style={styles.indiaIcon} source={require('./../../assets/Images/india.png')} />
           </View>
           <TextInput placeholder='Your number' style={styles.textInputNum} />
         </View>
@@ -27,8 +32,10 @@ export default function CreateAcc() {
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Done</Text>
+          </TouchableOpacity>
+        <TouchableOpacity style={{backgroundColor:Colors.WHITE}} onPress={() => navigation.navigate('LoginScreen')}>
+          <Text>Cancel</Text>
         </TouchableOpacity>
-        <Text style={styles.cancelText}>Cancel</Text>
       </View>
     </View>
   );
@@ -38,6 +45,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     justifyContent: 'center',
+    backgroundColor:Colors.WHITE
   },
   container: {
     paddingHorizontal: '10%',
@@ -61,6 +69,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginTop: 20,
     color: Colors.BLACK,
+    height:50
   },
   passwordContainer: {
     flexDirection: 'row',
@@ -74,6 +83,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     color: Colors.BLACK,
+    height:50
   },
   eyeIcon: {
     marginLeft: 10,
@@ -86,13 +96,13 @@ const styles = StyleSheet.create({
   imageContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: 50, // width to match the aspect ratio of the image
+    width: 50,
     height: 50,
     backgroundColor: '#F8F8F8',
     borderRadius: 8,
     marginRight: 10,
   },
-  phoneIcon: {
+  indiaIcon: {
     width: 24,
     height: 24,
   },
@@ -102,27 +112,31 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 8,
     color: Colors.BLACK,
+    height:50
   },
   buttonContainer: {
     alignItems: 'center',
     marginTop: 'auto',
-    marginBottom: 20,
+    marginBottom:20,
+
   },
   button: {
     height: 61,
     width: 330,
+    marginTop: 63,
     backgroundColor: Colors.PRIMARY,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 20,
-    marginBottom: 10,
+    marginBottom: 20,
+    alignSelf: 'center',
+
   },
+ 
   buttonText: {
     color: Colors.WHITE,
     fontSize: 18,
     fontFamily: 'Regular',
   },
-  cancelText: {
-    textAlign: 'center',
-  },
+ 
 });
