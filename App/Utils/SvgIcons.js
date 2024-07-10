@@ -1,4 +1,5 @@
-import  Svg,{Path}  from "react-native-svg";
+import { Image } from "react-native";
+import  Svg,{Defs, Path, Pattern, Rect}  from "react-native-svg";
 
 
 export const ShowPassword = ()=>(

@@ -23,7 +23,7 @@ export default function SigninScreen() {
 
 
       </View>
-      <View  style={{right:0,top:'40%', position: 'absolute',}}>
+      <View  style={{right:0,top:'35%', position: 'absolute',}}>
       <Image
             style={{}}
             source={require('./../../assets/Images/bubble 04.png')}
@@ -34,29 +34,33 @@ export default function SigninScreen() {
         <Image
  
             source={require('./../../assets/Images/bubble 05.png')}
+        />
+         </View>
 
-          />
-                            <View style={{position:'absolute',left:0}}>
-           <Text style={styles.text}>Login</Text>
+
+
+
+          <View style={{position:'absolute',left:0,top:350}}>
+
+          <Text style={styles.text}>Login</Text>
           <View style={{display:'flex' ,flexDirection:'row'}}>
-            <Text style={{fontSize:17,paddingLeft:20}}>Good to see you back! </Text>
-            <View style={{marginTop:3}}>
+            <Text style={{fontSize:17,paddingLeft:20,paddingTop:10}}>Good to see you back! </Text>
+            <View style={{paddingTop:10}}>
             <HeartImg/>
             </View>
-          </View>
-        <TextInput placeholder='Email' style={styles.textInput} />
-      </View> 
-   
-          
-          </View>
-          {/* <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button}>
+           
+            </View>
+            <TextInput placeholder='Email' style={styles.textInput} />
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('password')}>
           <Text style={styles.buttonText}>Next</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{backgroundColor:Colors.WHITE}} onPress={() => navigation.navigate('LoginScreen')}>
-          <Text>Cancel</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
+          <Text style={{left:'40%'}}>Cancel</Text>
         </TouchableOpacity>
-          </View> */}
+
+          </View>
+          
+
     </View>
   );
 }
@@ -72,11 +76,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#F8F8F8',
     padding: 10,
     borderRadius: 8,
-    marginTop: 20,
+    marginTop: 30,
     marginHorizontal: 20,
     color: Colors.BLACK,
     height: 50,
-    width:320
+    width:320,
+    
   },
   buttonContainer: {
     alignItems: 'center',
