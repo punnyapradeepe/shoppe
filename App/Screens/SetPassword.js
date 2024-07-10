@@ -1,9 +1,10 @@
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import React from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput } from 'react-native'
+import React from 'react'
 import Colors from '../Utils/Colors';
-import { EllipsImg, TickImg } from '../Utils/SvgIcons';
+import { useNavigation } from '@react-navigation/core';
 
-export default function ForgotScreen({ navigation }) {
+export default function SetPassword() {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.backgroundImagesContainer}>
@@ -23,30 +24,37 @@ export default function ForgotScreen({ navigation }) {
           source={require('./../../assets/Images/artist-2 1 (1).png')}
           style={styles.profileImage}
         />
-        <Text style={styles.title}>Password Recovery</Text>
-        <Text style={styles.subtitle}>How you would like to restore</Text>
-        <Text style={styles.subtitle}>your password?</Text>
+        <Text style={styles.title}>Setup New Password</Text>
+        <Text style={styles.subtitle}>Please, setup a new password for</Text>
+        <Text style={styles.subtitle}>your account</Text>
       </View>
 
-      <View style={styles.buttonGroup}>
-        <TouchableOpacity style={[styles.btn, styles.smsBtn]}>
-          <Text style={{ color: Colors.PRIMARY, fontWeight:'bold',paddingLeft:'30%' }}>SMS</Text>
-          <View style={{paddingLeft:'44%'}}>
-          <TickImg />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.btn, styles.emailBtn]}>
-          <Text style={{ color: Colors.BLACK, fontWeight:'bold',paddingLeft:'30%' }}>Email</Text>
-          <View style={{paddingLeft:'40%'}}>
-          <EllipsImg/>
-          </View>
-        </TouchableOpacity>
-      </View>
+<View>
+  <TextInput placeholder='New Password' style={{width: 300,height:50,top:180,color:'#F5F5F5',backgroundColor: '#F8F8F8',
+    padding: 10,
+    borderRadius: 8,
+    marginTop: 20,
+    color: Colors.BLACK,
+    textAlign:'center'}}></TextInput>
+  <TextInput placeholder='Repeat Password' style={{width: 300,height:50,top:200,color:'#F5F5F5',backgroundColor: '#F8F8F8',
+    padding: 10,
+    borderRadius: 8,
+    marginTop: 10,
+    color: Colors.BLACK,
+    textAlign:'center'
+   }}></TextInput>
+</View>
 
-      <TouchableOpacity style={styles.nextButton} onPress={()=>navigation.navigate('recovery')}>
-        <Text style={styles.buttonText}>Next</Text>
+
+
+
+
+
+
+      <TouchableOpacity style={styles.nextButton} onPress={()=>navigation.navigate('home')}>
+        <Text style={styles.buttonText}>Save</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('password')}>
+      <TouchableOpacity >
         <Text style={styles.cancelText}>Cancel</Text>
       </TouchableOpacity>
     </View>
@@ -75,7 +83,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     position: 'absolute',
     top: '18%',
-    left: '20%',
+    left: '15%',
   },
   ellipseImage: {
     position: 'relative',
@@ -94,31 +102,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 17,
   },
-  buttonGroup: {
-    marginTop: 190,
-    alignItems: 'center',
-  },
-  btn: {
-    marginTop: 10,
-    borderRadius: 99,
-    paddingVertical: 10,
-    paddingHorizontal: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 200,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  smsBtn: {
-    backgroundColor: '#F0F8FF',
-  },
-  emailBtn: {
-    backgroundColor: '#FFE4E1', 
-  },
   nextButton: {
     height: 61,
     width: 330,
-    marginTop: 115,
+    marginTop:290,
     backgroundColor: Colors.PRIMARY,
     justifyContent: 'center',
     alignItems: 'center',
@@ -131,5 +118,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'Regular',
   },
+  
   
 });

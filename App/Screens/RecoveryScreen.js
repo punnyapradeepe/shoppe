@@ -1,9 +1,10 @@
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import React from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput } from 'react-native'
+import React from 'react'
 import Colors from '../Utils/Colors';
-import { EllipsImg, TickImg } from '../Utils/SvgIcons';
+import { useNavigation } from '@react-navigation/core';
 
-export default function ForgotScreen({ navigation }) {
+export default function RecoveryScreen() {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.backgroundImagesContainer}>
@@ -24,28 +25,22 @@ export default function ForgotScreen({ navigation }) {
           style={styles.profileImage}
         />
         <Text style={styles.title}>Password Recovery</Text>
-        <Text style={styles.subtitle}>How you would like to restore</Text>
-        <Text style={styles.subtitle}>your password?</Text>
+        <Text style={styles.subtitle}>Enter 4-digits code we sent you</Text>
+        <Text style={styles.subtitle}>on your phone number</Text>
+        <Text style={{fontWeight:'bold',paddingTop:20,fontSize:17}}>+91********00</Text>
       </View>
 
-      <View style={styles.buttonGroup}>
-        <TouchableOpacity style={[styles.btn, styles.smsBtn]}>
-          <Text style={{ color: Colors.PRIMARY, fontWeight:'bold',paddingLeft:'30%' }}>SMS</Text>
-          <View style={{paddingLeft:'44%'}}>
-          <TickImg />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.btn, styles.emailBtn]}>
-          <Text style={{ color: Colors.BLACK, fontWeight:'bold',paddingLeft:'30%' }}>Email</Text>
-          <View style={{paddingLeft:'40%'}}>
-          <EllipsImg/>
-          </View>
-        </TouchableOpacity>
-      </View>
+      <View style={styles.container2}>
+          <TextInput style={styles.input} />
+          <TextInput style={styles.input} />
+          <TextInput style={styles.input} />
+          <TextInput style={styles.input} />
+        </View>
 
-      <TouchableOpacity style={styles.nextButton} onPress={()=>navigation.navigate('recovery')}>
-        <Text style={styles.buttonText}>Next</Text>
+        <TouchableOpacity style={styles.nextButton1} onPress={()=>navigation.navigate('setPass')}>
+        <Text style={styles.buttonText}>Send Again</Text>
       </TouchableOpacity>
+     
       <TouchableOpacity onPress={() => navigation.navigate('password')}>
         <Text style={styles.cancelText}>Cancel</Text>
       </TouchableOpacity>
@@ -55,7 +50,7 @@ export default function ForgotScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.WHITE,
+    backgroundColor:Colors.WHITE,
     flex: 1,
     alignItems: 'center',
   },
@@ -90,41 +85,53 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 10,
   },
+  container2: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 5,
+    alignItems: 'center',
+    marginTop: 30,
+   
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 99,
+    width: 20,
+    height: 20,
+    textAlign: 'center',
+    marginLeft:'2.3%',
+    marginTop:200,
+    backgroundColor:'#F0F8FF',
+  },
   subtitle: {
     marginTop: 10,
     fontSize: 17,
   },
-  buttonGroup: {
-    marginTop: 190,
-    alignItems: 'center',
-  },
-  btn: {
-    marginTop: 10,
-    borderRadius: 99,
-    paddingVertical: 10,
-    paddingHorizontal: 40,
-    alignItems: 'center',
+  nextButton1: {
+    height: 59,
+    width: 240,
+    marginTop: 170,
+    backgroundColor: '#FF1493',
     justifyContent: 'center',
-    width: 200,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderRadius: 20,
+    marginBottom: 20,
+    alignSelf: 'center',
+    borderRadius:20
   },
-  smsBtn: {
-    backgroundColor: '#F0F8FF',
-  },
-  emailBtn: {
-    backgroundColor: '#FFE4E1', 
-  },
+ 
   nextButton: {
-    height: 61,
-    width: 330,
-    marginTop: 115,
+    height: 59,
+    width: 240,
+    marginTop: 5,
     backgroundColor: Colors.PRIMARY,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 20,
     marginBottom: 20,
     alignSelf: 'center',
+    borderRadius:20
   },
   buttonText: {
     color: Colors.WHITE,

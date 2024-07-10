@@ -25,7 +25,7 @@ export default function LoginScreen() {
           <Text style={styles.buttonText}>Let's Get Started</Text>
         </TouchableOpacity>
         <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: 50 }}>
-          <Text style={{ padding: 10 }}>I already have an account</Text>
+          <Text style={{ padding: 10 ,marginLeft:'5%'}}>I already have an account</Text>
           <TouchableOpacity style={styles.circleButton} onPress={() => navigation.navigate('signIn')}>
             <AntDesign name="arrowright" size={24} color={Colors.WHITE} />
           </TouchableOpacity>

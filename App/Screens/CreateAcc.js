@@ -30,7 +30,7 @@ export default function CreateAcc() {
         </View>
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={()=>navigation.navigate('signIn')}>
           <Text style={styles.buttonText}>Done</Text>
           </TouchableOpacity>
         <TouchableOpacity style={{backgroundColor:Colors.WHITE}} onPress={() => navigation.navigate('LoginScreen')}>

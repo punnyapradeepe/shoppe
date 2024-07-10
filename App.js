@@ -9,6 +9,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SigninScreen from './App/Screens/SigninScreen';
 import PasswordScreen from './App/Screens/PasswordScreen';
 import ForgotScreen from './App/Screens/ForgotScreen';
+import RecoveryScreen from './App/Screens/RecoveryScreen';
+import SetPassword from './App/Screens/SetPassword';
+import HomeScreen from './App/Screens/HomeScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -34,6 +37,9 @@ export default function App() {
         <Stack.Screen name="signIn" component={SigninScreen} options={{ headerShown: false }}/>
         <Stack.Screen name="password" component={PasswordScreen} options={{ headerShown: false }}/>
         <Stack.Screen name="forgot" component={ForgotScreen} options={{ headerShown: false }}/>
+        <Stack.Screen name="recovery" component={RecoveryScreen} options={{ headerShown: false }}/>
+        <Stack.Screen name="setPass" component={SetPassword} options={{ headerShown: false }}/>
+        <Stack.Screen name="home" component={HomeScreen} options={{ headerShown: false }}/>
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>
