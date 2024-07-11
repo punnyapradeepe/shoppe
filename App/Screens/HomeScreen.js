@@ -1,13 +1,51 @@
-import { View, Text, Image, StyleSheet } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
+import { View, Text, Image, StyleSheet, Dimensions, FlatList, TouchableOpacity } from 'react-native';
 import Colors from './../Utils/Colors';
+import { useNavigation } from '@react-navigation/core';
+
+const { height, width } = Dimensions.get('window');
+
+const data = [
+  {
+    id: '1',
+    imageSource: require('./../../assets/Images/HomeImg.png'),
+    text: 'Lorem ipsum dolor sit amet,. consectetur adipiscing elit. Sed non consectetur turpis. Morbi eu eleifend lacus.',
+  },
+  {
+    id: '2',
+    imageSource: require('./../../assets/Images/Placeholder_01.jpg'),
+    text: 'Lorem ipsum dolor sit amet,. consectetur adipiscing elit.',
+  },
+  {
+    id: '3',
+    imageSource: require('./../../assets/Images/HomeImg.png'),
+    text: 'Lorem ipsum dolor sit amet,. consectetur adipiscing elit. Sed non consectetur turpis. Morbi eu eleifend lacus.',
+  },
+  {
+    id: '4',
+    imageSource: require('./../../assets/Images/Placeholder_01.jpg'),
+    text: 'Lorem ipsum dolor sit amet,. consectetur adipiscing elit.',
+  },
+];
 
 export default function HomeScreen() {
+  const navigation = useNavigation();
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const renderButton = () => {
+    
+    return (
+      <TouchableOpacity onPress={() => navigation.navigate('activity')} style={styles.button}>
+        <Text style={styles.buttonText}>Let's Start</Text>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.bubblesContainer}>
         <Image
-          style={styles.bubble}
+          style={styles.bubbleTopLeft}
           source={require('./../../assets/Images/bubble 01 (3).png')}
         />
         <Image
@@ -15,31 +53,53 @@ export default function HomeScreen() {
           source={require('./../../assets/Images/bubble 02 (2).png')}
         />
       </View>
-      <View style={styles.cardContainer}>
-        <Image
-          style={styles.cardImage}
-          source={require('./../../assets/Images/Card Shape.png')}
-        />
-        <View style={styles.contentContainer}>
-          <Image
-            style={styles.homeImage}
-            source={require('./../../assets/Images/HomeImg.png')}
-          />
-          <View style={styles.textContainer}>
-            <Text style={styles.greeting}>Hello</Text>
-            <View style={styles.description}>
-              <Text>Lorem ipsum dolor sit amet,</Text>
-              <Text>  consectetur adipiscing elit.</Text>
-              <Text>Sed non consectetur turpis.</Text>
-              <Text>   Morbi eu eleifend lacus.</Text>
+      <View style={{ height: height * 0.85, justifyContent: 'center', alignItems: 'center',flex:1 }}>
+        <FlatList
+          data={data}
+          horizontal
+          pagingEnabled
+          onScroll={(e) => {
+            const x = e.nativeEvent.contentOffset.x;
+            setCurrentIndex((x / width).toFixed(0));
+          }}
+          showsHorizontalScrollIndicator={false}
+          renderItem={({ item }) => (
+            <View style={{ width, height: height * 0.85, justifyContent: 'center', alignItems: 'center' }}>
+              <View style={styles.cardContainer}>
+                {/*<Image style={styles.cardImage} source={require('./../../assets/Images/Card Shape.png')} />*/}
+                <View style={styles.contentContainer}>
+                  <Image style={styles.homeImage} source={item.imageSource} />
+                  <View style={styles.textContainer}>
+                    <Text style={styles.greeting}>{item.id === '2' || item.id === '4' ? 'Ready' : 'Hello'}</Text>
+                    <View style={styles.description}>
+                      {item.text.split('. ').map((line, index) => (
+                        <Text key={index}>{line}</Text>
+                      ))}
+                    </View>
+                    {item.id === '2' || item.id === '4' ? renderButton() : null}
+                  </View>
+                </View>
+              </View>
             </View>
-          </View>
-        </View>
+          )}
+          keyExtractor={(item) => item.id}
+        />
       </View>
-      <Image
-        style={styles.dots}
-        source={require('./../../assets/Images/Dots.png')}
-      />
+      <View style={{ flexDirection: 'row', width: width, justifyContent: 'center', alignItems: 'center' ,position:'absolute',top:'83%'}}>
+        {data.map((_, index) => (
+          <View
+            key={index}
+            style={{
+              width: currentIndex == index ? 15 : 14,
+              height: currentIndex == index ? 15 : 14,
+              borderRadius: currentIndex == index ? 99 : 90,
+              backgroundColor: currentIndex == index ? 'green' : 'gray',
+              marginLeft: 5,
+              top: '10%',
+            }}
+          />
+        ))}
+      </View>
     </View>
   );
 }
@@ -50,60 +110,94 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   bubblesContainer: {
-    position: 'relative',
+    position: 'absolute',
+    width: width,
+    height: height,
+    top: 0,
+    left: 0,
+    zIndex: -1,
   },
-  bubble: {
+  bubbleTopLeft: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: width * 0.5, 
+    height: height * 0.3, 
     resizeMode: 'contain',
   },
-  cardContainer: {
+  bubble: {
     position: 'absolute',
-    top: 70,
-    bottom: 50,
+    resizeMode: 'cover',
+    top: '40%',
+    width: width * 0.5,
+    height: height * 0.4,
+  },
+  cardContainer: {
+    width: '82%',
+    height: '89%',
+    elevation:5,
     alignItems: 'center',
-    right: 10,
-    left: 10,
+    marginBottom: 20,
+    top: 65,
+    position: 'relative',
+    backgroundColor:'white',
+    borderRadius:30
   },
   cardImage: {
     resizeMode: 'contain',
-    position: 'relative',
-    height: 680,
-    width: 3020,
+    width: '100%',
+    height: '100%',
   },
   contentContainer: {
     position: 'absolute',
-    width:'90%',
-    top:0,
-    left:9
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   homeImage: {
-    resizeMode: 'contain',
     position: 'absolute',
-    width:322,
-    borderTopLeftRadius: 50,
-    borderTopRightRadius: 50,
+    top: 0,
+    width: '100%',
+    height: height * 0.45,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    resizeMode: 'cover',
   },
   textContainer: {
     position: 'absolute',
+    top: '50%',
+    alignItems: 'center',
   },
   greeting: {
-    fontSize: 30,
+    fontSize: 24,
     fontWeight: 'bold',
-    left: '60%',
-    top: 380,
+    marginTop: 60,
+    marginBottom: 25,
     fontFamily: 'RalewayB',
   },
   description: {
-    left: '35%',
-    fontSize: 30,
-    gap: 10,
-    alignContent: 'center',
-    width: 224,
-    height: 111,
-    top: 390,
+    alignItems: 'center',
+    textAlign: 'center',
+    marginBottom: 20,
+    gap:10,
+    fontSize:20
   },
-  dots: {
-    resizeMode: 'contain',
-    left: '20%',
-    bottom: 20,
+  button: {
+    backgroundColor: 'blue',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    marginTop: 10,
+    width:201,
+    height:50,
+    borderRadius:99,
+    alignItems:'center'
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 20,
   },
 });
