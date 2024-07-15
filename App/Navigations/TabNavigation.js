@@ -6,62 +6,74 @@ import CategoriesScreen from './../Screens/CategoriesScreen';
 import ShopScreen from './../Screens/ShopScreen';
 import ProfileScreen from './../Screens/ProfileScreen';
 import ActivityScreen from '../Screens/ActivityScreen';
-import { Feather } from '@expo/vector-icons';
-import Colors from '../Utils/Colors';
-import { AccountImg, Document, Heart, HomeImg, Shopping } from '../Utils/SvgIcons'; 
-
+import { HomeImg, Heart, Document, Shopping, AccountImg } from '../Utils/SvgIcons';
+import { StyleSheet } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
-export default function TabNavigation() {
+const TabNavigation = () => {
   return (
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
         tabBarLabel: () => null,
-    
         tabBarInactiveTintColor: 'gray',
-        tabBarStyle: { backgroundColor: 'white' },
-        
+        tabBarStyle: styles.tabBar,
       }}
     >
       <Tab.Screen
         name='Activity'
         component={ActivityScreen}
         options={{
-          tabBarIcon: ({ color, size,focused }) => (
-            <HomeImg width={size} height={size} fill={focused?'black':'blue'} />
+          tabBarIcon: ({ color, size, focused }) => (
+            <HomeImg width={size} height={size} fill={focused ? 'black' : 'blue'} />
           ),
         }}
       />
-      <Tab.Screen name='wishList' component={WishListScreen} 
-      options={{
-         tabBarIcon: ({ color, size }) => (
-          <Heart width={size} height={size} fill={color} />
-        ),
-      }}
-    />
-      <Tab.Screen name='categories' component={CategoriesScreen} 
-       options={{
-        tabBarIcon: ({ color, size }) => (
-         <Document width={size} height={size} fill={color} />
-       ),
-     }}
-   />
-      <Tab.Screen name='shop' component={ShopScreen} 
-       options={{
-        tabBarIcon: ({ color, size }) => (
-         <Shopping width={size} height={size} fill={color} />
-       ),
-     }}
-   />
-      <Tab.Screen name='profile' component={ProfileScreen} 
-      options={{
-        tabBarIcon: ({ color, size }) => (
-         <AccountImg width={size} height={size} fill={color} />
-       ),
-     }}
-   />
+      <Tab.Screen
+        name='Wishlist'
+        component={WishListScreen}
+        options={{
+          tabBarIcon: ({ color, size, focused }) => (
+            <Heart width={size} height={size} fill={focused ? 'black' : 'blue'} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name='Categories'
+        component={CategoriesScreen}
+        options={{
+          tabBarIcon: ({ color, size, focused }) => (
+            <Document width={size} height={size} fill={focused ? 'black' : 'blue'} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name='Shop'
+        component={ShopScreen}
+        options={{
+          tabBarIcon: ({ color, size, focused }) => (
+            <Shopping width={size} height={size} fill={focused ? 'black' : 'blue'} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name='Profile'
+        component={ProfileScreen}
+        options={{
+          tabBarIcon: ({ color, size, focused }) => (
+            <AccountImg width={size} height={size} fill={focused ? 'black' : 'blue'} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
-}
+};
+
+const styles = StyleSheet.create({
+  tabBar: {
+    backgroundColor: 'white',
+  },
+});
+
+export default TabNavigation;
