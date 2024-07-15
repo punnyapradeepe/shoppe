@@ -93,7 +93,7 @@ export default function HomeScreen() {
               width: currentIndex == index ? 15 : 14,
               height: currentIndex == index ? 15 : 14,
               borderRadius: currentIndex == index ? 99 : 90,
-              backgroundColor: currentIndex == index ? 'green' : 'gray',
+              backgroundColor: currentIndex == index ? Colors.PRIMARY : 'gray',
               marginLeft: 5,
               top: '10%',
             }}
