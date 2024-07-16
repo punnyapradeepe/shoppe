@@ -54,7 +54,7 @@ export default function SigninScreen() {
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('password')}>
           <Text style={styles.buttonText}>Next</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('allcategories')}>
+          <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
           <Text style={{left:'43%'}}>Cancel</Text>
         </TouchableOpacity>
 

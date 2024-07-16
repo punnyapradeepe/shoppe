@@ -15,6 +15,7 @@ import HomeScreen from './App/Screens/HomeScreen';
 import MyActivityScreen from './App/Screens/MyActivityScreen';
 import AllCategories from './App/Screens/AllCategories'
 import Categories from './Components/Categories';
+import TabNavigation from './App/Navigations/TabNavigation';
 
 
 const Stack = createNativeStackNavigator();
@@ -35,6 +36,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
+      
       <Stack.Navigator initialRouteName="LoginScreen">
         <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ headerShown: false }}/>
         <Stack.Screen name="createAcc" component={CreateAcc} options={{ headerShown: false }}/>
@@ -44,9 +46,10 @@ export default function App() {
         <Stack.Screen name="recovery" component={RecoveryScreen} options={{ headerShown: false }}/>
         <Stack.Screen name="setPass" component={SetPassword} options={{ headerShown: false }}/>
         <Stack.Screen name="home" component={HomeScreen} options={{ headerShown: false }}/>
-        <Stack.Screen name="activity" component={MyActivityScreen} options={{ headerShown: false }}/>
+        <Stack.Screen name="activity" component={TabNavigation} options={{ headerShown: false }}/>
+        
         <Stack.Screen name="Categories" component={Categories} options={{ headerShown: false }}/>
-        <Stack.Screen name="allcategories" component={AllCategories} options={{ headerShown: false }}/>
+        <Stack.Screen name="allc" component={AllCategories} options={{ headerShown: false }}/>
 
       </Stack.Navigator>
       <StatusBar style="auto" />

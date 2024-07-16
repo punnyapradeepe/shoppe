@@ -66,6 +66,15 @@ const TabNavigation = () => {
           ),
         }}
       />
+       <Tab.Screen
+        name='allc'
+        component={ProfileScreen}
+        options={{
+          tabBarIcon: ({ color, size, focused }) => (
+            <AccountImg width={size} height={size} fill={focused ? 'black' : 'blue'} />
+          ),
+        }}
+      />
 
     </Tab.Navigator>
   );

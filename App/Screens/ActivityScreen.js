@@ -14,73 +14,70 @@ import JustForYou from '../../Components/JustForYou';
 import { useNavigation } from '@react-navigation/core';
 import { NavigationContainer } from '@react-navigation/native';
 
-
 export default function ActivityScreen() {
   const navigation = useNavigation();
   return (
- 
     <View style={styles.screen}>
       <View style={styles.headerContainer}>
         <Image source={require('./../../assets/Images/Image.png')} style={styles.image} />
         <View style={styles.activityButton}>
           <Text style={styles.activityButtonText}>My Activity</Text>
-          
         </View>
         <Image source={require('./../../assets/Images/Vouchers.png')} style={styles.image1} />
         <Image source={require('./../../assets/Images/Top Menu.png')} style={styles.image1} />
         <Image source={require('./../../assets/Images/Settings.png')} style={styles.image1} />
       </View>
-<ScrollView 
-
-showsHorizontalScrollIndicator={false}
-showsVerticalScrollIndicator={false}>
-      <Text style={styles.helloText}>Hello, Romina!</Text>
-      <View style={styles.announcementWrapper}>
-        <Text style={styles.announcementText}>Announcement</Text>
-        <View style={styles.announcementContainer}>
-          <Text style={styles.announcementDescription}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas hendrerit luctus libero ac vulpulate.
-          </Text>
-          <TouchableOpacity style={styles.circleButton}>
-            <AntDesign name="arrowright" size={24} color={Colors.WHITE} />
-          </TouchableOpacity>
-        </View>
-      </View>
-      
-      <Text style={styles.recentlyViewedText}>Recently Viewed</Text>
-      <RecentlyViewed />
-      <View>
-      <Text style={styles.recentlyViewedText}>My Orders</Text>
-      </View>
-      <View style={styles.orderContainer}>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          <TouchableOpacity style={styles.orderButton}>
-            <Text style={styles.orderButtonText}>To Pay</Text>
-          </TouchableOpacity>
-        <View>
-          <TouchableOpacity style={styles.orderButton}>
-            <Text style={styles.orderButtonText}>To Receive</Text>
-            <View style={{position:'absolute',top:0,left:'85%'}}>
-            <Notification />
-            </View>
-          </TouchableOpacity>
+      <ScrollView 
+        contentContainerStyle={styles.scrollViewContent}
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
+      >
+        <Text style={styles.helloText}>Hello, Romina!</Text>
+        <View style={styles.announcementWrapper}>
+          <Text style={styles.announcementText}>Announcement</Text>
+          <View style={styles.announcementContainer}>
+            <Text style={styles.announcementDescription}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas hendrerit luctus libero ac vulpulate.
+            </Text>
+            <TouchableOpacity style={styles.circleButton}>
+              <AntDesign name="arrowright" size={24} color={Colors.WHITE} />
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity style={styles.orderButton}>
-            <Text style={styles.orderButtonText}>To Review</Text>
-          </TouchableOpacity>
-        </ScrollView>
-      </View>
-      
-      <Text style={styles.StoriesText}>Stories</Text>
-      <Stories style={{ position: 'relative' }} />
-      <NewItems/>
-      <MostPopular/>
-      <Categories/>
-      <FlashSale/>
-      <TopProductScreen/>
-      <JustForYou/>
+        </View>
+        
+        <Text style={styles.recentlyViewedText}>Recently Viewed</Text>
+        <RecentlyViewed />
+        <View>
+          <Text style={styles.recentlyViewedText}>My Orders</Text>
+        </View>
+        <View style={styles.orderContainer}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <TouchableOpacity onPress={()=>navigation.navigate('Activity', { screen: 'allc', params: {} })} style={styles.orderButton}>
+              <Text style={styles.orderButtonText}>To Pay</Text>
+            </TouchableOpacity>
+            <View>
+              <TouchableOpacity style={styles.orderButton}>
+                <Text style={styles.orderButtonText}>To Receive</Text>
+                <View style={{position:'absolute', top:0, left:'85%'}}>
+                  <Notification />
+                </View>
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity style={styles.orderButton}>
+              <Text style={styles.orderButtonText}>To Review</Text>
+            </TouchableOpacity>
+          </ScrollView>
+        </View>
+        
+        <Text style={styles.StoriesText}>Stories</Text>
+        <Stories style={{ position: 'relative' }} />
+        <NewItems/>
+        <MostPopular/>
+        <Categories/>
+        <FlashSale/>
+        <TopProductScreen/>
+        <JustForYou/>
       </ScrollView>
-      
     </View>
   );
 }
@@ -89,6 +86,7 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     padding: 20,
+    paddingBottom:2,
     marginTop: 20,
   },
   headerContainer: {
@@ -194,5 +192,8 @@ const styles = StyleSheet.create({
   },
   orderButtonText: {
     color: Colors.PRIMARY,
+  },
+  scrollViewContent: {
+    paddingBottom: 20, 
   },
 });

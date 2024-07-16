@@ -3,28 +3,28 @@ import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import Colors from './../App/Utils/Colors';
 import { Text109, Text218, Text530, Text87 } from './../App/Utils/SvgIcons';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/core';
 
 const Categories = () => {
   const navigation = useNavigation();
-  const images = [
-    require('./../assets/Images/img20.png'),
-    require('./../assets/Images/img21.png'),
-    require('./../assets/Images/img22.png'),
-    require('./../assets/Images/img23.png'),
-    require('./../assets/Images/img24.png'),
-    require('./../assets/Images/img25.png'),
-    require('./../assets/Images/img26.png'),
-    require('./../assets/Images/img27.png'),
-    require('./../assets/Images/img28.png'),
-    require('./../assets/Images/img29.png'),
-    require('./../assets/Images/img30.png'),
-    require('./../assets/Images/img31.png'),
-    require('./../assets/Images/img32.png'),
-    require('./../assets/Images/img33.png'),
-    require('./../assets/Images/img34.png'),
-    require('./../assets/Images/img35.png'),
-  ];
+    const images = [
+      require('./../assets/Images/img20.png'),
+      require('./../assets/Images/img21.png'),
+      require('./../assets/Images/img22.png'),
+      require('./../assets/Images/img23.png'),
+      require('./../assets/Images/img24.png'),
+      require('./../assets/Images/img25.png'),
+      require('./../assets/Images/img26.png'),
+      require('./../assets/Images/img27.png'),
+      require('./../assets/Images/img28.png'),
+      require('./../assets/Images/img29.png'),
+      require('./../assets/Images/img30.png'),
+      require('./../assets/Images/img31.png'),
+      require('./../assets/Images/img32.png'),
+      require('./../assets/Images/img33.png'),
+      require('./../assets/Images/img34.png'),
+      require('./../assets/Images/img35.png'),
+    ];
 
   const categoryTexts = ['Clothing', 'Shoes', 'Bags', 'Watch'];
 
@@ -35,7 +35,7 @@ const Categories = () => {
         <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', fontWeight: 700 }}>
           <Text style={{ paddingLeft: '30%'  ,
     fontWeight:'bold'}}>See All</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('AllCategories')} style={styles.circleButton}>
+          <TouchableOpacity onPress={() => {navigation.navigate('allc')}} style={styles.circleButton}>
             <AntDesign name="arrowright" size={24} color={Colors.WHITE} />
           </TouchableOpacity>
         </View>

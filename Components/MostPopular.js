@@ -3,8 +3,9 @@ import React from 'react'
 import { AntDesign } from '@expo/vector-icons';
 import Colors from '../App/Utils/Colors';
 import { HeartImg2, TextImg } from '../App/Utils/SvgIcons';
-
+import { useNavigation } from '@react-navigation/core';
 const MostPopular = () => {
+  const navigation = useNavigation()
   const type = [
     {
       id: '1',
@@ -51,7 +52,7 @@ const MostPopular = () => {
   }}>See All</Text>
 
     
-        <TouchableOpacity  style={styles.circleButton}>
+        <TouchableOpacity onPress={() => {navigation.navigate('allcategories')}}  style={styles.circleButton}>
           <AntDesign name="arrowright" size={24} color={Colors.WHITE} />
         </TouchableOpacity>
         </View>

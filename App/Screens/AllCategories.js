@@ -9,13 +9,14 @@ import NewItems from '../../Components/NewItems';
 import FlashSale from '../../Components/FlashSale';
 import MostPopular from '../../Components/MostPopular';
 import JustForYou from '../../Components/JustForYou';
-import TabNavigation from '../Navigations/TabNavigation';
 import Carousel from '../../Components/Carousel';
+import TabNavigation from '../Navigations/TabNavigation';
 
 
 
 const AllCategories = () => {
   const navigation = useNavigation();
+
 
   const images = [
     require('./../../assets/Images/img20.png'),
@@ -47,95 +48,130 @@ const AllCategories = () => {
   const categoryTexts = ['Clothing', 'Shoes', 'Bags', 'Watch', 'Hoodies', 'Jeans'];
 
   return (
-    <View style={{padding:20}}>
-      <View style={{display:'flex' , flexDirection:'row',gap:1,borderColor:'white'}}>
-        <Text style={{paddingTop:40,fontWeight:'bold',fontSize:25}}>Shop</Text>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>Shop</Text>
         <TextInput placeholder='Search' style={styles.textInput} />
-        <View style={{position:'absolute',top:45,right:20}}>
-        <CameraImg/>
+        <View style={styles.cameraIcon}>
+          <CameraImg />
         </View>
       </View>
-    <ScrollView
-    showsVerticalScrollIndicator={false}
-    >
-      <View style={{marginTop:10,marginRight:10}}>
-      <Carousel/>
-      </View>
-      <View style={styles.headerContainer}>
-        <Text style={styles.recentlyViewedText}>Categories</Text>
-        <View style={styles.seeAllContainer}>
-          <Text style={styles.seeAllText}>See All</Text>
-          <TouchableOpacity  style={styles.circleButton}>
-            <AntDesign name="arrowright" size={24} color={Colors.WHITE} />
-          </TouchableOpacity>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollContent}
+      >
+        <View style={styles.carouselContainer}>
+          <Carousel />
         </View>
-      </View>
-      <View style={styles.mainContainer}>
-        {Array.from({ length: 3 }).map((_, rowIndex) => (
-          <View key={rowIndex} style={styles.row}>
-            {Array.from({ length: 2 }).map((_, colIndex) => (
-              <TouchableOpacity key={colIndex} style={styles.whiteBackground}>
-                <View style={styles.imageGrid}>
-                  {Array.from({ length: 4 }).map((_, imgIndex) => (
-                    <Image
-                      key={imgIndex}
-                      source={images[rowIndex * 8 + colIndex * 4 + imgIndex]}
-                      style={styles.categoryImage}
-                    />
-                  ))}
-                </View>
-                <View style={styles.categoryTextContainer}>
-                  <Text style={styles.categoryText}>{categoryTexts[rowIndex * 2 + colIndex]}</Text>
-                  <View style={styles.categoryIcons}>
-                    {rowIndex === 0 && colIndex === 0 && <Text109 />}
-                    {rowIndex === 0 && colIndex === 1 && <Text530 />}
-                    {rowIndex === 1 && colIndex === 0 && <Text87 />}
-                    {rowIndex === 1 && colIndex === 1 && <Text218 />}
-                    {rowIndex === 2 && colIndex === 0 && <Text109 />} 
-                    {rowIndex === 2 && colIndex === 1 && <Text218 />} 
-                  </View>
-                </View>
-              </TouchableOpacity>
-            ))}
+        <View style={styles.headerContainer}>
+          <Text style={styles.recentlyViewedText}>Categories</Text>
+          <View style={styles.seeAllContainer}>
+            <Text style={styles.seeAllText}>See All</Text>
+            <TouchableOpacity style={styles.circleButton}>
+              <AntDesign name="arrowright" size={24} color={Colors.WHITE} />
+            </TouchableOpacity>
           </View>
-        ))}
-      </View>
-      <TopProductScreen/>
-      <NewItems/>
-      <FlashSale/>
-      <MostPopular/>
-      <JustForYou/>
-   
-
+        </View>
+        <View style={styles.mainContainer}>
+          {Array.from({ length: 3 }).map((_, rowIndex) => (
+            <View key={rowIndex} style={styles.row}>
+              {Array.from({ length: 2 }).map((_, colIndex) => (
+                <TouchableOpacity key={colIndex} style={styles.whiteBackground}>
+                  <View style={styles.imageGrid}>
+                    {Array.from({ length: 4 }).map((_, imgIndex) => (
+                      <Image
+                        key={imgIndex}
+                        source={images[rowIndex * 8 + colIndex * 4 + imgIndex]}
+                        style={styles.categoryImage}
+                      />
+                    ))}
+                  </View>
+                  <View style={styles.categoryTextContainer}>
+                    <Text style={styles.categoryText}>{categoryTexts[rowIndex * 2 + colIndex]}</Text>
+                    <View style={styles.categoryIcons}>
+                      {rowIndex === 0 && colIndex === 0 && <Text109 />}
+                      {rowIndex === 0 && colIndex === 1 && <Text530 />}
+                      {rowIndex === 1 && colIndex === 0 && <Text87 />}
+                      {rowIndex === 1 && colIndex === 1 && <Text218 />}
+                      {rowIndex === 2 && colIndex === 0 && <Text109 />}
+                      {rowIndex === 2 && colIndex === 1 && <Text218 />}
+                    </View>
+                  </View>
+                </TouchableOpacity>
+              ))}
+            </View>
+          ))}
+        </View>
+        <TopProductScreen />
+        <NewItems />
+        <FlashSale />
+        <MostPopular />
+        <JustForYou />
       </ScrollView>
-
-   
-    </View>
+      <View style={styles.tabNavigationContainer}>
+        <TabNavigation />
+      </View>
+    </SafeAreaView>
   );
 };
 
 export default AllCategories;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop:40,
+    padding: 20,
+   
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  headerTitle: {
+    flex: 1,
+    fontWeight: 'bold',
+    fontSize: 25,
+  },
+  textInput: {
+    flex: 2,
+    backgroundColor: '#F8F8F8',
+    padding: 10,
+    borderRadius: 8,
+    marginLeft: 10,
+    marginRight:0
+  },
+  cameraIcon: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
+  },
+  scrollContent: {
+    paddingBottom: 20,
+  },
+  carouselContainer: {
+    marginTop: 10,
+    marginBottom: 10,
+  },
   headerContainer: {
     flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     marginTop: 20,
+    marginBottom: 10,
   },
   recentlyViewedText: {
     fontSize: 25,
     fontFamily: 'Raleway',
     fontWeight: 'bold',
-    marginBottom: 10,
-    marginTop: 10,
   },
   seeAllContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   seeAllText: {
-    paddingLeft: '34%',
-    fontWeight:'bold'
-    
+    fontWeight: 'bold',
   },
   circleButton: {
     width: 30,
@@ -147,19 +183,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   mainContainer: {
-    gap: 10,
-  },
-  textInput: {
-    position:'relative',
-    backgroundColor: '#F8F8F8',
-    padding: 5,
-    borderRadius: 8,
-    marginTop: 30,
-    marginHorizontal: 10,
-    color: Colors.BLACK,
-    height: 50,
-    width:240,
-    
+    marginBottom: 10,
   },
   row: {
     flexDirection: 'row',
@@ -177,12 +201,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    height: 200,
+    height: 160,
   },
   categoryImage: {
     width: '48%',
-    height: 80,
-    marginBottom: 5,
+    height: 70,
+    marginBottom: 10,
     resizeMode: 'cover',
     borderRadius: 5,
   },
@@ -200,15 +224,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  categoryButton: {
-    marginTop: 20,
-    padding: 10,
-    backgroundColor: Colors.PRIMARY,
-    borderRadius: 5,
-    alignItems: 'center',
-  },
-  categoryButtonText: {
-    color: Colors.WHITE,
-    fontWeight: 'bold',
+  tabNavigationContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: Colors.WHITE,
+    marginTop:30
   },
 });
