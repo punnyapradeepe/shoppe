@@ -46,7 +46,9 @@ const MostPopular = () => {
     <View style={{display:'flex',flexDirection:'row',marginTop:20}}>
     <Text style={styles.recentlyViewedText}>Most Popular</Text>
     <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center',fontWeight:700 }}>
-        <Text style={{paddingLeft:'25%'}}>See All</Text>
+        <Text style={{paddingLeft:'25%',
+    fontWeight:'bold'
+  }}>See All</Text>
 
     
         <TouchableOpacity  style={styles.circleButton}>

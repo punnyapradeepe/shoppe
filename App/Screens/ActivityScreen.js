@@ -11,10 +11,14 @@ import FlashSale from '../../Components/FlashSale';
 import { ClockImg, Notification, RectangleImg } from '../Utils/SvgIcons';
 import TopProductScreen from '../../Components/TopProductScreen';
 import JustForYou from '../../Components/JustForYou';
+import { useNavigation } from '@react-navigation/core';
+import { NavigationContainer } from '@react-navigation/native';
 
 
 export default function ActivityScreen() {
+  const navigation = useNavigation();
   return (
+ 
     <View style={styles.screen}>
       <View style={styles.headerContainer}>
         <Image source={require('./../../assets/Images/Image.png')} style={styles.image} />

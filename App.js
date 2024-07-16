@@ -13,6 +13,8 @@ import RecoveryScreen from './App/Screens/RecoveryScreen';
 import SetPassword from './App/Screens/SetPassword';
 import HomeScreen from './App/Screens/HomeScreen';
 import MyActivityScreen from './App/Screens/MyActivityScreen';
+import AllCategories from './App/Screens/AllCategories'
+import Categories from './Components/Categories';
 
 
 const Stack = createNativeStackNavigator();
@@ -43,7 +45,8 @@ export default function App() {
         <Stack.Screen name="setPass" component={SetPassword} options={{ headerShown: false }}/>
         <Stack.Screen name="home" component={HomeScreen} options={{ headerShown: false }}/>
         <Stack.Screen name="activity" component={MyActivityScreen} options={{ headerShown: false }}/>
-        
+        <Stack.Screen name="Categories" component={Categories} options={{ headerShown: false }}/>
+        <Stack.Screen name="allcategories" component={AllCategories} options={{ headerShown: false }}/>
 
       </Stack.Navigator>
       <StatusBar style="auto" />

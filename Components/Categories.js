@@ -1,10 +1,12 @@
-import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import React from 'react';
+import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import Colors from '../App/Utils/Colors';
-import { Text109, Text218, Text530, Text87 } from '../App/Utils/SvgIcons';
+import Colors from './../App/Utils/Colors';
+import { Text109, Text218, Text530, Text87 } from './../App/Utils/SvgIcons';
+import { useNavigation } from '@react-navigation/native';
 
 const Categories = () => {
+  const navigation = useNavigation();
   const images = [
     require('./../assets/Images/img20.png'),
     require('./../assets/Images/img21.png'),
@@ -31,13 +33,13 @@ const Categories = () => {
       <View style={{ display: 'flex', flexDirection: 'row', marginTop: 20 }}>
         <Text style={styles.recentlyViewedText}>Categories</Text>
         <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', fontWeight: 700 }}>
-          <Text style={{ paddingLeft: '30%' }}>See All</Text>
-          <TouchableOpacity style={styles.circleButton}>
+          <Text style={{ paddingLeft: '30%'  ,
+    fontWeight:'bold'}}>See All</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('AllCategories')} style={styles.circleButton}>
             <AntDesign name="arrowright" size={24} color={Colors.WHITE} />
           </TouchableOpacity>
         </View>
       </View>
-
       <View style={styles.mainContainer}>
         {Array.from({ length: 2 }).map((_, rowIndex) => (
           <View key={rowIndex} style={styles.row}>
@@ -66,9 +68,10 @@ const Categories = () => {
           </View>
         ))}
       </View>
+     
     </View>
   );
-}
+};
 
 export default Categories;
 
@@ -115,14 +118,14 @@ const styles = StyleSheet.create({
     height: 80,
     marginBottom: 5,
     resizeMode: 'cover',
-    borderRadius:5
+    borderRadius: 5,
   },
   categoryTextContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  categoryText: {  
+  categoryText: {
     fontSize: 16,
     color: Colors.TEXT,
     fontWeight: 'bold',
@@ -130,5 +133,16 @@ const styles = StyleSheet.create({
   categoryIcons: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  categoryButton: {
+    marginTop: 20,
+    padding: 10,
+    backgroundColor: Colors.PRIMARY,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  categoryButtonText: {
+    color: Colors.WHITE,
+    fontWeight: 'bold',
   },
 });

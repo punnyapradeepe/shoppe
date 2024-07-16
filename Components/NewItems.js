@@ -43,7 +43,10 @@ const NewItems = () => {
       <View style={{display:'flex',flexDirection:'row'}}>
       <Text style={styles.recentlyViewedText}>New Items</Text>
       <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center',fontWeight:700 }}>
-          <Text style={{paddingLeft:'35%'}}>See All</Text>
+          <Text style={{
+    paddingLeft: '34%',
+    fontWeight:'bold'
+ }}>See All</Text>
 
       
           <TouchableOpacity  style={styles.circleButton}>

@@ -10,7 +10,6 @@ export default function MyActivityScreen() {
       <NavigationContainer independent={true}>
         <TabNavigation/>
       </NavigationContainer>
-      
     </View>
   )
 }
