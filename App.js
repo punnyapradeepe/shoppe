@@ -54,6 +54,7 @@ export default function App() {
         <Stack.Screen name="allc" component={AllCategories} options={{ headerShown: false }}/>
         <Stack.Screen name="NewItemDetail" component={NewItemDetail} options={{ headerShown: false }}/>
         <Stack.Screen name="shippingAddr" component={TabNavigation} options={{ headerShown: false }}/>
+        <Stack.Screen name="payment" component={TabNavigation} options={{ headerShown: false }}/>
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>

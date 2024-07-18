@@ -1,9 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { EditBtn } from '../Utils/SvgIcons';
+import { useNavigation } from '@react-navigation/core';
 
 export default function ShippingAddressScreen({ route }) {
   const { totalQuantity } = route.params;
+  const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
@@ -30,7 +32,7 @@ export default function ShippingAddressScreen({ route }) {
       <View style={styles.footer}>
         <Text style={styles.totalText}>Total  $29.00</Text>
         <TouchableOpacity style={styles.checkoutButton}>
-          <Text style={styles.checkoutButtonText}>Check Out</Text>
+          <Text style={styles.checkoutButtonText} onPress={()=> navigation.navigate('payment')}>Check Out</Text>
         </TouchableOpacity>
       </View>
      

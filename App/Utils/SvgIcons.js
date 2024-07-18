@@ -365,5 +365,16 @@ export const EditBtn =()=>(
 </Svg>
 )
 
+export const TIckB =() =>(
+  <Svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
+<Path d="M13 25C19.6274 25 25 19.6274 25 13C25 6.37258 19.6274 1 13 1C6.37258 1 1 6.37258 1 13C1 19.6274 6.37258 25 13 25Z" fill="#0042E0" stroke="white" strokeWidth="2"/>
+<Path d="M17.024 10.6089L12.2417 15.3911L10.068 13.2174" stroke="white" strokeWidth="3" stroke-linecap="round" strokeLinejoin="round"/>
+</Svg>
+)
 
+export const TickW =() =>(
+  <Svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
+<Path d="M13 25C19.6274 25 25 19.6274 25 13C25 6.37258 19.6274 1 13 1C6.37258 1 1 6.37258 1 13C1 19.6274 6.37258 25 13 25Z" fill="#EFEFEF" stroke="white" strokeWidth="2"/>
+</Svg>
+) 
 

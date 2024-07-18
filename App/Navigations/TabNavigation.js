@@ -14,6 +14,7 @@ import AllCategories from '../Screens/AllCategories';
 import FlashSale from '../../Components/FlashSale';
 import FlashSaleScreen from '../Screens/FlashSaleScreen';
 import ShippingAddressScreen from '../Screens/ShippingAddressScreen';
+import PaymentScreen from '../Screens/PaymentScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack= createNativeStackNavigator();
@@ -95,6 +96,7 @@ const ShopScreenStack=()=>(
 <Stack.Navigator initialRouteName="shop">
 <Stack.Screen name="shop" component={ShopScreen} options={{ headerShown: false }}/>
 <Stack.Screen name="shippingAddr" component={ShippingAddressScreen} options={{ headerShown:false}}/>
+<Stack.Screen name="payment" component={PaymentScreen} options={{ headerShown:false}}/>
 </Stack.Navigator>
 )
 

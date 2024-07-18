@@ -52,7 +52,7 @@ const MostPopular = () => {
   }}>See All</Text>
 
     
-        <TouchableOpacity onPress={() => {navigation.navigate('allcategories')}}  style={styles.circleButton}>
+        <TouchableOpacity  style={styles.circleButton}>
           <AntDesign name="arrowright" size={24} color={Colors.WHITE} />
         </TouchableOpacity>
         </View>
