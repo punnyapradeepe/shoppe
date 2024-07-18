@@ -1,9 +1,12 @@
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import { Image, ScrollView, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import Colors from '../App/Utils/Colors'; // Assuming you have Colors in your project
 import { Clk2, ClkImg, ClkTym, ClkTym1, ClockImg } from '../App/Utils/SvgIcons';
 
 const FlashSale = () => {
+  const navigation = useNavigation();
+
   const type1 = [
     {
       id: '1',
@@ -13,17 +16,17 @@ const FlashSale = () => {
     {
       id: '2',
       imageSource: require('./../assets/Images/img41.png'),
-      img: require('./../assets/Images/discount.png')
+      img: require('./../assets/Images/discount.png'),
     },
     {
       id: '3',
       imageSource: require('./../assets/Images/img42.png'),
-      img: require('./../assets/Images/discount.png')
+      img: require('./../assets/Images/discount.png'),
     },
     {
       id: '4',
       imageSource: require('./../assets/Images/img43.png'),
-      img: require('./../assets/Images/discount.png')
+      img: require('./../assets/Images/discount.png'),
     },
   ];
 
@@ -36,71 +39,64 @@ const FlashSale = () => {
     {
       id: '6',
       imageSource: require('./../assets/Images/img45.png'),
-      img: require('./../assets/Images/discount.png')
+      img: require('./../assets/Images/discount.png'),
     },
     {
       id: '7',
       imageSource: require('./../assets/Images/img46.png'),
-      img: require('./../assets/Images/discount.png')
+      img: require('./../assets/Images/discount.png'),
     },
     {
       id: '8',
       imageSource: require('./../assets/Images/img47.png'),
-      img: require('./../assets/Images/discount.png')
+      img: require('./../assets/Images/discount.png'),
     },
   ];
+
+  const handlePress = () => {
+    navigation.navigate('FlashSaleDetails');
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.recentlyViewedText}>Flash Sale</Text>
-        <View style={{paddingLeft:100}}>
-        <ClkImg/>
+        <View style={{ paddingLeft: 100 }}>
+          <ClkImg />
         </View>
         <View style={styles.timerContainer}>
           <View style={styles.timerBox}>
-            <ClkTym1/>
+            <ClkTym1 />
           </View>
           <View style={styles.timerBox}>
-            <Clk2/>
+            <Clk2 />
           </View>
           <View style={styles.timerBox}>
-            <ClkTym/>
+            <ClkTym />
           </View>
         </View>
       </View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {type1.map((item) => (
-          <View key={item.id} style={styles.imageContainer}>
-            <Image 
-              source={item.imageSource} 
-              style={styles.image} 
-              resizeMode="cover"
-            />
-            <Image 
-              source={item.img} 
-              style={styles.overlayImage} 
-            />
-          </View>
+          <TouchableOpacity key={item.id} onPress={() => {navigation.navigate('flashSale')}}>
+            <View style={styles.imageContainer}>
+              <Image source={item.imageSource} style={styles.image} resizeMode="cover" />
+              <Image source={item.img} style={styles.overlayImage} />
+            </View>
+          </TouchableOpacity>
         ))}
       </ScrollView>
       
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {type2.map((item) => (
-          <View key={item.id} style={styles.imageContainer}>
-            <Image 
-              source={item.imageSource} 
-              style={styles.image} 
-              resizeMode="cover"
-            />
-            <Image 
-              source={item.img} 
-              style={styles.overlayImage} 
-            />
-          </View>
+          <TouchableOpacity key={item.id} onPress={() => {navigation.navigate('flashSale')}}>
+            <View style={styles.imageContainer}>
+              <Image source={item.imageSource} style={styles.image} resizeMode="cover" />
+              <Image source={item.img} style={styles.overlayImage} />
+            </View>
+          </TouchableOpacity>
         ))}
       </ScrollView>
-      
     </View>
   );
 };
@@ -148,8 +144,8 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
-    borderWidth:4,
-    borderColor:'white',
+    borderWidth: 4,
+    borderColor: 'white',
     borderRadius: 10,
   },
   overlayImage: {

@@ -108,9 +108,6 @@ const AllCategories = () => {
         <MostPopular />
         <JustForYou />
       </ScrollView>
-      <View style={styles.tabNavigationContainer}>
-        <TabNavigation />
-      </View>
     </SafeAreaView>
   );
 };

@@ -8,8 +8,15 @@ import ProfileScreen from './../Screens/ProfileScreen';
 import ActivityScreen from '../Screens/ActivityScreen';
 import { HomeImg, Heart, Document, Shopping, AccountImg } from '../Utils/SvgIcons';
 import { StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import AllCategories from '../Screens/AllCategories';
+import FlashSale from '../../Components/FlashSale';
+import FlashSaleScreen from '../Screens/FlashSaleScreen';
+import ShippingAddressScreen from '../Screens/ShippingAddressScreen';
 
 const Tab = createBottomTabNavigator();
+const Stack= createNativeStackNavigator();
 
 const TabNavigation = () => {
   return (
@@ -23,7 +30,7 @@ const TabNavigation = () => {
     >
       <Tab.Screen
         name='Activity'
-        component={ActivityScreen}
+        component={ActivityStack}
         options={{
           tabBarIcon: ({ color, size, focused }) => (
             <HomeImg width={size} height={size} fill={focused ? 'black' : 'blue'} />
@@ -50,7 +57,7 @@ const TabNavigation = () => {
       />
       <Tab.Screen
         name='Shop'
-        component={ShopScreen}
+        component={ShopScreenStack}
         options={{
           tabBarIcon: ({ color, size, focused }) => (
             <Shopping width={size} height={size} fill={focused ? 'black' : 'blue'} />
@@ -66,19 +73,30 @@ const TabNavigation = () => {
           ),
         }}
       />
-       <Tab.Screen
-        name='allc'
-        component={ProfileScreen}
-        options={{
-          tabBarIcon: ({ color, size, focused }) => (
-            <AccountImg width={size} height={size} fill={focused ? 'black' : 'blue'} />
-          ),
-        }}
-      />
+      
 
     </Tab.Navigator>
   );
 };
+
+
+const ActivityStack=()=>(
+
+<Stack.Navigator initialRouteName="activity">
+<Stack.Screen name="activity" component={ActivityScreen} options={{ headerShown: false }}/>
+<Stack.Screen name="allc" component={AllCategories} options={{ headerShown:false}}/>
+<Stack.Screen name="flashSale" component={FlashSaleScreen} options={{ headerShown:false}}/>
+
+</Stack.Navigator>
+
+)
+
+const ShopScreenStack=()=>(
+<Stack.Navigator initialRouteName="shop">
+<Stack.Screen name="shop" component={ShopScreen} options={{ headerShown: false }}/>
+<Stack.Screen name="shippingAddr" component={ShippingAddressScreen} options={{ headerShown:false}}/>
+</Stack.Navigator>
+)
 
 const styles = StyleSheet.create({
   tabBar: {

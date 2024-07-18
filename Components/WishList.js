@@ -1,36 +1,86 @@
-import { FlatList, StyleSheet, Text, TouchableOpacity, View, Image, ScrollView } from 'react-native';
-import React from 'react';
-import { AntDesign } from '@expo/vector-icons';
-import Colors from '../Utils/Colors';
-import RecentlyViewed from '../../Components/RecentlyViwed';
-import { AddBtn, DeleteBtn } from '../Utils/SvgIcons';
-import WishList from '../../Components/WishList';
+import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React from 'react'
+import Colors from '../App/Utils/Colors';
+import { AddBtn, DeleteBtn } from '../App/Utils/SvgIcons';
 
-const WishListScreen = () => {
+const WishList = () => {
+  const type = [
+    {
+      id: '1',
+      images: require('./../assets/Images/dr1.png'),
+      text: 'Lorem ipsum dolor sit amet \n consectetur.',
+      price: '$17,00',
+      color: 'Black',
+      size: 'M',
+    },
+    {
+      id: '2',
+      images: require('./../assets/Images/hb2.png'),
+      text: 'Lorem ipsum dolor sit amet \n consectetur.',
+      orgPrice: '$17,00',
+      price: '$12,00',
+      color: 'Red',
+      size: 'S',
+    },
+    {
+      id: '3',
+      images: require('./../assets/Images/db1.png'),
+      text: 'Lorem ipsum dolor sit amet \n consectetur.',
+      price: '$21,00',
+      color: 'Blue',
+      size: 'M',
+    },
+    {
+      id: '4',
+      images: require('./../assets/Images/dy1.png'),
+      text: 'Lorem ipsum dolor sit amet \n consectetur.',
+      price: '$15,00',
+      color: 'Black',
+      size: 'S',
+    },
+  ];
 
-
-  return (
-    <View style={styles.container}>
-      <View>
-        <Text style={styles.text}>Wishlist</Text>
-        <View style={styles.header}>
-          <Text style={styles.subText}>Recently viewed</Text>
-          <TouchableOpacity style={styles.circleButton}>
-            <AntDesign name="arrowright" size={24} color={Colors.WHITE} />
+  const renderItem = ({ item }) => (
+    <View style={styles.itemContainer}>
+      <Image source={item.images} style={styles.itemImage} />
+      <View style={styles.itemDetails}>
+        <Text style={styles.itemText}>{item.text}</Text>
+        <View style={styles.priceContainer}>
+          {item.orgPrice && <Text style={styles.orgPrice}>{item.orgPrice}</Text>}
+          <Text style={styles.itemPrice}>{item.price}</Text>
+        </View>
+        <TouchableOpacity style={{ position: 'absolute', top: 60, right: 260 }}>
+          <DeleteBtn />
+        </TouchableOpacity>
+        <View style={styles.colorSizeContainer}>
+          <Text style={styles.itemColor}>{item.color}</Text>
+          <Text style={styles.itemSize}>{item.size}</Text>
+          <TouchableOpacity style={{ left: 50 }}>
+            <AddBtn />
           </TouchableOpacity>
         </View>
       </View>
-      <RecentlyViewed />
-      <WishList/>
     </View>
   );
-};
 
-export default WishListScreen;
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={type}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={styles.flatList}
+        showsVerticalScrollIndicator={false}
+      />
+    </View>
+  );
+}
+
+export default WishList
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+   
     paddingTop: 0,
     paddingBottom: 0,
     backgroundColor: 'white',
@@ -63,12 +113,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  scrollView: {
-    flex: 1,
-  },
   itemContainer: {
     flexDirection: 'row',
     marginVertical: 10,
+    marginHorizontal:1,
     padding: 10,
     backgroundColor: Colors.WHITE,
     borderRadius: 10,
@@ -77,6 +125,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 5,
     elevation: 5,
+    
   },
   itemImage: {
     position: 'relative',

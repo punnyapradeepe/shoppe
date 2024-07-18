@@ -16,6 +16,9 @@ import MyActivityScreen from './App/Screens/MyActivityScreen';
 import AllCategories from './App/Screens/AllCategories'
 import Categories from './Components/Categories';
 import TabNavigation from './App/Navigations/TabNavigation';
+import NewItemDetail from './App/Screens/NewItemDetail';
+import ShippingAddressScreen from './App/Screens/ShippingAddressScreen';
+
 
 
 const Stack = createNativeStackNavigator();
@@ -47,10 +50,10 @@ export default function App() {
         <Stack.Screen name="setPass" component={SetPassword} options={{ headerShown: false }}/>
         <Stack.Screen name="home" component={HomeScreen} options={{ headerShown: false }}/>
         <Stack.Screen name="activity" component={TabNavigation} options={{ headerShown: false }}/>
-        
         <Stack.Screen name="Categories" component={Categories} options={{ headerShown: false }}/>
         <Stack.Screen name="allc" component={AllCategories} options={{ headerShown: false }}/>
-
+        <Stack.Screen name="NewItemDetail" component={NewItemDetail} options={{ headerShown: false }}/>
+        <Stack.Screen name="shippingAddr" component={TabNavigation} options={{ headerShown: false }}/>
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>

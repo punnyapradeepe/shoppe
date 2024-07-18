@@ -206,3 +206,164 @@ export const CameraImg =()=>(
 <Path d="M14.7894 9.79829C14.7894 12.0136 12.9936 13.8095 10.7783 13.8095C8.56295 13.8095 6.76709 12.0136 6.76709 9.79829C6.76709 7.58297 8.56295 5.78711 10.7783 5.78711C12.9936 5.78711 14.7894 7.58297 14.7894 9.79829Z" stroke="#0042E0" strokeLinecap="round" strokeLinejoin="round"/>
 </Svg>
 )
+
+export const ClkImgw=()=>(
+<Svg xmlns="http://www.w3.org/2000/svg" width="18" height="21" viewBox="0 0 18 21" fill="none">
+<Path fill-rule="evenodd" clip-rule="evenodd" d="M11.9 0.666992H6.2V2.56699H11.9V0.666992ZM8.1 13.017H10V7.31699H8.1V13.017ZM15.7285 6.73749L17.0775 5.38849C16.669 4.90399 16.2225 4.44799 15.738 4.04899L14.389 5.39799C12.9165 4.21999 11.064 3.51699 9.05 3.51699C4.3285 3.51699 0.5 7.34549 0.5 12.067C0.5 16.7885 4.319 20.617 9.05 20.617C13.781 20.617 17.6 16.7885 17.6 12.067C17.6 10.053 16.897 8.20049 15.7285 6.73749ZM9.05 18.717C5.3735 18.717 2.4 15.7435 2.4 12.067C2.4 8.3905 5.3735 5.41699 9.05 5.41699C12.7265 5.41699 15.7 8.3905 15.7 12.067C15.7 15.7435 12.7265 18.717 9.05 18.717Z" fill="white"/>
+</Svg>
+)
+
+export const D13 =()=>(
+  <Svg xmlns="http://www.w3.org/2000/svg" width="19" height="17" viewBox="0 0 19 17" fill="none">
+<G clip-path="url(#clip0_0_10913)">
+<Path d="M9.49512 0.410156V17" stroke="#231F20"/>
+<Path d="M9.49511 7.39159C10.8731 7.39159 11.9902 6.27449 11.9902 4.89648C11.9902 3.51847 10.8731 2.40137 9.49511 2.40137C8.1171 2.40137 7 3.51847 7 4.89648C7 6.27449 8.1171 7.39159 9.49511 7.39159Z" fill="white" stroke="#231F20"/>
+</G>
+<G clipPath="url(#clip1_0_10913)">
+<Path d="M16.4287 0.410156V17" stroke="#231F20"/>
+<Path d="M16.4951 14.9902C17.8731 14.9902 18.9902 13.8731 18.9902 12.4951C18.9902 11.1171 17.8731 10 16.4951 10C15.1171 10 14 11.1171 14 12.4951C14 13.8731 15.1171 14.9902 16.4951 14.9902Z" fill="white" stroke="#231F20"/>
+</G>
+<G clipPath="url(#clip2_0_10913)">
+<Path d="M2.49512 0.410156V17" stroke="#231F20"/>
+<Path d="M2.49511 14.9902C3.87313 14.9902 4.99022 13.8731 4.99022 12.4951C4.99022 11.1171 3.87313 10 2.49511 10C1.1171 10 0 11.1171 0 12.4951C0 13.8731 1.1171 14.9902 2.49511 14.9902Z" fill="white" stroke="#231F20"/>
+</G>
+<Defs>
+<ClipPath id="clip0_0_10913">
+<Rect width="4.99022" height="16.5898" fill="white" transform="translate(7 0.410156)"/>
+</ClipPath>
+<ClipPath id="clip1_0_10913">
+<Rect width="4.99022" height="16.5898" fill="white" transform="translate(14 0.410156)"/>
+</ClipPath>
+<ClipPath id="clip2_0_10913">
+<Rect width="4.99022" height="16.5898" fill="white" transform="translate(0 0.410156)"/>
+</ClipPath>
+</Defs>
+</Svg>
+)
+
+
+export const FavBtn = () => (
+  <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="29" height="29">
+    <Path fill="none" d="M0 0h24v24H0z"/>
+    <Path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="white" stroke="black" strokeWidth="2"/>
+  </Svg>
+);
+
+export const AddBtn =() =>(
+  <Svg xmlns="http://www.w3.org/2000/svg" width="29" height="25" viewBox="0 0 29 25" fill="none">
+<G clipPath="url(#clip0_0_8096)">
+<Path d="M8.01697 21.9834V5.21853L11.1809 1H24.8365L28.0004 5.21853V21.9834C28.0004 22.7801 27.3545 23.426 26.5578 23.426H9.45957C8.66284 23.426 8.01697 22.7801 8.01697 21.9834Z" stroke="#004CFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+<Path d="M9.01697 4.88477H27.0004" stroke="#004CFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+<Path d="M22.8933 9.77002C22.8933 12.468 20.7061 14.6552 18.0081 14.6552C15.3101 14.6552 13.1229 12.468 13.1229 9.77002" stroke="#004CFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+</G>
+<G clipPath="url(#clip1_0_8096)">
+<Path d="M17 16C17 20.4183 13.4183 24 9 24C4.58172 24 1 20.4183 1 16C1 11.5817 4.58172 8 9 8C13.4183 8 17 11.5817 17 16Z" fill="white" stroke="#004BFE" strokeWidth="2"/>
+<G ClipPath="url(#clip2_0_8096)">
+<Path d="M9.08191 12.752V19.4119" stroke="#004BFE" strokeLidth="2" strokeLinecap="round"/>
+<Path d="M12.4119 16.082H5.75195" stroke="#004BFE" strokeWidth="2" strokeLinecap="round"/>
+</G>
+</G>
+<Defs>
+<ClipPath id="clip0_0_8096">
+<Rect width="21.9834" height="24.426" fill="white" transform="translate(7.01697)"/>
+</ClipPath>
+<ClipPath id="clip1_0_8096">
+<Rect width="18" height="18" fill="white" transform="translate(0 7)"/>
+</ClipPath>
+<ClipPath id="clip2_0_8096">
+<Rect width="6.65998" height="6.65998" fill="white" transform="translate(5.75195 12.752)"/>
+</ClipPath>
+</Defs>
+</Svg>
+  
+)
+
+
+
+export const StarImgClr =()=>(
+  <Svg xmlns="http://www.w3.org/2000/svg" width="22" height="21" viewBox="0 0 22 21" fill="none">
+<Path d="M10.8549 0.822592L13.4917 7.13661L20.2422 7.72334C20.7104 7.76425 20.9009 8.35528 20.5455 8.6664L15.4252 13.1546L16.9596 19.8314C17.066 20.2954 16.569 20.6604 16.1668 20.4138L10.3655 16.8741L4.56412 20.4138C4.16084 20.6593 3.66498 20.2943 3.77139 19.8314L5.30578 13.1546L0.184385 8.66533C-0.171017 8.3542 0.0183891 7.76317 0.487647 7.72226L7.23815 7.13554L9.87493 0.822591C10.058 0.383355 10.6719 0.383355 10.8549 0.822591L10.8549 0.822592Z" fill="#ECA61B"/>
+</Svg>
+)
+
+export const StarImgLayout =() =>(
+  <Svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+<Path d="M12.7601 7.52197L12.9933 8.08045L13.5963 8.13286L19.2661 8.62565L14.9572 12.4026L14.5079 12.7963L14.6417 13.3786L15.9292 18.9807L11.0775 16.0204L10.5566 15.7026L10.0358 16.0204L5.18411 18.9807L6.47154 13.3786L6.60534 12.7964L6.15612 12.4026L1.84611 8.62457L7.5159 8.13178L8.11881 8.07938L8.35205 7.52095L10.5561 2.24414L12.7601 7.52197ZM20.078 7.91398L20.0775 7.9144L20.078 7.91398ZM4.93713 20.0554L4.93714 20.0554L4.93713 20.0554Z" stroke="#ECA61B" strokeWidth="2"/>
+</Svg>
+)
+
+export const ellipse =()=>(
+  <Svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+<Path d="M15 30C23.2843 30 30 23.2843 30 15C30 6.71573 23.2843 0 15 0C6.71573 0 0 6.71573 0 15C0 23.2843 6.71573 30 15 30Z" fill="#FFEBEB"/>
+</Svg>
+)
+
+export const Share =() =>(
+  <Svg xmlns="http://www.w3.org/2000/svg" width="19" height="14" viewBox="0 0 19 14" fill="none">
+<Path d="M18.0778 5.56344L11.601 0.191724C11.523 0.126613 11.4495 0.0899874 11.344 0.0940567C11.142 0.102195 10.8849 0.22835 10.8849 0.419616V3.11361C10.8849 3.195 10.8115 3.26825 10.7197 3.28046C4.27962 4.1554 1.5668 8.42836 0.607449 12.8641C0.570727 13.0391 0.836959 13.2019 0.960895 13.0635C3.31109 10.4387 6.17079 8.72543 10.6922 8.69288C10.7931 8.69288 10.8849 8.79868 10.8849 8.88821V11.5334C10.8849 11.8182 11.3118 11.9444 11.5505 11.7491L18.0732 6.28374C18.1926 6.18607 18.2293 6.07213 18.2339 5.9419C18.2293 5.81168 18.1926 5.66111 18.0778 5.56344Z" fill="#B5A2A2"/>
+</Svg>
+)
+
+export const DeleteBtn =() =>(
+  <Svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 35 35" fill="none">
+<G clipPath="url(#clip0_2_6904)">
+<Path d="M17.5 35C27.165 35 35 27.165 35 17.5C35 7.83502 27.165 0 17.5 0C7.83502 0 0 7.83502 0 17.5C0 27.165 7.83502 35 17.5 35Z" fill="white"/>
+<Path d="M20.118 25.068H14.884C14.2273 25.0573 13.6011 24.7894 13.1398 24.3219C12.6785 23.8545 12.419 23.2247 12.417 22.568L11.594 13H23.482L22.66 22.563C22.655 23.2322 22.3844 23.8721 21.9077 24.3418C21.431 24.8116 20.7872 25.0728 20.118 25.068V25.068Z" stroke="#FF5790" strokeMiterlimit="10"/>
+<Path d="M15.4519 16.0361V22.0321" stroke="#FF5790" strokeMiterlimit="10" strokeLinecap="round"/>
+<Path d="M19.551 16.0361V22.0321" stroke="#FF5790" strokeMiterlimit="10" strokeLinecap="round"/>
+<Path d="M12.581 13C12.5501 12.6366 12.5912 12.2707 12.7019 11.9231C12.8126 11.5756 12.9907 11.2533 13.2261 10.9747C13.4614 10.6961 13.7494 10.4666 14.0735 10.2993C14.3976 10.1321 14.7515 10.0304 15.115 10H19.96C20.6811 10.0786 21.3426 10.4368 21.8026 10.9977C22.2625 11.5586 22.4842 12.2775 22.42 13H12.581Z" stroke="#FF5790" strokeMiterlimit="10"/>
+<Path d="M10 13H25" stroke="#FF5790" strokeMiterlimit="10" strokeLinecap="round"/>
+</G>
+<Defs>
+<ClipPath id="clip0_2_6904">
+<Rect width="35" height="35" fill="white"/>
+</ClipPath>
+</Defs>
+</Svg>
+)
+
+export const MinusImg =() =>(
+  <Svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+<Path d="M29 15C29 22.732 22.732 29 15 29C7.26801 29 1 22.732 1 15C1 7.26801 7.26801 1 15 1C22.732 1 29 7.26801 29 15Z" stroke="#004BFE" strokeWidth="2"/>
+<Path d="M10.5 15.5H19.5" stroke="#004CFF" strokeWidth="2" strokeLinecap="round"/>
+</Svg>
+)
+
+export const Quantity =() =>(
+  <Svg xmlns="http://www.w3.org/2000/svg" width="37" height="30" viewBox="0 0 37 30" fill="none">
+<G clip-path="url(#clip0_0_7289)">
+<Rect width="37" height="30" rx="7" fill="#E5EBFC"/>
+<Path d="M22.816 20.72V22H17.072V20.72H19.344V14.48C19.248 14.608 19.0987 14.7467 18.896 14.896C18.6933 15.0347 18.464 15.168 18.208 15.296C17.9627 15.4133 17.7067 15.5147 17.44 15.6C17.1733 15.6853 16.9387 15.728 16.736 15.728V14.384C16.9707 14.384 17.232 14.32 17.52 14.192C17.808 14.0533 18.08 13.8987 18.336 13.728C18.6027 13.5467 18.8267 13.376 19.008 13.216C19.2 13.0453 19.312 12.928 19.344 12.864H20.784V20.72H22.816Z" fill="black"/>
+</G>
+<Defs>
+<ClipPath id="clip0_0_7289">
+<Rect width="37" height="30" fill="white"/>
+</ClipPath>
+</Defs>
+</Svg>
+)
+
+export const MoreImg =()=>(
+  <Svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+<Path d="M29 15C29 22.732 22.732 29 15 29C7.26801 29 1 22.732 1 15C1 7.26801 7.26801 1 15 1C22.732 1 29 7.26801 29 15Z" stroke="#004BFE" strokeWidth="2"/>
+<G clipPath="url(#clip0_0_7297)">
+<Path d="M15 9.5V20.5" stroke="#004BFE" strokeWidth="2" strokeLinecap="round"/>
+<Path d="M20.5 15H9.5" stroke="#004BFE" strokeWidth="2" strokeLinecap="round"/>
+</G>
+<Defs>
+<ClipPath id="clip0_0_7297">
+<Rect width="11" height="11" fill="white" transform="translate(9.5 9.5)"/>
+</ClipPath>
+</Defs>
+</Svg>
+)
+
+export const EditBtn =()=>(
+<Svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+<Path d="M15 30C23.2843 30 30 23.2843 30 15C30 6.71573 23.2843 0 15 0C6.71573 0 0 6.71573 0 15C0 23.2843 6.71573 30 15 30Z" fill="#004BFE"/>
+<Path fillRule="evenodd" clipRule="evenodd" d="M8.7 18.6892V21.5016H11.5124L19.8073 13.2068L16.9948 10.3943L8.7 18.6892ZM21.9823 11.0318C22.2748 10.7393 22.2748 10.2668 21.9823 9.97434L20.2273 8.21937C19.9348 7.92688 19.4623 7.92688 19.1698 8.21937L17.7973 9.59185L20.6098 12.4043L21.9823 11.0318H21.9823Z" fill="white"/>
+</Svg>
+)
+
+
+

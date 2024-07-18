@@ -6,10 +6,10 @@ const { width } = Dimensions.get('window');
 
 const Carousel = () => {
   const carouselData = [
-    { id: '1', imageSource: require('./../assets/Images/img20.png') },
-    { id: '2', imageSource: require('./../assets/Images/img30.png') },
-    { id: '3', imageSource: require('./../assets/Images/img40.png') },
-    { id: '4', imageSource: require('./../assets/Images/img41.png') },
+    { id: '1', imageSource: require('./../assets/Images/img20.png'), backgroundColor: '#a52a2a' },
+    { id: '2', imageSource: require('./../assets/Images/img46.png'), backgroundColor: '#ADD8E6' },
+    { id: '3', imageSource: require('./../assets/Images/img40.png'), backgroundColor: '#483d8b' },
+    { id: '4', imageSource: require('./../assets/Images/img41.png'), backgroundColor: '#00008B' },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -33,7 +33,7 @@ const Carousel = () => {
   }, [currentIndex]);
 
   const renderItem = ({ item }) => (
-    <View style={styles.itemContainer}>
+    <View style={[styles.itemContainer, { backgroundColor: item.backgroundColor }]}>
       <Image source={item.imageSource} style={styles.image} />
     </View>
   );
@@ -62,7 +62,7 @@ const Carousel = () => {
               style={[
                 styles.indicator,
                 { backgroundColor: index === currentIndex ? Colors.PRIMARY : '#95a5a6' },
-                {width: index=== currentIndex? 50:10}
+                { width: index === currentIndex ? 50 : 10 }
               ]}
             />
           ))}
@@ -74,7 +74,6 @@ const Carousel = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -82,15 +81,11 @@ const styles = StyleSheet.create({
     width: width,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingRight: 10,
-    gap: 10,
-    borderRadius: 20,
   },
   image: {
     width: width,
     height: 200,
-    borderRadius: 10,
-    resizeMode: 'cover',
+    resizeMode: 'contain',
   },
   indicatorContainer: {
     flexDirection: 'row',
@@ -98,7 +93,6 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   indicator: {
-    width: 10,
     height: 10,
     borderRadius: 5,
     marginHorizontal: 5,

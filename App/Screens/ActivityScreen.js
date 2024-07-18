@@ -8,7 +8,7 @@ import NewItems from '../../Components/NewItems';
 import MostPopular from '../../Components/MostPopular';
 import Categories from '../../Components/Categories';
 import FlashSale from '../../Components/FlashSale';
-import { ClockImg, Notification, RectangleImg } from '../Utils/SvgIcons';
+import { ClockImg, Notification, RectangleImg, StartImg } from '../Utils/SvgIcons';
 import TopProductScreen from '../../Components/TopProductScreen';
 import JustForYou from '../../Components/JustForYou';
 import { useNavigation } from '@react-navigation/core';
@@ -76,6 +76,12 @@ export default function ActivityScreen() {
         <Categories/>
         <FlashSale/>
         <TopProductScreen/>
+        <View style={{display:'flex', flexDirection:'row',bottom:20}}>
+      <Text style={styles.recentlyViewedText}>Just For You</Text>
+      <View style={{top:'6%',left:'10%'}}>
+      <StartImg/>
+      </View>
+      </View>
         <JustForYou/>
       </ScrollView>
     </View>
