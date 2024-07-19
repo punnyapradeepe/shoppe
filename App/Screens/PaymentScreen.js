@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Button, FlatList, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Button, FlatList, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View ,TouchableWithoutFeedback} from 'react-native';
 import { EditBtn, TIckB, TickW } from '../Utils/SvgIcons';
 import Colors from '../Utils/Colors';
 import Modal from 'react-native-modal';
@@ -12,7 +12,10 @@ const PaymentScreen = () => {
   const [isInfoModalVisible, setInfoModalVisible] = useState(false);
   const [tempAddress, setTempAddress] = useState(address);
   const [tempInfo, setTempInfo] = useState(info);
-  const [isVoucherModalVisible, setVoucherModalVisible] = useState(false);
+  const [voucherCode, setVoucherCode] = useState('');
+  const [isVoucherModalVisible, 
+  setVoucherModalVisible] = useState(false);
+  const [totalAmount, setTotalAmount] = useState('29.00');
   
 
   const type = [
@@ -20,7 +23,7 @@ const PaymentScreen = () => {
       id: '1',
       images: require('./../../assets/Images/img40.png'),
       text: 'Lorem ipsum dolor sit amet \n consectetur.',
-      price: '$17,00',
+      price: '$17.00',
       color: 'Black',
       size: 'M',
     },
@@ -28,7 +31,7 @@ const PaymentScreen = () => {
       id: '2',
       images: require('./../../assets/Images/img21.png'),
       text: 'Lorem ipsum dolor sit amet \n consectetur.',
-      price: '$12,00',
+      price: '$12.00',
       color: 'Red',
       size: 'S',
     },
@@ -69,6 +72,52 @@ const PaymentScreen = () => {
     setInfoModalVisible(false);
   };
 
+  const handleApplyVoucher = () => {
+    // Update total amount to 5 as an example
+    setTotalAmount(27.55);
+    setVoucherModalVisible(false);
+  };
+  
+  const handleApplyVoucher2 = () => {
+    // Update total amount to 5 as an example
+    setTotalAmount(24.65);
+    setVoucherModalVisible(false);
+  };
+  
+
+  const handleCancelVoucher = () => {
+    setVoucherModalVisible(false);
+  };
+
+    useEffect(() => {
+    if (selectedShipping === 'Express') {
+      if (totalAmount === '29.00') {
+        setTotalAmount("37.00");
+      } else if (totalAmount === 27.55) {
+        setTotalAmount(35.55);
+      } else if (totalAmount === 24.65) {
+        setTotalAmount(32.65);
+      }
+    }
+    else{
+      if (totalAmount === '29.00') {
+        setTotalAmount('29.00');
+      } else if (totalAmount === 27.55) {
+        setTotalAmount(27.55);
+      } else if (totalAmount === 24.65) {
+        setTotalAmount(24.65);
+      }
+      else if (totalAmount === '37.00') {
+        setTotalAmount('29.00');
+      } else if (totalAmount === 35.55) {
+        setTotalAmount(27.55);
+      }else if (totalAmount === 32.65) {
+        setTotalAmount(24.65);
+      }
+    }
+  }, [selectedShipping, totalAmount]);
+  
+
   return (
     <View style={styles.container}>
       <View style={{ padding: 20 ,flex:1}}>
@@ -89,16 +138,19 @@ const PaymentScreen = () => {
           </TouchableOpacity>
         </View>
 
-        <ScrollView
-        showsVerticalScrollIndicator={false} style={{marginLeft:-10,marginRight:-10}} >
+        <ScrollView showsVerticalScrollIndicator={false} style={{marginLeft:-10,marginRight:-10}} >
           <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center',gap:0 }}>
             <Text style={[styles.text1, { marginRight: 6 }]}>Items</Text>
             <View style={{ width: 30, height: 30, borderRadius: 99, backgroundColor: '#F0F8FF', alignItems: 'center', justifyContent: 'center', marginRight: 90 }}>
               <Text style={{ fontWeight: 'bold' }}>2</Text>
             </View>
-            <TouchableOpacity style={{ width: 100, height: 30, backgroundColor: 'white', borderWidth: 3, borderColor: 'blue', alignItems: 'center', borderRadius: 20, justifyContent: 'center' }}>
-              <Text style={{ color: 'blue' }}>Add Voucher</Text>
-            </TouchableOpacity>
+            <TouchableOpacity 
+  style={{ width: 100, height: 30, backgroundColor: 'white', borderWidth: 3, borderColor: 'blue', alignItems: 'center', borderRadius: 20, justifyContent: 'center' }}
+  onPress={() => setVoucherModalVisible(true)}
+>
+  <Text style={{ color: 'blue' }}>Add Voucher</Text>
+</TouchableOpacity>
+
           </View>
 
           <View style={{ paddingLeft: 20, paddingRight: 20 }}>
@@ -145,7 +197,7 @@ const PaymentScreen = () => {
               <View style={{ width: 70, height: 20, backgroundColor: 'white', borderRadius: 10, marginLeft: -120 }}>
                 <Text style={styles.deliveryText1}>1-2days</Text>
               </View>
-              <Text style={styles.text2}>$800</Text>
+              <Text style={styles.text2}>$8.00</Text>
             </TouchableOpacity>
 
             <Text style={{ marginLeft: 18, marginRight: 20 }}>Delivered on or before Thursday, 23 April 2020</Text>
@@ -170,45 +222,207 @@ const PaymentScreen = () => {
           </TouchableOpacity>
 
         </ScrollView>
+     
         </View>
         
 
+        
+
         <Modal isVisible={isAddressModalVisible}>
-          <View style={styles.modalContainer}>
-            <Text style={styles.modalTitle}>Edit Address</Text>
+        <View style={ {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  }}>
+          <View style={ {
+    backgroundColor: 'white',
+    borderColor: Colors.PRIMARY,
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 20,
+    width: '80%',
+  }}>
+            <Text style={{
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  }}>Edit Address</Text>
             <TextInput
-              style={styles.input}
+              style={ {
+                borderColor: Colors.GRAY,
+                borderWidth: 1,
+                borderRadius: 5,
+                padding: 10,
+                marginBottom: 20,
+              }}
               value={tempAddress}
               onChangeText={setTempAddress}
               placeholder="Enter your address"
             />
             <View style={styles.modalButtons}>
-              <Button title="Cancel" onPress={handleCancelAddress} />
-              <Button title="Save" onPress={handleSaveAddress} />
+              <TouchableOpacity style={[ {
+    flex: 1,
+    marginHorizontal: 5,
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }, { backgroundColor: Colors.PRIMARY }]} onPress={handleCancelAddress}>
+                <Text style={ {
+    color: 'white',
+    fontWeight: 'bold',
+  }}>Cancel</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={[{
+    flex: 1,
+    marginHorizontal: 5,
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }, { backgroundColor: Colors.PRIMARY }]} onPress={handleSaveAddress}>
+                <Text style={ {
+    color: 'white',
+    fontWeight: 'bold',
+  }}>Save</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
+
+
+
+
+      <Modal isVisible={isInfoModalVisible}>
+  <View style={{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  }}>
+    <View style={{
+      backgroundColor: 'white',
+      borderColor: Colors.PRIMARY,
+      borderWidth: 1,
+      borderRadius: 10,
+      padding: 20,
+      width: '80%',
+    }}>
+      <Text style={{
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 10,
+      }}>Edit Contact Information</Text>
+      <TextInput
+        style={{
+          borderColor: Colors.GRAY,
+          borderWidth: 1,
+          borderRadius: 5,
+          padding: 10,
+          marginBottom: 20,
+        }}
+        value={tempInfo}
+        onChangeText={setTempInfo}
+        placeholder="Enter your information"
+      />
+      <View style={{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+      }}>
+        <TouchableOpacity
+          style={[{
+            flex: 1,
+            marginHorizontal: 5,
+            padding: 10,
+            borderRadius: 5,
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: Colors.PRIMARY,
+          }]}
+          onPress={handleCancelInfo}
+        >
+          <Text style={{
+            color: 'white',
+            fontWeight: 'bold',
+          }}>Cancel</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[{
+            flex: 1,
+            marginHorizontal: 5,
+            padding: 10,
+            borderRadius: 5,
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: Colors.PRIMARY,
+          }]}
+          onPress={handleSaveInfo}
+        >
+          <Text style={{
+            color: 'white',
+            fontWeight: 'bold',
+          }}>Save</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  </View>
+</Modal>
+
+     
+        <View>
+      <TouchableOpacity onPress={() => setVoucherModalVisible(true)}>
+      </TouchableOpacity>
+
+      <TouchableWithoutFeedback onPress={handleCancelVoucher}>
+        <Modal isVisible={isVoucherModalVisible}>
+          <View style={styles.modalContainer1}>
+            <Text style={{fontSize: 20, fontWeight: '700', color: Colors.BLACK, marginLeft: -140, marginBottom: 20}}>Active Vouchers</Text>
+
+            <View style={styles.imageContainer}>
+              <View style={{width: 300, height: 100, backgroundColor: 'white', borderWidth: 2, borderColor: 'blue', borderRadius: 10}}>
+                <View style={{display: 'flex', flexDirection: 'row', gap: 115}}>
+                  <Text style={{fontSize: 17, fontWeight: '700', color: Colors.PRIMARY, marginLeft: 10}}>Voucher</Text>
+                  <Image source={require('./../../assets/Images/Valid.png')} style={{top: 5}}/>
+                </View>
+                <View>
+                  <Text style={{width: 300, color: 'blue', marginRight: 0, marginTop: 0}}>-------------------------------------------------------------------------</Text>
+                </View>
+                <Text style={{fontSize: 17, fontWeight: '700', color: Colors.BLACK, marginLeft: 10}}>First Purchase</Text>
+                <Text style={{fontSize: 12, fontWeight: '700', marginLeft: 10}}>5% off for your next order</Text>
+              </View>
+              <View style={styles.buttonContainer}>
+                <TouchableOpacity style={{width: 80, height: 30, backgroundColor: Colors.PRIMARY, borderRadius: 10, right: 10, top: 15, alignItems: 'center'}} onPress={handleApplyVoucher}>
+                  <Text style={{color: 'white', top: 4}}>Apply</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+
+            <View style={styles.imageContainer}>
+              <View style={{width: 300, height: 100, backgroundColor: 'white', borderWidth: 2, borderColor: 'blue', borderRadius: 10}}>
+                <View style={{display: 'flex', flexDirection: 'row', gap: 115}}>
+                  <Text style={{fontSize: 17, fontWeight: '700', color: Colors.PRIMARY, marginLeft: 10}}>Voucher</Text>
+                  <Image source={require('./../../assets/Images/Valid (1).png')} style={{top: 5}}/>
+                </View>
+                <View>
+                  <Text style={{width: 300, color: 'blue', marginRight: 0, marginTop: 0}}>-------------------------------------------------------------------------</Text>
+                </View>
+                <Text style={{fontSize: 17, fontWeight: '700', color: Colors.BLACK, marginLeft: 10}}>Gift From Customer Care</Text>
+                <Text style={{fontSize: 12, fontWeight: '700', marginLeft: 10}}>15% off your next purchase</Text>
+              </View>
+              <View style={styles.buttonContainer}>
+                <TouchableOpacity style={{width: 80, height: 30, backgroundColor: Colors.PRIMARY, borderRadius: 10, right: 10, top: 15, alignItems: 'center'}} onPress={handleApplyVoucher2}>
+                  <Text style={{color: 'white', top: 4}}>Apply</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
         </Modal>
+      </TouchableWithoutFeedback>
+    </View>
 
-        <Modal isVisible={isInfoModalVisible}>
-          <View style={styles.modalContainer}>
-            <Text style={styles.modalTitle}>Edit Contact Information</Text>
-            <TextInput
-              style={styles.input}
-              value={tempInfo}
-              onChangeText={setTempInfo}
-              placeholder="Enter your information"
-            />
-            <View style={styles.modalButtons}>
-              <Button title="Cancel" onPress={handleCancelInfo} />
-              <Button title="Save" onPress={handleSaveInfo} />
-            </View>
-          </View>
-        </Modal>
-
-       
  
       <View style={styles.footer}>
-          <Text style={styles.totalText}>Total  $29.00</Text>
+          <Text style={styles.totalText}>Total: ${totalAmount}</Text>
           <TouchableOpacity style={styles.checkoutButton}>
             <Text style={styles.checkoutButtonText}>Pay</Text>
           </TouchableOpacity>
@@ -276,6 +490,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
   text1: {
     fontFamily: 'RalewayB',
     fontSize:20,
@@ -463,10 +678,25 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: 'center',
   },
+  modalContainer1:{
+   height:400,
+   width:350,
+    backgroundColor: 'white',
+    alignItems: 'center',
+  },
   modalTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 40,
+    marginTop:30
+  },
+
+  modalTitleVoucher: {
+    fontSize: 23,
+    fontWeight: 'bold',
+    marginBottom: 50,
+    marginTop:30,
+    
   },
   input: {
     borderWidth: 1,
@@ -481,4 +711,31 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
   },
+  modalContainer1: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  modalTitleVoucher: {
+    fontSize: 18,
+    fontWeight: '600',
+    marginBottom: 10,
+  },
+  imageContainer: {
+    position: 'relative',
+    width: 300, 
+    height: 140, 
+    marginBottom: 0,
+  },
+
+  buttonContainer: {
+    position: 'absolute',
+    bottom: 60, 
+    left: '75%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+ 
 });

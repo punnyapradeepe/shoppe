@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, Button, TextInput } fr
 import { EditBtn } from '../Utils/SvgIcons';
 import { useNavigation } from '@react-navigation/core';
 import Modal from 'react-native-modal';
+import Colors from '../Utils/Colors';
 
 export default function ShippingAddressScreen({ route }) {
   const { totalQuantity } = route.params;
@@ -51,20 +52,79 @@ export default function ShippingAddressScreen({ route }) {
       </View>
       
       <Modal isVisible={isModalVisible}>
-        <View style={styles.modalContainer}>
-          <Text style={styles.modalTitle}>Edit Address</Text>
-          <TextInput
-            style={styles.input}
-            value={tempAddress}
-            onChangeText={setTempAddress}
-            placeholder="Enter your address"
-          />
-          <View style={styles.modalButtons}>
-            <Button title="Cancel" onPress={handleCancel} />
-            <Button title="Save" onPress={handleSave} />
-          </View>
-        </View>
-      </Modal>
+  <View style={{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  }}>
+    <View style={{
+      backgroundColor: 'white',
+      borderColor: Colors.PRIMARY,
+      borderWidth: 1,
+      borderRadius: 10,
+      padding: 20,
+      width: '80%',
+    }}>
+      <Text style={{
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 10,
+      }}>Edit Address</Text>
+      <TextInput
+        style={{
+          borderColor: Colors.GRAY,
+          borderWidth: 1,
+          borderRadius: 5,
+          padding: 10,
+          marginBottom: 20,
+        }}
+        value={tempAddress}
+        onChangeText={setTempAddress}
+        placeholder="Enter your address"
+      />
+      <View style={{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+      }}>
+        <TouchableOpacity
+          style={[{
+            flex: 1,
+            marginHorizontal: 5,
+            padding: 10,
+            borderRadius: 5,
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: Colors.PRIMARY,
+          }]}
+          onPress={handleCancel}
+        >
+          <Text style={{
+            color: 'white',
+            fontWeight: 'bold',
+          }}>Cancel</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[{
+            flex: 1,
+            marginHorizontal: 5,
+            padding: 10,
+            borderRadius: 5,
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: Colors.PRIMARY,
+          }]}
+          onPress={handleSave}
+        >
+          <Text style={{
+            color: 'white',
+            fontWeight: 'bold',
+          }}>Save</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  </View>
+</Modal>
+
     </View>
   );
 }
