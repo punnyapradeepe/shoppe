@@ -1,16 +1,32 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Button, TextInput } from 'react-native';
 import { EditBtn } from '../Utils/SvgIcons';
 import { useNavigation } from '@react-navigation/core';
+import Modal from 'react-native-modal';
 
 export default function ShippingAddressScreen({ route }) {
   const { totalQuantity } = route.params;
   const navigation = useNavigation();
+  
+  // State to manage the address
+  const [address, setAddress] = useState('26, Duong So 2, Thao Dien Ward, An Phu, District 2, Ho Chi Minh city');
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [tempAddress, setTempAddress] = useState(address);
+
+  const handleSave = () => {
+    setAddress(tempAddress);
+    setModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setTempAddress(address);
+    setModalVisible(false);
+  };
 
   return (
     <View style={styles.container}>
       <View>
-      <View style={{ display: 'flex', flexDirection: 'row', gap: 10}}>
+        <View style={{ display: 'flex', flexDirection: 'row', gap: 10 }}>
           <Text style={styles.text}>Cart</Text>
           <View style={styles.quantityIndicator}>
             <Text style={styles.quantityText}>{totalQuantity}</Text>
@@ -18,10 +34,8 @@ export default function ShippingAddressScreen({ route }) {
         </View>
         <Text style={styles.subText}>Shipping Address</Text>
         <View style={styles.addressContainer}>
-          <Text style={styles.address}>
-            26, Duong So 2, Thao Dien Ward, An Phu, District 2, Ho Chi Minh city
-          </Text>
-          <TouchableOpacity style={styles.editButton}>
+          <Text style={styles.address}>{address}</Text>
+          <TouchableOpacity style={styles.editButton} onPress={() => setModalVisible(true)}>
             <EditBtn />
           </TouchableOpacity>
         </View>
@@ -30,12 +44,27 @@ export default function ShippingAddressScreen({ route }) {
         <Image source={require('./../../assets/Images/Logo.png')} style={styles.loginImg} />
       </View>
       <View style={styles.footer}>
-        <Text style={styles.totalText}>Total  $29.00</Text>
-        <TouchableOpacity style={styles.checkoutButton}>
-          <Text style={styles.checkoutButtonText} onPress={()=> navigation.navigate('payment')}>Check Out</Text>
+        <Text style={styles.totalText}>Total $29.00</Text>
+        <TouchableOpacity style={styles.checkoutButton} onPress={() => navigation.navigate('payment')}>
+          <Text style={styles.checkoutButtonText}>Check Out</Text>
         </TouchableOpacity>
       </View>
-     
+      
+      <Modal isVisible={isModalVisible}>
+        <View style={styles.modalContainer}>
+          <Text style={styles.modalTitle}>Edit Address</Text>
+          <TextInput
+            style={styles.input}
+            value={tempAddress}
+            onChangeText={setTempAddress}
+            placeholder="Enter your address"
+          />
+          <View style={styles.modalButtons}>
+            <Button title="Cancel" onPress={handleCancel} />
+            <Button title="Save" onPress={handleSave} />
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -51,7 +80,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     paddingTop: 50,
     paddingBottom: 10,
-    paddingLeft:20
+    paddingLeft: 20,
   },
   subText: {
     marginLeft: 20,
@@ -73,14 +102,6 @@ const styles = StyleSheet.create({
   },
   editButton: {
     marginLeft: 10,
-  },
-  text1: {
-    fontFamily: 'RalewayB',
-    fontSize: 20,
-    fontWeight: 'bold',
-    paddingLeft: 0,
-    paddingTop: 5,
-    paddingBottom: 10,
   },
   ellipse: {
     position: 'absolute',
@@ -142,11 +163,35 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightblue',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop:60
+    marginTop: 60,
   },
   quantityText: {
     fontSize: 14,
     fontWeight: 'bold',
     color: 'black',
+  },
+  modalContainer: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: 'gray',
+    borderRadius: 5,
+    padding: 10,
+    width: '100%',
+    marginBottom: 20,
+  },
+  modalButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
   },
 });

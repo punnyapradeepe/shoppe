@@ -1,20 +1,25 @@
+// ShopScreen.js
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, TextInput, Button } from 'react-native';
 import WishList from '../../Components/WishList';
 import Colors from '../Utils/Colors';
 import { EditBtn, DeleteBtn, MinusImg, MoreImg } from '../Utils/SvgIcons';
-import CartItems from './../../Components/CartItems'
+import CartItems from './../../Components/CartItems';
 import { useNavigation } from '@react-navigation/native';
+import Modal from 'react-native-modal';
 
 export default function ShopScreen() {
   const navigation = useNavigation();
   const [totalQuantity, setTotalQuantity] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
   const [cartItems, setCartItems] = useState([]);
 
-  // Function to update total quantity based on cart items
-  const updateTotalQuantity = (items) => {
-    const total = items.reduce((sum, item) => sum + (item.quantity || 0), 0);
-    setTotalQuantity(total);
+  // Function to update total quantity and total price based on cart items
+  const updateTotalQuantityAndPrice = (items) => {
+    const totalQty = items.reduce((sum, item) => sum + (item.quantity || 0), 0);
+    const totalPr = items.reduce((sum, item) => sum + (parseFloat(item.price.replace('$', '')) * (item.quantity || 0)), 0);
+    setTotalQuantity(totalQty);
+    setTotalPrice(totalPr.toFixed(2));
   };
 
   // Function to handle quantity changes within cart items
@@ -25,12 +30,13 @@ export default function ShopScreen() {
       }
       return item;
     });
+    
     setCartItems(updatedItems);
-    updateTotalQuantity(updatedItems);
+    updateTotalQuantityAndPrice(updatedItems);
   };
 
   const navigateToShippingAddress = () => {
-    navigation.navigate('shippingAddr', { totalQuantity }); 
+    navigation.navigate('shippingAddr', { totalQuantity, totalPrice }); 
   };
 
   // Sample data for cart items
@@ -39,7 +45,7 @@ export default function ShopScreen() {
       id: '1',
       images: require('./../../assets/Images/img40.png'),
       text: 'Lorem ipsum dolor sit amet \n consectetur.',
-      price: '$17,00',
+      price: '$17.00',
       color: 'Black',
       size: 'M',
       quantity: 1, // Initial quantity
@@ -48,7 +54,7 @@ export default function ShopScreen() {
       id: '2',
       images: require('./../../assets/Images/img21.png'),
       text: 'Lorem ipsum dolor sit amet \n consectetur.',
-      price: '$12,00',
+      price: '$12.00',
       color: 'Red',
       size: 'S',
       quantity: 1, // Initial quantity
@@ -57,13 +63,27 @@ export default function ShopScreen() {
 
   useEffect(() => {
     setCartItems(type); // Initialize cart items
-    updateTotalQuantity(type); // Initialize total quantity
+    updateTotalQuantityAndPrice(type); // Initialize total quantity and price
   }, []);
+
+  const [address, setAddress] = useState('26, Duong So 2, Thao Dien Ward, An Phu, District 2, Ho Chi Minh city');
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [tempAddress, setTempAddress] = useState(address);
+
+  const handleSave = () => {
+    setAddress(tempAddress);
+    setModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setTempAddress(address);
+    setModalVisible(false);
+  };
 
   return (
     <View style={styles.container}>
       <View>
-      <View style={{ display: 'flex', flexDirection: 'row', gap: 10 }}>
+        <View style={{ display: 'flex', flexDirection: 'row',gap:0 }}>
           <Text style={styles.text}>Cart</Text>
           <View style={styles.quantityIndicator}>
             <Text style={styles.quantityText}>{totalQuantity}</Text>
@@ -71,16 +91,13 @@ export default function ShopScreen() {
         </View>
         <Text style={styles.subText}>Shipping Address</Text>
         <View style={styles.addressContainer}>
-          <Text style={styles.address}>
-            26, Duong So 2, Thao Dien Ward, An Phu, District 2, Ho Chi Minh city
-          </Text>
-          <TouchableOpacity style={styles.editButton}>
+          <Text style={styles.address}>{address}</Text>
+          <TouchableOpacity style={styles.editButton} onPress={() => setModalVisible(true)}>
             <EditBtn />
           </TouchableOpacity>
         </View>
       </View>
-      <ScrollView showsVerticalScrollIndicator={false} style={{paddingLeft: 20,
-    paddingRight: 20,}}>
+      <ScrollView showsVerticalScrollIndicator={false} style={{ paddingLeft: 20, paddingRight: 20 }}>
         {cartItems.map(item => (
           <View style={styles.itemContainer} key={item.id}>
             <Image source={item.images} style={styles.itemImage} />
@@ -112,7 +129,7 @@ export default function ShopScreen() {
         <WishList/>
       </ScrollView>
       <View style={styles.checkoutContainer}>
-        <Text style={styles.totalText}>Total $29,00</Text>
+        <Text style={styles.totalText}>Total ${totalPrice}</Text>
         <TouchableOpacity 
           style={styles.checkoutButton}
           onPress={navigateToShippingAddress}
@@ -120,13 +137,27 @@ export default function ShopScreen() {
           <Text style={styles.checkoutButtonText}>CheckOut</Text>
         </TouchableOpacity>
       </View>
+      <Modal isVisible={isModalVisible}>
+        <View style={styles.modalContainer}>
+          <Text style={styles.modalTitle}>Edit Address</Text>
+          <TextInput
+            style={styles.input}
+            value={tempAddress}
+            onChangeText={setTempAddress}
+            placeholder="Enter your address"
+          />
+          <View style={styles.modalButtons}>
+            <Button title="Cancel" onPress={handleCancel} />
+            <Button title="Save" onPress={handleSave} />
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    
     paddingTop: 0,
     backgroundColor: 'white',
     flex: 1,
@@ -139,7 +170,7 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     paddingBottom: 10,
     paddingLeft: 20,
-    paddingRight: 20,
+    paddingRight: 10,
   },
   subText: {
     marginLeft: 20,
@@ -156,7 +187,6 @@ const styles = StyleSheet.create({
     marginRight: 20,
     paddingLeft: 20,
     paddingRight: 20,
-
   },
   address: {
     fontSize: 12,
@@ -180,7 +210,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     marginTop: 20,
-        borderTopWidth: 1,
+    borderTopWidth: 1,
     borderColor: 'white',
     paddingTop: 10,
     paddingBottom: 20,
@@ -230,11 +260,13 @@ const styles = StyleSheet.create({
   },
   itemDetails: {
     marginLeft: 10,
-    justifyContent: 'center',
+    justifyContent
+: 'center',
     flex: 1,
   },
   itemText: {
     fontSize: 11,
+
     marginBottom: 10,
   },
   priceContainer: {
@@ -316,5 +348,29 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     color: 'black',
+  },
+  modalContainer: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: 'gray',
+    borderRadius: 5,
+    padding: 10,
+    width: '100%',
+    marginBottom: 20,
+  },
+  modalButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
   },
 });
