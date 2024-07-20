@@ -38,10 +38,14 @@ export default function PasswordScreen() {
         <Text style={{ marginTop: 20, fontSize: 17 }}>Type your password</Text>
 
         <View style={styles.container}>
-          <TextInput style={styles.input} />
-          <TextInput style={styles.input} />
-          <TextInput style={styles.input} />
-          <TextInput style={styles.input} />
+          <TextInput keyboardType="numeric"
+      maxLength={1} style={styles.input} />
+          <TextInput  keyboardType="numeric"
+      maxLength={1} style={styles.input} />
+          <TextInput  keyboardType="numeric"
+      maxLength={1} style={styles.input} />
+          <TextInput  keyboardType="numeric"
+      maxLength={1} style={styles.input} />
         </View>
         <View>
           <TouchableOpacity onPress={() => navigation.navigate('forgot')}>

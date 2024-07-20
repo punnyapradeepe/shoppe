@@ -16,7 +16,10 @@ const PaymentScreen = () => {
   const [isVoucherModalVisible, 
   setVoucherModalVisible] = useState(false);
   const [totalAmount, setTotalAmount] = useState('29.00');
-  
+  const [cardNumber, setCardNumber] = useState(['', '', '', '']);
+const [cardHolderName, setCardHolderName] = useState('');
+const [expiryDate, setExpiryDate] = useState('');
+
 
   const type = [
     {
@@ -39,7 +42,7 @@ const PaymentScreen = () => {
 
   const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
-      <View style={styles.itemDetails}>
+  
         <View style={styles.imageWrapper}>
           <Image source={item.images} style={styles.itemImage} />
           <View style={styles.badge}>
@@ -48,21 +51,31 @@ const PaymentScreen = () => {
         </View>
         <Text style={styles.itemText}>{item.text}</Text>
         <Text style={styles.textPrice}>{item.price}</Text>
-      </View>
+    
     </View>
   );
  // State to control modal visibility
- const [isModalVisible, setModalVisible] = useState(false);
+ const [isModalVisible, setIsModalVisible] = useState(false);
+ const [isEditable, setIsEditable] = useState(false);
+ 
 
- // Function to open the modal
  const openModal = () => {
-   setModalVisible(true);
- };
+  setIsModalVisible(true);
+};
 
- // Function to close the modal
- const closeModal = () => {
-   setModalVisible(false);
- };
+const closeModal = () => {
+  setIsModalVisible(false);
+};
+const toggleEditable = () => {
+  setIsEditable(!isEditable);
+};
+
+const saveDetails = () => {
+  // Here you can handle the save logic, such as sending the data to a server or updating state
+  setIsEditable(false);
+  closeModal();
+};
+
   const handleSaveAddress = () => {
     setAddress(tempAddress);
     setAddressModalVisible(false);
@@ -229,7 +242,7 @@ const PaymentScreen = () => {
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity style={{ width: 73, height: 30, backgroundColor: '#F0F8FF', alignItems: 'center', borderRadius: 20, marginLeft: 20, marginTop: 0, marginBottom: 10 }}  onPress={openModal}>
+          <TouchableOpacity style={{ width: 73, height: 30, backgroundColor: '#F0F8FF', alignItems: 'center', borderRadius: 20, marginLeft: 20, marginTop: 0, marginBottom: 10 }} onPress={openModal}>
             <Text style={{ fontSize: 15, fontWeight: '500', color: 'blue', top: 5 }}>Card</Text>
           </TouchableOpacity>
 
@@ -420,13 +433,12 @@ const PaymentScreen = () => {
 
             <View style={styles.imageContainer}>
               <View style={{width: 300, height: 100, backgroundColor: 'white', borderWidth: 2, borderColor: 'blue', borderRadius: 10}}>
-                <View style={{display: 'flex', flexDirection: 'row', gap: 115}}>
+                <View style={{display: 'flex', flexDirection: 'row', gap: 115,
+                  padding:5,borderBottomWidth:1,borderColor:'blue',borderStyle:'dashed'}}>
                   <Text style={{fontSize: 17, fontWeight: '700', color: Colors.PRIMARY, marginLeft: 10}}>Voucher</Text>
-                  <Image source={require('./../../assets/Images/Valid (1).png')} style={{top: 5}}/>
+                  <Image source={require('./../../assets/Images/Valid (1).png')} style={{}}/>
                 </View>
-                <View>
-                  <Text style={{width: 300, color: 'blue', marginRight: 0, marginTop: 0}}>-------------------------------------------------------------------------</Text>
-                </View>
+                
                 <View style={{display:'flex' ,flexDirection:'row',gap:5}}>
                   <View style={{marginLeft:10}}>
                   <GiftBox/>
@@ -446,65 +458,145 @@ const PaymentScreen = () => {
       </TouchableWithoutFeedback>
 
       <Modal
-  transparent={true}
-  visible={isModalVisible}
-  onRequestClose={() => closeModal()}
-  onBackdropPress={closeModal}
->
-  <View style={{
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', 
-    justifyContent: 'center',
-    alignItems: 'center',
-    width:500,
-    height:700,
-    left:-100,
-    top:-100,
-    bottom:-100
-  }}>
-    <View style={{
-    width: '80%',
-    height:300,
-    padding: 20,
-    backgroundColor: 'white',
-    borderRadius: 10,
-    alignItems: 'center',
-  }}>
-     <Text style={{fontSize:20,color:'black',fontWeight:'bold',marginLeft:-150,marginBottom:10}}>Payment Methods</Text>
-<View style={{display:'flex',flexDirection:'row',gap:3}}>
-     <View style={{width:280,height:200,backgroundColor:'lightblue',marginRight:0,marginLeft:25,borderRadius:20}}>
-      <View style={{display:'flex', flexDirection:'row',gap:160}}>
-     <View style={{top:10,left:10}}>
-        <ClrImg/>
-      </View>
-      <View style={{top:10,left:10}}>
-        <SettingImg/>
-      </View>
-      </View>
+        transparent={true}
+        visible={isModalVisible}
+        onRequestClose={closeModal}
+      >
+        <View style={{
+          flex: 1,
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: 1000,
+          width:400,
+          marginLeft:-20,
+          marginRight:-10,
+          marginBottom:-30
+        }}>
+          <View style={{
+            width: '110%',
+            height: 350,
+            width:350,
+            padding: 20,
+            marginLeft:-30,
+            marginRight:5,
+            backgroundColor: 'white',
+            borderRadius: 10,
+            alignItems: 'center',
+          }}>
+            <Text style={{ fontSize: 20, color: 'black', fontWeight: 'bold', marginBottom: 10 }}>Payment Methods</Text>
+            <View style={{ display: 'flex', flexDirection: 'row', gap: 3 }}>
+              <View style={{ width: 290, height: 200, backgroundColor: 'lightblue', marginLeft: 8, borderRadius: 20 ,overflow:'hidden'}}>
+                <View style={{ display: 'flex', flexDirection: 'row', gap: 160 }}>
+                  <View style={{ top: 10, left: 10 }}>
+                    <ClrImg />
+                  </View>
+                  <View style={{ top: 10, left: 10 }}>
+                    <SettingImg />
+                  </View>
+                </View>
 
-      <View style={{display:'flex', flexDirection:'row',gap:20,left:20,top:50}}>
-        <Text style={{fontWeight:'700',fontSize:16}}>* * * * </Text>
-        <Text style={{fontWeight:'700',fontSize:16}}>* * * * </Text>
-        <Text style={{fontWeight:'700',fontSize:16}}>* * * * </Text>
-        <Text style={{fontWeight:'400',fontSize:16}}>1579</Text>
-      </View>
-      <View style={{display:'flex', flexDirection:'row',gap:60,left:20,top:70}}>
-        <Text style={{fontWeight:'400',fontSize:16}}>AMANDA MORGAN</Text>
-        <Text style={{fontWeight:'400',fontSize:16}}>12/22</Text>
-      </View>
-     </View>
-     <TouchableOpacity style={{width:60,height:200,backgroundColor:Colors.PRIMARY,marginRight:0,borderRadius:20}}>
-      <View style={{top:100,left:20}}>
-        <Plus/>
-      </View>
-     
-     </TouchableOpacity>
-     </View>
-    </View>
-   
-  </View>
-</Modal>
+                <View style={{ display: 'flex', flexDirection: 'row', gap: 20, left: 20, top: 50 }}>
+  {cardNumber.map((num, index) => (
+    <TextInput
+      key={index}
+      style={{
+        fontWeight: '700',
+        fontSize: 16,
+        borderBottomWidth: 1,
+        borderBottomColor: isEditable ? 'black' : 'transparent',
+        width: 40,
+        textAlign: 'center'
+      }}
+      editable={isEditable}
+      value={num}
+      placeholder="* * * *"
+      keyboardType="numeric"
+      maxLength={4}
+      onChangeText={(text) => {
+        // Ensure only digits are allowed
+        if (/^\d*$/.test(text)) {
+          const newCardNumber = [...cardNumber];
+          newCardNumber[index] = text;
+          setCardNumber(newCardNumber);
+        }
+      }}
+    />
+  ))}
+</View>
 
+
+                <View style={{ display: 'flex', flexDirection: 'row', gap: 60, left: 30, top: 70 ,backgroundColor:'red',marginRi2ht:20}}>
+                  <TextInput
+                    style={{
+                      fontWeight: '400',
+                      fontSize: 16,
+                      borderBottomWidth: 1,
+                      borderBottomColor: isEditable ? 'black' : 'transparent',
+                      flex: 1
+                    }}
+                    editable={isEditable}
+                    value={cardHolderName}
+                    placeholder="AMANDA MORGAN"
+                    onChangeText={setCardHolderName}
+                  />
+                 <TextInput
+  style={{
+    fontWeight: '400',
+    fontSize: 16,
+    borderBottomWidth: 1,
+  
+    borderBottomColor: isEditable ? 'black' : 'transparent',
+    flex: 1
+  }}
+  editable={isEditable}
+  value={expiryDate}
+  placeholder="MM/YY"
+  keyboardType="numeric"
+  maxLength={5} // Allows for MM/YY format
+  onChangeText={(text) => {
+    // Remove non-digit characters
+    let cleanedText = text.replace(/\D/g, '');
+
+    // Format as MM/YY
+    if (cleanedText.length > 2) {
+      cleanedText = cleanedText.slice(0, 2) + '/' + cleanedText.slice(2, 4);
+    }
+
+    // Set the formatted text
+    setExpiryDate(cleanedText);
+  }}
+/>
+
+                </View>
+              </View>
+              <TouchableOpacity
+                style={{ width: 40, height: 200, backgroundColor: Colors.PRIMARY, borderRadius: 20 }}
+                onPress={toggleEditable}
+              >
+                <View style={{ top: 100, left: 13 }}>
+                  <Plus />
+                </View>
+              </TouchableOpacity>
+            </View>
+
+            <TouchableOpacity
+              style={{
+                width: 100,
+                height: 40,
+                backgroundColor: Colors.PRIMARY,
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: 20,
+                marginTop: 20
+              }}
+              onPress={saveDetails}
+            >
+              <Text style={{ color: 'white', fontSize: 16 }}>Save</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
       
     </View>
 
@@ -615,8 +707,10 @@ const styles = StyleSheet.create({
   itemContainer: {
     flexDirection: 'row',
     marginVertical: 10,
-    marginHorizontal: 1,
+    alignItems:'center',
+   
     padding: 10,
+    justifyContent:'space-between',
     backgroundColor: Colors.WHITE,
     borderRadius: 10,
     shadowColor: '#000',
@@ -642,7 +736,7 @@ const styles = StyleSheet.create({
   itemText: {
     fontSize: 11,
     fontWeight: 'bold',
-    marginBottom: 30,
+    // marginBottom: 30,
   },
   priceContainer: {
     flexDirection: 'row',

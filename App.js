@@ -18,6 +18,7 @@ import Categories from './Components/Categories';
 import TabNavigation from './App/Navigations/TabNavigation';
 import NewItemDetail from './App/Screens/NewItemDetail';
 import ShippingAddressScreen from './App/Screens/ShippingAddressScreen';
+import PaymentScreen from './App/Screens/PaymentScreen';
 
 
 
@@ -38,26 +39,27 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
+    // <NavigationContainer>
       
-      <Stack.Navigator initialRouteName="LoginScreen">
-        <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ headerShown: false }}/>
-        <Stack.Screen name="createAcc" component={CreateAcc} options={{ headerShown: false }}/>
-        <Stack.Screen name="signIn" component={SigninScreen} options={{ headerShown: false }}/>
-        <Stack.Screen name="password" component={PasswordScreen} options={{ headerShown: false }}/>
-        <Stack.Screen name="forgot" component={ForgotScreen} options={{ headerShown: false }}/>
-        <Stack.Screen name="recovery" component={RecoveryScreen} options={{ headerShown: false }}/>
-        <Stack.Screen name="setPass" component={SetPassword} options={{ headerShown: false }}/>
-        <Stack.Screen name="home" component={HomeScreen} options={{ headerShown: false }}/>
-        <Stack.Screen name="activity" component={TabNavigation} options={{ headerShown: false }}/>
-        <Stack.Screen name="Categories" component={Categories} options={{ headerShown: false }}/>
-        <Stack.Screen name="allc" component={AllCategories} options={{ headerShown: false }}/>
-        <Stack.Screen name="NewItemDetail" component={NewItemDetail} options={{ headerShown: false }}/>
-        <Stack.Screen name="shippingAddr" component={TabNavigation} options={{ headerShown: false }}/>
-        <Stack.Screen name="payment" component={TabNavigation} options={{ headerShown: false }}/>
-      </Stack.Navigator>
-      <StatusBar style="auto" />
-    </NavigationContainer>
+    //   <Stack.Navigator initialRouteName="LoginScreen">
+    //     <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ headerShown: false }}/>
+    //     <Stack.Screen name="createAcc" component={CreateAcc} options={{ headerShown: false }}/>
+    //     <Stack.Screen name="signIn" component={SigninScreen} options={{ headerShown: false }}/>
+    //     <Stack.Screen name="password" component={PasswordScreen} options={{ headerShown: false }}/>
+    //     <Stack.Screen name="forgot" component={ForgotScreen} options={{ headerShown: false }}/>
+    //     <Stack.Screen name="recovery" component={RecoveryScreen} options={{ headerShown: false }}/>
+    //     <Stack.Screen name="setPass" component={SetPassword} options={{ headerShown: false }}/>
+    //     <Stack.Screen name="home" component={HomeScreen} options={{ headerShown: false }}/>
+    //     <Stack.Screen name="activity" component={TabNavigation} options={{ headerShown: false }}/>
+    //     <Stack.Screen name="Categories" component={Categories} options={{ headerShown: false }}/>
+    //     <Stack.Screen name="allc" component={AllCategories} options={{ headerShown: false }}/>
+    //     <Stack.Screen name="NewItemDetail" component={NewItemDetail} options={{ headerShown: false }}/>
+    //     <Stack.Screen name="shippingAddr" component={TabNavigation} options={{ headerShown: false }}/>
+    //     <Stack.Screen name="payment" component={TabNavigation} options={{ headerShown: false }}/>
+    //   </Stack.Navigator>
+    //   <StatusBar style="auto" />
+    // </NavigationContainer>
+    <PaymentScreen />
   );
 }
 

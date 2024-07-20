@@ -31,10 +31,10 @@ export default function RecoveryScreen() {
       </View>
 
       <View style={styles.container2}>
-          <TextInput style={styles.input} />
-          <TextInput style={styles.input} />
-          <TextInput style={styles.input} />
-          <TextInput style={styles.input} />
+          <TextInput keyboardType='numeric' maxLength={1} style={styles.input} />
+          <TextInput  keyboardType='numeric' maxLength={1}  style={styles.input} />
+          <TextInput  keyboardType='numeric' maxLength={1}  style={styles.input} />
+          <TextInput  keyboardType='numeric' maxLength={1}  style={styles.input} />
         </View>
 
         <TouchableOpacity style={styles.nextButton1} onPress={()=>navigation.navigate('setPass')}>
