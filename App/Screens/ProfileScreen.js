@@ -2,8 +2,11 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { SideArrow } from '../Utils/SvgIcons';
 import { ScrollView } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
 
 export default function ProfileScreen() {
+const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <Text style={styles.SettingsText}>Settings</Text>
@@ -24,7 +27,7 @@ export default function ProfileScreen() {
         </View>
         <View style={styles.row}>
           <Text style={styles.Text2}>Payment Method</Text>
-          <TouchableOpacity style={styles.arrowContainer}>
+          <TouchableOpacity style={styles.arrowContainer} onPress={()=>navigation.navigate('paymentMethod')}>
             <SideArrow />
           </TouchableOpacity>
         </View>
@@ -87,7 +90,7 @@ export default function ProfileScreen() {
         </View>
       </View>
 
-      <Text style={{fontSize:15,color:'darkred',marginBottom:10,marginLeft:10}}>Delete My Account</Text>
+      <Text style={{fontSize:15,color:'darkred',marginBottom:10,marginLeft:10,marginTop:10}}>Delete My Account</Text>
 
       <Text style={{ fontSize: 20,
     fontWeight: '700',
@@ -101,7 +104,7 @@ export default function ProfileScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'White',
+    backgroundColor: 'white',
     flex: 1,
     padding: 20,
   

@@ -15,6 +15,7 @@ import FlashSale from '../../Components/FlashSale';
 import FlashSaleScreen from '../Screens/FlashSaleScreen';
 import ShippingAddressScreen from '../Screens/ShippingAddressScreen';
 import PaymentScreen from '../Screens/PaymentScreen';
+import PaymentMethod from './../Screens/PaymentMethod'
 
 const Tab = createBottomTabNavigator();
 const Stack= createNativeStackNavigator();
@@ -67,7 +68,7 @@ const TabNavigation = () => {
       />
       <Tab.Screen
         name='Profile'
-        component={ProfileScreen}
+        component={ProfileScreenStack}
         options={{
           tabBarIcon: ({ color, size, focused }) => (
             <AccountImg width={size} height={size} fill={focused ? 'black' : 'blue'} />
@@ -97,6 +98,13 @@ const ShopScreenStack=()=>(
 <Stack.Screen name="shop" component={ShopScreen} options={{ headerShown: false }}/>
 <Stack.Screen name="shippingAddr" component={ShippingAddressScreen} options={{ headerShown:false}}/>
 <Stack.Screen name="payment" component={PaymentScreen} options={{ headerShown:false}}/>
+</Stack.Navigator>
+)
+
+const ProfileScreenStack=()=>(
+  <Stack.Navigator initialRouteName="Profile">
+<Stack.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }}/>
+<Stack.Screen name="paymentMethod" component={PaymentMethod} options={{ headerShown:false}}/>
 </Stack.Navigator>
 )
 

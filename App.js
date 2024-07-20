@@ -20,6 +20,7 @@ import NewItemDetail from './App/Screens/NewItemDetail';
 import ShippingAddressScreen from './App/Screens/ShippingAddressScreen';
 import PaymentScreen from './App/Screens/PaymentScreen';
 import ProfileScreen from './App/Screens/ProfileScreen';
+import PaymentMethod from './App/Screens/PaymentMethod';
 
 
 
@@ -57,10 +58,11 @@ export default function App() {
     //     <Stack.Screen name="NewItemDetail" component={NewItemDetail} options={{ headerShown: false }}/>
     //     <Stack.Screen name="shippingAddr" component={TabNavigation} options={{ headerShown: false }}/>
     //     <Stack.Screen name="payment" component={TabNavigation} options={{ headerShown: false }}/>
+    //     <Stack.Screen name="paymentMethod" component={TabNavigation} options={{ headerShown: false }}/>
     //   </Stack.Navigator>
     //   <StatusBar style="auto" />
     // </NavigationContainer>
-    <ProfileScreen/>
+   <PaymentMethod/>
   );
 }
 
