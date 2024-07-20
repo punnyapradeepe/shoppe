@@ -190,7 +190,7 @@ const saveDetails = () => {
 
           <Text style={styles.text1}>Shipping Options</Text>
 
-          <View style={{ padding:5 }}>
+         <View style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
             <TouchableOpacity
               style={[
                 styles.deliveryContainer,
@@ -198,16 +198,17 @@ const saveDetails = () => {
               ]}
               onPress={() => setSelectedShipping('Standard')}
             >
-              <Text style={styles.text2}>Standard</Text>
-              <View style={{ right:160 }}>
+               <View>
                 {selectedShipping === 'Standard' ? <TIckB /> : <TickW />}
               </View>
-              <View style={{ width: 70, height: 24, backgroundColor: 'white', borderRadius: 10, marginLeft: -133, gap: 7 }}>
+              <Text style={styles.text2}>Standard</Text>
+             
+              <View style={{ width: 70, height: 24, backgroundColor: 'white', borderRadius:10 }}>
                 <Text style={styles.deliveryText1}>5-7days</Text>
               </View>
               <Text style={styles.text2}>FREE</Text>
             </TouchableOpacity>
-
+            </View>
             <TouchableOpacity
               style={[
                 styles.deliveryContainer,
@@ -226,7 +227,7 @@ const saveDetails = () => {
             </TouchableOpacity>
 
             <Text style={{ marginLeft: 18, marginRight: 20 }}>Delivered on or before Thursday, 23 April 2020</Text>
-          </View>
+        
 
           <View style={{
             flexDirection: 'row',
