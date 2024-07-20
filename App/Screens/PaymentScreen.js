@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, FlatList, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View ,TouchableWithoutFeedback} from 'react-native';
-import { EditBtn, TIckB, TickW } from '../Utils/SvgIcons';
+import { ClrImg, EditBtn, Gift, GiftBox, Plus, SettingImg, TIckB, TickW } from '../Utils/SvgIcons';
 import Colors from '../Utils/Colors';
 import Modal from 'react-native-modal';
 
@@ -51,7 +51,18 @@ const PaymentScreen = () => {
       </View>
     </View>
   );
+ // State to control modal visibility
+ const [isModalVisible, setModalVisible] = useState(false);
 
+ // Function to open the modal
+ const openModal = () => {
+   setModalVisible(true);
+ };
+
+ // Function to close the modal
+ const closeModal = () => {
+   setModalVisible(false);
+ };
   const handleSaveAddress = () => {
     setAddress(tempAddress);
     setAddressModalVisible(false);
@@ -119,6 +130,7 @@ const PaymentScreen = () => {
   
 
   return (
+    
     <View style={styles.container}>
       <View style={{ padding: 20 ,flex:1}}>
         <Text style={styles.text}>Payment</Text>
@@ -217,7 +229,7 @@ const PaymentScreen = () => {
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity style={{ width: 73, height: 30, backgroundColor: '#F0F8FF', alignItems: 'center', borderRadius: 20, marginLeft: 20, marginTop: 0, marginBottom: 10 }}>
+          <TouchableOpacity style={{ width: 73, height: 30, backgroundColor: '#F0F8FF', alignItems: 'center', borderRadius: 20, marginLeft: 20, marginTop: 0, marginBottom: 10 }}  onPress={openModal}>
             <Text style={{ fontSize: 15, fontWeight: '500', color: 'blue', top: 5 }}>Card</Text>
           </TouchableOpacity>
 
@@ -374,7 +386,11 @@ const PaymentScreen = () => {
       </TouchableOpacity>
 
       <TouchableWithoutFeedback onPress={handleCancelVoucher}>
-        <Modal isVisible={isVoucherModalVisible}>
+      <Modal
+        isVisible={isVoucherModalVisible}
+        onBackdropPress={handleCancelVoucher}
+        onRequestClose={() => handleCancelVoucher()}
+      >
           <View style={styles.modalContainer1}>
             <Text style={{fontSize: 20, fontWeight: '700', color: Colors.BLACK, marginLeft: -140, marginBottom: 20}}>Active Vouchers</Text>
 
@@ -387,7 +403,12 @@ const PaymentScreen = () => {
                 <View>
                   <Text style={{width: 300, color: 'blue', marginRight: 0, marginTop: 0}}>-------------------------------------------------------------------------</Text>
                 </View>
+                <View style={{display:'flex' ,flexDirection:'row',gap:5}}>
+                  <View style={{marginLeft:10}}>
+                  <Gift/>
+                  </View>
                 <Text style={{fontSize: 17, fontWeight: '700', color: Colors.BLACK, marginLeft: 10}}>First Purchase</Text>
+                </View>
                 <Text style={{fontSize: 12, fontWeight: '700', marginLeft: 10}}>5% off for your next order</Text>
               </View>
               <View style={styles.buttonContainer}>
@@ -406,7 +427,12 @@ const PaymentScreen = () => {
                 <View>
                   <Text style={{width: 300, color: 'blue', marginRight: 0, marginTop: 0}}>-------------------------------------------------------------------------</Text>
                 </View>
+                <View style={{display:'flex' ,flexDirection:'row',gap:5}}>
+                  <View style={{marginLeft:10}}>
+                  <GiftBox/>
+                  </View>
                 <Text style={{fontSize: 17, fontWeight: '700', color: Colors.BLACK, marginLeft: 10}}>Gift From Customer Care</Text>
+                </View>
                 <Text style={{fontSize: 12, fontWeight: '700', marginLeft: 10}}>15% off your next purchase</Text>
               </View>
               <View style={styles.buttonContainer}>
@@ -418,7 +444,72 @@ const PaymentScreen = () => {
           </View>
         </Modal>
       </TouchableWithoutFeedback>
+
+      <Modal
+  transparent={true}
+  visible={isModalVisible}
+  onRequestClose={() => closeModal()}
+  onBackdropPress={closeModal}
+>
+  <View style={{
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+    justifyContent: 'center',
+    alignItems: 'center',
+    width:500,
+    height:700,
+    left:-100,
+    top:-100,
+    bottom:-100
+  }}>
+    <View style={{
+    width: '80%',
+    height:300,
+    padding: 20,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    alignItems: 'center',
+  }}>
+     <Text style={{fontSize:20,color:'black',fontWeight:'bold',marginLeft:-150,marginBottom:10}}>Payment Methods</Text>
+<View style={{display:'flex',flexDirection:'row',gap:3}}>
+     <View style={{width:280,height:200,backgroundColor:'lightblue',marginRight:0,marginLeft:25,borderRadius:20}}>
+      <View style={{display:'flex', flexDirection:'row',gap:160}}>
+     <View style={{top:10,left:10}}>
+        <ClrImg/>
+      </View>
+      <View style={{top:10,left:10}}>
+        <SettingImg/>
+      </View>
+      </View>
+
+      <View style={{display:'flex', flexDirection:'row',gap:20,left:20,top:50}}>
+        <Text style={{fontWeight:'700',fontSize:16}}>* * * * </Text>
+        <Text style={{fontWeight:'700',fontSize:16}}>* * * * </Text>
+        <Text style={{fontWeight:'700',fontSize:16}}>* * * * </Text>
+        <Text style={{fontWeight:'400',fontSize:16}}>1579</Text>
+      </View>
+      <View style={{display:'flex', flexDirection:'row',gap:60,left:20,top:70}}>
+        <Text style={{fontWeight:'400',fontSize:16}}>AMANDA MORGAN</Text>
+        <Text style={{fontWeight:'400',fontSize:16}}>12/22</Text>
+      </View>
+     </View>
+     <TouchableOpacity style={{width:60,height:200,backgroundColor:Colors.PRIMARY,marginRight:0,borderRadius:20}}>
+      <View style={{top:100,left:20}}>
+        <Plus/>
+      </View>
+     
+     </TouchableOpacity>
+     </View>
     </View>
+   
+  </View>
+</Modal>
+
+      
+    </View>
+
+
+
 
  
       <View style={styles.footer}>
