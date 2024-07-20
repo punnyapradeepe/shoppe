@@ -40,11 +40,11 @@ export default function SigninScreen() {
 
 
 
-          <View style={{position:'absolute',left:0,top:350}}>
+          <View style={{position:'absolute',top:350,width:'90%',marginHorizontal:20}}>
 
           <Text style={styles.text}>Login</Text>
           <View style={{display:'flex' ,flexDirection:'row'}}>
-            <Text style={{fontSize:17,paddingLeft:20,paddingTop:10}}>Good to see you back! </Text>
+            <Text style={{fontSize:17,paddingTop:10}}>Good to see you back! </Text>
             <View style={{paddingTop:10}}>
             <HeartImg/>
             </View>
@@ -70,17 +70,18 @@ const styles = StyleSheet.create({
     fontFamily: 'RalewayB',
     fontSize: 40,
     fontWeight: 'bold',
-    paddingLeft:20
+    // paddingLeft:20
+    
   },
   textInput: {
     backgroundColor: '#F8F8F8',
     padding: 10,
     borderRadius: 8,
     marginTop: 30,
-    marginHorizontal: 20,
+    // marginHorizontal: 20,
     color: Colors.BLACK,
     height: 50,
-    width:320,
+    width:'100%',
     
   },
   buttonContainer: {
@@ -91,8 +92,8 @@ const styles = StyleSheet.create({
   },
   button: {
     height: 61,
-    width: 330,
-    marginTop: 63,
+    width:"100%",
+    marginTop: 40,
     backgroundColor: Colors.PRIMARY,
     justifyContent: 'center',
     alignItems: 'center',
