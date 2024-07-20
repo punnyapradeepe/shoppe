@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: Colors.WHITE,
     fontSize: 18,
-    fontFamily: 'Regular',
+    // fontFamily: 'Regular',
     
   },
 })
