@@ -17,11 +17,20 @@ const [storedCardNumber, setStoredCardNumber] = useState(['* * * *', '* * * *', 
   const [backupCardNumber, setBackupCardNumber] = useState(['', '', '', '']);
   const [backupCardHolderName, setBackupCardHolderName] = useState('');
   const [backupExpiryDate, setBackupExpiryDate] = useState('');
+  const [isCardNumberEdited, setIsCardNumberEdited] = useState(false);
+  const [isCardHolderNameEdited, setIsCardHolderNameEdited] = useState(false);
+  const [isExpiryDateEdited, setIsExpiryDateEdited] = useState(false);
+  
 
- const openModal = () => {
-  setIsModalVisible(true);
-  setIsEditable(true);
-};
+  const openModal = () => {
+    // Store the current values as backup when opening the modal
+    setBackupCardNumber(cardNumber);
+    setBackupCardHolderName(cardHolderName);
+    setBackupExpiryDate(expiryDate);
+    
+    setIsModalVisible(true);
+    setIsEditable(true);
+  };
 
 const closeModal = () => {
   setIsModalVisible(false);
@@ -33,19 +42,56 @@ const toggleEditable = () => {
 
 
 const saveDetails = () => {
-  setStoredCardNumber(cardNumber);
-  setStoredCardHolderName(cardHolderName);
-  setStoredExpiryDate(expiryDate);
+  // Update stored values only for fields that were edited
+  if (isCardNumberEdited) {
+    setStoredCardNumber(cardNumber);
+  }
+
+  if (isCardHolderNameEdited) {
+    setStoredCardHolderName(cardHolderName);
+  }
+
+  if (isExpiryDateEdited) {
+    setStoredExpiryDate(expiryDate);
+  }
+
+  // Reset the edit tracking flags
+  setIsCardNumberEdited(false);
+  setIsCardHolderNameEdited(false);
+  setIsExpiryDateEdited(false);
+
+  // Disable editing and close the modal
   setIsEditable(false);
   closeModal();
 };
 
+
 const cancelChanges = () => {
-  setCardNumber(backupCardNumber);
-  setCardHolderName(backupCardHolderName);
-  setExpiryDate(backupExpiryDate);
+  // Check if the card number was edited
+  if (isCardNumberEdited) {
+    setCardNumber(backupCardNumber);
+  } else {
+    setCardNumber(storedCardNumber);
+  }
+
+  // Check if the card holder name was edited
+  if (isCardHolderNameEdited) {
+    setCardHolderName(backupCardHolderName);
+  } else {
+    setCardHolderName(storedCardHolderName);
+  }
+
+  // Check if the expiry date was edited
+  if (isExpiryDateEdited) {
+    setExpiryDate(backupExpiryDate);
+  } else {
+    setExpiryDate(storedExpiryDate);
+  }
+
   closeModal();
 };
+
+
 
 
 
@@ -200,6 +246,7 @@ const cancelChanges = () => {
                         const newCardNumber = [...cardNumber];
                         newCardNumber[index] = text;
                         setCardNumber(newCardNumber);
+                        setIsCardNumberEdited(true);  // Set flag when edited
                       }
                     }}
                   />
@@ -207,40 +254,46 @@ const cancelChanges = () => {
               </View>
 
               <View style={{ display: 'flex', flexDirection: 'row', gap: 60, top: 70, marginRight: 20 }}>
-                <TextInput
-                  style={{
-                    fontWeight: '400',
-                    fontSize: 16,
-                    borderBottomWidth: 1,
-                    borderBottomColor: isEditable ? 'black' : 'transparent',
-                    flex: 1
-                  }}
-                  editable={isEditable}
-                  value={cardHolderName}
-                  placeholder="AMANDA MORGAN"
-                  onChangeText={setCardHolderName}
-                />
-                <TextInput
-                  style={{
-                    fontWeight: '400',
-                    fontSize: 16,
-                    borderBottomWidth: 1,
-                    borderBottomColor: isEditable ? 'black' : 'transparent',
-                    flex: 1
-                  }}
-                  editable={isEditable}
-                  value={expiryDate}
-                  placeholder="MM/YY"
-                  keyboardType="numeric"
-                  maxLength={5}
-                  onChangeText={(text) => {
-                    let cleanedText = text.replace(/\D/g, '');
-                    if (cleanedText.length > 2) {
-                      cleanedText = cleanedText.slice(0, 2) + '/' + cleanedText.slice(2, 4);
-                    }
-                    setExpiryDate(cleanedText);
-                  }}
-                />
+              <TextInput
+  style={{
+    fontWeight: '400',
+    fontSize: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: isEditable ? 'black' : 'transparent',
+    flex: 1
+  }}
+  editable={isEditable}
+  value={cardHolderName}
+  placeholder="AMANDA MORGAN"
+  onChangeText={(text) => {
+    setCardHolderName(text);
+    setIsCardHolderNameEdited(true);  // Set flag when edited
+  }}
+/>
+
+
+<TextInput
+  style={{
+    fontWeight: '400',
+    fontSize: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: isEditable ? 'black' : 'transparent',
+    flex: 1
+  }}
+  editable={isEditable}
+  value={expiryDate}
+  placeholder="MM/YY"
+  keyboardType="numeric"
+  maxLength={5}
+  onChangeText={(text) => {
+    let cleanedText = text.replace(/\D/g, '');
+    if (cleanedText.length > 2) {
+      cleanedText = cleanedText.slice(0, 2) + '/' + cleanedText.slice(2, 4);
+    }
+    setExpiryDate(cleanedText);
+    setIsExpiryDateEdited(true);  // Set flag when edited
+  }}
+/>
               </View>
             </View>
             <View style={{display:'flex', flexDirection:'row',justifyContent:'space-between',gap:10}}>
