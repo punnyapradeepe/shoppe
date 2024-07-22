@@ -27,7 +27,12 @@ const toggleEditable = () => {
   setIsEditable(!isEditable);
 };
 
+
+
 const saveDetails = () => {
+  setStoredCardNumber(cardNumber);
+  setStoredCardHolderName(cardHolderName);
+  setStoredExpiryDate(expiryDate);
   setIsEditable(false);
   closeModal();
 };
@@ -48,16 +53,14 @@ const saveDetails = () => {
             </View>
 
             <View style={styles.cardNumbers}>
-              <Text>* * * *</Text>
-              <Text>* * * *</Text>
-              <Text>* * * *</Text>
-              <Text>* * * *</Text>
-              <Text>1579</Text>
+            {storedCardNumber.map((num, index) => (
+                <Text key={index}>{num}</Text>
+              ))}
             </View>
 
             <View style={styles.cardDetails}>
-              <Text>AMANDA MORGAN</Text>
-              <Text>12/22</Text>
+            <Text>{storedCardHolderName}</Text>
+            <Text>{storedExpiryDate}</Text>
             </View>
           </View>
           <TouchableOpacity style={styles.Add}  onPress={openModal}>
@@ -139,109 +142,94 @@ const saveDetails = () => {
         transparent={true}
         visible={isModalVisible}
         onRequestClose={closeModal}
-       
       >
         <View style={{
           flex: 1,
           backgroundColor: 'rgba(0, 0, 0, 0.5)',
           justifyContent: 'center',
           alignItems: 'center',
-        
         }}>
           <View style={{
-          padding:10,
+            padding: 10,
             backgroundColor: 'white',
             borderRadius: 10,
             alignItems: 'center',
           }}>
-          
-           
-              <View style={{backgroundColor: 'lightblue', borderRadius: 20 ,overflow:'hidden',paddingHorizontal:40,paddingBottom:90}}>
-                <View style={{ display: 'flex', flexDirection: 'row', justifyContent:'space-between'}}>
-                  <View style={{ top: 10,}}>
-                    <ClrImg />
-                  </View>
-                  <View style={{ top: 10,}}>
-                    <SettingImg />
-                  </View>
+            <View style={{ backgroundColor: 'lightblue', borderRadius: 20, overflow: 'hidden', paddingHorizontal: 40, paddingBottom: 90 }}>
+              <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                <View style={{ top: 10, }}>
+                  <ClrImg />
                 </View>
+                <View style={{ top: 10, }}>
+                  <SettingImg />
+                </View>
+              </View>
 
-                <View style={{ display: 'flex', flexDirection: 'row', gap: 20, top: 50 }}>
-  {cardNumber.map((num, index) => (
-    <TextInput
-      key={index}
-      style={{
-        fontWeight: '700',
-        fontSize: 16,
-        borderBottomWidth: 1,
-        borderBottomColor: isEditable ? 'black' : 'transparent',
-        width: 40,
-        textAlign: 'center'
-      }}
-      editable={isEditable}
-      value={num}
-      placeholder="* * * *"
-      keyboardType="numeric"
-      maxLength={4}
-      onChangeText={(text) => {
-        // Ensure only digits are allowed
-        if (/^\d*$/.test(text)) {
-          const newCardNumber = [...cardNumber];
-          newCardNumber[index] = text;
-          setCardNumber(newCardNumber);
-        }
-      }}
-    />
-  ))}
-</View>
-
-
-                <View style={{ display: 'flex', flexDirection: 'row', gap: 60,top: 70 ,marginRi2ht:20}}>
+              <View style={{ display: 'flex', flexDirection: 'row', gap: 20, top: 50 }}>
+                {cardNumber.map((num, index) => (
                   <TextInput
+                    key={index}
                     style={{
-                      fontWeight: '400',
+                      fontWeight: '700',
                       fontSize: 16,
                       borderBottomWidth: 1,
                       borderBottomColor: isEditable ? 'black' : 'transparent',
-                      flex: 1
+                      width: 40,
+                      textAlign: 'center'
                     }}
                     editable={isEditable}
-                    value={cardHolderName}
-                    placeholder="AMANDA MORGAN"
-                    onChangeText={setCardHolderName}
+                    value={num}
+                    placeholder="* * * *"
+                    keyboardType="numeric"
+                    maxLength={4}
+                    onChangeText={(text) => {
+                      if (/^\d*$/.test(text)) {
+                        const newCardNumber = [...cardNumber];
+                        newCardNumber[index] = text;
+                        setCardNumber(newCardNumber);
+                      }
+                    }}
                   />
-                 <TextInput
-  style={{
-    fontWeight: '400',
-    fontSize: 16,
-    borderBottomWidth: 1,
-  
-    borderBottomColor: isEditable ? 'black' : 'transparent',
-    flex: 1
-  }}
-  editable={isEditable}
-  value={expiryDate}
-  placeholder="MM/YY"
-  keyboardType="numeric"
-  maxLength={5} // Allows for MM/YY format
-  onChangeText={(text) => {
-    // Remove non-digit characters
-    let cleanedText = text.replace(/\D/g, '');
-
-    // Format as MM/YY
-    if (cleanedText.length > 2) {
-      cleanedText = cleanedText.slice(0, 2) + '/' + cleanedText.slice(2, 4);
-    }
-
-    // Set the formatted text
-    setExpiryDate(cleanedText);
-  }}
-/>
-
-                </View>
+                ))}
               </View>
-            
 
+              <View style={{ display: 'flex', flexDirection: 'row', gap: 60, top: 70, marginRight: 20 }}>
+                <TextInput
+                  style={{
+                    fontWeight: '400',
+                    fontSize: 16,
+                    borderBottomWidth: 1,
+                    borderBottomColor: isEditable ? 'black' : 'transparent',
+                    flex: 1
+                  }}
+                  editable={isEditable}
+                  value={cardHolderName}
+                  placeholder="AMANDA MORGAN"
+                  onChangeText={setCardHolderName}
+                />
+                <TextInput
+                  style={{
+                    fontWeight: '400',
+                    fontSize: 16,
+                    borderBottomWidth: 1,
+                    borderBottomColor: isEditable ? 'black' : 'transparent',
+                    flex: 1
+                  }}
+                  editable={isEditable}
+                  value={expiryDate}
+                  placeholder="MM/YY"
+                  keyboardType="numeric"
+                  maxLength={5}
+                  onChangeText={(text) => {
+                    let cleanedText = text.replace(/\D/g, '');
+                    if (cleanedText.length > 2) {
+                      cleanedText = cleanedText.slice(0, 2) + '/' + cleanedText.slice(2, 4);
+                    }
+                    setExpiryDate(cleanedText);
+                  }}
+                />
+              </View>
+            </View>
             <TouchableOpacity
               style={{
                 width: 100,
@@ -285,7 +273,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   Card: {
-    backgroundColor: 'lightblue',
+    backgroundColor: '#e0ffff',
     paddingHorizontal: 20,
     paddingVertical: 20,
     borderRadius: 20,
@@ -332,7 +320,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     padding: 10,
-    backgroundColor: 'lightblue',
+    backgroundColor: '#e0ffff',
     marginBottom: 10,
     borderRadius: 20,
   },
