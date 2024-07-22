@@ -155,7 +155,7 @@ const saveDetails = () => {
             borderRadius: 10,
             alignItems: 'center',
           }}>
-            <View style={{ backgroundColor: 'lightblue', borderRadius: 20, overflow: 'hidden', paddingHorizontal: 40, paddingBottom: 90 }}>
+            <View style={{ backgroundColor: '#f8f8ff', borderRadius: 20, overflow: 'hidden', paddingHorizontal: 40, paddingBottom: 90 }}>
               <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                 <View style={{ top: 10, }}>
                   <ClrImg />
@@ -244,6 +244,7 @@ const saveDetails = () => {
             >
               <Text style={{ color: 'white', fontSize: 16 }}>Save</Text>
             </TouchableOpacity>
+            
           </View>
         </View>
       </Modal>
@@ -273,7 +274,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   Card: {
-    backgroundColor: '#e0ffff',
+    backgroundColor: '#f8f8ff',
     paddingHorizontal: 20,
     paddingVertical: 20,
     borderRadius: 20,
@@ -320,7 +321,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     padding: 10,
-    backgroundColor: '#e0ffff',
+    backgroundColor: '#f8f8ff',
     marginBottom: 10,
     borderRadius: 20,
   },
