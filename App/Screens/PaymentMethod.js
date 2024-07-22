@@ -14,6 +14,9 @@ export default function PaymentMethod() {
 const [storedCardNumber, setStoredCardNumber] = useState(['* * * *', '* * * *', '* * * *', '1579']);
   const [storedCardHolderName, setStoredCardHolderName] = useState('AMANDA MORGAN');
   const [storedExpiryDate, setStoredExpiryDate] = useState('12/22');
+  const [backupCardNumber, setBackupCardNumber] = useState(['', '', '', '']);
+  const [backupCardHolderName, setBackupCardHolderName] = useState('');
+  const [backupExpiryDate, setBackupExpiryDate] = useState('');
 
  const openModal = () => {
   setIsModalVisible(true);
@@ -36,6 +39,16 @@ const saveDetails = () => {
   setIsEditable(false);
   closeModal();
 };
+
+const cancelChanges = () => {
+  setCardNumber(backupCardNumber);
+  setCardHolderName(backupCardHolderName);
+  setExpiryDate(backupExpiryDate);
+  closeModal();
+};
+
+
+
   return (
     <View style={styles.container}>
       <Text style={styles.SettingsText}>Settings</Text>
@@ -230,6 +243,7 @@ const saveDetails = () => {
                 />
               </View>
             </View>
+            <View style={{display:'flex', flexDirection:'row',justifyContent:'space-between'}}>
             <TouchableOpacity
               style={{
                 width: 100,
@@ -244,7 +258,21 @@ const saveDetails = () => {
             >
               <Text style={{ color: 'white', fontSize: 16 }}>Save</Text>
             </TouchableOpacity>
-            
+            <TouchableOpacity
+              style={{
+                width: 100,
+                height: 40,
+                backgroundColor: Colors.PRIMARY,
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: 20,
+                marginTop: 20
+              }}
+              onPress={cancelChanges}
+            >
+              <Text style={{ color: 'white', fontSize: 16 }}>Cancel</Text>
+            </TouchableOpacity>
+            </View>
           </View>
         </View>
       </Modal>
