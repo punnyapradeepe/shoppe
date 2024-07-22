@@ -1,11 +1,12 @@
 import { View, Text, StyleSheet, ScrollView, TextInput, TouchableOpacity,TouchableWithoutFeedback } from 'react-native';
 import React, { useState } from 'react';
 import Colors from '../Utils/Colors';
-import { ClrImg, Gift, Gift2, GiftBox, GiftRed, Plus, SettingImg } from '../Utils/SvgIcons';
+import { ClrImg, Delete, Gift, Gift2, GiftBox, GiftRed, Plus, SettingImg } from '../Utils/SvgIcons';
 import Modal from 'react-native-modal';
 
 export default function PaymentMethod() {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isEditModalVisible ,setIsEditModalVisible] = useState(false);
  const [isEditable, setIsEditable] = useState(false);
  const [cardNumber, setCardNumber] = useState(['', '', '', '']);
  const [cardHolderName, setCardHolderName] = useState('');
@@ -20,16 +21,20 @@ const [storedCardNumber, setStoredCardNumber] = useState(['* * * *', '* * * *', 
   const [isCardNumberEdited, setIsCardNumberEdited] = useState(false);
   const [isCardHolderNameEdited, setIsCardHolderNameEdited] = useState(false);
   const [isExpiryDateEdited, setIsExpiryDateEdited] = useState(false);
+  const [isDetailsSaved, setIsDetailsSaved] = useState(false);
+  const [hasChangesBeenSaved, setHasChangesBeenSaved] = useState(false); 
   
-
+  
   const openModal = () => {
-    // Store the current values as backup when opening the modal
-    setBackupCardNumber(cardNumber);
-    setBackupCardHolderName(cardHolderName);
-    setBackupExpiryDate(expiryDate);
-    
-    setIsModalVisible(true);
-    setIsEditable(true);
+    if (!hasChangesBeenSaved) {
+      setBackupCardNumber(storedCardNumber);
+      setBackupCardHolderName(storedCardHolderName);
+      setBackupExpiryDate(storedExpiryDate);
+      setCardNumber(storedCardNumber);
+      setCardHolderName(storedCardHolderName);
+      setExpiryDate(storedExpiryDate);
+      setIsModalVisible(true);
+    }
   };
 
 const closeModal = () => {
@@ -61,8 +66,11 @@ const saveDetails = () => {
   setIsExpiryDateEdited(false);
 
   // Disable editing and close the modal
+  
   setIsEditable(false);
+  setHasChangesBeenSaved(true);
   closeModal();
+
 };
 
 
@@ -88,7 +96,111 @@ const cancelChanges = () => {
     setExpiryDate(storedExpiryDate);
   }
 
-  closeModal();
+  setHasChangesBeenSaved(false); // Allow modal to be opened again
+    closeModal();
+};
+
+const dltChanges = () => {
+  // Check if the card number was edited
+  if (isCardNumberEdited) {
+    setCardNumber(backupCardNumber);
+  } else {
+    setCardNumber(storedCardNumber);
+  }
+
+  // Check if the card holder name was edited
+  if (isCardHolderNameEdited) {
+    setCardHolderName(backupCardHolderName);
+  } else {
+    setCardHolderName(storedCardHolderName);
+  }
+
+  // Check if the expiry date was edited
+  if (isExpiryDateEdited) {
+    setExpiryDate(backupExpiryDate);
+  } else {
+    setExpiryDate(storedExpiryDate);
+  }
+
+  setHasChangesBeenSaved(false); // Allow modal to be opened again
+  
+};
+
+
+
+
+
+
+
+
+const openEditModal = () => {
+ 
+    setBackupCardNumber(storedCardNumber);
+    setBackupCardHolderName(storedCardHolderName);
+    setBackupExpiryDate(storedExpiryDate);
+    setCardNumber(storedCardNumber);
+    setCardHolderName(storedCardHolderName);
+    setExpiryDate(storedExpiryDate);
+    setIsEditModalVisible(true);
+
+};
+
+const closeEditModal = () => {
+setIsEditModalVisible(false);
+};
+const toggleEditEditable = () => {
+setIsEditable(!isEditable);
+};
+
+
+
+const saveEditDetails = () => {
+if (isCardNumberEdited) {
+  setStoredCardNumber(cardNumber);
+}
+
+if (isCardHolderNameEdited) {
+  setStoredCardHolderName(cardHolderName);
+}
+
+if (isExpiryDateEdited) {
+  setStoredExpiryDate(expiryDate);
+}
+
+// Reset the edit tracking flags
+setIsCardNumberEdited(false);
+setIsCardHolderNameEdited(false);
+setIsExpiryDateEdited(false);
+
+// Disable editing and close the modal
+setIsEditable(false);
+closeEditModal();
+};
+
+
+const cancelEditChanges = () => {
+// Check if the card number was edited
+if (isCardNumberEdited) {
+  setCardNumber(backupCardNumber);
+} else {
+  setCardNumber(storedCardNumber);
+}
+
+// Check if the card holder name was edited
+if (isCardHolderNameEdited) {
+  setCardHolderName(backupCardHolderName);
+} else {
+  setCardHolderName(storedCardHolderName);
+}
+
+// Check if the expiry date was edited
+if (isExpiryDateEdited) {
+  setExpiryDate(backupExpiryDate);
+} else {
+  setExpiryDate(storedExpiryDate);
+}
+
+closeEditModal();
 };
 
 
@@ -101,7 +213,7 @@ const cancelChanges = () => {
       <View style={{ backgroundColor: 'white', flex: 1 }}>
         <Text style={styles.Text2}>Payment Methods</Text>
         <View style={styles.Cardcontainer}>
-          <View style={styles.Card}>
+          <TouchableOpacity style={styles.Card} onPress={openEditModal}>
             <View style={styles.cardIcons}>
               <View style={styles.iconLeft}>
                 <ClrImg />
@@ -121,12 +233,14 @@ const cancelChanges = () => {
             <Text>{storedCardHolderName}</Text>
             <Text>{storedExpiryDate}</Text>
             </View>
-          </View>
-          <TouchableOpacity style={styles.Add}  onPress={openModal}>
-            <View style={styles.addIcon}>
-              <Plus />
-            </View>
           </TouchableOpacity>
+          
+            <TouchableOpacity style={styles.Add} onPress={openModal}>
+              <View style={styles.addIcon}>
+                <Plus />
+              </View>
+            </TouchableOpacity>
+        
         </View>
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.subViews}>
@@ -198,137 +312,152 @@ const cancelChanges = () => {
 
       </View>
       <Modal
-        transparent={true}
-        visible={isModalVisible}
-        onRequestClose={closeModal}
+        isVisible={isModalVisible}
+        onBackdropPress={closeModal}
+        onBackButtonPress={closeModal}
+        style={styles.modalContainer}
       >
-        <View style={{
-          flex: 1,
-          backgroundColor: 'rgba(0, 0, 0, 0.5)',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-          <View style={{
-            padding: 10,
-            backgroundColor: 'white',
-            borderRadius: 10,
-            alignItems: 'center',
-          }}>
-            <View style={{ backgroundColor: '#f8f8ff', borderRadius: 20, overflow: 'hidden', paddingHorizontal: 40, paddingBottom: 90 }}>
-              <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                <View style={{ top: 10, }}>
-                  <ClrImg />
-                </View>
-                <View style={{ top: 10, }}>
-                  <SettingImg />
-                </View>
-              </View>
-
-              <View style={{ display: 'flex', flexDirection: 'row', gap: 20, top: 50 }}>
-                {cardNumber.map((num, index) => (
-                  <TextInput
-                    key={index}
-                    style={{
-                      fontWeight: '700',
-                      fontSize: 16,
-                      borderBottomWidth: 1,
-                      borderBottomColor: isEditable ? 'black' : 'transparent',
-                      width: 40,
-                      textAlign: 'center'
-                    }}
-                    editable={isEditable}
-                    value={num}
-                    placeholder="* * * *"
-                    keyboardType="numeric"
-                    maxLength={4}
-                    onChangeText={(text) => {
-                      if (/^\d*$/.test(text)) {
-                        const newCardNumber = [...cardNumber];
-                        newCardNumber[index] = text;
-                        setCardNumber(newCardNumber);
-                        setIsCardNumberEdited(true);  // Set flag when edited
-                      }
-                    }}
-                  />
-                ))}
-              </View>
-
-              <View style={{ display: 'flex', flexDirection: 'row', gap: 60, top: 70, marginRight: 20 }}>
+        <View style={styles.modalContent}>
+          <Text style={styles.modalTitle}>Add Card</Text>
+          <Text style={styles.label}>Card Holder</Text>
+          <TextInput
+            style={styles.input}
+           placeholder='required'
+            onChangeText={(text) => {
+              setCardHolderName(text);
+              setIsCardHolderNameEdited(true);
+            }}
+          />
+          <Text style={styles.label}>Card Number</Text>
+          <TextInput
+            style={styles.input}
+           placeholder='required'
+           keyboardType="numeric"
+           maxLength={16}
+            onChangeText={(text) => {
+              const num = text.split(' ');
+              setCardNumber(num);
+              setIsCardNumberEdited(true);
+              
+            }}
+          />
+          <View style={styles.row}>
+            <View style={styles.column}>
+              <Text style={styles.label}>Expiry Date</Text>
               <TextInput
-  style={{
-    fontWeight: '400',
-    fontSize: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: isEditable ? 'black' : 'transparent',
-    flex: 1
-  }}
-  editable={isEditable}
-  value={cardHolderName}
-  placeholder="AMANDA MORGAN"
-  onChangeText={(text) => {
-    setCardHolderName(text);
-    setIsCardHolderNameEdited(true);  // Set flag when edited
-  }}
-/>
-
-
-<TextInput
-  style={{
-    fontWeight: '400',
-    fontSize: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: isEditable ? 'black' : 'transparent',
-    flex: 1
-  }}
-  editable={isEditable}
-  value={expiryDate}
-  placeholder="MM/YY"
-  keyboardType="numeric"
-  maxLength={5}
-  onChangeText={(text) => {
-    let cleanedText = text.replace(/\D/g, '');
-    if (cleanedText.length > 2) {
-      cleanedText = cleanedText.slice(0, 2) + '/' + cleanedText.slice(2, 4);
-    }
-    setExpiryDate(cleanedText);
-    setIsExpiryDateEdited(true);  // Set flag when edited
-  }}
-/>
-              </View>
+                style={styles.input}
+                placeholder="MM/YY"
+                keyboardType="numeric"
+                maxLength={5}
+                onChangeText={(text) => {
+                  // Remove non-digit characters
+                  let cleanedText = text.replace(/\D/g, '');
+              
+                  // Format as MM/YY
+                  if (cleanedText.length > 2) {
+                    cleanedText = cleanedText.slice(0, 2) + '/' + cleanedText.slice(2, 4);
+                  }
+              
+                  // Set the formatted text
+                  setExpiryDate(cleanedText);
+                }}
+              />
             </View>
-            <View style={{display:'flex', flexDirection:'row',justifyContent:'space-between',gap:10}}>
-            <TouchableOpacity
-              style={{
-                padding:10,
-                paddingHorizontal:30,
-                backgroundColor: Colors.PRIMARY,
-                justifyContent: 'center',
-                alignItems: 'center',
-                borderRadius: 20,
-                marginTop: 20
-              }}
-              onPress={saveDetails}
-            >
-              <Text style={{ color: 'white', fontSize: 16 }}>Save</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-               padding:10,
-               paddingHorizontal:30,
-                backgroundColor: Colors.PRIMARY,
-                justifyContent: 'center',
-                alignItems: 'center',
-                borderRadius: 20,
-                marginTop: 20
-              }}
-              onPress={cancelChanges}
-            >
-              <Text style={{ color: 'white', fontSize: 16 }}>Cancel</Text>
-            </TouchableOpacity>
+            <View style={styles.column}>
+              <Text style={styles.label}>CVV</Text>
+              <TextInput
+                style={styles.input}
+                placeholder='required'
+                keyboardType="numeric"
+                maxLength={3}
+                secureTextEntry
+             
+              />
             </View>
           </View>
+          <TouchableOpacity style={styles.saveButton} onPress={saveDetails}>
+            <Text style={styles.saveButtonText}>Save Changes</Text>
+          </TouchableOpacity>
+       
         </View>
       </Modal>
+
+      <Modal
+        isVisible={isEditModalVisible}
+        onBackdropPress={closeEditModal}
+        onBackButtonPress={closeEditModal}
+        style={styles.modalContainer}
+      >
+        <View style={styles.modalContent}>
+          <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+          <Text style={styles.modalTitle}>Edit Card</Text>
+          <TouchableOpacity onPress={dltChanges}>
+          <Delete/>
+          </TouchableOpacity>
+          </View>
+          <Text style={styles.label}>Card Holder</Text>
+          <TextInput
+            style={styles.input}
+            value={cardHolderName}
+            onChangeText={(text) => {
+              setCardHolderName(text);
+              setIsCardHolderNameEdited(true);
+            }}
+          />
+          <Text style={styles.label}>Card Number</Text>
+          <TextInput
+            style={styles.input}
+            placeholder='**** **** **** ****'
+           keyboardType="numeric"
+           maxLength={16}
+            onChangeText={(text) => {
+              const num = text.split(' ');
+              setCardNumber(num);
+              setIsCardNumberEdited(true);
+              
+            }}
+          />
+          <View style={styles.row}>
+            <View style={styles.column}>
+              <Text style={styles.label}>Expiry Date</Text>
+              <TextInput
+                style={styles.input}
+                value={expiryDate}
+                keyboardType="numeric"
+                maxLength={5}
+                onChangeText={(text) => {
+                  // Remove non-digit characters
+                  let cleanedText = text.replace(/\D/g, '');
+              
+                  // Format as MM/YY
+                  if (cleanedText.length > 2) {
+                    cleanedText = cleanedText.slice(0, 2) + '/' + cleanedText.slice(2, 4);
+                  }
+              
+                  // Set the formatted text
+                  setExpiryDate(cleanedText);
+                }}
+              />
+            </View>
+            <View style={styles.column}>
+              <Text style={styles.label}>CVV</Text>
+              <TextInput
+                style={styles.input}
+                placeholder='required'
+                keyboardType="numeric"
+                maxLength={3}
+                secureTextEntry
+             
+              />
+            </View>
+          </View>
+          <TouchableOpacity style={styles.saveButton} onPress={saveEditDetails}>
+            <Text style={styles.saveButtonText}>Save Changes</Text>
+          </TouchableOpacity>
+       
+        </View>
+      </Modal>
+
     </View>
   );
 }
@@ -343,6 +472,11 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: '700',
     marginTop: 20,
+    marginBottom: 10,
+  },
+  Text1: {
+    fontSize: 20,
+    fontWeight: '600',
     marginBottom: 10,
   },
   Text2: {
@@ -423,5 +557,59 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     marginBottom: 10,
     marginTop: 10,
+  },
+  modalContainer: {
+  justifyContent:'flex-end',
+  margin:0
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  label: {
+    marginBottom: 5,
+    color: '#333',
+  },
+  input: {
+    backgroundColor: '#f1f1f1',
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 10,
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  column: {
+    flex: 1,
+    marginRight: 10,
+  },
+  saveButton: {
+    backgroundColor: Colors.PRIMARY,
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  saveButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  cancelButton: {
+    backgroundColor: 'grey',
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  cancelButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
   },
 });

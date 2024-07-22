@@ -35,7 +35,6 @@ const [expiryDate, setExpiryDate] = useState('');
       images: require('./../../assets/Images/img21.png'),
       text: 'Lorem ipsum dolor sit amet \n consectetur.',
       price: '$12.00',
-      color: 'Red',
       size: 'S',
     },
   ];
@@ -526,7 +525,7 @@ const saveDetails = () => {
 </View>
 
 
-                <View style={{ display: 'flex', flexDirection: 'row', gap: 60, left: 30, top: 70 ,backgroundColor:'red',marginRi2ht:20}}>
+                <View style={{ display: 'flex', flexDirection: 'row', gap: 60, left: 30, top: 70 ,marginRi2ht:20}}>
                   <TextInput
                     style={{
                       fontWeight: '400',

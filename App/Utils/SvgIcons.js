@@ -485,3 +485,21 @@ export const GiftRed =() =>(
 <Path d="M4.398 4.71268V4.11865C4.398 2.39627 5.78447 1 7.49477 1H10.3128C12.0231 1 13.4095 2.39627 13.4095 4.11865V4.71268" stroke="#D97474" strokeWidth="2" strokeLinecap="round"/>
 </Svg>
 )
+
+export const Delete =() =>(
+  <Svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 35 35" fill="none">
+<G clipPath="url(#clip0_2_7141)">
+<Path d="M17.5 35C27.165 35 35 27.165 35 17.5C35 7.83502 27.165 0 17.5 0C7.83502 0 0 7.83502 0 17.5C0 27.165 7.83502 35 17.5 35Z" fill="#F9F9F9"/>
+<Path d="M20.118 25.068H14.884C14.2273 25.0573 13.6011 24.7894 13.1398 24.3219C12.6785 23.8545 12.419 23.2247 12.417 22.568L11.594 13H23.482L22.66 22.563C22.655 23.2322 22.3844 23.8721 21.9077 24.3418C21.431 24.8116 20.7872 25.0728 20.118 25.068V25.068Z" stroke="#D97474" strokeMiterlimit="10"/>
+<Path d="M15.452 16.0359V22.0319" stroke="#D97474" strokeMiterlimit="10" strokeLinecap="round"/>
+<Path d="M19.551 16.0359V22.0319" stroke="#D97474" strokeMiterlimit="10" strokeLinecap="round"/>
+<Path d="M12.581 13C12.5502 12.6366 12.5913 12.2707 12.702 11.9231C12.8126 11.5756 12.9908 11.2533 13.2261 10.9747C13.4615 10.6961 13.7494 10.4666 14.0735 10.2993C14.3976 10.1321 14.7515 10.0304 15.115 10H19.96C20.6811 10.0786 21.3427 10.4368 21.8026 10.9977C22.2625 11.5586 22.4842 12.2775 22.42 13H12.581Z" stroke="#D97474" strokeMiterlimit="10"/>
+<Path d="M10 13H25" stroke="#D97474" strokeMiterlimit="10" strokeLinecap="round"/>
+</G>
+<Defs>
+<ClipPath id="clip0_2_7141">
+<Rect width="35" height="35" fill="white"/>
+</ClipPath>
+</Defs>
+</Svg>
+)
