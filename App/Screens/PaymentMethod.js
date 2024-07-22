@@ -243,11 +243,11 @@ const cancelChanges = () => {
                 />
               </View>
             </View>
-            <View style={{display:'flex', flexDirection:'row',justifyContent:'space-between'}}>
+            <View style={{display:'flex', flexDirection:'row',justifyContent:'space-between',gap:10}}>
             <TouchableOpacity
               style={{
-                width: 100,
-                height: 40,
+                padding:10,
+                paddingHorizontal:30,
                 backgroundColor: Colors.PRIMARY,
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -260,8 +260,8 @@ const cancelChanges = () => {
             </TouchableOpacity>
             <TouchableOpacity
               style={{
-                width: 100,
-                height: 40,
+               padding:10,
+               paddingHorizontal:30,
                 backgroundColor: Colors.PRIMARY,
                 justifyContent: 'center',
                 alignItems: 'center',
