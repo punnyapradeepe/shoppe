@@ -71,7 +71,6 @@ const toggleEditable = () => {
 };
 
 const saveDetails = () => {
-  // Here you can handle the save logic, such as sending the data to a server or updating state
   setIsEditable(false);
   closeModal();
 };
