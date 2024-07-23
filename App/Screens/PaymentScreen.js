@@ -153,7 +153,7 @@ const saveDetails = () => {
         </View>
         <Text style={styles.subText}>Shipping Address</Text>
         <View style={styles.addressContainer}>
-          <Text style={styles.address}>{address}</Text>
+          <Text style={styles.address1}>{address}</Text>
           <TouchableOpacity style={styles.editButton} onPress={() => setAddressModalVisible(true)}>
             <EditBtn />
           </TouchableOpacity>
@@ -161,7 +161,7 @@ const saveDetails = () => {
 
         <Text style={styles.subText}>Contact Information</Text>
         <View style={styles.addressContainer}>
-          <Text style={styles.address}>{info}</Text>
+          <Text style={styles.address1}>{info}</Text>
           <TouchableOpacity style={styles.editButton} onPress={() => setInfoModalVisible(true)}>
             <EditBtn />
           </TouchableOpacity>
@@ -170,11 +170,11 @@ const saveDetails = () => {
         <ScrollView showsVerticalScrollIndicator={false} style={{marginLeft:-10,marginRight:-10}} >
           <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center',gap:0 }}>
             <Text style={[styles.text1, { marginRight: 6 }]}>Items</Text>
-            <View style={{ width: 30, height: 30, borderRadius: 99, backgroundColor: '#F0F8FF', alignItems: 'center', justifyContent: 'center', marginRight: 90 }}>
+            <View style={{ width: 30, height: 30, borderRadius: 99, backgroundColor: '#F0F8FF', alignItems: 'center', justifyContent: 'center' }}>
               <Text style={{ fontWeight: 'bold' }}>2</Text>
             </View>
             <TouchableOpacity 
-  style={{ width: 100, height: 30, backgroundColor: 'white', borderWidth: 3, borderColor: 'blue', alignItems: 'center', borderRadius: 20, justifyContent: 'center' }}
+  style={{ paddingHorizontal:20, backgroundColor: 'white', borderWidth: 3, borderColor: 'blue', alignItems: 'center', borderRadius: 20, justifyContent: 'center',marginLeft:10 }}
   onPress={() => setVoucherModalVisible(true)}
 >
   <Text style={{ color: 'blue' }}>Add Voucher</Text>
@@ -194,7 +194,7 @@ const saveDetails = () => {
 
           <Text style={styles.text1}>Shipping Options</Text>
 
-         <View style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
+       
             <TouchableOpacity
               style={[
                 styles.deliveryContainer,
@@ -202,17 +202,17 @@ const saveDetails = () => {
               ]}
               onPress={() => setSelectedShipping('Standard')}
             >
-               <View>
+              <Text style={styles.text2}>Standard</Text>
+              <View style={{ right:150 }}>
                 {selectedShipping === 'Standard' ? <TIckB /> : <TickW />}
               </View>
-              <Text style={styles.text2}>Standard</Text>
-             
-              <View style={{ width: 70, height: 24, backgroundColor: 'white', borderRadius:10 }}>
-                <Text style={styles.deliveryText1}>5-7days</Text>
+              <View style={{ width: 70, height: 20, backgroundColor: 'white', borderRadius: 10, marginLeft: -120 }}>
+                <Text style={styles.deliveryText1}>6-7days</Text>
               </View>
               <Text style={styles.text2}>FREE</Text>
             </TouchableOpacity>
-            </View>
+
+
             <TouchableOpacity
               style={[
                 styles.deliveryContainer,
@@ -233,19 +233,12 @@ const saveDetails = () => {
             <Text style={{ marginLeft: 18, marginRight: 20 }}>Delivered on or before Thursday, 23 April 2020</Text>
         
 
-          <View style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            marginTop: 10,
-            marginBottom: 20,
-          }}>
-            <Text style={styles.text1}>
-              Payment Method
-            </Text>
-            <TouchableOpacity style={styles.editButton2}>
-              <EditBtn />
-            </TouchableOpacity>
-          </View>
+            <View style={styles.addressContainer}>
+          <Text style={styles.address}>Payment Method</Text>
+          <TouchableOpacity style={styles.editButton} onPress={() => setAddressModalVisible(true)}>
+            <EditBtn />
+          </TouchableOpacity>
+        </View>
 
           <TouchableOpacity style={{ width: 73, height: 30, backgroundColor: '#F0F8FF', alignItems: 'center', borderRadius: 20, marginLeft: 20, marginTop: 0, marginBottom: 10 }} onPress={openModal}>
             <Text style={{ fontSize: 15, fontWeight: '500', color: 'blue', top: 5 }}>Card</Text>
@@ -463,35 +456,27 @@ const saveDetails = () => {
       </TouchableWithoutFeedback>
 
       <Modal
-        transparent={true}
+        
         visible={isModalVisible}
         onRequestClose={closeModal}
       >
         <View style={{
-          flex: 1,
-          backgroundColor: 'rgba(0, 0, 0, 0.5)',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: 1000,
-          width:400,
-          marginLeft:-20,
-          marginRight:-10,
-          marginBottom:-30
+         
+      justifyContent:'flex-end'
+        
+         
+       
         }}>
           <View style={{
-            width: '110%',
-            height: 350,
-            width:350,
-            padding: 20,
-            marginLeft:-30,
-            marginRight:5,
+          marginBottom:0,
+           padding:30,
             backgroundColor: 'white',
             borderRadius: 10,
             alignItems: 'center',
           }}>
             <Text style={{ fontSize: 20, color: 'black', fontWeight: 'bold', marginBottom: 10 }}>Payment Methods</Text>
-            <View style={{ display: 'flex', flexDirection: 'row', gap: 3 }}>
-              <View style={{ width: 290, height: 200, backgroundColor: 'lightblue', marginLeft: 8, borderRadius: 20 ,overflow:'hidden'}}>
+            <View style={{ display: 'flex', flexDirection: 'row',justifyContent:'space-between'}}>
+              <View style={{ width: 290, height: 200, backgroundColor: 'lightblue',borderRadius: 20 ,overflow:'hidden'}}>
                 <View style={{ display: 'flex', flexDirection: 'row', gap: 160 }}>
                   <View style={{ top: 10, left: 10 }}>
                     <ClrImg />
@@ -649,7 +634,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   address: {
-    fontSize: 12,
+    fontSize: 17,
+    fontWeight:'bold',
+    flex: 1,
+    flexWrap: 'wrap',
+  },
+  address1: {
+    fontSize:12,
     flex: 1,
     flexWrap: 'wrap',
   },
@@ -683,9 +674,9 @@ const styles = StyleSheet.create({
     fontFamily: 'RalewayB',
     fontSize:20,
     fontWeight: 'bold',
-    paddingLeft: 0,
+   
     paddingTop: 5,
-    paddingLeft: 25
+    paddingLeft: 10
   },
   text2: {
     fontFamily: 'RalewayB',
@@ -868,12 +859,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: 'center',
   },
-  modalContainer1:{
-   height:400,
-   width:350,
-    backgroundColor: 'white',
-    alignItems: 'center',
-  },
+ 
   modalTitle: {
     fontSize: 18,
     fontWeight: 'bold',
@@ -902,15 +888,16 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   modalContainer1: {
-    backgroundColor: 'white',
-    padding: 20,
-    borderRadius: 10,
-    alignItems: 'center',
+   padding:10,
+    backgroundColor:'white',
+  alignSelf:'center',
+  borderRadius:20
   },
   modalTitleVoucher: {
     fontSize: 18,
     fontWeight: '600',
     marginBottom: 10,
+    marginLeft:20
   },
   imageContainer: {
     position: 'relative',

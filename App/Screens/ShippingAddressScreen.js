@@ -167,23 +167,19 @@ const styles = StyleSheet.create({
   },
   ellipse: {
     position: 'absolute',
-    width: 134,
-    height: 134,
+    padding:40,
     borderRadius: 67,
     backgroundColor: 'white',
     justifyContent: 'center',
-    alignItems: 'center',
     elevation: 20,
     shadowColor: '#52006A',
     shadowOffset: { width: 0, height: 8 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
-    top: 300,
-    left: 120,
+    alignSelf:'center',
+    marginTop:'70%'
   },
   loginImg: {
-    width: 80,
-    height: 80,
     resizeMode: 'contain',
   },
   footer: {

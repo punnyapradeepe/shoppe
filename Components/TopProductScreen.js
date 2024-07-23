@@ -23,6 +23,26 @@ const TopProductScreen = () => {
       id: '5',
       imageSource: require('./../assets/Images/img25.png'),
     },
+    {
+      id: '6',
+      imageSource: require('./../assets/Images/img30.png'),
+    },
+    {
+      id: '7',
+      imageSource: require('./../assets/Images/img44.png'),
+    },
+    {
+      id: '8',
+      imageSource: require('./../assets/Images/img45.png'),
+    },
+    {
+      id: '9',
+      imageSource: require('./../assets/Images/img46.png'),
+    },
+    {
+      id: '10',
+      imageSource: require('./../assets/Images/img50.png'),
+    },
     
   ];
   return (

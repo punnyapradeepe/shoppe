@@ -1,22 +1,20 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, SafeAreaView, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, SafeAreaView, TextInput, Dimensions } from 'react-native';
 import Colors from '../Utils/Colors';
 import { AntDesign } from '@expo/vector-icons';
 import { CameraImg, Text109, Text218, Text530, Text87 } from './../Utils/SvgIcons';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import TopProductScreen from '../../Components/TopProductScreen';
 import NewItems from '../../Components/NewItems';
 import FlashSale from '../../Components/FlashSale';
 import MostPopular from '../../Components/MostPopular';
 import JustForYou from '../../Components/JustForYou';
 import Carousel from '../../Components/Carousel';
-import TabNavigation from '../Navigations/TabNavigation';
-import { Ionicons } from '@expo/vector-icons';
 
+const { width } = Dimensions.get('window'); // Get screen width
 
 const AllCategories = () => {
   const navigation = useNavigation();
-
 
   const images = [
     require('./../../assets/Images/img20.png'),
@@ -50,7 +48,7 @@ const AllCategories = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-      <Ionicons name="arrow-back-sharp" size={24} color="black" onPress={()=>navigation.goBack()}/>
+        <AntDesign name="arrowleft" size={24} color="black" onPress={() => navigation.goBack()} />
         <Text style={styles.headerTitle}>Shop</Text>
         <TextInput placeholder='Search' style={styles.textInput} />
         <View style={styles.cameraIcon}>
@@ -83,7 +81,7 @@ const AllCategories = () => {
                       <Image
                         key={imgIndex}
                         source={images[rowIndex * 8 + colIndex * 4 + imgIndex]}
-                        style={styles.categoryImage}
+                        style={[styles.categoryImage, { height: width * 0.2 }]} // Adjust image height based on screen width
                       />
                     ))}
                   </View>
@@ -107,20 +105,24 @@ const AllCategories = () => {
         <NewItems />
         <FlashSale />
         <MostPopular />
+        <Text style={{
+    flex: 1,
+    fontWeight: 'bold',
+    fontSize: 25,
+    padding:10
+  }}>Just For You</Text>
         <JustForYou />
       </ScrollView>
     </SafeAreaView>
   );
 };
 
-export default AllCategories;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop:40,
+    paddingTop: 40,
     padding: 20,
-   
+    paddingBottom: 0,
   },
   header: {
     flexDirection: 'row',
@@ -138,7 +140,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 8,
     marginLeft: 10,
-    marginRight:0
   },
   cameraIcon: {
     position: 'absolute',
@@ -146,7 +147,7 @@ const styles = StyleSheet.create({
     right: 20,
   },
   scrollContent: {
-    paddingBottom: 20,
+    paddingBottom: 0, // Remove extra space at the bottom
   },
   carouselContainer: {
     marginTop: 10,
@@ -199,19 +200,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    height: 160,
   },
   categoryImage: {
     width: '48%',
-    height: 70,
-    marginBottom: 10,
     resizeMode: 'cover',
-    borderRadius: 5,
+    borderRadius: 10,
+    borderWidth:4,
+    borderColor:'white'
+
   },
   categoryTextContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+   
   },
   categoryText: {
     fontSize: 16,
@@ -222,12 +224,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  tabNavigationContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: Colors.WHITE,
-    marginTop:30
-  },
 });
+
+export default AllCategories;

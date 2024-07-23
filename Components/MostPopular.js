@@ -40,6 +40,39 @@ const MostPopular = () => {
       price:'$15,00',
       type:'New'
     },
+    {
+      id: '5',
+      imageSource: require('./../assets/Images/img12.png'),
+      img: require('./../assets/Images/Group 1497.png'),
+      price:'$1780',
+      text:'Lorem ipsum dolor sit amet consectetur.',
+      type:'New'
+     
+    },
+    {
+      id: '6',
+      imageSource: require('./../assets/Images/img15.png'),
+      img: require('./../assets/Images/Group 1497.png'),
+      text:'Lorem ipsum dolor sit amet consectetur.',
+      price:'$1780',
+      type:'Sale'
+    },
+    {
+      id: '7',
+      imageSource: require('./../assets/Images/img14.png'),
+      img: require('./../assets/Images/Group 1497.png'),
+      text:'Lorem ipsum dolor sit amet consectetur.',
+      price:'1780',
+      type:'Hot'
+    },
+    {
+      id: '8',
+      imageSource: require('./../assets/Images/img13.png'),
+      img: require('./../assets/Images/Group 1497.png'),
+      text:'Lorem ipsum dolor sit amet consectetur.',
+      price:'$15,00',
+      type:'New'
+    },
   ];
   return (
 

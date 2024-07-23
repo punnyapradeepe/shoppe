@@ -24,6 +24,7 @@ import PaymentMethod from './App/Screens/PaymentMethod';
 import MyProfile from './App/Screens/MyProfile';
 import MostPopularDetail from './App/Screens/MostPopularDetail';
 import MostPopular from './Components/MostPopular';
+import CategoriesScreen from './App/Screens/CategoriesScreen';
 
 
 

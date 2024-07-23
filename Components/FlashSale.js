@@ -28,29 +28,70 @@ const FlashSale = () => {
       imageSource: require('./../assets/Images/img43.png'),
       img: require('./../assets/Images/discount.png'),
     },
-  ];
-
-  const type2 = [
     {
-      id: '5',
+      id: '13',
       imageSource: require('./../assets/Images/img44.png'),
       img: require('./../assets/Images/discount.png'),
     },
     {
-      id: '6',
+      id: '14',
       imageSource: require('./../assets/Images/img45.png'),
       img: require('./../assets/Images/discount.png'),
     },
     {
-      id: '7',
+      id: '15',
       imageSource: require('./../assets/Images/img46.png'),
       img: require('./../assets/Images/discount.png'),
     },
     {
-      id: '8',
+      id: '16',
       imageSource: require('./../assets/Images/img47.png'),
       img: require('./../assets/Images/discount.png'),
     },
+  ];
+
+  const type2 = [
+    {
+      id: '9',
+      imageSource: require('./../assets/Images/img44.png'),
+      img: require('./../assets/Images/discount.png'),
+    },
+    {
+      id: '10',
+      imageSource: require('./../assets/Images/img45.png'),
+      img: require('./../assets/Images/discount.png'),
+    },
+    {
+      id: '11',
+      imageSource: require('./../assets/Images/img46.png'),
+      img: require('./../assets/Images/discount.png'),
+    },
+    {
+      id: '12',
+      imageSource: require('./../assets/Images/img47.png'),
+      img: require('./../assets/Images/discount.png'),
+    },
+    {
+      id: '5',
+      imageSource: require('./../assets/Images/img40.png'),
+      img: require('./../assets/Images/discount.png'),
+    },
+    {
+      id: '6',
+      imageSource: require('./../assets/Images/img41.png'),
+      img: require('./../assets/Images/discount.png'),
+    },
+    {
+      id: '7',
+      imageSource: require('./../assets/Images/img42.png'),
+      img: require('./../assets/Images/discount.png'),
+    },
+    {
+      id: '8',
+      imageSource: require('./../assets/Images/img43.png'),
+      img: require('./../assets/Images/discount.png'),
+    },
+    
   ];
 
   const handlePress = () => {
