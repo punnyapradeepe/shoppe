@@ -24,6 +24,27 @@ const Stories = () => {
       imageSource: require('./../assets/Images/Img9.png'),
       img: require('./../assets/Images/Group 1497.png')
     },
+    {
+      id: '5',
+      imageSource: require('./../assets/Images/Img6.png'),
+      img: require('./../assets/Images/Group 1497.png'),
+      live: require('./../assets/Images/baige.png')
+    },
+    {
+      id: '6',
+      imageSource: require('./../assets/Images/Img7.png'),
+      img: require('./../assets/Images/Group 1497.png')
+    },
+    {
+      id: '7',
+      imageSource: require('./../assets/Images/Img8.png'),
+      img: require('./../assets/Images/Group 1497.png')
+    },
+    {
+      id: '8',
+      imageSource: require('./../assets/Images/Img9.png'),
+      img: require('./../assets/Images/Group 1497.png')
+    },
   ];
 
   return (

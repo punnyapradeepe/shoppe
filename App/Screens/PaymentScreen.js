@@ -322,6 +322,7 @@ const saveDetails = () => {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  
   }}>
     <View style={{
       backgroundColor: 'white',
@@ -403,7 +404,7 @@ const saveDetails = () => {
         onRequestClose={() => handleCancelVoucher()}
       >
           <View style={styles.modalContainer1}>
-            <Text style={{fontSize: 20, fontWeight: '700', color: Colors.BLACK, marginLeft: -140, marginBottom: 20}}>Active Vouchers</Text>
+            <Text style={{fontSize: 20, fontWeight: '700', color: Colors.BLACK,  marginBottom: 20}}>Active Vouchers</Text>
 
             <View style={styles.imageContainer}>
               <View style={{width: 300, height: 100, backgroundColor: 'white', borderWidth: 2, borderColor: 'blue', borderRadius: 10}}>
@@ -411,8 +412,8 @@ const saveDetails = () => {
                   <Text style={{fontSize: 17, fontWeight: '700', color: Colors.PRIMARY, marginLeft: 10}}>Voucher</Text>
                   <Image source={require('./../../assets/Images/Valid.png')} style={{top: 5}}/>
                 </View>
-                <View>
-                  <Text style={{width: 300, color: 'blue', marginRight: 0, marginTop: 0}}>-------------------------------------------------------------------------</Text>
+                <View style={{display: 'flex', flexDirection: 'row', gap: 115,
+                  padding:5,borderBottomWidth:1,borderColor:'blue',borderStyle:'dashed'}}>
                 </View>
                 <View style={{display:'flex' ,flexDirection:'row',gap:5}}>
                   <View style={{marginLeft:10}}>
@@ -455,139 +456,110 @@ const saveDetails = () => {
         </Modal>
       </TouchableWithoutFeedback>
 
+
+      <TouchableWithoutFeedback onPress={closeModal}>
       <Modal
-        
-        visible={isModalVisible}
-        onRequestClose={closeModal}
-      >
-        <View style={{
-         
-      justifyContent:'flex-end'
-        
-         
-       
-        }}>
-          <View style={{
-          marginBottom:0,
-           padding:30,
-            backgroundColor: 'white',
-            borderRadius: 10,
-            alignItems: 'center',
-          }}>
-            <Text style={{ fontSize: 20, color: 'black', fontWeight: 'bold', marginBottom: 10 }}>Payment Methods</Text>
-            <View style={{ display: 'flex', flexDirection: 'row',justifyContent:'space-between'}}>
-              <View style={{ width: 290, height: 200, backgroundColor: 'lightblue',borderRadius: 20 ,overflow:'hidden'}}>
-                <View style={{ display: 'flex', flexDirection: 'row', gap: 160 }}>
-                  <View style={{ top: 10, left: 10 }}>
-                    <ClrImg />
-                  </View>
-                  <View style={{ top: 10, left: 10 }}>
-                    <SettingImg />
-                  </View>
-                </View>
-
-                <View style={{ display: 'flex', flexDirection: 'row', gap: 20, left: 20, top: 50 }}>
-  {cardNumber.map((num, index) => (
-    <TextInput
-      key={index}
-      style={{
-        fontWeight: '700',
-        fontSize: 16,
-        borderBottomWidth: 1,
-        borderBottomColor: isEditable ? 'black' : 'transparent',
-        width: 40,
-        textAlign: 'center'
-      }}
-      editable={isEditable}
-      value={num}
-      placeholder="* * * *"
-      keyboardType="numeric"
-      maxLength={4}
-      onChangeText={(text) => {
-        // Ensure only digits are allowed
-        if (/^\d*$/.test(text)) {
-          const newCardNumber = [...cardNumber];
-          newCardNumber[index] = text;
-          setCardNumber(newCardNumber);
-        }
-      }}
-    />
-  ))}
-</View>
-
-
-                <View style={{ display: 'flex', flexDirection: 'row', gap: 60, left: 30, top: 70 ,marginRi2ht:20}}>
-                  <TextInput
-                    style={{
-                      fontWeight: '400',
-                      fontSize: 16,
-                      borderBottomWidth: 1,
-                      borderBottomColor: isEditable ? 'black' : 'transparent',
-                      flex: 1
-                    }}
-                    editable={isEditable}
-                    value={cardHolderName}
-                    placeholder="AMANDA MORGAN"
-                    onChangeText={setCardHolderName}
-                  />
-                 <TextInput
-  style={{
-    fontWeight: '400',
-    fontSize: 16,
-    borderBottomWidth: 1,
+  visible={isModalVisible}
+  onRequestClose={closeModal}
+  onBackdropPress={closeModal}
   
-    borderBottomColor: isEditable ? 'black' : 'transparent',
-    flex: 1
-  }}
-  editable={isEditable}
-  value={expiryDate}
-  placeholder="MM/YY"
-  keyboardType="numeric"
-  maxLength={5} // Allows for MM/YY format
-  onChangeText={(text) => {
-    // Remove non-digit characters
-    let cleanedText = text.replace(/\D/g, '');
-
-    // Format as MM/YY
-    if (cleanedText.length > 2) {
-      cleanedText = cleanedText.slice(0, 2) + '/' + cleanedText.slice(2, 4);
-    }
-
-    // Set the formatted text
-    setExpiryDate(cleanedText);
-  }}
-/>
-
-                </View>
-              </View>
-              <TouchableOpacity
-                style={{ width: 40, height: 200, backgroundColor: Colors.PRIMARY, borderRadius: 20 }}
-                onPress={toggleEditable}
-              >
-                <View style={{ top: 100, left: 13 }}>
-                  <Plus />
-                </View>
-              </TouchableOpacity>
+>
+<View style={styles.modalBackground}>
+   
+      <Text style={styles.modalTitle}>Payment Methods</Text>
+      <View style={styles.paymentContainer}>
+        <View style={styles.cardContainer}>
+          <View style={styles.cardIcons}>
+            <View style={styles.iconWrapper}>
+              <ClrImg />
             </View>
+            <View style={styles.iconWrapper}>
+              <SettingImg />
+            </View>
+          </View>
 
-            <TouchableOpacity
-              style={{
-                width: 100,
-                height: 40,
-                backgroundColor: Colors.PRIMARY,
-                justifyContent: 'center',
-                alignItems: 'center',
-                borderRadius: 20,
-                marginTop: 20
+          <View style={styles.cardNumberContainer}>
+            {cardNumber.map((num, index) => (
+              <TextInput
+                key={index}
+                style={[
+                  styles.cardInput,
+                  {
+                    borderBottomColor: isEditable ? 'black' : 'transparent'
+                  }
+                ]}
+                editable={isEditable}
+                value={num}
+                placeholder="* * * *"
+                keyboardType="numeric"
+                maxLength={4}
+                onChangeText={(text) => {
+                  if (/^\d*$/.test(text)) {
+                    const newCardNumber = [...cardNumber];
+                    newCardNumber[index] = text;
+                    setCardNumber(newCardNumber);
+                  }
+                }}
+              />
+            ))}
+          </View>
+
+          <View style={styles.cardHolderContainer}>
+            <TextInput
+              style={[
+                styles.cardHolderInput,
+                {
+                  borderBottomColor: isEditable ? 'black' : 'transparent'
+                }
+              ]}
+              editable={isEditable}
+              value={cardHolderName}
+              placeholder="AMANDA MORGAN"
+              onChangeText={setCardHolderName}
+            />
+            <TextInput
+              style={[
+                styles.expiryDateInput,
+                {
+                  borderBottomColor: isEditable ? 'black' : 'transparent'
+                }
+              ]}
+              editable={isEditable}
+              value={expiryDate}
+              placeholder="MM/YY"
+              keyboardType="numeric"
+              maxLength={5}
+              onChangeText={(text) => {
+                let cleanedText = text.replace(/\D/g, '');
+                if (cleanedText.length > 2) {
+                  cleanedText = cleanedText.slice(0, 2) + '/' + cleanedText.slice(2, 4);
+                }
+                setExpiryDate(cleanedText);
               }}
-              onPress={saveDetails}
-            >
-              <Text style={{ color: 'white', fontSize: 16 }}>Save</Text>
-            </TouchableOpacity>
+            />
           </View>
         </View>
-      </Modal>
-      
+
+        <TouchableOpacity
+          style={styles.addButton}
+          onPress={toggleEditable}
+        >
+          <View style={styles.plusIcon}>
+            <Plus />
+          </View>
+        </TouchableOpacity>
+      </View>
+
+      <TouchableOpacity
+        style={styles.saveButton}
+        onPress={saveDetails}
+      >
+        <Text style={styles.saveButtonText}>Save</Text>
+      </TouchableOpacity>
+    
+</View>
+</Modal>
+</TouchableWithoutFeedback> 
     </View>
 
 
@@ -850,14 +822,10 @@ const styles = StyleSheet.create({
   },
   checkoutButtonText: {
     color: 'white',
-    fontSize: 16,
-    
+    fontSize: 16, 
   },
   modalContainer: {
-    backgroundColor: 'white',
-    padding: 20,
-    borderRadius: 10,
-    alignItems: 'center',
+   
   },
  
   modalTitle: {
@@ -887,6 +855,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
   },
+   modalBackground: {
+    // flex: 1,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    
+  },
   modalContainer1: {
    padding:10,
     backgroundColor:'white',
@@ -915,4 +890,96 @@ const styles = StyleSheet.create({
     width: '100%',
   },
  
+  modalContent: {
+    flex:1,
+    padding: 30,
+    backgroundColor: 'transparent',
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  modalTitle: {
+    fontSize: 20,
+    color: 'black',
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  paymentContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+   
+  },
+  cardContainer: {
+    width: 290,
+    height: 200,
+    backgroundColor: 'lightblue',
+    borderRadius: 20,
+    overflow: 'hidden',
+  },
+  cardIcons: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 160,
+  },
+  iconWrapper: {
+    top: 10,
+    left: 10,
+  },
+  cardNumberContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 20,
+    left: 20,
+    top: 50,
+  },
+  cardInput: {
+    fontWeight: '700',
+    fontSize: 16,
+    borderBottomWidth: 1,
+    width: 40,
+    textAlign: 'center',
+  },
+  cardHolderContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 60,
+    left: 30,
+    top: 70,
+    marginRight: 20,
+  },
+  cardHolderInput: {
+    fontWeight: '400',
+    fontSize: 16,
+    borderBottomWidth: 1,
+    flex: 1,
+  },
+  expiryDateInput: {
+    fontWeight: '400',
+    fontSize: 16,
+    borderBottomWidth: 1,
+    flex: 1,
+  },
+  addButton: {
+    width: 40,
+    height: 200,
+    backgroundColor: Colors.PRIMARY,
+    borderRadius: 20,
+  },
+  plusIcon: {
+    top: 100,
+    left: 13,
+  },
+  saveButton: {
+    width: 100,
+    height: 40,
+    backgroundColor: Colors.PRIMARY,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20,
+    marginTop: 20,
+  },
+  saveButtonText: {
+    color: 'white',
+    fontSize: 16,
+  },
 });
