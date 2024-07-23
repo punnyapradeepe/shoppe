@@ -3,6 +3,7 @@ import { View, Image, StyleSheet, TouchableOpacity, Text, ScrollView } from 'rea
 import Colors from './../Utils/Colors';
 import { AntDesign } from '@expo/vector-icons';
 import RecentlyViewed from './../../Components/RecentlyViwed';
+import { Ionicons } from '@expo/vector-icons';
 import Stories from '../../Components/Stories';
 import NewItems from '../../Components/NewItems';
 import MostPopular from '../../Components/MostPopular';
@@ -19,6 +20,7 @@ export default function ActivityScreen() {
   return (
     <View style={styles.screen}>
       <View style={styles.headerContainer}>
+      <Ionicons name="arrow-back-sharp" size={24} color="black" onPress={()=>navigation.goBack()} />
         <Image source={require('./../../assets/Images/Image.png')} style={styles.image} />
         <View style={styles.activityButton}>
           <Text style={styles.activityButtonText}>My Activity</Text>
@@ -94,12 +96,13 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingBottom:2,
     marginTop: 20,
+
   },
   headerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 10, 
-    padding:1 
+   paddingRight:5
   },
   image: {
     width: 40,
@@ -123,7 +126,7 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 0, height: 8},
     shadowOpacity: 0.2,
     shadowRadius: 3,
-    left:20
+  
   },
   activityButton: {
     width: 115,

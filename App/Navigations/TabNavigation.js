@@ -16,6 +16,11 @@ import FlashSaleScreen from '../Screens/FlashSaleScreen';
 import ShippingAddressScreen from '../Screens/ShippingAddressScreen';
 import PaymentScreen from '../Screens/PaymentScreen';
 import PaymentMethod from './../Screens/PaymentMethod'
+import Shipping from '../Screens/Shipping';
+import MyProfile from '../Screens/MyProfile';
+import MostPopularDetail from '../Screens/MostPopularDetail';
+import JustForYou from '../../Components/JustForYou';
+import JustForYouDetail from '../Screens/JustForYouDetail';
 
 const Tab = createBottomTabNavigator();
 const Stack= createNativeStackNavigator();
@@ -88,6 +93,10 @@ const ActivityStack=()=>(
 <Stack.Screen name="activity" component={ActivityScreen} options={{ headerShown: false }}/>
 <Stack.Screen name="allc" component={AllCategories} options={{ headerShown:false}}/>
 <Stack.Screen name="flashSale" component={FlashSaleScreen} options={{ headerShown:false}}/>
+<Stack.Screen name="populardetail" component={MostPopularDetail} options={{ headerShown:false}}/>
+<Stack.Screen name="justforyou" component={JustForYou} options={{ headerShown:false}}/>
+<Stack.Screen name="justforyoudetail" component={JustForYouDetail} options={{ headerShown:false}}/>
+
 
 </Stack.Navigator>
 
@@ -105,6 +114,9 @@ const ProfileScreenStack=()=>(
   <Stack.Navigator initialRouteName="Profile">
 <Stack.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }}/>
 <Stack.Screen name="paymentMethod" component={PaymentMethod} options={{ headerShown:false}}/>
+<Stack.Screen name="Shipping" component={Shipping} options={{ headerShown:false}}/>
+<Stack.Screen name="myprofile" component={MyProfile} options={{ headerShown:false}}/>
+
 </Stack.Navigator>
 )
 

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, Dimensions, FlatList, TouchableOpacity } from 'react-native';
 import Colors from './../Utils/Colors';
 import { useNavigation } from '@react-navigation/core';
+import { Ionicons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
 const { height, width } = Dimensions.get('window');
 
@@ -43,6 +45,7 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
+      
       <View style={styles.bubblesContainer}>
         <Image
           style={styles.bubbleTopLeft}
@@ -53,6 +56,7 @@ export default function HomeScreen() {
           source={require('./../../assets/Images/bubble 02 (2).png')}
         />
       </View>
+      
       <View style={{ height: height * 0.85, justifyContent: 'center', alignItems: 'center',flex:1 }}>
         <FlatList
           data={data}
@@ -100,6 +104,12 @@ export default function HomeScreen() {
           />
         ))}
       </View>
+      
+          <TouchableOpacity onPress={() => navigation.goBack()} style={{alignSelf:'center',marginBottom:40}}>
+          <Text>Cancel</Text>
+          </TouchableOpacity>
+        
+     
     </View>
   );
 }
@@ -131,6 +141,14 @@ const styles = StyleSheet.create({
     top: '40%',
     width: width * 0.5,
     height: height * 0.4,
+  }, circleButton: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: Colors.PRIMARY,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 10,
   },
   cardContainer: {
     width: '82%',

@@ -1,10 +1,13 @@
-import { View, Text, StyleSheet, ScrollView, TextInput, TouchableOpacity,TouchableWithoutFeedback } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TextInput, TouchableOpacity,TouchableWithoutFeedback ,} from 'react-native';
 import React, { useState } from 'react';
 import Colors from '../Utils/Colors';
 import { ClrImg, Delete, Gift, Gift2, GiftBox, GiftRed, Plus, SettingImg } from '../Utils/SvgIcons';
 import Modal from 'react-native-modal';
+import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 export default function PaymentMethod() {
+  const navigation= useNavigation();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isEditModalVisible ,setIsEditModalVisible] = useState(false);
  const [isEditable, setIsEditable] = useState(false);
@@ -209,7 +212,12 @@ closeEditModal();
 
   return (
     <View style={styles.container}>
+      <View style={{flexDirection:'row'}}>
+        <View style={{marginTop:23,marginRight:0}}>
+      <Ionicons name="arrow-back-sharp" size={34} color="black" onPress={()=>navigation.goBack()}/>
+      </View>
       <Text style={styles.SettingsText}>Settings</Text>
+      </View>
       <View style={{ backgroundColor: 'white', flex: 1 }}>
         <Text style={styles.Text2}>Payment Methods</Text>
         <View style={styles.Cardcontainer}>

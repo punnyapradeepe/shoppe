@@ -7,6 +7,7 @@ import { EditBtn, DeleteBtn, MinusImg, MoreImg } from '../Utils/SvgIcons';
 import CartItems from './../../Components/CartItems';
 import { useNavigation } from '@react-navigation/native';
 import Modal from 'react-native-modal';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function ShopScreen() {
   const navigation = useNavigation();
@@ -84,6 +85,7 @@ export default function ShopScreen() {
     <View style={styles.container}>
       <View>
         <View style={{ display: 'flex', flexDirection: 'row',gap:0 }}>
+        <Ionicons name="arrow-back-sharp" size={24} color="black" onPress={()=> navigation.goBack()}  style={{marginTop:60,marginLeft:20}}/>
           <Text style={styles.text}>Cart</Text>
           <View style={styles.quantityIndicator}>
             <Text style={styles.quantityText}>{totalQuantity}</Text>
@@ -225,10 +227,9 @@ const styles = StyleSheet.create({
     fontFamily: 'RalewayB',
     fontSize: 35,
     fontWeight: 'bold',
-    paddingLeft: 0,
     paddingTop: 50,
     paddingBottom: 10,
-    paddingLeft: 20,
+   
     paddingRight: 10,
   },
   subText: {

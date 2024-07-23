@@ -3,34 +3,40 @@ import React from 'react';
 import { SideArrow } from '../Utils/SvgIcons';
 import { ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function ProfileScreen() {
 const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
+       <View style={{flexDirection:'row'}}>
+        <View style={{marginTop:23,marginRight:0}}>
+      <Ionicons name="arrow-back-sharp" size={34} color="black" onPress={()=>navigation.goBack()}/>
+      </View>
       <Text style={styles.SettingsText}>Settings</Text>
+      </View>
       <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.contentContainer}>
       <Text style={styles.Text}>Personal</Text>
-        <View style={styles.row}>
+        <TouchableOpacity style={styles.row} onPress={()=>navigation.navigate('myprofile')}>
           <Text style={styles.Text2}>Profile</Text>
           <TouchableOpacity style={styles.arrowContainer}>
             <SideArrow />
           </TouchableOpacity>
-        </View>
-        <View style={styles.row}>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.row} onPress={()=>navigation.navigate('Shipping')}>
           <Text style={styles.Text2}>Shipping Address</Text>
           <TouchableOpacity style={styles.arrowContainer}>
             <SideArrow />
           </TouchableOpacity>
-        </View>
-        <View style={styles.row}>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.row} onPress={()=>navigation.navigate('paymentMethod')}>
           <Text style={styles.Text2}>Payment Method</Text>
-          <TouchableOpacity style={styles.arrowContainer} onPress={()=>navigation.navigate('paymentMethod')}>
+          <TouchableOpacity style={styles.arrowContainer}>
             <SideArrow />
           </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
         
         </View>
 
@@ -40,7 +46,7 @@ const navigation = useNavigation();
           <Text style={styles.Text2}>Country</Text>
           <View style={styles.rowRight}>
            <Text>Vietnam</Text>  
-           <TouchableOpacity style={styles.arrowContainer}>
+           <TouchableOpacity style={styles.arrowContainer} onPress={()=>navigation.navigate('myprofile')}>
             <SideArrow />
           </TouchableOpacity>
           </View>
@@ -107,6 +113,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     flex: 1,
     padding: 20,
+    paddingBottom:0
   
   },
   SettingsText: {

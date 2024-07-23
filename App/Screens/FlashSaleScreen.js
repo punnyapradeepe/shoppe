@@ -3,8 +3,11 @@ import React, { useState } from 'react';
 import { Clk2, ClkImg, ClkImgw, ClkTym, ClkTym1, D13, PlayBtn, StartImg } from '../Utils/SvgIcons';
 import JustForYou from '../../Components/JustForYou';
 import Discount20 from '../../Components/Discount20';
+import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/core';
 
 const FlashSaleScreen = () => {
+  const navigation=useNavigation();
   const [selectedDiscount, setSelectedDiscount] = useState('All');
 
   const handlePress = (discount) => {
@@ -36,7 +39,11 @@ const FlashSaleScreen = () => {
         </View>
       </View>
       <View>
+        
+          <View style={{paddingTop: 20,}}>
+      <Ionicons name="arrow-back-sharp" size={34} color="black" onPress={()=>navigation.goBack()}/></View>
         <Text style={styles.text}>Flash Sale</Text>
+       
         <Text style={styles.subText}>Choose Your Discount</Text>
       </View>
       <SafeAreaView style={styles.buttonContainer}>

@@ -1,9 +1,11 @@
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import Colors from '../App/Utils/Colors';
 import { HeartImg2, StartImg } from '../App/Utils/SvgIcons';
+import { useNavigation } from '@react-navigation/core';
 
 const JustForYou = () => {
+  const navigation= useNavigation();
   const type = [
     {
       id: '1',
@@ -65,7 +67,6 @@ const JustForYou = () => {
 
   return (
     <View>
-      
       <ScrollView showsVerticalScrollIndicator={false}>
         {type.reduce((rows, item, index) => {
           if (index % 2 === 0) {
@@ -76,16 +77,17 @@ const JustForYou = () => {
         }, []).map((row, rowIndex) => (
           <View key={rowIndex} style={styles.row}>
             {row.map((item) => (
-              <View key={item.id} style={styles.itemContainer}>
+              <TouchableOpacity
+                key={item.id}
+                style={styles.itemContainer}
+                onPress={() => navigation.navigate('justforyoudetail', { item })}
+              >
                 <View style={styles.imageContainer}>
-                  <Image
-                    source={item.imageSource}
-                    style={styles.image}
-                  />
+                  <Image source={item.imageSource} style={styles.image} />
                 </View>
                 <Text style={styles.itemText}>{item.text}</Text>
                 <Text style={styles.itemPrice}>{item.price}</Text>
-              </View>
+              </TouchableOpacity>
             ))}
           </View>
         ))}

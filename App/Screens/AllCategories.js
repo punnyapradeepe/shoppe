@@ -11,7 +11,7 @@ import MostPopular from '../../Components/MostPopular';
 import JustForYou from '../../Components/JustForYou';
 import Carousel from '../../Components/Carousel';
 import TabNavigation from '../Navigations/TabNavigation';
-
+import { Ionicons } from '@expo/vector-icons';
 
 
 const AllCategories = () => {
@@ -50,6 +50,7 @@ const AllCategories = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
+      <Ionicons name="arrow-back-sharp" size={24} color="black" onPress={()=>navigation.goBack()}/>
         <Text style={styles.headerTitle}>Shop</Text>
         <TextInput placeholder='Search' style={styles.textInput} />
         <View style={styles.cameraIcon}>

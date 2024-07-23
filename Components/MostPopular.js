@@ -12,7 +12,7 @@ const MostPopular = () => {
       imageSource: require('./../assets/Images/img12.png'),
       img: require('./../assets/Images/Group 1497.png'),
       price:'$1780',
-
+      text:'Lorem ipsum dolor sit amet consectetur.',
       type:'New'
      
     },
@@ -42,6 +42,11 @@ const MostPopular = () => {
     },
   ];
   return (
+
+     
+      
+      
+  
     <View >
 
     <View style={{display:'flex',flexDirection:'row',marginTop:20}}>
@@ -61,7 +66,10 @@ const MostPopular = () => {
 
   <ScrollView horizontal showsHorizontalScrollIndicator={false}>
     {type.map((item) => (
-      <View style={{backgroundColor:Colors.WHITE,width:145,height:210,marginRight:10,borderRadius:10}}>
+      <TouchableOpacity 
+      key={item.id}
+      onPress={()=>navigation.navigate('populardetail',{item})}
+      style={{backgroundColor:Colors.WHITE,width:145,height:210,marginRight:10,borderRadius:10}}>
       <View key={item.id} style={styles.imageContainer}>
         <Image 
           source={item.imageSource} 
@@ -78,7 +86,7 @@ const MostPopular = () => {
       </View>
       <Text style={{paddingTop:7,fontWeight:'400',gap:10,fontFamily:'Raleway',fontWeight:'650',fontSize:17,right:10}}>{item.type}</Text>
       </View>
-      </View>
+      </TouchableOpacity>
     ))}
   </ScrollView>
 </View>

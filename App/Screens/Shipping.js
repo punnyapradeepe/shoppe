@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Button, TextInput } from 'react-native';
-import { EditBtn } from '../Utils/SvgIcons';
-import { useNavigation } from '@react-navigation/core';
-import Modal from 'react-native-modal';
-import Colors from '../Utils/Colors';
 import { Ionicons } from '@expo/vector-icons';
 
-export default function ShippingAddressScreen({ route }) {
-  const { totalQuantity } = route.params;
+import { useNavigation } from '@react-navigation/core';
+import Modal from 'react-native-modal';
+import Colors from './../Utils/Colors';
+import { EditBtn } from './../Utils/SvgIcons';
+
+export default function Shipping() {
   const navigation = useNavigation();
   
-  // State to manage the address
+
   const [address, setAddress] = useState('26, Duong So 2, Thao Dien Ward, An Phu, District 2, Ho Chi Minh city');
   const [isModalVisible, setModalVisible] = useState(false);
   const [tempAddress, setTempAddress] = useState(address);
@@ -28,30 +28,25 @@ export default function ShippingAddressScreen({ route }) {
   return (
     <View style={styles.container}>
       <View>
-        <View style={{ display: 'flex', flexDirection: 'row', gap: 10 }}>
-        <Ionicons name="arrow-back-sharp" size={24} color="black" onPress={()=> navigation.goBack()}  style={{marginTop:60,marginLeft:20}}/>
-        <Text style={styles.text}>Cart</Text>
-          <View style={styles.quantityIndicator}>
-            <Text style={styles.quantityText}>{totalQuantity}</Text>
-          </View>
+        <View style={{ display: 'flex', flexDirection: 'row' }}>
+          <View style={{marginTop:57,marginLeft:20}}>
+        <Ionicons name="arrow-back-sharp" size={34} color="black" onPress={()=>navigation.goBack()}/>
+        </View>
+          <Text style={styles.text}>Address</Text>
+         
         </View>
         <Text style={styles.subText}>Shipping Address</Text>
         <View style={styles.addressContainer}>
           <Text style={styles.address}>{address}</Text>
           <TouchableOpacity style={styles.editButton} onPress={() => setModalVisible(true)}>
-            <EditBtn />
+            <EditBtn/>
           </TouchableOpacity>
         </View>
       </View>
       <View style={styles.ellipse}>
         <Image source={require('./../../assets/Images/Logo.png')} style={styles.loginImg} />
       </View>
-      <View style={styles.footer}>
-        <Text style={styles.totalText}>Total $29.00</Text>
-        <TouchableOpacity style={styles.checkoutButton} onPress={() => navigation.navigate('payment')}>
-          <Text style={styles.checkoutButtonText}>Check Out</Text>
-        </TouchableOpacity>
-      </View>
+      
       
       <Modal isVisible={isModalVisible}>
   <View style={{
@@ -138,11 +133,11 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: 'RalewayB',
-    fontSize: 35,
+    fontSize: 20,
     fontWeight: 'bold',
-    paddingTop: 50,
+    paddingTop: 60,
     paddingBottom: 10,
-   
+  
   },
   subText: {
     marginLeft: 20,

@@ -3,8 +3,11 @@ import { Button, FlatList, Image, ScrollView, StyleSheet, Text, TextInput, Touch
 import { ClrImg, EditBtn, Gift, GiftBox, Plus, SettingImg, TIckB, TickW } from '../Utils/SvgIcons';
 import Colors from '../Utils/Colors';
 import Modal from 'react-native-modal';
+import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/core';
 
 const PaymentScreen = () => {
+  const navigation= useNavigation();
   const [selectedShipping, setSelectedShipping] = useState('Standard');
   const [address, setAddress] = useState('26, Duong So 2, Thao Dien Ward, An Phu, District 2, Ho Chi Minh city');
   const [info, setInfo] = useState('punnyapradeep1328@gmail.com');
@@ -144,7 +147,10 @@ const saveDetails = () => {
     
     <View style={styles.container}>
       <View style={{ padding: 20 ,flex:1}}>
+        <View style={{flexDirection:'row',}}>
+      <Ionicons name="arrow-back-sharp" size={24} color="black" style={{marginTop:30}} onPress={()=>navigation.goBack()}/>
         <Text style={styles.text}>Payment</Text>
+        </View>
         <Text style={styles.subText}>Shipping Address</Text>
         <View style={styles.addressContainer}>
           <Text style={styles.address}>{address}</Text>
@@ -757,7 +763,7 @@ const styles = StyleSheet.create({
   quantityBox: {
     width: 30,
     height: 30,
-    backgroundColor: 'lightblue',
+    backgroundColor: '#e6e6fa',
     borderRadius: 10,
     alignItems: 'center',
     marginTop: 'auto',

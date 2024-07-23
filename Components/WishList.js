@@ -2,6 +2,7 @@ import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react
 import React from 'react'
 import Colors from '../App/Utils/Colors';
 import { AddBtn, DeleteBtn } from '../App/Utils/SvgIcons';
+import { Ionicons } from '@expo/vector-icons';
 
 const WishList = () => {
   const type = [

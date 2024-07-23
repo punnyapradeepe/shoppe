@@ -7,10 +7,13 @@ import { AntDesign } from '@expo/vector-icons';
 import MostPopular from '../../Components/MostPopular';
 import JustForYou from '../../Components/JustForYou';
 import { EllipsImg, Share, StarImgClr, StarImgLayout } from '../Utils/SvgIcons';
+import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/core';
 
 const { width } = Dimensions.get('window');
 
 const NewItemDetail = ({ route }) => {
+  const navigation = useNavigation();
   const { item } = route.params;
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -28,6 +31,7 @@ const NewItemDetail = ({ route }) => {
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={{ paddingBottom: 80 }}>
         <View style={styles.container}>
+          <Ionicons name="arrow-back-sharp" size={24} color="black" onPress={()=>navigation.goBack()}/>
           <View style={styles.imageContainer}>
             <FlatList
               data={item.images}

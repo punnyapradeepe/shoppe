@@ -5,14 +5,20 @@ import Colors from '../Utils/Colors';
 import RecentlyViewed from '../../Components/RecentlyViwed';
 import { AddBtn, DeleteBtn } from '../Utils/SvgIcons';
 import WishList from '../../Components/WishList';
+import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/core';
 
 const WishListScreen = () => {
 
-
+const navigation =useNavigation();
   return (
     <View style={styles.container}>
       <View>
+        <View style={{display:'flex',flexDirection:'row'}}>
+        <Ionicons name="arrow-back-sharp" size={24} color="black" onPress={()=> navigation.goBack()}  style={{marginTop:60}}/>
         <Text style={styles.text}>Wishlist</Text>
+        </View>
+        
         <View style={styles.header}>
           <Text style={styles.subText}>Recently viewed</Text>
           <TouchableOpacity style={styles.circleButton}>
