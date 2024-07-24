@@ -391,7 +391,7 @@ const saveDetails = () => {
           <Text style={{
             color: 'white',
             fontWeight: 'bold',
-          }}>Save</Text>
+          }}>Save </Text>
         </TouchableOpacity>
       </View>
     </View>
