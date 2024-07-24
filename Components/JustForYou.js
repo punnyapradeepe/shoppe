@@ -100,7 +100,7 @@ export default JustForYou;
 
 const styles = StyleSheet.create({
   recentlyViewedText: {
-    fontSize: 25,
+    fontSize: 3,
     fontFamily: 'Raleway',
     fontWeight: 'bold',
     marginBottom: 10,
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: 130,
+    height: 300,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     borderWidth: 6,

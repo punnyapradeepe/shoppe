@@ -102,10 +102,11 @@ const FlashSale = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.recentlyViewedText}>Flash Sale</Text>
-        <View style={{ paddingLeft: 100 }}>
+       
+        <View style={styles.timerContainer}>
+        <View >
           <ClkImg />
         </View>
-        <View style={styles.timerContainer}>
           <View style={styles.timerBox}>
             <ClkTym1 />
           </View>
@@ -156,7 +157,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   recentlyViewedText: {
-    fontSize: 25,
+    fontSize: 30,
     fontFamily: 'Raleway',
     fontWeight: 'bold',
   },
@@ -166,16 +167,16 @@ const styles = StyleSheet.create({
   },
   timerBox: {
     backgroundColor: 'pink',
-    width: 20,
-    height: 20,
+    width: 30,
+    height: 30,
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
     marginHorizontal: 2,
   },
   imageContainer: {
-    width: 99,
-    height: 103,
+    width: 150,
+    height: 150,
     borderRadius: 10,
     position: 'relative',
     overflow: 'hidden',
@@ -183,15 +184,16 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   image: {
-    width: '100%',
-    height: '100%',
+    width:'100%',
+    height: 160,
     borderWidth: 4,
     borderColor: 'white',
     borderRadius: 10,
+    resizeMode:'contain'
   },
   overlayImage: {
     position: 'absolute',
-    top: '4%',
-    left: '57%',
+    top: '3%',
+    left: '70%',
   },
 });

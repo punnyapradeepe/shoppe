@@ -87,13 +87,10 @@ const Discount20 = () => {
                 <View key={item.id} style={styles.itemContainer}>
                   <View style={styles.imageContainer}>
                     <Image source={item.imageSource} style={styles.image} />
-                   
+                    <View style={styles.discountBadge}>
+                      <Image source={require('./../assets/Images/discount (1).png')} style={styles.discountIcon} />
+                    </View>
                   </View>
-
-                  <View style={{position:'absolute',top:6,left:107}}>
-                  <Image source={require('./../assets/Images/discount (1).png')}/>
-                  </View>
-                  
                   <Text style={styles.itemText}>{item.text}</Text>
                   <View style={styles.priceContainer}>
                     <Text style={styles.itemPrice}>{item.price}</Text>
@@ -111,13 +108,6 @@ const Discount20 = () => {
 export default Discount20;
 
 const styles = StyleSheet.create({
-  recentlyViewedText: {
-    fontSize: 25,
-    fontFamily: 'Raleway',
-    fontWeight: 'bold',
-    marginBottom: 10,
-    marginTop: 10,
-  },
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -127,40 +117,56 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.WHITE,
     width: '48%',
     borderRadius: 20,
+    marginBottom: 20, 
   },
   imageContainer: {
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
+    overflow: 'hidden',
   },
   image: {
     width: '100%',
-    height: 130,
+    height: 350,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    borderWidth: 6,
-    borderColor: Colors.WHITE,
+    resizeMode: 'cover', 
+  },
+  discountBadge: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+  height:'100%',
+  width:30
+  },
+  discountIcon: {
+    width: 30,
+    height: 30,
+    resizeMode: 'contain', // Adjust resizeMode as needed
   },
   itemText: {
-    paddingLeft: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 5,
+    paddingBottom: 10,
     fontWeight: '400',
-    marginVertical: 10,
+    fontFamily: 'Raleway',
   },
   priceContainer: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    paddingLeft: 8,
-    paddingTop: 10,
-    marginBottom: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingBottom: 10,
   },
   itemPrice: {
     fontWeight: '700',
     fontFamily: 'Raleway',
-    fontSize: 17,
-    marginRight: 5,
+    fontSize: 18,
   },
   disPrice: {
-    fontSize: 12,
-    color: 'darkred', 
+    fontSize: 14,
+    color: 'darkred',
     textDecorationLine: 'line-through',
   },
 });

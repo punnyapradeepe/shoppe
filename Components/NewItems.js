@@ -1,5 +1,5 @@
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
+import { StyleSheet, Text, TouchableOpacity, View, Image, ScrollView } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import Colors from '../App/Utils/Colors';
 import { useNavigation } from '@react-navigation/native';
@@ -17,14 +17,14 @@ const NewItems = () => {
       text: 'Lorem ipsum dolor sit amet consectetur.',
       price: '$17,00',
       Dis: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.',
-      color :'Black',
-      size:'M',
+      color: 'Black',
+      size: 'M',
       variations: [
         require('./../assets/Images/hb2.png'),
         require('./../assets/Images/hb4.png'),
       ],
-      Material :[
-        'Cotton 95%' ,'Nylon 5%'
+      Material: [
+        'Cotton 95%', 'Nylon 5%'
       ]
     },
     {
@@ -36,13 +36,13 @@ const NewItems = () => {
       text: 'Lorem ipsum dolor sit amet consectetur.',
       price: '$32,00',
       Dis: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.',
-      color :'Red',
-      size:'S',
+      color: 'Red',
+      size: 'S',
       variations: [
         require('./../assets/Images/db1.png'),
         require('./../assets/Images/dy1.png'),
       ],
-      Material :[
+      Material: [
         'Cotton 95%'
       ]
     },
@@ -50,19 +50,19 @@ const NewItems = () => {
       id: '3',
       images: [
         require('./../assets/Images/j4.png'),
-       
+
       ],
       text: 'Lorem ipsum dolor sit amet consectetur.',
       price: '$15,00',
       Dis: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.',
-      color :'Black',
-      size:'S',
+      color: 'Black',
+      size: 'S',
       variations: [
         require('./../assets/Images/j1.png'),
         require('./../assets/Images/j2.png'),
       ],
-      Material :[
-        'Cotton 50%','Nylon 50%'
+      Material: [
+        'Cotton 50%', 'Nylon 50%'
       ]
     },
     {
@@ -74,35 +74,35 @@ const NewItems = () => {
       text: 'Lorem ipsum dolor sit amet consectetur.',
       price: '$21,00',
       Dis: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.',
-      color :'Blue',
-      size:'M',
+      color: 'Blue',
+      size: 'M',
       variations: [
         require('./../assets/Images/db3.png'),
         require('./../assets/Images/db4.png'),
       ],
-      Material :[
-        'Cotton 95%' ,'Nylon 5%'
+      Material: [
+        'Cotton 95%', 'Nylon 5%'
       ]
     },
-  
+
     {
       id: '5',
       images: [
         require('./../assets/Images/img29.png'),
-        
+
       ],
       text: 'Lorem ipsum dolor sit amet consectetur.',
       price: '$17,00',
       Dis: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.',
-      color :'Black',
-      size:'M',
+      color: 'Black',
+      size: 'M',
       variations: [
         require('./../assets/Images/img28.png'),
         require('./../assets/Images/img29.png'),
         require('./../assets/Images/img30.png'),
       ],
-      Material :[
-        'Cotton 95%' ,'Nylon 5%'
+      Material: [
+        'Cotton 95%', 'Nylon 5%'
       ]
     },
     {
@@ -114,13 +114,13 @@ const NewItems = () => {
       text: 'Lorem ipsum dolor sit amet consectetur.',
       price: '$32,00',
       Dis: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.',
-      color :'Red',
-      size:'S',
+      color: 'Red',
+      size: 'S',
       variations: [
         require('./../assets/Images/img34.png'),
         require('./../assets/Images/img35.png'),
       ],
-      Material :[
+      Material: [
         'Cotton 95%'
       ]
     },
@@ -128,38 +128,38 @@ const NewItems = () => {
       id: '7',
       images: [
         require('./../assets/Images/img23.png'),
-        
+
       ],
       text: 'Lorem ipsum dolor sit amet consectetur.',
       price: '$21,00',
       Dis: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.',
-      color :'Blue',
-      size:'M',
+      color: 'Blue',
+      size: 'M',
       variations: [
         require('./../assets/Images/img21.png'),
         require('./../assets/Images/img22.png'),
       ],
-      Material :[
-        'Cotton 95%' ,'Nylon 5%'
+      Material: [
+        'Cotton 95%', 'Nylon 5%'
       ]
     },
     {
       id: '8',
       images: [
         require('./../assets/Images/img26.png'),
-       
+
       ],
       text: 'Lorem ipsum dolor sit amet consectetur.',
       price: '$15,00',
       Dis: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.',
-      color :'Black',
-      size:'S',
+      color: 'Black',
+      size: 'S',
       variations: [
         require('./../assets/Images/img24.png'),
         require('./../assets/Images/img25.png'),
       ],
-      Material :[
-        'Cotton 50%','Nylon 50%'
+      Material: [
+        'Cotton 50%', 'Nylon 50%'
       ]
     },
   ];
@@ -170,23 +170,23 @@ const NewItems = () => {
 
   return (
     <View>
-      <View style={{ display: 'flex', flexDirection: 'row' }}>
+      <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
         <Text style={styles.recentlyViewedText}>New Items</Text>
-        <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', fontWeight: 700 }}>
-          <Text style={{ paddingLeft: '34%', fontWeight: 'bold' }}>See All</Text>
+        <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }} onPress={() => navigation.navigate('alln')}>
+          <Text style={{ fontWeight: 'bold', marginRight: 5 }}>See All</Text>
           <TouchableOpacity style={styles.circleButton}>
             <AntDesign name="arrowright" size={24} color={Colors.WHITE} />
           </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
       </View>
 
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {type.map((item) => (
           <TouchableOpacity key={item.id} onPress={() => handlePress(item)} style={{ backgroundColor: Colors.WHITE, width: 190, height: 210, marginRight: 10, borderRadius: 20 }}>
             <View style={styles.imageContainer}>
-              <Image 
-                source={item.images[0]} 
-                style={{ width: 190, height: 130, borderTopLeftRadius: 20, borderTopRightRadius: 20, borderWidth: 6, borderColor: Colors.WHITE }} 
+              <Image
+                source={item.images[0]}
+                style={{ width: 190, height: 130, borderTopLeftRadius: 20, borderTopRightRadius: 20, borderWidth: 6, borderColor: Colors.WHITE }}
               />
             </View>
             <Text style={{ paddingLeft: 5, fontWeight: '400', gap: 10 }}>{item.text}</Text>
@@ -223,10 +223,10 @@ const styles = StyleSheet.create({
     left: '40%',
   },
   recentlyViewedText: {
-    fontSize: 25,
+    fontSize: 30,
     fontFamily: 'Raleway',
     fontWeight: 'bold',
-    marginBottom: 10, 
+    marginBottom: 10,
     marginTop: 10
   },
   liveImage: {

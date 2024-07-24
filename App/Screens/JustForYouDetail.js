@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: 300,
+    height: 500,
     borderRadius: 10,
     marginBottom: 20,
   },
@@ -84,7 +84,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.PRIMARY,
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 210,
+   marginLeft:20,
+   marginBottom:15
   },
   text: {
     fontSize: 18,
@@ -100,7 +101,7 @@ const styles = StyleSheet.create({
   },
 
   button: {
-   paddingHorizontal:90,
+   paddingHorizontal:100,
    paddingVertical:10,
     marginTop: 20,
     backgroundColor: Colors.PRIMARY,

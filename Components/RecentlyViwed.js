@@ -35,6 +35,30 @@ const RecentlyViewed = () => {
       id: '8',
       imageSource: require('./../assets/Images/img13.png'),
     },
+    {
+      id: '9',
+      imageSource: require('./../assets/Images/Img1.png'),
+    },
+    {
+      id: '10',
+      imageSource: require('./../assets/Images/Img2.png'),
+    },
+    {
+      id: '11',
+      imageSource: require('./../assets/Images/Img3.png'),
+    },
+    {
+      id: '12',
+      imageSource: require('./../assets/Images/Img4.png'),
+    },
+    {
+      id: '13',
+      imageSource: require('./../assets/Images/Img5.png'),
+    },
+    {
+      id: '14',
+      imageSource: require('./../assets/Images/img12.png'),
+    },
   ];
 
   return (
@@ -60,8 +84,8 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   image: {
-    width: 55,
-    height:55,
+    width: 90,
+    height:90,
     borderRadius:99
   },
 });

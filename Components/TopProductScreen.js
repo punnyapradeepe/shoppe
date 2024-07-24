@@ -43,6 +43,30 @@ const TopProductScreen = () => {
       id: '10',
       imageSource: require('./../assets/Images/img50.png'),
     },
+    {
+      id: '1',
+      imageSource: require('./../assets/Images/img40.png'),
+    },
+    {
+      id: '2',
+      imageSource: require('./../assets/Images/img41.png'),
+    },
+    {
+      id: '3',
+      imageSource: require('./../assets/Images/img42.png'),
+    },
+    {
+      id: '4',
+      imageSource: require('./../assets/Images/img21.png'),
+    },
+    {
+      id: '5',
+      imageSource: require('./../assets/Images/img22.png'),
+    },
+    {
+      id: '6',
+      imageSource: require('./../assets/Images/img26.png'),
+    },
     
   ];
   return (
@@ -73,15 +97,15 @@ const styles = StyleSheet.create({
 
   },
   recentlyViewedText: {
-    fontSize: 25,
+    fontSize: 30,
     fontFamily: 'Raleway',
     fontWeight: 'bold',
-    marginBottom: 10, 
+    marginBottom: 20, 
     marginTop:10
   },
   image: {
-    width: 55,
-    height:55,
+    width: 100,
+    height:100,
     borderRadius:99,
     borderWidth:5,
     borderColor:'white'

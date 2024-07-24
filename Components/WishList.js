@@ -1,8 +1,7 @@
-import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React from 'react';
 import Colors from '../App/Utils/Colors';
 import { AddBtn, DeleteBtn } from '../App/Utils/SvgIcons';
-import { Ionicons } from '@expo/vector-icons';
 
 const WishList = () => {
   const type = [
@@ -50,15 +49,18 @@ const WishList = () => {
           {item.orgPrice && <Text style={styles.orgPrice}>{item.orgPrice}</Text>}
           <Text style={styles.itemPrice}>{item.price}</Text>
         </View>
-        <TouchableOpacity style={{ position: 'absolute', top: 60, right: 260 }}>
-          <DeleteBtn />
-        </TouchableOpacity>
         <View style={styles.colorSizeContainer}>
           <Text style={styles.itemColor}>{item.color}</Text>
           <Text style={styles.itemSize}>{item.size}</Text>
-          <TouchableOpacity style={{ left: 50 }}>
-            <AddBtn />
-          </TouchableOpacity>
+          <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.addButton}>
+              <AddBtn />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.deleteButton}>
+              <DeleteBtn />
+            </TouchableOpacity>
+            
+          </View>
         </View>
       </View>
     </View>
@@ -75,49 +77,20 @@ const WishList = () => {
       />
     </View>
   );
-}
+};
 
-export default WishList
+export default WishList;
 
 const styles = StyleSheet.create({
   container: {
-   
+    flex: 1,
+    backgroundColor: 'white',
     paddingTop: 0,
     paddingBottom: 0,
-    backgroundColor: 'white',
-    flex: 1,
-  },
-  text: {
-    fontFamily: 'RalewayB',
-    fontSize: 35,
-    fontWeight: 'bold',
-    paddingLeft: 0,
-    paddingTop: 50,
-    paddingBottom: 10,
-  },
-  subText: {
-    marginLeft: 0,
-    fontWeight: 'bold',
-    fontSize: 20,
-  },
-  circleButton: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-    backgroundColor: Colors.PRIMARY,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 140,
-  },
-  header: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
   },
   itemContainer: {
     flexDirection: 'row',
     marginVertical: 10,
-    marginHorizontal:1,
     padding: 10,
     backgroundColor: Colors.WHITE,
     borderRadius: 10,
@@ -126,12 +99,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 5,
     elevation: 5,
-    
   },
   itemImage: {
-    position: 'relative',
-    width: 90,
-    height: 100,
+    width: 105,
+    height: 105,
     borderRadius: 10,
   },
   itemDetails: {
@@ -140,57 +111,62 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   itemText: {
-    fontSize: 11,
-    marginBottom: 10,
+    fontSize: 16,
+    marginBottom: 5,
   },
   priceContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: 5,
   },
   orgPrice: {
-    fontSize: 14,
+    fontSize: 16,
     color: 'red',
     textDecorationLine: 'line-through',
     marginRight: 5,
   },
   itemPrice: {
-    fontSize: 17,
+    fontSize: 19,
     color: 'black',
     fontWeight: '700',
     fontFamily: 'Raleway',
   },
   colorSizeContainer: {
     flexDirection: 'row',
-    gap: 5,
-    marginTop: 10,
-    marginBottom: 5,
     alignItems: 'center',
+    marginBottom: 5,
   },
   itemColor: {
-    fontSize: 12,
+    fontSize: 17,
     color: Colors.LIGHTBLUE,
     backgroundColor: '#E0F7FA',
     borderRadius: 5,
     padding: 2,
     width: 54,
-    height: 25,
-    marginLeft: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
     textAlign: 'center',
+    marginRight: 5,
   },
   itemSize: {
-    fontSize: 12,
+    fontSize: 17,
     color: Colors.LIGHTBLUE,
     backgroundColor: '#E0F7FA',
     borderRadius: 5,
     padding: 2,
     width: 50,
-    height: 25,
-    alignContent: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
     textAlign: 'center',
+    marginRight: 5,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 5,
+  },
+  deleteButton: {
+    marginLeft:400,
+   
+  },
+  addButton:{
+marginRight:0
   },
   flatList: {
     paddingBottom: 20,

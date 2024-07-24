@@ -225,17 +225,16 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: 'RalewayB',
-    fontSize: 35,
+    fontSize: 40,
     fontWeight: 'bold',
     paddingTop: 50,
     paddingBottom: 10,
-   
     paddingRight: 10,
   },
   subText: {
     marginLeft: 20,
     fontWeight: 'bold',
-    fontSize: 17,
+    fontSize: 25,
     marginBottom: 10,
     paddingLeft: 20,
     paddingRight: 20,
@@ -249,7 +248,7 @@ const styles = StyleSheet.create({
     paddingRight: 20,
   },
   address: {
-    fontSize: 12,
+    fontSize: 15,
     flex: 1,
     flexWrap: 'wrap',
   },
@@ -283,7 +282,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   totalText: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   checkoutButton: {
@@ -296,7 +295,7 @@ const styles = StyleSheet.create({
   },
   checkoutButtonText: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   itemContainer: {
@@ -325,7 +324,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   itemText: {
-    fontSize: 11,
+    fontSize: 15,
 
     marginBottom: 10,
   },
@@ -390,7 +389,7 @@ const styles = StyleSheet.create({
   deleteButton: {
     position: 'absolute',
     top: 60,
-    right: 260,
+    right:10
   },
   flatList: {
     paddingBottom: 20,

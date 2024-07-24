@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, Button, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput } from 'react-native';
 import { EditBtn } from '../Utils/SvgIcons';
 import { useNavigation } from '@react-navigation/core';
 import Modal from 'react-native-modal';
@@ -29,8 +29,8 @@ export default function ShippingAddressScreen({ route }) {
     <View style={styles.container}>
       <View>
         <View style={{ display: 'flex', flexDirection: 'row', gap: 10 }}>
-        <Ionicons name="arrow-back-sharp" size={24} color="black" onPress={()=> navigation.goBack()}  style={{marginTop:60,marginLeft:20}}/>
-        <Text style={styles.text}>Cart</Text>
+          <Ionicons name="arrow-back-sharp" size={24} color="black" onPress={() => navigation.goBack()} style={{ marginTop: 60, marginLeft: 20 }} />
+          <Text style={styles.text}>Cart</Text>
           <View style={styles.quantityIndicator}>
             <Text style={styles.quantityText}>{totalQuantity}</Text>
           </View>
@@ -43,9 +43,13 @@ export default function ShippingAddressScreen({ route }) {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.ellipse}>
-        <Image source={require('./../../assets/Images/Logo.png')} style={styles.loginImg} />
+      
+      <View style={styles.centered}>
+        <View style={styles.imageContainer}>
+          <Image source={require('./../../assets/Images/Logo.png')} style={styles.loginImg} />
+        </View>
       </View>
+
       <View style={styles.footer}>
         <Text style={styles.totalText}>Total $29.00</Text>
         <TouchableOpacity style={styles.checkoutButton} onPress={() => navigation.navigate('payment')}>
@@ -54,78 +58,30 @@ export default function ShippingAddressScreen({ route }) {
       </View>
       
       <Modal isVisible={isModalVisible}>
-  <View style={{
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  }}>
-    <View style={{
-      backgroundColor: 'white',
-      borderColor: Colors.PRIMARY,
-      borderWidth: 1,
-      borderRadius: 10,
-      padding: 20,
-      width: '80%',
-    }}>
-      <Text style={{
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 10,
-      }}>Edit Address</Text>
-      <TextInput
-        style={{
-          borderColor: Colors.GRAY,
-          borderWidth: 1,
-          borderRadius: 5,
-          padding: 10,
-          marginBottom: 20,
-        }}
-        value={tempAddress}
-        onChangeText={setTempAddress}
-        placeholder="Enter your address"
-      />
-      <View style={{
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-      }}>
-        <TouchableOpacity
-          style={[{
-            flex: 1,
-            marginHorizontal: 5,
-            padding: 10,
-            borderRadius: 5,
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: Colors.PRIMARY,
-          }]}
-          onPress={handleCancel}
-        >
-          <Text style={{
-            color: 'white',
-            fontWeight: 'bold',
-          }}>Cancel</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[{
-            flex: 1,
-            marginHorizontal: 5,
-            padding: 10,
-            borderRadius: 5,
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: Colors.PRIMARY,
-          }]}
-          onPress={handleSave}
-        >
-          <Text style={{
-            color: 'white',
-            fontWeight: 'bold',
-          }}>Save</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  </View>
-</Modal>
+        <View style={styles.modalContainer}>
+          <Text style={styles.modalTitle}>Edit Address</Text>
+          <TextInput
+            style={styles.input}
+            value={tempAddress}
+            onChangeText={setTempAddress}
+            placeholder="Enter your address"
+          />
+          <View style={styles.modalButtons}>
+            <TouchableOpacity
+              style={[styles.modalButton, { backgroundColor: Colors.PRIMARY }]}
+              onPress={handleCancel}
+            >
+              <Text style={styles.buttonText}>Cancel</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.modalButton, { backgroundColor: Colors.PRIMARY }]}
+              onPress={handleSave}
+            >
+              <Text style={styles.buttonText}>Save</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
 
     </View>
   );
@@ -133,65 +89,64 @@ export default function ShippingAddressScreen({ route }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
     flex: 1,
+    backgroundColor: 'white',
   },
   text: {
     fontFamily: 'RalewayB',
-    fontSize: 35,
+    fontSize: 40,
     fontWeight: 'bold',
     paddingTop: 50,
     paddingBottom: 10,
-   
   },
   subText: {
     marginLeft: 20,
     fontWeight: 'bold',
-    fontSize: 17,
+    fontSize: 25,
     marginBottom: 0,
   },
   addressContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginLeft: 20,
-    marginRight: 20,
+    marginHorizontal: 20,
     marginTop: 10,
   },
   address: {
-    fontSize: 12,
+    fontSize: 15,
     flex: 1,
     flexWrap: 'wrap',
   },
   editButton: {
     marginLeft: 10,
   },
-  ellipse: {
-    position: 'absolute',
-    padding:40,
-    borderRadius: 67,
-    backgroundColor: 'white',
+  centered: {
+    flex: 1,
     justifyContent: 'center',
-    elevation: 20,
-    shadowColor: '#52006A',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-    alignSelf:'center',
-    marginTop:'70%'
+    alignItems: 'center',
+  },
+  imageContainer: {
+    backgroundColor: 'white',
+    borderRadius: 99,
+    padding: 30,
+    elevation: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
   },
   loginImg: {
     resizeMode: 'contain',
+    width: 100, 
+    height: 100, 
   },
   footer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 'auto',
     borderTopWidth: 1,
     borderColor: 'white',
-    paddingTop: 10,
-    paddingBottom: 20,
-    paddingHorizontal: 20, // Apply padding left and right here
+    paddingVertical: 10,
+    paddingHorizontal: 20,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
@@ -200,7 +155,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   totalText: {
-    fontSize: 20,
+    fontSize: 25,
     fontWeight: 'bold',
   },
   checkoutButton: {
@@ -211,7 +166,7 @@ const styles = StyleSheet.create({
   },
   checkoutButtonText: {
     color: 'black',
-    fontSize: 16,
+    fontSize: 25,
     fontWeight: 'bold',
   },
   quantityIndicator: {
@@ -251,5 +206,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
+  },
+  modalButton: {
+    flex: 1,
+    marginHorizontal: 5,
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
   },
 });

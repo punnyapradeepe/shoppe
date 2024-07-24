@@ -1,13 +1,13 @@
-import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React, { useState } from 'react';
-import { Clk2, ClkImg, ClkImgw, ClkTym, ClkTym1, D13, PlayBtn, StartImg } from '../Utils/SvgIcons';
+import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { Clk2, ClkImg, ClkImgw, ClkTym, ClkTym1, D13 } from '../Utils/SvgIcons';
 import JustForYou from '../../Components/JustForYou';
 import Discount20 from '../../Components/Discount20';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/core';
 
 const FlashSaleScreen = () => {
-  const navigation=useNavigation();
+  const navigation = useNavigation();
   const [selectedDiscount, setSelectedDiscount] = useState('All');
 
   const handlePress = (discount) => {
@@ -39,14 +39,11 @@ const FlashSaleScreen = () => {
         </View>
       </View>
       <View>
-        
-          <View style={{paddingTop: 20,}}>
-      <Ionicons name="arrow-back-sharp" size={34} color="black" onPress={()=>navigation.goBack()}/></View>
+        <Ionicons name="arrow-back-sharp" size={34} color="black" onPress={() => navigation.goBack()} />
         <Text style={styles.text}>Flash Sale</Text>
-       
         <Text style={styles.subText}>Choose Your Discount</Text>
       </View>
-      <SafeAreaView style={styles.buttonContainer}>
+      <View style={styles.buttonContainer}>
         {['All', '10%', '20%', '30%', '40%', '50%'].map((discount) => (
           <TouchableOpacity
             key={discount}
@@ -69,7 +66,7 @@ const FlashSaleScreen = () => {
             )}
           </TouchableOpacity>
         ))}
-      </SafeAreaView>
+      </View>
       
       <ScrollView showsVerticalScrollIndicator={false}>
         <Text style={styles.articleText}>ARTICLE REIMAGINED</Text>
@@ -77,34 +74,31 @@ const FlashSaleScreen = () => {
           source={require('./../../assets/Images/f1.png')} 
           style={styles.image}
         />
-        <Image 
-          source={require('./../../assets/Images/baige.png')} 
-          style={{position:'absolute',top:130,left:270}}
-        />
-        <Image 
-          source={require('./../../assets/Images/play (1).png')} 
-          style={{position:'absolute',top:80,left:130}}
-        />
-        <View style={{display:'flex' ,flexDirection:'row'}}>
-          <Text style={styles.text1}>20% Discount</Text>
-          <View style={{marginLeft:170,marginTop:15}}>
-            <D13/>
-          </View>
+        <View style={styles.overlayImage}>
+          <Image 
+            source={require('./../../assets/Images/baige.png')} 
+            style={styles.overlayImage}
+          />
+          <Image 
+            source={require('./../../assets/Images/play (1).png')} 
+            style={styles.overlayImage}
+          />
         </View>
-        
-        <Discount20/>
+        <View style={styles.discountContainer}>
+          <Text style={styles.text1}>20% Discount</Text>
+          <D13 style={styles.discountIcon} />
+        </View>
+        <Discount20 />
       </ScrollView>
     </View>
   );
 };
 
-export default FlashSaleScreen;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    paddingBottom:0,
+    paddingBottom: 0,
     position: 'relative',
   },
   bubble1: {
@@ -119,15 +113,15 @@ const styles = StyleSheet.create({
   },
   clkImg: {
     position: 'absolute',
-    top: 50,
-    left: 249,
+    right: 110,
+    top: 40,
   },
   timerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     position: 'absolute',
-    top: 50,
-    left: 270,
+    right: 30,
+    top: 40,
   },
   timerBox: {
     backgroundColor: 'white',
@@ -151,7 +145,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     paddingLeft: 0,
     paddingTop: 10,
-    paddingBottom:10
+    paddingBottom: 10,
   },
   subText: {
     marginLeft: 0,
@@ -161,11 +155,11 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginVertical: 20,
+    marginVertical: 25,
   },
   discountBtn: {
-    width: 45,
-    height: 25,
+    paddingHorizontal:40,
+    paddingVertical:10,
     backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
@@ -185,24 +179,34 @@ const styles = StyleSheet.create({
     color: 'blue',
   },
   articleText: {
-    marginLeft: 65,
-    fontSize: 13,
-    fontWeight: '500',
-    marginBottom: 0,
-    letterSpacing: 5, 
+    fontSize: 20,
+    fontWeight: '700',
+    alignSelf:'center',
+    letterSpacing: 5,
   },
-  
   image: {
-    width: 320,
-    height:150,
+    width: '100%',
+    height: 300, 
     resizeMode: 'contain',
-    marginTop: 0,
-    position:'relative',
-    borderRadius:10
+    borderRadius: 10,
+    marginBottom: 20,
+  },
+  overlayImage: {
+    position: 'absolute',
+    top: 90,
+    left: 280,
+  },
+  discountContainer: {
+    flexDirection: 'row',
+    marginTop: 15,
+    marginLeft: 65,
+  },
+  discountIcon: {
+    marginLeft: 10,
   },
   selectedBtnTriangle: {
     position: 'absolute',
-   top:-1,
+    top: -1,
     width: 0,
     height: 0,
     borderTopWidth: 0,
@@ -213,6 +217,8 @@ const styles = StyleSheet.create({
     borderRightColor: 'transparent',
     borderBottomColor: 'blue',
     borderLeftColor: 'transparent',
-    transform: [{ rotate: '180deg' }], 
+    transform: [{ rotate: '180deg' }],
   },
 });
+
+export default FlashSaleScreen;

@@ -8,60 +8,70 @@ import { AntDesign } from '@expo/vector-icons';
 export default function PasswordScreen() {
   const navigation = useNavigation();
   return (
-    <View style={{ backgroundColor: Colors.WHITE, flex: 1 }}>
-      <View>
-        <View style={{ position: 'relative' }}>
-          <Image
-            style={{ resizeMode: 'contain' }}
-            source={require('./../../assets/Images/bubble 02.png')}
-          />
-        </View>
-        <View style={{ position: 'absolute' }}>
-          <Image
-            style={{ resizeMode: 'contain' }}
-            source={require('./../../assets/Images/bubble 03.png')}
-          />
-        </View>
+    <View style={styles.container}>
+      {/* Top-left corner images */}
+      <View style={[styles.imageContainer, styles.bubbleContainer]}>
+        <Image
+          style={styles.bubbleImage}
+          source={require('./../../assets/Images/bubble 02.png')}
+        />
+      </View>
+      <View style={[styles.imageContainer, styles.bubbleContainer, { marginTop: 50 }]}>
+        <Image
+          style={styles.bubbleImage}
+          source={require('./../../assets/Images/bubble 03.png')}
+        />
       </View>
 
-      <View style={{ alignItems: 'center', position: 'absolute', top: '20%', left: '10%' }}>
-        <View style={{ position: 'relative' }}>
-          <Image source={require('./../../assets/Images/ellipse.png')} />
-        </View>
-        <View style={{ position: 'absolute', top: 12 }}>
-          <Image
-            source={require('./../../assets/Images/artist-2 1 (1).png')}
-            style={{ borderRadius: 99 }}
-          />
-        </View>
-        <Text style={{ fontSize: 30, fontWeight: 'bold', marginTop: 10 }}>Hello, Romina !!</Text>
-        <Text style={{ marginTop: 20, fontSize: 17 }}>Type your password</Text>
+      {/* Centered content */}
+      <View style={styles.content}>
+        <View style={styles.centeredContent}>
+          <View style={styles.profileImageContainer}>
+            <Image
+              source={require('./../../assets/Images/artist-2 1 (1).png')}
+              style={styles.profileImage}
+            />
+          </View>
+          <Text style={styles.greetingText}>Hello, Romina !!</Text>
+          <Text style={styles.passwordText}>Type your password</Text>
 
-        <View style={styles.container}>
-          <TextInput keyboardType="numeric"
-      maxLength={1} style={styles.input} />
-          <TextInput  keyboardType="numeric"
-      maxLength={1} style={styles.input} />
-          <TextInput  keyboardType="numeric"
-      maxLength={1} style={styles.input} />
-          <TextInput  keyboardType="numeric"
-      maxLength={1} style={styles.input} />
-        </View>
-        <View>
+          <View style={styles.passwordInputContainer}>
+            <TextInput
+              keyboardType="numeric"
+              maxLength={1}
+              style={styles.input}
+            />
+            <TextInput
+              keyboardType="numeric"
+              maxLength={1}
+              style={styles.input}
+            />
+            <TextInput
+              keyboardType="numeric"
+              maxLength={1}
+              style={styles.input}
+            />
+            <TextInput
+              keyboardType="numeric"
+              maxLength={1}
+              style={styles.input}
+            />
+          </View>
+
           <TouchableOpacity onPress={() => navigation.navigate('forgot')}>
-            <Text style={{ marginTop: 20,marginLeft:70 }}>Forgot your password?</Text>
+            <Text style={styles.forgotPasswordText}>Forgot your password?</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.btn} onPress={()=>navigation.navigate('home')} >
-            <Text style={{ color: Colors.WHITE, textAlign: 'center' }}>Continue</Text>
+          <TouchableOpacity style={styles.continueButton} onPress={() => navigation.navigate('home')}>
+            <Text style={styles.continueButtonText}>Continue</Text>
           </TouchableOpacity>
-        </View>
 
-        <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: '25%' }}>
-          <Text>Not you?</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('signIn')} style={styles.circleButton}>
-            <AntDesign name="arrowright" size={24} color={Colors.WHITE} />
-          </TouchableOpacity>
+          <View style={styles.notYouContainer}>
+            <Text>Not you?</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('signIn')} style={styles.circleButton}>
+              <AntDesign name="arrowright" size={24} color={Colors.WHITE} />
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </View>
@@ -69,17 +79,48 @@ export default function PasswordScreen() {
 }
 
 const styles = StyleSheet.create({
-  circleButton: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-    backgroundColor: Colors.PRIMARY,
+  container: {
+    flex: 1,
+    backgroundColor: Colors.WHITE,
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 10,
   },
-  container: {
-    display: 'flex',
+  imageContainer: {
+    position: 'absolute',
+    top: 20,
+    left: 20,
+  },
+  bubbleContainer: {
+    zIndex: -1, // Ensures images stay behind other content
+  },
+  bubbleImage: {
+    resizeMode: 'contain',
+  },
+  content: {
+    alignItems: 'center',
+    position: 'relative',
+  },
+  centeredContent: {
+    alignItems: 'center',
+    marginTop: '20%',
+    marginLeft: '10%',
+  },
+  profileImageContainer: {
+    position: 'relative',
+  },
+  profileImage: {
+    borderRadius: 99,
+  },
+  greetingText: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    marginTop: 10,
+  },
+  passwordText: {
+    marginTop: 20,
+    fontSize: 17,
+  },
+  passwordInputContainer: {
     flexDirection: 'row',
     gap: 5,
     alignItems: 'center',
@@ -94,7 +135,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginHorizontal: 5,
   },
-  btn: {
+  forgotPasswordText: {
+    marginTop: 20,
+  },
+  continueButton: {
     marginTop: 50,
     backgroundColor: Colors.PRIMARY,
     borderRadius: 99,
@@ -102,8 +146,25 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
     alignItems: 'center',
     justifyContent: 'center',
-    marginHorizontal: 'auto',
-    height:60,
-    width:300
+    height: 60,
+    width: 300,
+  },
+  continueButtonText: {
+    color: Colors.WHITE,
+    textAlign: 'center',
+  },
+  notYouContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: '25%',
+  },
+  circleButton: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: Colors.PRIMARY,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 10,
   },
 });

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, FlatList, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View ,TouchableWithoutFeedback} from 'react-native';
-import { ClrImg, EditBtn, Gift, GiftBox, Plus, SettingImg, TIckB, TickW } from '../Utils/SvgIcons';
+import { ClrImg, EditBtn, Gift, GiftBox, Plus, SettingImg,  TickImg, TickW } from '../Utils/SvgIcons';
 import Colors from '../Utils/Colors';
 import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
@@ -194,46 +194,47 @@ const saveDetails = () => {
 
           <Text style={styles.text1}>Shipping Options</Text>
 
-       <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-            <TouchableOpacity
-              style={[
-                styles.deliveryContainer,
-                selectedShipping === 'Standard' ? styles.selectedDelivery : styles.unselectedDelivery
-              ]}
-              onPress={() => setSelectedShipping('Standard')}
-            >
-                <View style={{  }}>
-                {selectedShipping === 'Standard' ? <TIckB /> : <TickW />}
-              </View>
-              <Text style={styles.text2}>Standard</Text>
-            
-              <View style={{paddingHorizontal:20, backgroundColor: 'white', borderRadius: 10, }}>
-                <Text style={styles.deliveryText1}>6-7days</Text>
-              </View>
-              <Text style={styles.text2}>FREE</Text>
-            </TouchableOpacity>
-            </View>
+         
 
 
-            <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-            <TouchableOpacity
-              style={[
-                styles.deliveryContainer,
-                selectedShipping === 'Express' ? styles.selectedDelivery : styles.unselectedDelivery
-              ]}
-              onPress={() => setSelectedShipping('Express')}
-            >
-              <View style={{}}>
-                {selectedShipping === 'Express' ? <TIckB /> : <TickW />}
-              </View>
-              <Text style={styles.text2}>Express</Text>
-              
-              <View style={{ paddingHorizontal:20, backgroundColor: 'white', borderRadius: 10,}}>
-                <Text style={styles.deliveryText1}>1-2days</Text>
-              </View>
-              <Text style={styles.text2}>$8.00</Text>
-            </TouchableOpacity>
-            </View>
+    <View style={styles.container}>
+      <View style={styles.rowContainer}>
+        {/* Standard Shipping */}
+        <TouchableOpacity
+          style={[
+            styles.deliveryContainer,
+            selectedShipping === 'Standard' ? styles.selectedDelivery : styles.unselectedDelivery
+          ]}
+          onPress={() => setSelectedShipping('Standard')}
+        >
+          <View>
+            {selectedShipping === 'Standard' ? <TickImg /> : <TickW />}
+          </View>
+          <Text style={styles.text2}>Standard</Text>
+          <View style={styles.infoContainer}>
+            <Text style={styles.deliveryText1}>6-7 days</Text>
+          </View>
+          <Text style={styles.text2}>FREE</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[
+            styles.deliveryContainer,
+            selectedShipping === 'Express' ? styles.selectedDelivery : styles.unselectedDelivery
+          ]}
+          onPress={() => setSelectedShipping('Express')}
+        >
+          <View>
+            {selectedShipping === 'Express' ? <TickImg /> : <TickW />}
+          </View>
+          <Text style={styles.text2}>Express</Text>
+          <View style={styles.infoContainer}>
+            <Text style={styles.deliveryText1}>1-2 days</Text>
+          </View>
+          <Text style={styles.text2}>$8.00</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
 
             <Text style={{ marginLeft: 18, marginRight: 20 }}>Delivered on or before Thursday, 23 April 2020</Text>
         
@@ -585,7 +586,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: 'RalewayB',
-    fontSize: 35,
+    fontSize: 40,
     fontWeight: 'bold',
     paddingTop: 20,
     paddingBottom: 10,
@@ -594,7 +595,7 @@ const styles = StyleSheet.create({
   subText: {
     marginLeft: 10,
     fontWeight: 'bold',
-    fontSize: 17,
+    fontSize: 25,
     marginBottom: 0,
   },
   addressContainer: {
@@ -606,13 +607,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   address: {
-    fontSize: 17,
+    fontSize: 20,
     fontWeight:'bold',
     flex: 1,
     flexWrap: 'wrap',
   },
   address1: {
-    fontSize:12,
+    fontSize:15,
     flex: 1,
     flexWrap: 'wrap',
   },
@@ -644,11 +645,11 @@ const styles = StyleSheet.create({
 
   text1: {
     fontFamily: 'RalewayB',
-    fontSize:20,
+    fontSize:25,
     fontWeight: 'bold',
    
     paddingTop: 5,
-    paddingLeft: 10
+    paddingLeft: 20
   },
   text2: {
     fontFamily: 'RalewayB',
@@ -844,7 +845,7 @@ const styles = StyleSheet.create({
   },
   modalContainer1: {
 
-   padding:10,
+   padding:50,
     backgroundColor:'white',
   alignSelf:'center',
   borderRadius:20

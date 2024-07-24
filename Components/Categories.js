@@ -7,24 +7,25 @@ import { useNavigation } from '@react-navigation/core';
 
 const Categories = () => {
   const navigation = useNavigation();
-    const images = [
-      require('./../assets/Images/img20.png'),
-      require('./../assets/Images/img21.png'),
-      require('./../assets/Images/img22.png'),
-      require('./../assets/Images/img23.png'),
-      require('./../assets/Images/img24.png'),
-      require('./../assets/Images/img25.png'),
-      require('./../assets/Images/img26.png'),
-      require('./../assets/Images/img27.png'),
-      require('./../assets/Images/img28.png'),
-      require('./../assets/Images/img29.png'),
-      require('./../assets/Images/img30.png'),
-      require('./../assets/Images/img31.png'),
-      require('./../assets/Images/img32.png'),
-      require('./../assets/Images/img33.png'),
-      require('./../assets/Images/img34.png'),
-      require('./../assets/Images/img35.png'),
-    ];
+
+  const images = [
+    require('./../assets/Images/img20.png'),
+    require('./../assets/Images/img21.png'),
+    require('./../assets/Images/img22.png'),
+    require('./../assets/Images/img23.png'),
+    require('./../assets/Images/img24.png'),
+    require('./../assets/Images/img25.png'),
+    require('./../assets/Images/img26.png'),
+    require('./../assets/Images/img27.png'),
+    require('./../assets/Images/img28.png'),
+    require('./../assets/Images/img29.png'),
+    require('./../assets/Images/img30.png'),
+    require('./../assets/Images/img31.png'),
+    require('./../assets/Images/img32.png'),
+    require('./../assets/Images/img33.png'),
+    require('./../assets/Images/img34.png'),
+    require('./../assets/Images/img35.png'),
+  ];
 
   const categoryTexts = ['Clothing', 'Shoes', 'Bags', 'Watch'];
 
@@ -32,14 +33,14 @@ const Categories = () => {
     <View>
       <View style={{ display: 'flex', flexDirection: 'row', marginTop: 20 }}>
         <Text style={styles.recentlyViewedText}>Categories</Text>
-        <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', fontWeight: 700 }}>
-          <Text style={{ paddingLeft: '30%'  ,
-    fontWeight:'bold'}}>See All</Text>
-          <TouchableOpacity onPress={() => {navigation.navigate('allc')}} style={styles.circleButton}>
+        <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 'auto' }} onPress={() => navigation.navigate('allc')}>
+          <Text style={{ fontWeight: 'bold', marginRight: 5 }}>See All</Text>
+          <TouchableOpacity style={styles.circleButton}>
             <AntDesign name="arrowright" size={24} color={Colors.WHITE} />
           </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
       </View>
+
       <View style={styles.mainContainer}>
         {Array.from({ length: 2 }).map((_, rowIndex) => (
           <View key={rowIndex} style={styles.row}>
@@ -68,7 +69,6 @@ const Categories = () => {
           </View>
         ))}
       </View>
-     
     </View>
   );
 };
@@ -77,10 +77,10 @@ export default Categories;
 
 const styles = StyleSheet.create({
   recentlyViewedText: {
-    fontSize: 25,
+    fontSize: 30,
     fontFamily: 'Raleway',
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 20,
     marginTop: 10,
   },
   circleButton: {
@@ -93,12 +93,12 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   mainContainer: {
-    gap: 10,
+    gap: 20,
   },
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 10,
+    marginBottom: 20,
   },
   whiteBackground: {
     backgroundColor: Colors.WHITE,
@@ -111,11 +111,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    height: 200,
+    height: 300,
   },
   categoryImage: {
     width: '48%',
-    height: 80,
+    height: 140,
     marginBottom: 5,
     resizeMode: 'cover',
     borderRadius: 5,
@@ -133,16 +133,5 @@ const styles = StyleSheet.create({
   categoryIcons: {
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  categoryButton: {
-    marginTop: 20,
-    padding: 10,
-    backgroundColor: Colors.PRIMARY,
-    borderRadius: 5,
-    alignItems: 'center',
-  },
-  categoryButtonText: {
-    color: Colors.WHITE,
-    fontWeight: 'bold',
   },
 });

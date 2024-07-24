@@ -55,7 +55,7 @@ export default function SigninScreen() {
           <Text style={styles.buttonText}>Next</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
-          <Text style={{left:'43%'}}>Cancel</Text>
+          <Text style={{alignSelf:'center'}}>Cancel</Text>
         </TouchableOpacity>
 
           </View>

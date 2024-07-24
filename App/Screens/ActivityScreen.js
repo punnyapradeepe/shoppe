@@ -13,21 +13,22 @@ import { ClockImg, Notification, RectangleImg, StartImg } from '../Utils/SvgIcon
 import TopProductScreen from '../../Components/TopProductScreen';
 import JustForYou from '../../Components/JustForYou';
 import { useNavigation } from '@react-navigation/core';
-import { NavigationContainer } from '@react-navigation/native';
 
 export default function ActivityScreen() {
   const navigation = useNavigation();
+  
   return (
     <View style={styles.screen}>
       <View style={styles.headerContainer}>
-      <Ionicons name="arrow-back-sharp" size={24} color="black" onPress={()=>navigation.goBack()} />
-        <Image source={require('./../../assets/Images/Image.png')} style={styles.image} />
-        <View style={styles.activityButton}>
-          <Text style={styles.activityButtonText}>My Activity</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Ionicons name="arrow-back-sharp" size={24} color="black" onPress={()=>navigation.goBack()} />
+          <Image source={require('./../../assets/Images/Image.png')} style={styles.image} />
         </View>
-        <Image source={require('./../../assets/Images/Vouchers.png')} style={styles.image1} />
-        <Image source={require('./../../assets/Images/Top Menu.png')} style={styles.image1} />
-        <Image source={require('./../../assets/Images/Settings.png')} style={styles.image1} />
+        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}>
+          <Image source={require('./../../assets/Images/Vouchers.png')} style={styles.image1} />
+          <Image source={require('./../../assets/Images/Top Menu.png')} style={styles.image1} />
+          <Image source={require('./../../assets/Images/Settings.png')} style={styles.image1} />
+        </View>
       </View>
       <ScrollView 
         contentContainerStyle={styles.scrollViewContent}
@@ -49,9 +50,8 @@ export default function ActivityScreen() {
         
         <Text style={styles.recentlyViewedText}>Recently Viewed</Text>
         <RecentlyViewed />
-        <View>
-          <Text style={styles.recentlyViewedText}>My Orders</Text>
-        </View>
+        
+        <Text style={styles.recentlyViewedText}>My Orders</Text>
         <View style={styles.orderContainer}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             <TouchableOpacity onPress={()=>navigation.navigate('Activity', { screen: 'allc', params: {} })} style={styles.orderButton}>
@@ -71,20 +71,23 @@ export default function ActivityScreen() {
           </ScrollView>
         </View>
         
-        <Text style={styles.StoriesText}>Stories</Text>
+        <Text style={styles.recentlyViewedText}>Stories</Text>
         <Stories style={{ position: 'relative' }} />
-        <NewItems/>
-        <MostPopular/>
-        <Categories/>
-        <FlashSale/>
-        <TopProductScreen/>
-        <View style={{display:'flex', flexDirection:'row',bottom:20}}>
-      <Text style={styles.recentlyViewedText}>Just For You</Text>
-      <View style={{top:'6%',left:'10%'}}>
-      <StartImg/>
-      </View>
-      </View>
-        <JustForYou/>
+        
+        <NewItems />
+        <MostPopular />
+        <Categories />
+        <FlashSale />
+        <TopProductScreen />
+        
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 20 }}>
+          <Text style={styles.recentlyViewedText}>Just For You</Text>
+          <View style={{ alignItems: 'center', justifyContent: 'center', marginLeft: 10 }}>
+            <StartImg />
+          </View>
+        </View>
+        <JustForYou />
+      
       </ScrollView>
     </View>
   );
@@ -94,39 +97,33 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     padding: 20,
-    paddingBottom:2,
+    paddingBottom: 2,
     marginTop: 20,
-
   },
   headerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10, 
-   paddingRight:5
+    marginBottom: 10,
   },
   image: {
-    width: 40,
-    height: 40,
+    width: 70,
+    height: 70,
     marginHorizontal: 5,
     elevation: 20,
     shadowColor: '#52006A',
-    shadowColor: '#171717',
-    shadowOffset: {width: 0, height: 8},
+    shadowOffset: { width: 0, height: 8 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
-    marginLeft:3
   },
-  image1:{
-    width: 40,
-    height: 40,
+  image1: {
+    width: 70,
+    height: 70,
     marginHorizontal: 5,
     elevation: 20,
     shadowColor: '#52006A',
-    shadowColor: '#171717',
-    shadowOffset: {width: 0, height: 8},
+    shadowOffset: { width: 0, height: 8 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
-  
   },
   activityButton: {
     width: 115,
@@ -140,27 +137,27 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   helloText: {
-    fontSize: 30,
+    fontSize: 40,
     fontFamily: 'Raleway',
     fontWeight: '700',
-    marginBottom: 10, 
+    marginBottom: 10,
   },
   announcementWrapper: {
     marginLeft: 10,
-    marginBottom: 10,  
+    marginBottom: 10,
   },
   announcementText: {
-    fontSize: 18,
+    fontSize: 25,
     fontWeight: '700',
-    marginBottom: 5, 
+    marginBottom: 5,
   },
   announcementContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 5, 
+    marginBottom: 5,
   },
   announcementDescription: {
-    fontSize: 11,
+    fontSize: 16,
     fontWeight: '500',
     flex: 1,
   },
@@ -174,20 +171,20 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   recentlyViewedText: {
-    fontSize: 25,
+    fontSize: 30,
     fontFamily: 'Raleway',
     fontWeight: 'bold',
-    marginBottom: 10, 
-    marginTop:10
+    marginBottom: 10,
+    marginTop: 10,
   },
   StoriesText: {
     fontSize: 25,
     fontFamily: 'Raleway',
     fontWeight: 'bold',
-    marginTop:10
+    marginTop: 10,
   },
   orderContainer: {
-    marginVertical: 10,  
+    marginVertical: 10,
   },
   orderButton: {
     width: 100,
@@ -197,12 +194,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 10,
-    position:'relative'
+    position: 'relative',
   },
   orderButtonText: {
     color: Colors.PRIMARY,
   },
   scrollViewContent: {
-    paddingBottom: 20, 
+    paddingBottom: 20,
   },
 });

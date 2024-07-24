@@ -192,8 +192,8 @@ const styles = StyleSheet.create({
   greeting: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginTop: 60,
-    marginBottom: 25,
+    marginTop: 100,
+    marginBottom:30,
     fontFamily: 'RalewayB',
   },
   description: {
