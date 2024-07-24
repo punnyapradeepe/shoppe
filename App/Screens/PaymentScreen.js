@@ -194,7 +194,7 @@ const saveDetails = () => {
 
           <Text style={styles.text1}>Shipping Options</Text>
 
-       
+       <View style={{flexDirection:'row',justifyContent:'space-between'}}>
             <TouchableOpacity
               style={[
                 styles.deliveryContainer,
@@ -202,17 +202,20 @@ const saveDetails = () => {
               ]}
               onPress={() => setSelectedShipping('Standard')}
             >
-              <Text style={styles.text2}>Standard</Text>
-              <View style={{ right:150 }}>
+                <View style={{  }}>
                 {selectedShipping === 'Standard' ? <TIckB /> : <TickW />}
               </View>
-              <View style={{ width: 70, height: 20, backgroundColor: 'white', borderRadius: 10, marginLeft: -120 }}>
+              <Text style={styles.text2}>Standard</Text>
+            
+              <View style={{paddingHorizontal:20, backgroundColor: 'white', borderRadius: 10, }}>
                 <Text style={styles.deliveryText1}>6-7days</Text>
               </View>
               <Text style={styles.text2}>FREE</Text>
             </TouchableOpacity>
+            </View>
 
 
+            <View style={{flexDirection:'row',justifyContent:'space-between'}}>
             <TouchableOpacity
               style={[
                 styles.deliveryContainer,
@@ -220,15 +223,17 @@ const saveDetails = () => {
               ]}
               onPress={() => setSelectedShipping('Express')}
             >
-              <Text style={styles.text2}>Express</Text>
-              <View style={{ right:150 }}>
+              <View style={{}}>
                 {selectedShipping === 'Express' ? <TIckB /> : <TickW />}
               </View>
-              <View style={{ width: 70, height: 20, backgroundColor: 'white', borderRadius: 10, marginLeft: -120 }}>
+              <Text style={styles.text2}>Express</Text>
+              
+              <View style={{ paddingHorizontal:20, backgroundColor: 'white', borderRadius: 10,}}>
                 <Text style={styles.deliveryText1}>1-2days</Text>
               </View>
               <Text style={styles.text2}>$8.00</Text>
             </TouchableOpacity>
+            </View>
 
             <Text style={{ marginLeft: 18, marginRight: 20 }}>Delivered on or before Thursday, 23 April 2020</Text>
         
@@ -459,106 +464,101 @@ const saveDetails = () => {
 
       <TouchableWithoutFeedback onPress={closeModal}>
       <Modal
-  visible={isModalVisible}
-  onRequestClose={closeModal}
-  onBackdropPress={closeModal}
-  
->
-<View style={styles.modalBackground}>
-   
-      <Text style={styles.modalTitle}>Payment Methods</Text>
-      <View style={styles.paymentContainer}>
-        <View style={styles.cardContainer}>
-          <View style={styles.cardIcons}>
-            <View style={styles.iconWrapper}>
-              <ClrImg />
+      visible={isModalVisible}
+      onRequestClose={closeModal}
+      onBackdropPress={closeModal}
+    >
+      <View style={{marginTop:400}}>
+      <View style={styles.modalContainer1}>
+        <View style={styles.modalContent}>
+          <Text style={styles.modalTitle}>Payment Methods</Text>
+          <View style={styles.paymentContainer}>
+            <View style={styles.cardContainer}>
+              <View style={styles.cardIcons}>
+                <View style={styles.iconWrapper}>
+                  <ClrImg />
+                </View>
+                <View style={styles.iconWrapper}>
+                  <SettingImg />
+                </View>
+              </View>
+
+              <View style={styles.cardNumberContainer}>
+                {cardNumber.map((num, index) => (
+                  <TextInput
+                    key={index}
+                    style={[
+                      styles.cardInput,
+                      {
+                        borderBottomColor: isEditable ? 'black' : 'transparent',
+                      },
+                    ]}
+                    editable={isEditable}
+                    value={num}
+                    placeholder="* * * *"
+                    keyboardType="numeric"
+                    maxLength={4}
+                    onChangeText={(text) => {
+                      if (/^\d*$/.test(text)) {
+                        const newCardNumber = [...cardNumber];
+                        newCardNumber[index] = text;
+                        setCardNumber(newCardNumber);
+                      }
+                    }}
+                  />
+                ))}
+              </View>
+
+              <View style={styles.cardHolderContainer}>
+                <TextInput
+                  style={[
+                    styles.cardHolderInput,
+                    {
+                      borderBottomColor: isEditable ? 'black' : 'transparent',
+                    },
+                  ]}
+                  editable={isEditable}
+                  value={cardHolderName}
+                  placeholder="AMANDA MORGAN"
+                  onChangeText={setCardHolderName}
+                />
+                <TextInput
+                  style={[
+                    styles.expiryDateInput,
+                    {
+                      borderBottomColor: isEditable ? 'black' : 'transparent',
+                    },
+                  ]}
+                  editable={isEditable}
+                  value={expiryDate}
+                  placeholder="MM/YY"
+                  keyboardType="numeric"
+                  maxLength={5}
+                  onChangeText={(text) => {
+                    let cleanedText = text.replace(/\D/g, '');
+                    if (cleanedText.length > 2) {
+                      cleanedText = cleanedText.slice(0, 2) + '/' + cleanedText.slice(2, 4);
+                    }
+                    setExpiryDate(cleanedText);
+                  }}
+                />
+              </View>
             </View>
-            <View style={styles.iconWrapper}>
-              <SettingImg />
-            </View>
+
+            <TouchableOpacity style={styles.addButton} onPress={toggleEditable}>
+              <View style={styles.plusIcon}>
+                <Plus />
+              </View>
+            </TouchableOpacity>
           </View>
 
-          <View style={styles.cardNumberContainer}>
-            {cardNumber.map((num, index) => (
-              <TextInput
-                key={index}
-                style={[
-                  styles.cardInput,
-                  {
-                    borderBottomColor: isEditable ? 'black' : 'transparent'
-                  }
-                ]}
-                editable={isEditable}
-                value={num}
-                placeholder="* * * *"
-                keyboardType="numeric"
-                maxLength={4}
-                onChangeText={(text) => {
-                  if (/^\d*$/.test(text)) {
-                    const newCardNumber = [...cardNumber];
-                    newCardNumber[index] = text;
-                    setCardNumber(newCardNumber);
-                  }
-                }}
-              />
-            ))}
-          </View>
-
-          <View style={styles.cardHolderContainer}>
-            <TextInput
-              style={[
-                styles.cardHolderInput,
-                {
-                  borderBottomColor: isEditable ? 'black' : 'transparent'
-                }
-              ]}
-              editable={isEditable}
-              value={cardHolderName}
-              placeholder="AMANDA MORGAN"
-              onChangeText={setCardHolderName}
-            />
-            <TextInput
-              style={[
-                styles.expiryDateInput,
-                {
-                  borderBottomColor: isEditable ? 'black' : 'transparent'
-                }
-              ]}
-              editable={isEditable}
-              value={expiryDate}
-              placeholder="MM/YY"
-              keyboardType="numeric"
-              maxLength={5}
-              onChangeText={(text) => {
-                let cleanedText = text.replace(/\D/g, '');
-                if (cleanedText.length > 2) {
-                  cleanedText = cleanedText.slice(0, 2) + '/' + cleanedText.slice(2, 4);
-                }
-                setExpiryDate(cleanedText);
-              }}
-            />
-          </View>
+          <TouchableOpacity style={styles.saveButton} onPress={saveDetails}>
+            <Text style={styles.saveButtonText}>Save</Text>
+          </TouchableOpacity>
         </View>
-
-        <TouchableOpacity
-          style={styles.addButton}
-          onPress={toggleEditable}
-        >
-          <View style={styles.plusIcon}>
-            <Plus />
-          </View>
-        </TouchableOpacity>
       </View>
-
-      <TouchableOpacity
-        style={styles.saveButton}
-        onPress={saveDetails}
-      >
-        <Text style={styles.saveButtonText}>Save</Text>
-      </TouchableOpacity>
-    
-</View>
-</Modal>
+      </View>
+    </Modal>
 </TouchableWithoutFeedback> 
     </View>
 
@@ -654,7 +654,6 @@ const styles = StyleSheet.create({
     fontFamily: 'RalewayB',
     fontSize: 17,
     fontWeight: 'bold',
-    paddingLeft: 0,
     paddingTop: 5,
     paddingBottom: 10,
     paddingLeft: 18
@@ -756,7 +755,6 @@ const styles = StyleSheet.create({
   checkoutButtonText: {
     color: 'white',
     fontSize: 16,
-    
   },
 
   deliveryContainer: {
@@ -820,27 +818,16 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor:'black',
   },
-  checkoutButtonText: {
-    color: 'white',
-    fontSize: 16, 
-  },
-  modalContainer: {
-   
-  },
  
-  modalTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 40,
-    marginTop:30
+  modalContainer: {
+   backgroundColor:'white',
+   flex:1
   },
-
   modalTitleVoucher: {
     fontSize: 23,
     fontWeight: 'bold',
     marginBottom: 50,
     marginTop:30,
-    
   },
   input: {
     borderWidth: 1,
@@ -855,14 +842,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
   },
-   modalBackground: {
-    // flex: 1,
-    backgroundColor: 'white',
-    justifyContent: 'center',
-    alignItems: 'center',
-    
-  },
   modalContainer1: {
+
    padding:10,
     backgroundColor:'white',
   alignSelf:'center',
@@ -889,13 +870,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
   },
- 
-  modalContent: {
+  modalBackground:{
     flex:1,
-    padding: 30,
-    backgroundColor: 'transparent',
+ backgroundColor: 'rgba(0,0,0,0.5)'
+  },
+  modalContent: {
+    backgroundColor: 'white',
     borderRadius: 10,
-    alignItems: 'center',
+    alignSelf:'baseline'
   },
   modalTitle: {
     fontSize: 20,
@@ -973,13 +955,14 @@ const styles = StyleSheet.create({
     width: 100,
     height: 40,
     backgroundColor: Colors.PRIMARY,
-    justifyContent: 'center',
-    alignItems: 'center',
+    alignSelf:'center',
     borderRadius: 20,
     marginTop: 20,
   },
   saveButtonText: {
     color: 'white',
     fontSize: 16,
+    alignSelf:'center',
+    marginTop:6
   },
 });
