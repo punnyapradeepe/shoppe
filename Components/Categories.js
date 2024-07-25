@@ -41,7 +41,6 @@ const Categories = () => {
           </TouchableOpacity>
         </TouchableOpacity>
       </View>
-
       <View style={styles.mainContainer}>
         {Array.from({ length: 2 }).map((_, rowIndex) => (
           <View key={rowIndex} style={styles.row}>
