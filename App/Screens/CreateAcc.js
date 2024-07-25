@@ -9,7 +9,7 @@ export default function CreateAcc() {
   return (
     <View style={styles.mainContainer}>
       <View style={{ position: 'relative' }}>
-        <Image style={{width: '100%'}} source={require('./../../assets/Images/Bubbles.png')} />
+        <Image style={{marginLeft:'auto'}} source={require('./../../assets/Images/bubble 01 (2).png')} />
       </View>
       <View style={styles.container}>
         <Text style={styles.text}>Create</Text>

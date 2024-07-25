@@ -116,8 +116,8 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
   },
   image1: {
-    width: 70,
-    height: 70,
+    width: 40,
+    height: 40,
     marginHorizontal: 5,
     elevation: 20,
     shadowColor: '#52006A',
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   helloText: {
-    fontSize: 40,
+    fontSize: 35,
     fontFamily: 'Raleway',
     fontWeight: '700',
     marginBottom: 10,
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   announcementText: {
-    fontSize: 25,
+    fontSize: 20,
     fontWeight: '700',
     marginBottom: 5,
   },
@@ -157,8 +157,8 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   announcementDescription: {
-    fontSize: 16,
-    fontWeight: '500',
+    fontSize: 14,
+    
     flex: 1,
   },
   circleButton: {
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   recentlyViewedText: {
-    fontSize: 30,
+    fontSize: 25,
     fontFamily: 'Raleway',
     fontWeight: 'bold',
     marginBottom: 10,

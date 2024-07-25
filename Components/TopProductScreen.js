@@ -97,15 +97,15 @@ const styles = StyleSheet.create({
 
   },
   recentlyViewedText: {
-    fontSize: 30,
+    fontSize: 25,
     fontFamily: 'Raleway',
     fontWeight: 'bold',
     marginBottom: 20, 
     marginTop:10
   },
   image: {
-    width: 100,
-    height:100,
+    width: 70,
+    height:70,
     borderRadius:99,
     borderWidth:5,
     borderColor:'white'

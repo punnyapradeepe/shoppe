@@ -35,7 +35,7 @@ const Categories = () => {
         <Text style={styles.recentlyViewedText}>Categories</Text>
         <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 'auto' }} onPress={() => navigation.navigate('allc')}>
           <Text style={{ fontWeight: 'bold', marginRight: 5 }}>See All</Text>
-          <TouchableOpacity style={styles.circleButton}>
+          <TouchableOpacity style={styles.circleButton} onPress={()=>navigation.navigate('allc')}>
             <AntDesign name="arrowright" size={24} color={Colors.WHITE} />
           </TouchableOpacity>
         </TouchableOpacity>
@@ -77,7 +77,7 @@ export default Categories;
 
 const styles = StyleSheet.create({
   recentlyViewedText: {
-    fontSize: 30,
+    fontSize: 25,
     fontFamily: 'Raleway',
     fontWeight: 'bold',
     marginBottom: 20,
@@ -111,11 +111,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    height: 300,
+    height: 230,
   },
   categoryImage: {
     width: '48%',
-    height: 140,
+    height: 100,
     marginBottom: 5,
     resizeMode: 'cover',
     borderRadius: 5,

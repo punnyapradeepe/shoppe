@@ -2,7 +2,6 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput } from 'reac
 import React from 'react'
 import Colors from '../Utils/Colors';
 import { useNavigation } from '@react-navigation/core';
-
 export default function SetPassword() {
   const navigation = useNavigation();
   return (
@@ -54,7 +53,7 @@ export default function SetPassword() {
       <TouchableOpacity style={styles.nextButton} onPress={()=>navigation.navigate('home')}>
         <Text style={styles.buttonText}>Save</Text>
       </TouchableOpacity>
-      <TouchableOpacity >
+      <TouchableOpacity onPress={()=>navigation.goBack()} >
         <Text style={styles.cancelText}>Cancel</Text>
       </TouchableOpacity>
     </View>
@@ -66,24 +65,23 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.WHITE,
     flex: 1,
     alignItems: 'center',
+   
   },
   backgroundImagesContainer: {
     position: 'relative',
-    width: '100%',
-    left: '20%',
+   marginLeft:'auto'
   },
   backgroundImage: {
     resizeMode: 'contain',
   },
   backgroundImageOverlay: {
     position: 'absolute',
-    left: '20%',
+   right:0
   },
   profileContainer: {
     alignItems: 'center',
     position: 'absolute',
-    top: '18%',
-    left: '15%',
+    marginTop:100
   },
   ellipseImage: {
     position: 'relative',

@@ -46,16 +46,17 @@ const styles = StyleSheet.create({
     padding: 20
   },
   header: {
+
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 30,
+    marginBottom: 20,
   },
   text: {
     fontFamily: 'RalewayB',
-    fontSize: 35,
+    fontSize: 30,
     fontWeight: 'bold',
     paddingLeft: 10,
-  paddingBottom:30
+  paddingTop:0
   },
   subHeader: {
     flexDirection: 'row',

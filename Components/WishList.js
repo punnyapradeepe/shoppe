@@ -101,8 +101,8 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   itemImage: {
-    width: 105,
-    height: 105,
+    width: 100,
+    height: 100,
     borderRadius: 10,
   },
   itemDetails: {
@@ -162,11 +162,10 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   deleteButton: {
-    marginLeft:400,
+    marginLeft:'auto'
    
   },
   addButton:{
-marginRight:0
   },
   flatList: {
     paddingBottom: 20,

@@ -129,10 +129,6 @@ const styles = StyleSheet.create({
   },
   bubbleTopLeft: {
     position: 'absolute',
-    top: 0,
-    left: 0,
-    width: width * 0.5, 
-    height: height * 0.3, 
     resizeMode: 'contain',
   },
   bubble: {

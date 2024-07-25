@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: 'RalewayB',
-    fontSize: 40,
+    fontSize: 35,
     fontWeight: 'bold',
     paddingTop: 50,
     paddingBottom: 10,
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   address: {
-    fontSize: 15,
+    fontSize: 14,
     flex: 1,
     flexWrap: 'wrap',
   },
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   totalText: {
-    fontSize: 25,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   checkoutButton: {
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
   },
   checkoutButtonText: {
     color: 'black',
-    fontSize: 25,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   quantityIndicator: {

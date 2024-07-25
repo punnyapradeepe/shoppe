@@ -122,11 +122,12 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: 300,
+    height: 150,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     borderWidth: 6,
     borderColor: Colors.WHITE,
+    alignSelf:'center'
   },
   itemText: {
     paddingLeft: 5,

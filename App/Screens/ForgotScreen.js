@@ -61,8 +61,7 @@ const styles = StyleSheet.create({
   },
   backgroundImagesContainer: {
     position: 'relative',
-    width: '100%',
-    left: '20%',
+  marginLeft:'auto'
   },
   backgroundImage: {
     resizeMode: 'contain',
@@ -74,8 +73,8 @@ const styles = StyleSheet.create({
   profileContainer: {
     alignItems: 'center',
     position: 'absolute',
-    top: '18%',
-    left: '20%',
+ alignSelf:'center',
+ marginTop:'20%'
   },
   ellipseImage: {
     position: 'relative',
@@ -84,18 +83,21 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 12,
     borderRadius: 99,
+    marginBottom:20
   },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
     marginTop: 10,
+    marginBottom:20
   },
   subtitle: {
     marginTop: 10,
     fontSize: 17,
+    marginBottom:10
   },
   buttonGroup: {
-    marginTop: 190,
+    marginTop: '45%',
     alignItems: 'center',
   },
   btn: {

@@ -121,9 +121,7 @@ export default function ShopScreen() {
                   <MoreImg />
                 </TouchableOpacity>
               </View>
-              <TouchableOpacity style={styles.deleteButton}>
-                <DeleteBtn />
-              </TouchableOpacity>
+              
             </View>
           </View>
         ))}
@@ -225,7 +223,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: 'RalewayB',
-    fontSize: 40,
+    fontSize: 35,
     fontWeight: 'bold',
     paddingTop: 50,
     paddingBottom: 10,
@@ -234,7 +232,7 @@ const styles = StyleSheet.create({
   subText: {
     marginLeft: 20,
     fontWeight: 'bold',
-    fontSize: 25,
+    fontSize: 20,
     marginBottom: 10,
     paddingLeft: 20,
     paddingRight: 20,
@@ -246,9 +244,10 @@ const styles = StyleSheet.create({
     marginRight: 20,
     paddingLeft: 20,
     paddingRight: 20,
+    paddingBottom:20
   },
   address: {
-    fontSize: 15,
+    fontSize: 13,
     flex: 1,
     flexWrap: 'wrap',
   },

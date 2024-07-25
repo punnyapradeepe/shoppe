@@ -134,9 +134,11 @@ const NewItemDetail = ({ route }) => {
               <StarImgClr style={{width: 15, height: 15}} />
               <StarImgLayout style={{width: 15, height: 15}} />
               </View>
-              <Text style={{ width: 250, whiteSpace: 'nowrap', wordWrap: 'break-word', overflow: 'hidden', flexWrap: 'wrap' }}>
-  Lorem ipsum dolor sit amet, conset sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed...
-</Text>
+              <Text>
+  Lorem ipsum dolor sit amet, conset sadip.</Text>
+  <Text>ipsun sit amet.</Text>
+ 
+
 
             </View>
 
@@ -203,9 +205,9 @@ const styles = StyleSheet.create({
     height: 450,
     borderRadius: 10,
   },
-  TextStyle: {
-    fontSize: 18,
-    fontWeight: '700',
+  textStyle: {
+    marginTop: 10, 
+    fontSize: 16, 
   },
   dotContainer: {
     position: 'absolute',

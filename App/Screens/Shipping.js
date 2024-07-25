@@ -85,14 +85,14 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontFamily: 'RalewayB',
-    fontSize: 40,
+    fontSize: 35,
     fontWeight: 'bold',
     marginLeft: 10,
   },
   subText: {
     marginLeft: 20,
     fontWeight: 'bold',
-    fontSize: 25,
+    fontSize: 20,
     marginTop: 10,
   },
   addressContainer: {
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   address: {
-    fontSize: 17,
+    fontSize: 14,
     flex: 1,
     flexWrap: 'wrap',
   },
@@ -115,8 +115,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logoImg: {
-    width: 150,
-    height: 150,
+    width: 100,
+    height: 100,
     resizeMode: 'contain',
   },
   modalContainer: {

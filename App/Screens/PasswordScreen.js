@@ -9,14 +9,14 @@ export default function PasswordScreen() {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      {/* Top-left corner images */}
+
       <View style={[styles.imageContainer, styles.bubbleContainer]}>
         <Image
           style={styles.bubbleImage}
           source={require('./../../assets/Images/bubble 02.png')}
         />
       </View>
-      <View style={[styles.imageContainer, styles.bubbleContainer, { marginTop: 50 }]}>
+      <View style={[styles.imageContainer, styles.bubbleContainer]}>
         <Image
           style={styles.bubbleImage}
           source={require('./../../assets/Images/bubble 03.png')}
@@ -87,14 +87,19 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     position: 'absolute',
-    top: 20,
-    left: 20,
+    top: 0,
+    left: 0,
   },
   bubbleContainer: {
-    zIndex: -1, // Ensures images stay behind other content
+    zIndex: -1, 
   },
   bubbleImage: {
     resizeMode: 'contain',
+    marginTop:0
+  },
+  bubbleImage2: {
+    resizeMode: 'contain',
+    marginTop:0
   },
   content: {
     alignItems: 'center',
@@ -102,8 +107,7 @@ const styles = StyleSheet.create({
   },
   centeredContent: {
     alignItems: 'center',
-    marginTop: '20%',
-    marginLeft: '10%',
+    
   },
   profileImageContainer: {
     position: 'relative',

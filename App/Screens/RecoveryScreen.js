@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput } from 'react-native'
-import React from 'react'
+import React from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput } from 'react-native';
 import Colors from '../Utils/Colors';
 import { useNavigation } from '@react-navigation/core';
 
@@ -25,23 +25,23 @@ export default function RecoveryScreen() {
           style={styles.profileImage}
         />
         <Text style={styles.title}>Password Recovery</Text>
-        <Text style={styles.subtitle}>Enter 4-digits code we sent you</Text>
-        <Text style={styles.subtitle}>on your phone number</Text>
-        <Text style={{fontWeight:'bold',paddingTop:20,fontSize:17}}>+91********00</Text>
+        <Text style={styles.subtitle}>Enter 4-digit code we sent you</Text>
+        <Text style={styles.subtitle}>to your phone number</Text>
+        <Text style={{ fontWeight: 'bold', paddingTop: 20, fontSize: 17 }}>+91********00</Text>
       </View>
 
       <View style={styles.container2}>
-          <TextInput keyboardType='numeric' maxLength={1} style={styles.input} />
-          <TextInput  keyboardType='numeric' maxLength={1}  style={styles.input} />
-          <TextInput  keyboardType='numeric' maxLength={1}  style={styles.input} />
-          <TextInput  keyboardType='numeric' maxLength={1}  style={styles.input} />
-        </View>
+        <TextInput keyboardType='numeric' maxLength={1} style={styles.input} />
+        <TextInput keyboardType='numeric' maxLength={1} style={styles.input} />
+        <TextInput keyboardType='numeric' maxLength={1} style={styles.input} />
+        <TextInput keyboardType='numeric' maxLength={1} style={styles.input} />
+      </View>
 
-        <TouchableOpacity style={styles.nextButton1} onPress={()=>navigation.navigate('setPass')}>
+      <TouchableOpacity style={styles.nextButton1} onPress={() => navigation.navigate('setPass')}>
         <Text style={styles.buttonText}>Send Again</Text>
       </TouchableOpacity>
-     
-      <TouchableOpacity onPress={() => navigation.navigate('password')}>
+
+      <TouchableOpacity onPress={() => navigation.navigate('password')} style={styles.cancelButton}>
         <Text style={styles.cancelText}>Cancel</Text>
       </TouchableOpacity>
     </View>
@@ -50,27 +50,27 @@ export default function RecoveryScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor:Colors.WHITE,
+    backgroundColor: Colors.WHITE,
     flex: 1,
     alignItems: 'center',
+    paddingTop: 40, 
   },
   backgroundImagesContainer: {
-    position: 'relative',
-    width: '100%',
-    left: '20%',
+    position: 'absolute',
+    marginRight:'auto',
+    right:0
   },
   backgroundImage: {
     resizeMode: 'contain',
+    right:0
   },
   backgroundImageOverlay: {
     position: 'absolute',
-    left: '20%',
+   
   },
   profileContainer: {
     alignItems: 'center',
-    position: 'absolute',
-    top: '18%',
-    left: '20%',
+    marginTop: '20%', 
   },
   ellipseImage: {
     position: 'relative',
@@ -86,57 +86,43 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   container2: {
-    display: 'flex',
     flexDirection: 'row',
-    gap: 5,
+    gap: 10, 
     alignItems: 'center',
-    marginTop: 30,
-   
+    marginTop: 20, 
+    marginBottom: 100, 
   },
   input: {
+    height: 40,
+    width: 40,
     borderWidth: 1,
     borderColor: '#ccc',
-    borderRadius: 99,
-    width: 20,
-    height: 20,
+    backgroundColor: '#F0F8FF',
+    borderRadius: 20,
     textAlign: 'center',
-    marginLeft:'2.3%',
-    marginTop:200,
-    backgroundColor:'#F0F8FF',
   },
   subtitle: {
     marginTop: 10,
     fontSize: 17,
   },
   nextButton1: {
-    height: 59,
-    width: 240,
-    marginTop: 170,
+    marginTop: 30, 
     backgroundColor: '#FF1493',
-    justifyContent: 'center',
-    alignItems: 'center',
+    paddingVertical: 15,
+    paddingHorizontal: 30,
     borderRadius: 20,
-    marginBottom: 20,
-    alignSelf: 'center',
-    borderRadius:20
-  },
- 
-  nextButton: {
-    height: 59,
-    width: 240,
-    marginTop: 5,
-    backgroundColor: Colors.PRIMARY,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 20,
-    marginBottom: 20,
-    alignSelf: 'center',
-    borderRadius:20
   },
   buttonText: {
     color: Colors.WHITE,
     fontSize: 18,
     fontFamily: 'Regular',
   },
-  
+  cancelButton: {
+    marginTop: 20, 
+  },
+  cancelText: {
+    color: 'black',
+    fontSize: 16,
+    
+  },
 });

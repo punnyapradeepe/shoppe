@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     marginRight: 5
   },
   recentlyViewedText: {
-    fontSize: 30,
+    fontSize: 25,
     fontFamily: 'Raleway',
     fontWeight: 'bold',
     marginBottom: 30,

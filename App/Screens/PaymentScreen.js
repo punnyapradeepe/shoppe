@@ -168,19 +168,32 @@ const saveDetails = () => {
         </View>
 
         <ScrollView showsVerticalScrollIndicator={false} style={{marginLeft:-10,marginRight:-10}} >
-          <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center',gap:0 }}>
-            <Text style={[styles.text1, { marginRight: 6 }]}>Items</Text>
-            <View style={{ width: 30, height: 30, borderRadius: 99, backgroundColor: '#F0F8FF', alignItems: 'center', justifyContent: 'center' }}>
-              <Text style={{ fontWeight: 'bold' }}>2</Text>
-            </View>
-            <TouchableOpacity 
-  style={{ paddingHorizontal:20, backgroundColor: 'white', borderWidth: 3, borderColor: 'blue', alignItems: 'center', borderRadius: 20, justifyContent: 'center',marginLeft:10 }}
-  onPress={() => setVoucherModalVisible(true)}
->
-  <Text style={{ color: 'blue' }}>Add Voucher</Text>
-</TouchableOpacity>
-
-          </View>
+        <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 0 }}>
+  <Text style={[styles.text1, { marginRight: 6 }]}>Items</Text>
+  
+  <View style={{ width: 30, height: 30, borderRadius: 99, backgroundColor: '#F0F8FF', alignItems: 'center', justifyContent: 'center' }}>
+    <Text style={{ fontWeight: 'bold' }}>2</Text>
+  </View>
+  
+ 
+  <TouchableOpacity 
+    style={{ 
+      paddingHorizontal: 20, 
+      backgroundColor: 'white', 
+      borderWidth: 3, 
+      borderColor: 'blue', 
+      alignItems: 'center', 
+      borderRadius: 20, 
+      justifyContent: 'center', 
+      marginLeft: 'auto',  
+      marginRight: 10      
+    }}
+    onPress={() => setVoucherModalVisible(true)}
+  >
+    <Text style={{ color: 'blue' }}>Add Voucher</Text>
+  </TouchableOpacity>
+  
+</View>
 
           <View style={{ paddingLeft: 20, paddingRight: 20 }}>
             <FlatList
@@ -199,7 +212,7 @@ const saveDetails = () => {
 
     <View style={styles.container}>
       <View style={styles.rowContainer}>
-        {/* Standard Shipping */}
+       
         <TouchableOpacity
           style={[
             styles.deliveryContainer,
@@ -214,7 +227,7 @@ const saveDetails = () => {
           <View style={styles.infoContainer}>
             <Text style={styles.deliveryText1}>6-7 days</Text>
           </View>
-          <Text style={styles.text2}>FREE</Text>
+          <Text style={styles.text3}>FREE</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -231,7 +244,7 @@ const saveDetails = () => {
           <View style={styles.infoContainer}>
             <Text style={styles.deliveryText1}>1-2 days</Text>
           </View>
-          <Text style={styles.text2}>$8.00</Text>
+          <Text style={styles.text3}>$8.00</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -469,7 +482,7 @@ const saveDetails = () => {
       onRequestClose={closeModal}
       onBackdropPress={closeModal}
     >
-      <View style={{marginTop:400}}>
+      <View style={{marginTop:'auto',paddingHorizontal:100}}>
       <View style={styles.modalContainer1}>
         <View style={styles.modalContent}>
           <Text style={styles.modalTitle}>Payment Methods</Text>
@@ -586,7 +599,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: 'RalewayB',
-    fontSize: 40,
+    fontSize: 35,
     fontWeight: 'bold',
     paddingTop: 20,
     paddingBottom: 10,
@@ -595,7 +608,7 @@ const styles = StyleSheet.create({
   subText: {
     marginLeft: 10,
     fontWeight: 'bold',
-    fontSize: 25,
+    fontSize: 20,
     marginBottom: 0,
   },
   addressContainer: {
@@ -613,7 +626,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   address1: {
-    fontSize:15,
+    fontSize:14,
     flex: 1,
     flexWrap: 'wrap',
   },
@@ -647,7 +660,6 @@ const styles = StyleSheet.create({
     fontFamily: 'RalewayB',
     fontSize:25,
     fontWeight: 'bold',
-   
     paddingTop: 5,
     paddingLeft: 20
   },
@@ -657,7 +669,16 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     paddingTop: 5,
     paddingBottom: 10,
-    paddingLeft: 18
+    paddingLeft:20,
+    marginRight:'auto'
+  },
+   text3: {
+    fontFamily: 'RalewayB',
+    fontSize: 17,
+    fontWeight: 'bold',
+    paddingTop: 5,
+    paddingBottom: 10,
+    marginLeft:'auto'
   },
   textPrice: {
     fontFamily: 'RalewayB',
@@ -704,7 +725,8 @@ const styles = StyleSheet.create({
   itemText: {
     fontSize: 11,
     fontWeight: 'bold',
-    // marginBottom: 30,
+   marginRight:'auto',
+   paddingLeft:20
   },
   priceContainer: {
     flexDirection: 'row',
@@ -779,10 +801,17 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: 'red',
   },
+  infoContainer:{
+  backgroundColor:'white',
+  padding:10,
+  borderRadius:20,
+  marginRight:'auto'
+  },
   deliveryText1:{
     color:'blue',
     marginLeft:9,
-    marginRight:6
+    marginRight:6,
+    marginLeft:'auto'
   },
   addToCart: {
     position: 'absolute',
@@ -847,6 +876,13 @@ const styles = StyleSheet.create({
 
    padding:50,
     backgroundColor:'white',
+  alignSelf:'center',
+  borderRadius:20
+  },
+   modalContainer2: {
+
+   padding:100,
+    backgroundColor:'rgba(0,0,0,0.5)',
   alignSelf:'center',
   borderRadius:20
   },
