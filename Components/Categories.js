@@ -27,6 +27,7 @@ const Categories = () => {
     require('./../assets/Images/img35.png'),
   ];
 
+
   const categoryTexts = ['Clothing', 'Shoes', 'Bags', 'Watch'];
 
   return (
