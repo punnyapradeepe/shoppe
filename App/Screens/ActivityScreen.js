@@ -106,8 +106,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   image: {
-    width: 70,
-    height: 70,
+    width: 50,
+    height: 50,
     marginHorizontal: 5,
     elevation: 20,
     shadowColor: '#52006A',
