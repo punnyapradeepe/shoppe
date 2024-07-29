@@ -1,0 +1,31 @@
+{
+    "products": [
+      {
+        "id": "1",
+        "image": "img44.png",
+        "title": "Lorem ipsum dolor sit amet consectetur.",
+        "price": "$17,00"
+      },
+      {
+        "id": "2",
+        "image": "img45.png",
+        "title": "Lorem ipsum dolor sit amet consectetur.",
+        "price": "$32,00"
+      },
+      {
+        "id": "3",
+        "image": "img46.png",
+        "title": "Lorem ipsum dolor sit amet consectetur.",
+        "price": "$21,00"
+      },
+      {
+        "id": "4",
+        "image": "img47.png",
+        "title": "Lorem ipsum dolor sit amet consectetur.",
+        "price": "$15,00"
+      }
+    ],
+    "users":[]
+
+  }
+  

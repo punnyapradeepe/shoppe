@@ -1,97 +1,53 @@
+import React, { useEffect, useState } from 'react';
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import React from 'react';
 import Colors from '../App/Utils/Colors';
-import { HeartImg2, StartImg } from '../App/Utils/SvgIcons';
 import { useNavigation } from '@react-navigation/core';
+import imageMapping from './imageMapping';
 
 const JustForYou = () => {
-  const navigation= useNavigation();
-  const type = [
-    {
-      id: '1',
-      imageSource: require('./../assets/Images/img47.png'),
-      img: require('./../assets/Images/Group 1497.png'),
-      text: 'Lorem ipsum dolor sit amet consectetur.',
-      price: '$17,00',
-    },
-    {
-      id: '2',
-      imageSource: require('./../assets/Images/img44.png'),
-      img: require('./../assets/Images/Group 1497.png'),
-      text: 'Lorem ipsum dolor sit amet consectetur.',
-      price: '$32,00',
-    },
-    {
-      id: '3',
-      imageSource: require('./../assets/Images/Img1.png'),
-      img: require('./../assets/Images/Group 1497.png'),
-      text: 'Lorem ipsum dolor sit amet consectetur.',
-      price: '$21,00',
-    },
-    {
-      id: '4',
-      imageSource: require('./../assets/Images/img23.png'),
-      img: require('./../assets/Images/Group 1497.png'),
-      text: 'Lorem ipsum dolor sit amet consectetur.',
-      price: '$15,00',
-    },
-    {
-      id: '5',
-      imageSource: require('./../assets/Images/img21.png'),
-      img: require('./../assets/Images/Group 1497.png'),
-      text: 'Lorem ipsum dolor sit amet consectetur.',
-      price: '$17,00',
-    },
-    {
-      id: '6',
-      imageSource: require('./../assets/Images/img22.png'),
-      img: require('./../assets/Images/Group 1497.png'),
-      text: 'Lorem ipsum dolor sit amet consectetur.',
-      price: '$32,00',
-    },
-    {
-      id: '7',
-      imageSource: require('./../assets/Images/img41.png'),
-      img: require('./../assets/Images/Group 1497.png'),
-      text: 'Lorem ipsum dolor sit amet consectetur.',
-      price: '$21,00',
-    },
-    {
-      id: '8',
-      imageSource: require('./../assets/Images/img40.png'),
-      img: require('./../assets/Images/Group 1497.png'),
-      text: 'Lorem ipsum dolor sit amet consectetur.',
-      price: '$15,00',
-    },
-  ];
+  const [products, setProducts] = useState([]);
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    fetch('http://192.168.1.40:5000/products')
+      .then(response => response.json())
+      .then(data => setProducts(data))
+      .catch(error => console.error('Error fetching data:', error));
+  }, []);
+
+
+  const getImageSource = (imageName) => {
+    return imageMapping[imageName] ; 
+  };
 
   return (
     <View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {type.reduce((rows, item, index) => {
-          if (index % 2 === 0) {
-            rows.push([]);
-          }
-          rows[rows.length - 1].push(item);
-          return rows;
-        }, []).map((row, rowIndex) => (
-          <View key={rowIndex} style={styles.row}>
-            {row.map((item) => (
+        <View style={{flexDirection:'row',flexWrap:'wrap'}}>
+        {products.map((item) =>{
+          return(
+   
+          
               <TouchableOpacity
                 key={item.id}
                 style={styles.itemContainer}
                 onPress={() => navigation.navigate('justforyoudetail', { item })}
               >
                 <View style={styles.imageContainer}>
-                  <Image source={item.imageSource} style={styles.image} />
+                <Image source={getImageSource(item.image)} style={styles.image} />
                 </View>
-                <Text style={styles.itemText}>{item.text}</Text>
+                <Text style={styles.itemText}>{item.title}</Text>
                 <Text style={styles.itemPrice}>{item.price}</Text>
               </TouchableOpacity>
-            ))}
-          </View>
-        ))}
+          
+         
+          )
+        } 
+
+        )}
+        </View>
       </ScrollView>
+
     </View>
   );
 };
@@ -99,21 +55,15 @@ const JustForYou = () => {
 export default JustForYou;
 
 const styles = StyleSheet.create({
-  recentlyViewedText: {
-    fontSize: 3,
-    fontFamily: 'Raleway',
-    fontWeight: 'bold',
-    marginBottom: 10,
-    marginTop: 10,
-  },
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 10,
+   
   },
   itemContainer: {
     backgroundColor: Colors.WHITE,
-    width: '48%', 
+    width: '48%',
     borderRadius: 20,
   },
   imageContainer: {
@@ -127,7 +77,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
     borderWidth: 6,
     borderColor: Colors.WHITE,
-    alignSelf:'center'
+    alignSelf: 'center',
   },
   itemText: {
     paddingLeft: 5,
@@ -140,6 +90,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontFamily: 'Raleway',
     fontSize: 17,
-    marginBottom:5
+    marginBottom: 5,
   },
 });
