@@ -10,7 +10,7 @@ export default function SigninScreen() {
   const navigation = useNavigation();
 
   const handleLogin = async () => {
-    const url = 'http://192.168.1.40:5000/users'; 
+    const url = `http://192.168.1.40:5000/users?email=${encodeURIComponent(email)}`; 
 
     let hasError = false;
 
@@ -29,13 +29,13 @@ export default function SigninScreen() {
       const response = await fetch(url);
       const users = await response.json();
 
-    
-      const userExists = users.some(user => user.email === email);
+      if (users.length > 0) {
+  
 
-      if (userExists) {
+        const userId = users[0].id;
         navigation.navigate('password'); 
       } else {
-        setEmailError('email does not exist');
+        setEmailError('Email does not exist');
       }
     } catch (error) {
       console.error('Error fetching users:', error);

@@ -17,7 +17,7 @@ const CreateAcc = () => {
   const handleCreateAccount = async () => {
     let hasError = false;
 
-    
+    // Validate input fields
     if (!email) {
       setEmailError('Email is required');
       hasError = true;
@@ -50,21 +50,26 @@ const CreateAcc = () => {
     }
 
     try {
-     
-      const userResponse = await fetch('http://192.168.1.40:5000/users');
-      const users = await userResponse.json();
+    
+      const checkEmailUrl = `http://192.168.1.40:5000/users?email=${encodeURIComponent(email)}`;
+      const emailResponse = await fetch(checkEmailUrl);
+      if (!emailResponse.ok) {
+        throw new Error('Failed to check email existence');
+      }
 
-      const userExists = users.some(user => user.email === email);
+      const emailData = await emailResponse.json();
+      const userExists = emailData.length > 0;
 
       if (userExists) {
         setEmailExists(true);
-
         return;
+      } else {
+        setEmailExists(false);
       }
 
-      
-      const url = 'http://192.168.1.40:5000/users';
-      const response = await fetch(url, {
+     
+      const createUserUrl = 'http://192.168.1.40:5000/users';
+      const response = await fetch(createUserUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password, phoneNumber }),
