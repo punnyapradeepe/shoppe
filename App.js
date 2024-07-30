@@ -69,7 +69,8 @@ export default function App() {
         <Stack.Screen name="populardetail" component={TabNavigation} options={{ headerShown: false }}/>
         <Stack.Screen name="justforyou" component={TabNavigation} options={{ headerShown: false }}/>
         <Stack.Screen name="justforyoudetail" component={TabNavigation} options={{ headerShown: false }}/>
-      
+        <Stack.Screen name="clothing" component={TabNavigation} options={{ headerShown: false }}/>
+
         
       </Stack.Navigator>
       <StatusBar style="auto" />

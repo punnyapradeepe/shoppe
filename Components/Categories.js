@@ -27,16 +27,23 @@ const Categories = () => {
     require('./../assets/Images/img35.png'),
   ];
 
-
-  const categoryTexts = ['Clothing', 'Shoes', 'Bags', 'Watch'];
+  const categories = [
+    { text: 'Clothing', category: 'clothing' },
+    { text: 'Shoes', category: 'shoes' },
+    { text: 'Bags', category: 'bags' },
+    { text: 'Watch', category: 'watch' },
+  ];
 
   return (
     <View>
       <View style={{ display: 'flex', flexDirection: 'row', marginTop: 20 }}>
         <Text style={styles.recentlyViewedText}>Categories</Text>
-        <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 'auto' }} onPress={() => navigation.navigate('allc')}>
+        <TouchableOpacity
+          style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 'auto' }}
+          onPress={() => navigation.navigate('allc')}
+        >
           <Text style={{ fontWeight: 'bold', marginRight: 5 }}>See All</Text>
-          <TouchableOpacity style={styles.circleButton} onPress={()=>navigation.navigate('allc')}>
+          <TouchableOpacity style={styles.circleButton} onPress={() => navigation.navigate('allc')}>
             <AntDesign name="arrowright" size={24} color={Colors.WHITE} />
           </TouchableOpacity>
         </TouchableOpacity>
@@ -45,7 +52,11 @@ const Categories = () => {
         {Array.from({ length: 2 }).map((_, rowIndex) => (
           <View key={rowIndex} style={styles.row}>
             {Array.from({ length: 2 }).map((_, colIndex) => (
-              <TouchableOpacity key={colIndex} style={styles.whiteBackground}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('clothing', { category: categories[rowIndex * 2 + colIndex].category })}
+                key={colIndex}
+                style={styles.whiteBackground}
+              >
                 <View style={styles.imageGrid}>
                   {Array.from({ length: 4 }).map((_, imgIndex) => (
                     <Image
@@ -56,7 +67,7 @@ const Categories = () => {
                   ))}
                 </View>
                 <View style={styles.categoryTextContainer}>
-                  <Text style={styles.categoryText}>{categoryTexts[rowIndex * 2 + colIndex]}</Text>
+                  <Text style={styles.categoryText}>{categories[rowIndex * 2 + colIndex].text}</Text>
                   <View style={styles.categoryIcons}>
                     {rowIndex === 0 && colIndex === 0 && <Text109 />}
                     {rowIndex === 0 && colIndex === 1 && <Text530 />}

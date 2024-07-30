@@ -9,7 +9,7 @@ const JustForYou = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    fetch('http://192.168.1.40:5000/products')
+    fetch('http://192.168.1.40:5000/products?category=clothing')
       .then(response => response.json())
       .then(data => setProducts(data))
       .catch(error => console.error('Error fetching data:', error));

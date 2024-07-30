@@ -1,48 +1,77 @@
 {
   "products": [
-    {
-      "id": "1",
-      "image": "img44.png",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$17,00"
-    },
-    {
-      "id": "2",
-      "image": "img45.png",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$32,00"
-    },
-    {
-      "id": "3",
-      "image": "img46.png",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$21,00"
-    },
-    {
-      "id": "4",
-      "image": "img47.png",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$15,00"
-    }
+    { "id": "1", "image": "img101.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$17,00", "category": "clothing", "gender": "women" },
+    { "id": "2", "image": "img102.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$32,00", "category": "clothing", "gender": "women" },
+    { "id": "3", "image": "img103.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$21,00", "category": "clothing", "gender": "women" },
+    { "id": "4", "image": "img104.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$15,00", "category": "clothing", "gender": "women" },
+    { "id": "5", "image": "img105.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$18,00", "category": "clothing", "gender": "women" },
+    { "id": "6", "image": "img106.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$22,00", "category": "clothing", "gender": "women" },
+    { "id": "7", "image": "img107.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$25,00", "category": "clothing", "gender": "women" },
+    { "id": "8", "image": "img108.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$20,00", "category": "clothing", "gender": "women" },
+    { "id": "9", "image": "img109.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$30,00", "category": "clothing", "gender": "women" },
+    { "id": "10", "image":"img110.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$16,00", "category": "clothing", "gender": "women" },
+
+    { "id": "11", "image": "img111.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$17,00", "category": "clothing", "gender": "men" },
+    { "id": "12", "image": "img112.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$32,00", "category": "clothing", "gender": "men" },
+    { "id": "13", "image": "img113.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$21,00", "category": "clothing", "gender": "men" },
+    { "id": "14", "image": "img114.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$15,00", "category": "clothing", "gender": "men" },
+    { "id": "15", "image": "img115.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$18,00", "category": "clothing", "gender": "men" },
+    { "id": "16", "image": "img116.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$22,00", "category": "clothing", "gender": "men" },
+    { "id": "17", "image": "img117.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$25,00", "category": "clothing", "gender": "men" },
+    { "id": "18", "image": "img118.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$20,00", "category": "clothing", "gender": "men" },
+    { "id": "19", "image": "img119.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$30,00", "category": "clothing", "gender": "men" },
+    { "id": "20", "image": "img120.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$16,00", "category": "clothing", "gender": "men" },
+
+    { "id": "21", "image": "img121.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$40,00", "category": "watch", "gender": "women" },
+    { "id": "22", "image": "img122.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$45,00", "category": "watch", "gender": "women" },
+    { "id": "23", "image": "img123.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$50,00", "category": "watch", "gender": "women" },
+    { "id": "24", "image": "img124.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$55,00", "category": "watch", "gender": "women" },
+    { "id": "25", "image": "img125.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$60,00", "category": "watch", "gender": "women" },
+    { "id": "26", "image": "img126.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$65,00", "category": "watch", "gender": "men" },
+    { "id": "27", "image": "img127.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$70,00", "category": "watch", "gender": "men" },
+    { "id": "28", "image": "img128.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$75,00", "category": "watch", "gender": "men" },
+    { "id": "29", "image": "img129.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$80,00", "category": "watch", "gender": "men" },
+    { "id": "30", "image": "img130.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$85,00", "category": "watch", "gender": "men" },
+
+    { "id": "31", "image": "img131.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$90,00", "category": "shoes", "gender": "women" },
+    { "id": "32", "image": "img132.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$95,00", "category": "shoes", "gender": "women" },
+    { "id": "33", "image": "img133.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$100,00", "category": "shoes", "gender": "women" },
+    { "id": "34", "image": "img134.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$105,00", "category": "shoes", "gender": "women" },
+    { "id": "35", "image": "img135.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$110,00", "category": "shoes", "gender": "women" },
+    { "id": "36", "image": "img136.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$115,00", "category": "shoes", "gender": "men" },
+    { "id": "37", "image": "img137.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$120,00", "category": "shoes", "gender": "men" },
+    { "id": "38", "image": "img138.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$125,00", "category": "shoes", "gender": "men" },
+    { "id": "39", "image": "img139.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$130,00", "category": "shoes", "gender": "men" },
+    { "id": "40", "image": "img140.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$135,00", "category": "shoes", "gender": "men" },
+
+    { "id": "41", "image": "img141.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$140,00", "category": "bags", "gender": "women" },
+    { "id": "42", "image": "img142.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$145,00", "category": "bags", "gender": "women" },
+    { "id": "43", "image": "img143.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$150,00", "category": "bags", "gender": "women" },
+    { "id": "44", "image": "img144.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$155,00", "category": "bags", "gender": "women" },
+    { "id": "45", "image": "img145.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$160,00", "category": "bags", "gender": "women" },
+    { "id": "46", "image": "img146.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$165,00", "category": "bags", "gender": "men" },
+    { "id": "47", "image": "img147.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$170,00", "category": "bags", "gender": "men" },
+    { "id": "48", "image": "img148.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$175,00", "category": "bags", "gender": "men" },
+    { "id": "49", "image": "img149.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$180,00", "category": "bags", "gender": "men" },
+    { "id": "50", "image": "img150.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$185,00", "category": "bags", "gender": "men" },
+ 
+    { "id": "51", "image": "img151.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$20,00", "category": "clothing", "gender": "women" },
+    { "id": "52", "image": "img152.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$30,00", "category": "clothing", "gender": "women" },
+    { "id": "53", "image":"img153.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$16,00", "category": "clothing", "gender": "women" },
+    { "id": "54", "image": "img154.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$21,00", "category": "clothing", "gender": "men" },
+    { "id": "55", "image": "img155.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$20,00", "category": "clothing", "gender": "women" },
+    { "id": "56", "image": "img156.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$15,00", "category": "clothing", "gender": "men" },
+    { "id": "57", "image": "img157.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$15,00", "category": "clothing", "gender": "men" },
+    { "id": "58", "image":"img158.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$16,00", "category": "clothing", "gender": "women" },
+    { "id": "59", "image": "img159.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$15,00", "category": "clothing", "gender": "men" },
+    { "id": "60", "image": "img160.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$15,00", "category": "clothing", "gender": "men" }
+
   ],
+
+
   "users": [
-    {
-      "id": "6b35",
-      "email": "punnyapradeep1328@gmail.com",
-      "password": "punnya2003@",
-      "phoneNumber": "8086658470"
-    },
-    {
-      "id": "a4a6",
-      "email": "uthrapradeep@gmail.com",
-      "password": "uthra2123",
-      "phoneNumber": "9037111588"
-    },
-    {
-      "id": "33f0",
-      "email": "punnya123@gmail.com",
-      "password": "punnya",
-      "phoneNumber": "8086658470"
-    }
+    { "id": "6b35", "email": "punnyapradeep1328@gmail.com", "password": "punnya2003@", "phoneNumber": "8086658470" },
+    { "id": "a4a6", "email": "uthrapradeep@gmail.com", "password": "uthra2123", "phoneNumber": "9037111588" },
+    { "id": "33f0", "email": "punnya123@gmail.com", "password": "punnya", "phoneNumber": "8086658470" }
   ]
 }
