@@ -23,7 +23,7 @@ export default function PasswordScreen() {
         />
       </View>
 
-      {/* Centered content */}
+    
       <View style={styles.content}>
         <View style={styles.centeredContent}>
           <View style={styles.profileImageContainer}>
@@ -33,29 +33,14 @@ export default function PasswordScreen() {
             />
           </View>
           <Text style={styles.greetingText}>Hello, Romina !!</Text>
-          <Text style={styles.passwordText}>Type your password</Text>
+        
 
-          <View style={styles.passwordInputContainer}>
+          <View style={styles.passwordContainer}>
             <TextInput
-              keyboardType="numeric"
-              maxLength={1}
-              style={styles.input}
+              placeholder='Enter your Password here'
+            
             />
-            <TextInput
-              keyboardType="numeric"
-              maxLength={1}
-              style={styles.input}
-            />
-            <TextInput
-              keyboardType="numeric"
-              maxLength={1}
-              style={styles.input}
-            />
-            <TextInput
-              keyboardType="numeric"
-              maxLength={1}
-              style={styles.input}
-            />
+          
           </View>
 
           <TouchableOpacity onPress={() => navigation.navigate('forgot')}>
@@ -92,6 +77,15 @@ const styles = StyleSheet.create({
   },
   bubbleContainer: {
     zIndex: -1, 
+  },
+  passwordContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F8F8F8',
+    borderRadius: 8,
+    marginTop: 20,
+    paddingHorizontal: 50,
+    paddingVertical:10
   },
   bubbleImage: {
     resizeMode: 'contain',

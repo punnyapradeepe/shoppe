@@ -1,31 +1,42 @@
 {
-    "products": [
-      {
-        "id": "1",
-        "image": "img44.png",
-        "title": "Lorem ipsum dolor sit amet consectetur.",
-        "price": "$17,00"
-      },
-      {
-        "id": "2",
-        "image": "img45.png",
-        "title": "Lorem ipsum dolor sit amet consectetur.",
-        "price": "$32,00"
-      },
-      {
-        "id": "3",
-        "image": "img46.png",
-        "title": "Lorem ipsum dolor sit amet consectetur.",
-        "price": "$21,00"
-      },
-      {
-        "id": "4",
-        "image": "img47.png",
-        "title": "Lorem ipsum dolor sit amet consectetur.",
-        "price": "$15,00"
-      }
-    ],
-    "users":[]
-
-  }
-  
+  "products": [
+    {
+      "id": "1",
+      "image": "img44.png",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$17,00"
+    },
+    {
+      "id": "2",
+      "image": "img45.png",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$32,00"
+    },
+    {
+      "id": "3",
+      "image": "img46.png",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$21,00"
+    },
+    {
+      "id": "4",
+      "image": "img47.png",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$15,00"
+    }
+  ],
+  "users": [
+    {
+      "id": "6b35",
+      "email": "punnyapradeep1328@gmail.com",
+      "password": "punnya2003@",
+      "phoneNumber": "8086658470"
+    },
+    {
+      "id": "a4a6",
+      "email": "uthrapradeep@gmail.com",
+      "password": "uthra2123",
+      "phoneNumber": "9037111588"
+    }
+  ]
+}

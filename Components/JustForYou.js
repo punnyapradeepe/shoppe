@@ -59,12 +59,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 10,
-   
+ 
   },
   itemContainer: {
     backgroundColor: Colors.WHITE,
     width: '48%',
     borderRadius: 20,
+    margin: '1%', 
+    marginBottom: 10,
   },
   imageContainer: {
     borderTopLeftRadius: 20,

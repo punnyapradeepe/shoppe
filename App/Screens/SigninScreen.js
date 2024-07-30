@@ -1,66 +1,96 @@
-import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
-import React from 'react';
+import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native';
+import React, { useState } from 'react';
 import Colors from '../Utils/Colors';
 import { useNavigation } from '@react-navigation/core';
 import { HeartImg } from './../../App/Utils/SvgIcons';
 
 export default function SigninScreen() {
+  const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
   const navigation = useNavigation();
+
+  const handleLogin = async () => {
+    const url = 'http://192.168.1.40:5000/users'; 
+
+    let hasError = false;
+
+    if (!email) {
+      setEmailError('Enter your email');
+      hasError = true;
+    } else {
+      setEmailError('');
+    }
+
+    if (hasError) {
+      return;
+    }
+
+    try {
+      const response = await fetch(url);
+      const users = await response.json();
+
+    
+      const userExists = users.some(user => user.email === email);
+
+      if (userExists) {
+        navigation.navigate('password'); 
+      } else {
+        setEmailError('email does not exist');
+      }
+    } catch (error) {
+      console.error('Error fetching users:', error);
+      Alert.alert('Error', 'There was a problem checking your email');
+    }
+  };
+
   return (
-    <View style={{backgroundColor:Colors.WHITE,flex:1}}>
-      <View style={{flex:1}}>
+    <View style={{ backgroundColor: Colors.WHITE, flex: 1 }}>
+      <View style={{ flex: 1 }}>
         <View style={{ position: 'relative' }}>
           <Image
-            style={{ position: 'absolute',resizeMode:'contain' }}
+            style={{ position: 'absolute', resizeMode: 'contain' }}
             source={require('./../../assets/Images/bubble 02.png')}
           />
           <Image
-            style={{ position: 'absolute',resizeMode:'contain'}}
+            style={{ position: 'absolute', resizeMode: 'contain' }}
             source={require('./../../assets/Images/bubble 03.png')}
           />
-
-           
-
-
-      </View>
-      <View  style={{right:0,top:'35%', position: 'absolute',}}>
-      <Image
+        </View>
+        <View style={{ right: 0, top: '35%', position: 'absolute' }}>
+          <Image
             style={{}}
             source={require('./../../assets/Images/bubble 04.png')}
           />
+        </View>
       </View>
-      </View>
-      <View style={{ position: 'absolute',resizeMode:'contain' ,bottom:0,right:0}}>
+      <View style={{ position: 'absolute', resizeMode: 'contain', bottom: 0, right: 0 }}>
         <Image
- 
-            source={require('./../../assets/Images/bubble 05.png')}
+          source={require('./../../assets/Images/bubble 05.png')}
         />
-         </View>
+      </View>
 
-
-
-
-          <View style={{position:'absolute',top:350,width:'90%',marginHorizontal:20}}>
-
-          <Text style={styles.text}>Login</Text>
-          <View style={{display:'flex' ,flexDirection:'row'}}>
-            <Text style={{fontSize:17,paddingTop:10}}>Good to see you back! </Text>
-            <View style={{paddingTop:10}}>
-            <HeartImg/>
-            </View>
-           
-            </View>
-            <TextInput placeholder='Email' style={styles.textInput} />
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('password')}>
-          <Text style={styles.buttonText}>Next</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
-          <Text style={{alignSelf:'center'}}>Cancel</Text>
-        </TouchableOpacity>
-
+      <View style={{ position: 'absolute', top: 350, width: '90%', marginHorizontal: 20 }}>
+        <Text style={styles.text}>Login</Text>
+        <View style={{ display: 'flex', flexDirection: 'row' }}>
+          <Text style={{ fontSize: 17, paddingTop: 10 }}>Good to see you back! </Text>
+          <View style={{ paddingTop: 10 }}>
+            <HeartImg />
           </View>
-          
-
+        </View>
+        <TextInput
+          placeholder='Email'
+          style={styles.textInput}
+          value={email}
+          onChangeText={setEmail}
+        />
+        {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+          <Text style={styles.buttonText}>Next</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
+          <Text style={{ alignSelf: 'center' }}>Cancel</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -70,29 +100,19 @@ const styles = StyleSheet.create({
     fontFamily: 'RalewayB',
     fontSize: 40,
     fontWeight: 'bold',
-    // paddingLeft:20
-    
   },
   textInput: {
     backgroundColor: '#F8F8F8',
     padding: 10,
     borderRadius: 8,
     marginTop: 30,
-    // marginHorizontal: 20,
     color: Colors.BLACK,
     height: 50,
-    width:'100%',
-    
-  },
-  buttonContainer: {
-    alignItems: 'center',
-    marginTop: 'auto',
-    marginBottom:20,
-   
+    width: '100%',
   },
   button: {
     height: 61,
-    width:"100%",
+    width: "100%",
     marginTop: 40,
     backgroundColor: Colors.PRIMARY,
     justifyContent: 'center',
@@ -100,12 +120,15 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginBottom: 20,
     alignSelf: 'center',
-
   },
   buttonText: {
     color: Colors.WHITE,
     fontSize: 18,
     fontFamily: 'Regular',
-    
   },
-})
+  errorText: {
+    color: 'red',
+    marginTop: 5,
+    fontSize: 14,
+  },
+});
