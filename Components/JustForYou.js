@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
     borderWidth: 6,
     borderColor: Colors.WHITE,
     alignSelf: 'center',
+    
   },
   itemText: {
     paddingLeft: 5,
