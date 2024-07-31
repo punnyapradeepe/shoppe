@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Colors from '../Utils/Colors';
 import { useNavigation } from '@react-navigation/core';
 import { HeartImg } from './../../App/Utils/SvgIcons';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function SigninScreen() {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -28,7 +28,8 @@ export default function SigninScreen() {
     try {
       const response = await fetch(url);
       const users = await response.json();
-
+console.log("users",users[0].id);
+await AsyncStorage.setItem('userid',users[0].id)
       if (users.length > 0) {
   
 

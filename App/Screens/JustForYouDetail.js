@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import Colors from '../Utils/Colors';
 import { StarImgClr, StarImgLayout } from '../Utils/SvgIcons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AddToCart from '../../Components/AddToCart';
 import { useNavigation } from '@react-navigation/core';
-import { AntDesign } from '@expo/vector-icons';
 import imageMapping from './../../Components/imageMapping'; 
-import FlashSale from './../../Components/FlashSale'
+import FlashSale from './../../Components/FlashSale';
 import JustForYou from '../../Components/JustForYou';
 
 const JustForYouDetail = ({ route }) => {
@@ -30,11 +29,19 @@ const JustForYouDetail = ({ route }) => {
     return imageMapping[imageName];
   };
 
+  const handleAddToCartPress = (product) => {
+    console.log('Product added to cart:', {
+      id: product.id,
+      title: product.title,
+      price: product.price
+    });
+  };
+
   if (!product) {
     return (
       <SafeAreaView style={styles.safeArea}>
         <ScrollView style={styles.container}>
-          <Text style={styles.loadingText}></Text> 
+          <Text style={styles.loadingText}>Loading...</Text> 
         </ScrollView>
       </SafeAreaView>
     );
@@ -42,13 +49,12 @@ const JustForYouDetail = ({ route }) => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-            <View style={styles.header}>
+      <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()} style={{marginLeft:20}}>
           <AntDesign name="arrowleft" size={30} color={Colors.TEXT} />
         </TouchableOpacity>
       </View>
       <ScrollView style={styles.container}>
-  
         <Image
           source={getImageSource(product.image)}
           style={styles.image}
@@ -57,29 +63,28 @@ const JustForYouDetail = ({ route }) => {
         <Text style={styles.price}>Price: {product.price}</Text>
 
         <View style={{
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      
-    }}>
-      <Text style={{
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: '#000' 
-      }}>
-        Size guide
-      </Text>
-      <TouchableOpacity style={{
-        backgroundColor: '#007bff',
-        width: 36,
-        height: 36,
-        borderRadius: 18,
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}>
-        <AntDesign name="arrowright" size={24} color="#fff" /> 
-      </TouchableOpacity>
-    </View>
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}>
+          <Text style={{
+            fontSize: 18,
+            fontWeight: 'bold',
+            color: '#000' 
+          }}>
+            Size guide
+          </Text>
+          <TouchableOpacity style={{
+            backgroundColor: '#007bff',
+            width: 36,
+            height: 36,
+            borderRadius: 18,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
+            <AntDesign name="arrowright" size={24} color="#fff" /> 
+          </TouchableOpacity>
+        </View>
 
         <View style={styles.reviewerContainer}>
           <Image
@@ -107,7 +112,7 @@ const JustForYouDetail = ({ route }) => {
         <JustForYou/>
         <FlashSale/>
       </ScrollView>
-      <AddToCart />
+      <AddToCart product={product} onAddToCartPress={handleAddToCartPress} />
     </SafeAreaView>
   );
 };

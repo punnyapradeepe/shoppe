@@ -12,7 +12,7 @@ const JustForYou = () => {
     fetch('http://192.168.1.40:5000/products?category=clothing')
       .then(response => response.json())
       .then(data => {
-        const filteredProducts = data.filter(product => product.type !== 'flashsale');
+        const filteredProducts = data.filter(product => product.type !== 'flashsale' &  product.type !== 'stories');
         setProducts(filteredProducts);
       })
       .catch(error => console.error('Error fetching data:', error));
