@@ -11,8 +11,7 @@ import MostPopular from '../../Components/MostPopular';
 import JustForYou from '../../Components/JustForYou';
 import Carousel from '../../Components/Carousel';
 
-const { width } = Dimensions.get('window'); // Get screen width
-
+const { width } = Dimensions.get('window'); 
 const AllCategories = () => {
   const navigation = useNavigation();
 
@@ -81,7 +80,7 @@ const AllCategories = () => {
                       <Image
                         key={imgIndex}
                         source={images[rowIndex * 8 + colIndex * 4 + imgIndex]}
-                        style={[styles.categoryImage, { height: width * 0.2 }]} // Adjust image height based on screen width
+                        style={[styles.categoryImage, { height: width * 0.2 }]}
                       />
                     ))}
                   </View>

@@ -12,7 +12,6 @@ const JustForYou = () => {
     fetch('http://192.168.1.40:5000/products?category=clothing')
       .then(response => response.json())
       .then(data => {
-        // Filter out the flashsale items
         const filteredProducts = data.filter(product => product.type !== 'flashsale');
         setProducts(filteredProducts);
       })
@@ -20,7 +19,7 @@ const JustForYou = () => {
   }, []);
 
   const getImageSource = (imageName) => {
-    return imageMapping[imageName] ;
+    return imageMapping[imageName];
   };
 
   return (
@@ -31,7 +30,7 @@ const JustForYou = () => {
             <TouchableOpacity
               key={item.id}
               style={styles.itemContainer}
-              onPress={() => navigation.navigate('justforyoudetail', { item })}
+              onPress={() => navigation.navigate('justforyoudetail', { id: item.id })}
             >
               <View style={styles.imageContainer}>
                 <Image source={getImageSource(item.image)} style={styles.image} />
@@ -49,7 +48,7 @@ const JustForYou = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.BACKGROUND, // Adjust background color if needed
+    backgroundColor: Colors.BACKGROUND,
   },
   productContainer: {
     flexDirection: 'row',

@@ -66,6 +66,18 @@
     { "id": "59", "image": "img159.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$15,00", "category": "clothing", "gender": "men" },
     { "id": "60", "image": "img160.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$15,00", "category": "clothing", "gender": "men" },
 
+    { "id": "61", "image": "img161.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$20,00", "category": "clothing", "gender": "women", "type": "mostpopular","sale":"New"},
+    { "id": "62", "image": "img162.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$30,00", "category": "clothing", "gender": "women", "type": "mostpopular","sale":"Sale"},
+    { "id": "63", "image": "img163.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$16,00", "category": "clothing", "gender": "women", "type": "mostpopular","sale" :"Hot"},      
+    { "id": "64", "image": "img164.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$21,00", "category": "clothing", "gender": "women", "type": "mostpopular","sale":"Sale"},
+    { "id": "65", "image": "img165.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$20,00", "category": "clothing", "gender": "women", "type": "mostpopular","sale":"Hot"},
+    { "id": "66", "image": "img166.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$15,00", "category": "clothing", "gender": "women", "type": "mostpopular","sale":"Hot"},
+    { "id": "67", "image": "img167.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$15,00", "category": "clothing", "gender": "women", "type": "mostpopular","sale":"Sale"},      
+    { "id": "68", "image": "img168.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$16,00", "category": "clothing", "gender": "women", "type": "mostpopular","sale":"New"},
+    { "id": "69", "image": "img169.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$15,00", "category": "clothing", "gender": "women", "type": "mostpopular","sale":"New"},
+    { "id": "70", "image": "img170.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$15,00", "category": "clothing", "gender": "women", "type": "mostpopular","sale":"Sale"},
+  
+  
 
     { "id": "101", "image": "img41.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$17,00", "category": "clothing", "gender": "women", "type": "flashsale" },
     { "id": "102", "image": "img42.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$32,00", "category": "clothing", "gender": "women", "type": "flashsale" },
@@ -75,6 +87,9 @@
     { "id": "106", "image": "img46.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$22,00", "category": "clothing", "gender": "women", "type": "flashsale" },
     { "id": "107", "image": "img47.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$25,00", "category": "clothing", "gender": "women", "type": "flashsale" }
     
+ 
+
+
   ],
 
 

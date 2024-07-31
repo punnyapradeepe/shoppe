@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, ScrollView, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Colors from '../App/Utils/Colors'; // Assuming you have Colors in your project
+import Colors from '../App/Utils/Colors'; 
 import { Clk2, ClkImg, ClkTym, ClkTym1, ClockImg } from '../App/Utils/SvgIcons';
 
 const FlashSale = () => {

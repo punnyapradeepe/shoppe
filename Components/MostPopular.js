@@ -1,79 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, Image, StyleSheet } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import Colors from '../App/Utils/Colors';
 import { HeartImg2, TextImg } from '../App/Utils/SvgIcons';
 import { useNavigation } from '@react-navigation/core';
+import imageMapping from './../Components/imageMapping'
 
 const MostPopular = () => {
+  const [products, setProducts] = useState([]);
   const navigation = useNavigation();
 
-  const type = [
-    {
-      id: '1',
-      imageSource: require('./../assets/Images/img12.png'),
-      img: require('./../assets/Images/Group 1497.png'),
-      price: '$1780',
-      text: 'Lorem ipsum dolor sit amet consectetur.',
-      type: 'New'
-    },
-    {
-      id: '2',
-      imageSource: require('./../assets/Images/img15.png'),
-      img: require('./../assets/Images/Group 1497.png'),
-      text: 'Lorem ipsum dolor sit amet consectetur.',
-      price: '$1780',
-      type: 'Sale'
-    },
-    {
-      id: '3',
-      imageSource: require('./../assets/Images/img14.png'),
-      img: require('./../assets/Images/Group 1497.png'),
-      text: 'Lorem ipsum dolor sit amet consectetur.',
-      price: '1780',
-      type: 'Hot'
-    },
-    {
-      id: '4',
-      imageSource: require('./../assets/Images/img13.png'),
-      img: require('./../assets/Images/Group 1497.png'),
-      text: 'Lorem ipsum dolor sit amet consectetur.',
-      price: '$15,00',
-      type: 'New'
-    },
-    {
-      id: '5',
-      imageSource: require('./../assets/Images/img12.png'),
-      img: require('./../assets/Images/Group 1497.png'),
-      price: '$1780',
-      text: 'Lorem ipsum dolor sit amet consectetur.',
-      type: 'New'
-    },
-    {
-      id: '6',
-      imageSource: require('./../assets/Images/img15.png'),
-      img: require('./../assets/Images/Group 1497.png'),
-      text: 'Lorem ipsum dolor sit amet consectetur.',
-      price: '$1780',
-      type: 'Sale'
-    },
-    {
-      id: '7',
-      imageSource: require('./../assets/Images/img14.png'),
-      img: require('./../assets/Images/Group 1497.png'),
-      text: 'Lorem ipsum dolor sit amet consectetur.',
-      price: '1780',
-      type: 'Hot'
-    },
-    {
-      id: '8',
-      imageSource: require('./../assets/Images/img13.png'),
-      img: require('./../assets/Images/Group 1497.png'),
-      text: 'Lorem ipsum dolor sit amet consectetur.',
-      price: '$15,00',
-      type: 'New'
-    },
-  ];
+  useEffect(() => {
+    fetch('http://192.168.1.40:5000/products?category=clothing')
+      .then(response => response.json())
+      .then(data => {
+        const filteredProducts = data.filter(product => product.type === 'mostpopular');
+        setProducts(filteredProducts);
+      })
+      .catch(error => console.error('Error fetching data:', error));
+  }, []);
+
+  const getImageSource = (imageName) => {
+    return imageMapping[imageName] ; 
+  };
 
   return (
     <View>
@@ -88,15 +37,15 @@ const MostPopular = () => {
       </View>
 
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {type.map((item) => (
+        {products.map((item) => (
           <TouchableOpacity
             key={item.id}
-            onPress={() => navigation.navigate('populardetail', { item })}
+            onPress={() => navigation.navigate('populardetail', { id: item.id })}
             style={{ backgroundColor: Colors.WHITE, width: 145, height: 210, marginRight: 10, borderRadius: 10 }}
           >
-            <View key={item.id} style={styles.imageContainer}>
+            <View style={styles.imageContainer}>
               <Image
-                source={item.imageSource}
+                source={getImageSource(item.image)}
                 style={{ width: 145, height: 250, borderRadius: 10, borderWidth: 6, borderColor: Colors.WHITE }}
               />
             </View>
@@ -107,7 +56,7 @@ const MostPopular = () => {
               <View style={{ paddingTop: 15, left: -19 }}>
                 <HeartImg2 />
               </View>
-              <Text style={{ paddingTop: 7, fontWeight: '400', gap: 10, fontFamily: 'Raleway', fontWeight: '650', fontSize: 17, right: 10 }}>{item.type}</Text>
+              <Text style={{ paddingTop: 7, fontWeight: '400', gap: 10, fontFamily: 'Raleway', fontWeight: '650', fontSize: 17, right: 10 }}>{item.sale}</Text>
             </View>
           </TouchableOpacity>
         ))}

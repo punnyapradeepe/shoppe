@@ -67,6 +67,17 @@ const imageMapping = {
   'img159.png': require('./../assets/Images/img159.png'),
   'img160.png': require('./../assets/Images/img160.png'),
 
+  'img161.png': require('./../assets/Images/img161.png'),
+  'img162.png': require('./../assets/Images/img162.png'),
+  'img163.png': require('./../assets/Images/img163.png'),
+  'img164.png': require('./../assets/Images/img164.png'),
+  'img165.png': require('./../assets/Images/img165.png'),
+  'img166.png': require('./../assets/Images/img166.png'),
+  'img167.png': require('./../assets/Images/img167.png'),
+  'img168.png': require('./../assets/Images/img168.png'),
+  'img169.png': require('./../assets/Images/img169.png'),
+  'img170.png': require('./../assets/Images/img170.png'),
+
 
   'img41.png': require('./../assets/Images/img41.png'),
   'img42.png': require('./../assets/Images/img42.png'),
