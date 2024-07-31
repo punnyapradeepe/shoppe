@@ -8,12 +8,13 @@ import AddToCart from '../../Components/AddToCart';
 import { useNavigation } from '@react-navigation/core';
 import { AntDesign } from '@expo/vector-icons';
 import imageMapping from './../../Components/imageMapping'; 
+import FlashSale from './../../Components/FlashSale'
 import JustForYou from '../../Components/JustForYou';
 
 const JustForYouDetail = ({ route }) => {
   const { id } = route.params;
   const navigation = useNavigation();
-  const [product, setProduct] = useState(null); // Initialize as null
+  const [product, setProduct] = useState(null); 
 
   useEffect(() => {
     fetch(`http://192.168.1.40:5000/products/${id}`)
@@ -41,13 +42,13 @@ const JustForYouDetail = ({ route }) => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
+            <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()} style={{marginLeft:20}}>
+          <AntDesign name="arrowleft" size={30} color={Colors.TEXT} />
+        </TouchableOpacity>
+      </View>
       <ScrollView style={styles.container}>
-        <Ionicons
-          name="arrow-back"
-          size={24}
-          color="black"
-          onPress={() => navigation.goBack()}
-        />
+  
         <Image
           source={getImageSource(product.image)}
           style={styles.image}
@@ -55,12 +56,30 @@ const JustForYouDetail = ({ route }) => {
         <Text style={styles.text}>Description: {product.title}</Text>
         <Text style={styles.price}>Price: {product.price}</Text>
 
-        <View style={styles.sizeGuideContainer}>
-          <Text style={styles.sizeGuideText}>Size guide</Text>
-          <TouchableOpacity style={styles.circleButton}>
-            <AntDesign name="arrowright" size={24} color={Colors.WHITE} />
-          </TouchableOpacity>
-        </View>
+        <View style={{
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      
+    }}>
+      <Text style={{
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#000' 
+      }}>
+        Size guide
+      </Text>
+      <TouchableOpacity style={{
+        backgroundColor: '#007bff',
+        width: 36,
+        height: 36,
+        borderRadius: 18,
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}>
+        <AntDesign name="arrowright" size={24} color="#fff" /> 
+      </TouchableOpacity>
+    </View>
 
         <View style={styles.reviewerContainer}>
           <Image
@@ -84,7 +103,9 @@ const JustForYouDetail = ({ route }) => {
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>View All Reviews</Text>
         </TouchableOpacity>
+       
         <JustForYou/>
+        <FlashSale/>
       </ScrollView>
       <AddToCart />
     </SafeAreaView>
@@ -101,6 +122,14 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
     backgroundColor: '#f5f5f5',
     marginBottom: 80,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: Colors.HEADER_BACKGROUND,
+    paddingTop: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.BORDER_COLOR,
   },
   image: {
     width: '100%',

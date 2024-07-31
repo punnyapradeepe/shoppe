@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: 'bold',
     paddingLeft: 0,
-    paddingTop: 70,
+    paddingTop: 20,
   },
   text1: {
     fontFamily: 'RalewayB',

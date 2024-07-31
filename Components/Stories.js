@@ -1,71 +1,46 @@
 import { Image, ScrollView, StyleSheet, View } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import imageMapping from './../Components/imageMapping'
 
 const Stories = () => {
-  const type = [
-    {
-      id: '1',
-      imageSource: require('./../assets/Images/Img6.png'),
-      img: require('./../assets/Images/Group 1497.png'),
-      live: require('./../assets/Images/baige.png')
-    },
-    {
-      id: '2',
-      imageSource: require('./../assets/Images/Img7.png'),
-      img: require('./../assets/Images/Group 1497.png')
-    },
-    {
-      id: '3',
-      imageSource: require('./../assets/Images/Img8.png'),
-      img: require('./../assets/Images/Group 1497.png')
-    },
-    {
-      id: '4',
-      imageSource: require('./../assets/Images/Img9.png'),
-      img: require('./../assets/Images/Group 1497.png')
-    },
-    {
-      id: '5',
-      imageSource: require('./../assets/Images/Img6.png'),
-      img: require('./../assets/Images/Group 1497.png'),
-      live: require('./../assets/Images/baige.png')
-    },
-    {
-      id: '6',
-      imageSource: require('./../assets/Images/Img7.png'),
-      img: require('./../assets/Images/Group 1497.png')
-    },
-    {
-      id: '7',
-      imageSource: require('./../assets/Images/Img8.png'),
-      img: require('./../assets/Images/Group 1497.png')
-    },
-    {
-      id: '8',
-      imageSource: require('./../assets/Images/Img9.png'),
-      img: require('./../assets/Images/Group 1497.png')
-    },
-  ];
+
+
+  const [products, setProducts] = useState([]);
+  
+
+ useEffect(() => {
+    fetch('http://192.168.1.40:5000/products?category=clothing')
+      .then(response => response.json())
+      .then(data => {
+        const filteredProducts = data.filter(product => product.type === 'stories');
+        setProducts(filteredProducts);
+      })
+      .catch(error => console.error('Error fetching data:', error));
+  }, []);
+
+  const getImageSource = (imageName) => {
+    return imageMapping[imageName] ; 
+  };
 
   return (
    
     <View style={styles.container}>
       
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {type.map((item) => (
+        {products.map((item) => (
           <View key={item.id} style={styles.imageContainer}>
             <Image 
-              source={item.imageSource} 
+              source={getImageSource(item.image)}
               style={styles.image} 
               resizeMode="cover"
             />
             <Image 
-              source={item.img} 
+              source={require('./../assets/Images/Group 1497.png')} 
               style={styles.overlayImage} 
             />
             {item.live && (
               <Image
-                source={item.live}  
+                source={require('./../assets/Images/baige.png')}  
                 style={styles.liveImage} 
               />
             )}

@@ -100,8 +100,8 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontFamily: 'Raleway',
     fontWeight: 'bold',
-    marginBottom: 20, 
-    marginTop:10
+    marginBottom: 10, 
+
   },
   image: {
     width: 70,

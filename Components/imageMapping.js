@@ -79,13 +79,32 @@ const imageMapping = {
   'img170.png': require('./../assets/Images/img170.png'),
 
 
-  'img41.png': require('./../assets/Images/img41.png'),
-  'img42.png': require('./../assets/Images/img42.png'),
-  'img43.png': require('./../assets/Images/img43.png'),
-  'img44.png': require('./../assets/Images/img44.png'),
-  'img45.png': require('./../assets/Images/img45.png'),
-  'img46.png': require('./../assets/Images/img46.png'),
-  'img47.png': require('./../assets/Images/img47.png'),
+  'img41.png': require('./../assets/Images/img47.png'),
+  'img42.png': require('./../assets/Images/img46.png'),
+  'img43.png': require('./../assets/Images/img44.png'),
+  'img44.png': require('./../assets/Images/img43.png'),
+  'img45.png': require('./../assets/Images/img42.png'),
+  'img46.png': require('./../assets/Images/img41.png'),
+  'img47.png': require('./../assets/Images/img40.png'),
+
+  'img48.png': require('./../assets/Images/img41.png'),
+  'img49.png': require('./../assets/Images/img42.png'),
+  'img50.png': require('./../assets/Images/img43.png'),
+  'img51.png': require('./../assets/Images/img45.png'),
+  'img52.png': require('./../assets/Images/img44.png'),
+  'img53.png': require('./../assets/Images/img46.png'),
+  'img54.png': require('./../assets/Images/img47.png'),
+
+  'img171.png': require('./../assets/Images/img171.png'),
+  'img172.png': require('./../assets/Images/Img6.png'),
+  'img173.png': require('./../assets/Images/Img7.png'),
+  'img174.png': require('./../assets/Images/Img8.png'),
+  'img175.png': require('./../assets/Images/img175.png'),
+  'img176.png': require('./../assets/Images/img176.png'),
+  // 'img177.png': require('./../assets/Images/img177.png'),
+  // 'img178.png': require('./../assets/Images/img178.png'),
+  // 'img179.png': require('./../assets/Images/img179.png'),
+  // 'img180.png': require('./../assets/Images/img180.png'),
   };
   
   export default imageMapping;

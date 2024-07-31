@@ -1,10 +1,12 @@
-import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import RecentlyViewed from './../../Components/RecentlyViwed';
 import JustForYou from '../../Components/JustForYou';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/core';
 import imageMapping from './../../Components/imageMapping';
+import { AntDesign } from '@expo/vector-icons';
+
 
 const MostPopularDetail = ({ route }) => {
   const { id } = route.params;
@@ -30,12 +32,38 @@ const MostPopularDetail = ({ route }) => {
   }
 
   return (
-    <View style={{ flex: 1, paddingTop: 40 }}>
+    <View style={{ flex: 1, paddingTop: 30 }}>
       <ScrollView style={styles.container}>
         <Ionicons name="arrow-back" size={24} color="black" onPress={() => navigation.goBack()} />
         <Image source={getImageSource(product.image)} style={styles.image} />
-        <Text style={styles.type}>Type: {product.type}</Text>
+        <Text style={styles.type}> {product.price}</Text>
+        <Text style={styles.type}> {product.title}</Text>
         {product.text && <Text style={styles.description}>Description: {product.text}</Text>}
+       
+        <View style={{
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+     
+    }}>
+      <Text style={{
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#000'
+      }}>
+        Size guide
+      </Text>
+      <TouchableOpacity style={{
+        backgroundColor: '#007bff',
+        width: 36,
+        height: 36,
+        borderRadius: 18,
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}>
+        <AntDesign name="arrowright" size={24} color="#fff" /> 
+      </TouchableOpacity>
+    </View>
         <RecentlyViewed />
         <JustForYou />
     
@@ -54,7 +82,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 300,
     borderRadius: 10,
-    marginBottom: 20,
     resizeMode: 'contain',
   },
   type: {

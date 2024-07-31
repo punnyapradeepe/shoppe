@@ -11,6 +11,65 @@ const NewItems = () => {
     {
       id: '1',
       images: [
+        require('./../assets/Images/j4.png'),
+
+      ],
+      text: 'Lorem ipsum dolor sit amet consectetur.',
+      price: '$15,00',
+      Dis: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.',
+      color: 'Black',
+      size: 'S',
+      variations: [
+        require('./../assets/Images/j1.png'),
+        require('./../assets/Images/j2.png'),
+      ],
+      Material: [
+        'Cotton 50%', 'Nylon 50%'
+      ]
+    },
+
+    {
+      id: '4',
+      images: [
+        require('./../assets/Images/db1.png'),
+        require('./../assets/Images/db2.png'),
+      ],
+      text: 'Lorem ipsum dolor sit amet consectetur.',
+      price: '$21,00',
+      Dis: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.',
+      color: 'Blue',
+      size: 'M',
+      variations: [
+        require('./../assets/Images/db3.png'),
+        require('./../assets/Images/db4.png'),
+      ],
+      Material: [
+        'Cotton 95%', 'Nylon 5%'
+      ]
+    },
+    {
+      id: '5',
+      images: [
+        require('./../assets/Images/img29.png'),
+
+      ],
+      text: 'Lorem ipsum dolor sit amet consectetur.',
+      price: '$17,00',
+      Dis: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.',
+      color: 'Black',
+      size: 'M',
+      variations: [
+        require('./../assets/Images/img28.png'),
+        require('./../assets/Images/img29.png'),
+        require('./../assets/Images/img30.png'),
+      ],
+      Material: [
+        'Cotton 95%', 'Nylon 5%'
+      ]
+    },
+    {
+      id: '3',
+      images: [
         require('./../assets/Images/hb1.png'),
         require('./../assets/Images/hb3.png'),
       ],
@@ -46,65 +105,7 @@ const NewItems = () => {
         'Cotton 95%'
       ]
     },
-    {
-      id: '3',
-      images: [
-        require('./../assets/Images/j4.png'),
-
-      ],
-      text: 'Lorem ipsum dolor sit amet consectetur.',
-      price: '$15,00',
-      Dis: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.',
-      color: 'Black',
-      size: 'S',
-      variations: [
-        require('./../assets/Images/j1.png'),
-        require('./../assets/Images/j2.png'),
-      ],
-      Material: [
-        'Cotton 50%', 'Nylon 50%'
-      ]
-    },
-    {
-      id: '4',
-      images: [
-        require('./../assets/Images/db1.png'),
-        require('./../assets/Images/db2.png'),
-      ],
-      text: 'Lorem ipsum dolor sit amet consectetur.',
-      price: '$21,00',
-      Dis: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.',
-      color: 'Blue',
-      size: 'M',
-      variations: [
-        require('./../assets/Images/db3.png'),
-        require('./../assets/Images/db4.png'),
-      ],
-      Material: [
-        'Cotton 95%', 'Nylon 5%'
-      ]
-    },
-
-    {
-      id: '5',
-      images: [
-        require('./../assets/Images/img29.png'),
-
-      ],
-      text: 'Lorem ipsum dolor sit amet consectetur.',
-      price: '$17,00',
-      Dis: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.',
-      color: 'Black',
-      size: 'M',
-      variations: [
-        require('./../assets/Images/img28.png'),
-        require('./../assets/Images/img29.png'),
-        require('./../assets/Images/img30.png'),
-      ],
-      Material: [
-        'Cotton 95%', 'Nylon 5%'
-      ]
-    },
+ 
     {
       id: '6',
       images: [

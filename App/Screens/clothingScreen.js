@@ -37,7 +37,7 @@ const CategoryScreen = () => {
             <TouchableOpacity
               key={item.id}
               style={styles.itemContainer}
-              onPress={() => navigation.navigate('justforyoudetail', { item })}
+              onPress={() => navigation.navigate('justforyoudetail', {id:item.id })}
             >
               <View style={styles.imageContainer}>
                 <Image source={getImageSource(item.image)} style={styles.image} />
