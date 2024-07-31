@@ -11,61 +11,56 @@ const JustForYou = () => {
   useEffect(() => {
     fetch('http://192.168.1.40:5000/products?category=clothing')
       .then(response => response.json())
-      .then(data => setProducts(data))
+      .then(data => {
+        // Filter out the flashsale items
+        const filteredProducts = data.filter(product => product.type !== 'flashsale');
+        setProducts(filteredProducts);
+      })
       .catch(error => console.error('Error fetching data:', error));
   }, []);
 
-
   const getImageSource = (imageName) => {
-    return imageMapping[imageName] ; 
+    return imageMapping[imageName] ;
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{flexDirection:'row',flexWrap:'wrap'}}>
-        {products.map((item) =>{
-          return(
-   
-          
-              <TouchableOpacity
-                key={item.id}
-                style={styles.itemContainer}
-                onPress={() => navigation.navigate('justforyoudetail', { item })}
-              >
-                <View style={styles.imageContainer}>
+        <View style={styles.productContainer}>
+          {products.map((item) => (
+            <TouchableOpacity
+              key={item.id}
+              style={styles.itemContainer}
+              onPress={() => navigation.navigate('justforyoudetail', { item })}
+            >
+              <View style={styles.imageContainer}>
                 <Image source={getImageSource(item.image)} style={styles.image} />
-                </View>
-                <Text style={styles.itemText}>{item.title}</Text>
-                <Text style={styles.itemPrice}>{item.price}</Text>
-              </TouchableOpacity>
-          
-         
-          )
-        } 
-
-        )}
+              </View>
+              <Text style={styles.itemText}>{item.title}</Text>
+              <Text style={styles.itemPrice}>{item.price}</Text>
+            </TouchableOpacity>
+          ))}
         </View>
       </ScrollView>
-
     </View>
   );
 };
 
-export default JustForYou;
-
 const styles = StyleSheet.create({
-  row: {
+  container: {
+    flex: 1,
+    backgroundColor: Colors.BACKGROUND, // Adjust background color if needed
+  },
+  productContainer: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     justifyContent: 'space-between',
-    marginBottom: 10,
- 
   },
   itemContainer: {
     backgroundColor: Colors.WHITE,
     width: '48%',
     borderRadius: 20,
-    margin: '1%', 
+    margin: '1%',
     marginBottom: 10,
   },
   imageContainer: {
@@ -80,7 +75,6 @@ const styles = StyleSheet.create({
     borderWidth: 6,
     borderColor: Colors.WHITE,
     alignSelf: 'center',
-    
   },
   itemText: {
     paddingLeft: 5,
@@ -96,3 +90,5 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
+
+export default JustForYou;

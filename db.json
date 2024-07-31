@@ -64,8 +64,17 @@
     { "id": "57", "image": "img157.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$15,00", "category": "clothing", "gender": "men" },
     { "id": "58", "image":"img158.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$16,00", "category": "clothing", "gender": "women" },
     { "id": "59", "image": "img159.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$15,00", "category": "clothing", "gender": "men" },
-    { "id": "60", "image": "img160.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$15,00", "category": "clothing", "gender": "men" }
+    { "id": "60", "image": "img160.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$15,00", "category": "clothing", "gender": "men" },
 
+
+    { "id": "101", "image": "img41.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$17,00", "category": "clothing", "gender": "women", "type": "flashsale" },
+    { "id": "102", "image": "img42.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$32,00", "category": "clothing", "gender": "women", "type": "flashsale" },
+    { "id": "103", "image": "img43.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$21,00", "category": "clothing", "gender": "women", "type": "flashsale" },
+    { "id": "104", "image": "img44.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$15,00", "category": "clothing", "gender": "women", "type": "flashsale" },
+    { "id": "105", "image": "img45.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$18,00", "category": "clothing", "gender": "women", "type": "flashsale" },
+    { "id": "106", "image": "img46.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$22,00", "category": "clothing", "gender": "women", "type": "flashsale" },
+    { "id": "107", "image": "img47.png", "title": "Lorem ipsum dolor sit amet consectetur.", "price": "$25,00", "category": "clothing", "gender": "women", "type": "flashsale" }
+    
   ],
 
 
