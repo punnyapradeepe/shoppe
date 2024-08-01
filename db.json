@@ -803,82 +803,40 @@
   ],
   "cart": [
     {
-      "id": "1",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$17,00",
-      "userId": "33f0"
-    },
-    {
-      "id": "1",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$17,00",
-      "userId": "33f0"
-    },
-    {
-      "id": "19",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$30,00",
-      "userId": "6b35"
-    },
-    {
-      "id": "19",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$30,00",
-      "userId": "6b35"
-    },
-    {
-      "id": "19",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$30,00",
-      "userId": "6b35"
-    },
-    {
-      "id": "51",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$20,00",
-      "userId": "a4a6"
-    },
-    {
-      "id": "51",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$20,00",
-      "userId": "a4a6"
-    },
-    {
-      "id": "51",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$20,00",
-      "userId": "a4a6"
-    },
-    {
-      "id": "51",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$20,00",
-      "userId": "a4a6"
-    },
-    {
-      "id": "51",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$20,00",
-      "userId": "a4a6"
-    },
-    {
-      "id": "51",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$20,00",
-      "userId": "a4a6"
-    },
-    {
-      "id": "70",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$15,00",
-      "userId": "33f0"
-    },
-    {
       "id": "3",
       "title": "Lorem ipsum dolor sit amet consectetur.",
       "price": "$21,00",
+      "image": "img103.png",
       "userId": "33f0"
+    },
+    {
+      "id": "11",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$17,00",
+      "image": "img111.png",
+      "userId": "33f0"
+    },
+    {
+      "id": "1",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$17,00",
+      "image": "img101.png",
+      "userId": "33f0"
+    },
+    {
+      "id": "13",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$21,00",
+      "image": "img113.png",
+      "userId": "33f0"
+    },
+    {
+      "id": "7",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$25,00",
+      "image": "img107.png",
+      "userId": "a4a6"
     }
+  
   ]
 }

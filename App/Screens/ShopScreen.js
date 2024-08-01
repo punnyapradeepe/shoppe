@@ -1,21 +1,54 @@
-// ShopScreen.js
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, TextInput, Button } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, TextInput } from 'react-native';
 import WishList from '../../Components/WishList';
 import Colors from '../Utils/Colors';
-import { EditBtn, DeleteBtn, MinusImg, MoreImg } from '../Utils/SvgIcons';
+import { EditBtn, MinusImg, MoreImg } from '../Utils/SvgIcons';
 import CartItems from './../../Components/CartItems';
 import { useNavigation } from '@react-navigation/native';
 import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
+import imageMapping from './../../Components/imageMapping'; 
 
 export default function ShopScreen() {
   const navigation = useNavigation();
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [cartItems, setCartItems] = useState([]);
+  const [userId, setUserId] = useState(null);
 
-  // Function to update total quantity and total price based on cart items
+  const fetchUserId = async () => {
+    try {
+      const id = await AsyncStorage.getItem('userid');
+      setUserId(id);
+    } catch (error) {
+      console.error('Failed to fetch user ID from AsyncStorage:', error);
+    }
+  };
+
+  const fetchCartItems = async (userId) => {
+    try {
+      const response = await fetch('http://192.168.1.40:5000/cart');
+      const data = await response.json();
+      const filteredItems = data.filter(item => item.userId === userId);
+      console.log('Filtered Cart Items:', filteredItems);
+      setCartItems(filteredItems);
+      updateTotalQuantityAndPrice(filteredItems);
+    } catch (error) {
+      console.error('Failed to fetch or filter cart items:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserId(); 
+  }, []);
+
+  useEffect(() => {
+    if (userId) {
+      fetchCartItems(userId); 
+    }
+  }, [userId]);
+
   const updateTotalQuantityAndPrice = (items) => {
     const totalQty = items.reduce((sum, item) => sum + (item.quantity || 0), 0);
     const totalPr = items.reduce((sum, item) => sum + (parseFloat(item.price.replace('$', '')) * (item.quantity || 0)), 0);
@@ -23,7 +56,6 @@ export default function ShopScreen() {
     setTotalPrice(totalPr.toFixed(2));
   };
 
-  // Function to handle quantity changes within cart items
   const handleQuantityChange = (itemId, newQuantity) => {
     const updatedItems = cartItems.map(item => {
       if (item.id === itemId) {
@@ -31,41 +63,14 @@ export default function ShopScreen() {
       }
       return item;
     });
-    
+
     setCartItems(updatedItems);
     updateTotalQuantityAndPrice(updatedItems);
   };
 
   const navigateToShippingAddress = () => {
-    navigation.navigate('shippingAddr', { totalQuantity, totalPrice }); 
+    navigation.navigate('shippingAddr', { totalQuantity, totalPrice });
   };
-
-  // Sample data for cart items
-  const type = [
-    {
-      id: '1',
-      images: require('./../../assets/Images/img40.png'),
-      text: 'Lorem ipsum dolor sit amet \n consectetur.',
-      price: '$17.00',
-      color: 'Black',
-      size: 'M',
-      quantity: 1, // Initial quantity
-    },
-    {
-      id: '2',
-      images: require('./../../assets/Images/img21.png'),
-      text: 'Lorem ipsum dolor sit amet \n consectetur.',
-      price: '$12.00',
-      color: 'Red',
-      size: 'S',
-      quantity: 1, // Initial quantity
-    },
-  ];
-
-  useEffect(() => {
-    setCartItems(type); // Initialize cart items
-    updateTotalQuantityAndPrice(type); // Initialize total quantity and price
-  }, []);
 
   const [address, setAddress] = useState('26, Duong So 2, Thao Dien Ward, An Phu, District 2, Ho Chi Minh city');
   const [isModalVisible, setModalVisible] = useState(false);
@@ -84,8 +89,8 @@ export default function ShopScreen() {
   return (
     <View style={styles.container}>
       <View>
-        <View style={{ display: 'flex', flexDirection: 'row',gap:0 }}>
-        <Ionicons name="arrow-back-sharp" size={24} color="black" onPress={()=> navigation.goBack()}  style={{marginTop:60,marginLeft:20}}/>
+        <View style={{ display: 'flex', flexDirection: 'row', gap: 0 }}>
+          <Ionicons name="arrow-back-sharp" size={24} color="black" onPress={() => navigation.goBack()} style={{ marginTop: 60, marginLeft: 20 }} />
           <Text style={styles.text}>Cart</Text>
           <View style={styles.quantityIndicator}>
             <Text style={styles.quantityText}>{totalQuantity}</Text>
@@ -102,7 +107,7 @@ export default function ShopScreen() {
       <ScrollView showsVerticalScrollIndicator={false} style={{ paddingLeft: 20, paddingRight: 20 }}>
         {cartItems.map(item => (
           <View style={styles.itemContainer} key={item.id}>
-            <Image source={item.images} style={styles.itemImage} />
+            <Image source={imageMapping[item.image]} style={styles.itemImage} />
             <View style={styles.itemDetails}>
               <Text style={styles.itemText}>{item.text}</Text>
               <View style={styles.colorSizeContainer}>
@@ -121,16 +126,15 @@ export default function ShopScreen() {
                   <MoreImg />
                 </TouchableOpacity>
               </View>
-              
             </View>
           </View>
         ))}
         <Text style={styles.text1}>From Your WishList</Text>
-        <WishList/>
+        <WishList />
       </ScrollView>
       <View style={styles.checkoutContainer}>
         <Text style={styles.totalText}>Total ${totalPrice}</Text>
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.checkoutButton}
           onPress={navigateToShippingAddress}
         >
@@ -138,297 +142,200 @@ export default function ShopScreen() {
         </TouchableOpacity>
       </View>
       <Modal isVisible={isModalVisible}>
-  <View style={{
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  }}>
-    <View style={{
-      backgroundColor: 'white',
-      borderColor: Colors.PRIMARY,
-      borderWidth: 1,
-      borderRadius: 10,
-      padding: 20,
-      width: '80%',
-    }}>
-      <Text style={{
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 10,
-      }}>Edit Address</Text>
-      <TextInput
-        style={{
-          borderColor: Colors.GRAY,
-          borderWidth: 1,
-          borderRadius: 5,
-          padding: 10,
-          marginBottom: 20,
-        }}
-        value={tempAddress}
-        onChangeText={setTempAddress}
-        placeholder="Enter your address"
-      />
-      <View style={{
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-      }}>
-        <TouchableOpacity
-          style={[{
-            flex: 1,
-            marginHorizontal: 5,
-            padding: 10,
-            borderRadius: 5,
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: Colors.PRIMARY,
-          }]}
-          onPress={handleCancel}
-        >
-          <Text style={{
-            color: 'white',
-            fontWeight: 'bold',
-          }}>Cancel</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[{
-            flex: 1,
-            marginHorizontal: 5,
-            padding: 10,
-            borderRadius: 5,
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: Colors.PRIMARY,
-          }]}
-          onPress={handleSave}
-        >
-          <Text style={{
-            color: 'white',
-            fontWeight: 'bold',
-          }}>Save</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  </View>
-</Modal>
-
+        <View style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+          <View style={{
+            backgroundColor: 'white',
+            borderColor: Colors.PRIMARY,
+            borderWidth: 1,
+            borderRadius: 10,
+            padding: 20,
+            width: '80%',
+          }}>
+            <Text style={{
+              fontSize: 18,
+              fontWeight: 'bold',
+              marginBottom: 10,
+            }}>Edit Address</Text>
+            <TextInput
+              style={{
+                borderColor: Colors.GRAY,
+                borderWidth: 1,
+                borderRadius: 5,
+                padding: 10,
+                marginBottom: 20,
+              }}
+              value={tempAddress}
+              onChangeText={setTempAddress}
+              placeholder="Enter your address"
+            />
+            <View style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}>
+              <TouchableOpacity
+                style={[{
+                  flex: 1,
+                  marginHorizontal: 5,
+                  padding: 10,
+                  borderRadius: 5,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor: Colors.PRIMARY,
+                }]}
+                onPress={handleCancel}
+              >
+                <Text style={{
+                  color: 'white',
+                  fontWeight: 'bold',
+                }}>Cancel</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[{
+                  flex: 1,
+                  marginHorizontal: 5,
+                  padding: 10,
+                  borderRadius: 5,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor: Colors.PRIMARY,
+                }]}
+                onPress={handleSave}
+              >
+                <Text style={{
+                  color: 'white',
+                  fontWeight: 'bold',
+                }}>Save</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 0,
-    backgroundColor: 'white',
     flex: 1,
+    backgroundColor: 'white',
   },
   text: {
-    fontFamily: 'RalewayB',
-    fontSize: 35,
+    fontSize: 20,
     fontWeight: 'bold',
-    paddingTop: 50,
-    paddingBottom: 10,
-    paddingRight: 10,
+    marginLeft: 15,
+    marginTop: 60,
+  },
+  quantityIndicator: {
+    position: 'absolute',
+    right: 20,
+    top: 60,
+    backgroundColor: Colors.PRIMARY,
+    borderRadius: 50,
+    width: 30,
+    height: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  quantityText: {
+    color: 'white',
+    fontWeight: 'bold',
   },
   subText: {
-    marginLeft: 20,
-    fontWeight: 'bold',
-    fontSize: 20,
-    marginBottom: 10,
-    paddingLeft: 20,
-    paddingRight: 20,
+    fontSize: 16,
+    fontWeight: '600',
+    marginHorizontal: 20,
+    marginVertical: 10,
   },
   addressContainer: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    marginLeft: 20,
-    marginRight: 20,
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingBottom:20
+    marginHorizontal: 20,
+    marginVertical: 10,
   },
   address: {
-    fontSize: 13,
+    fontSize: 16,
     flex: 1,
     flexWrap: 'wrap',
   },
   editButton: {
-    marginLeft: 10,
-  },
-  text1: {
-    fontFamily: 'RalewayB',
-    fontSize: 20,
-    fontWeight: 'bold',
-    paddingLeft: 0,
-    paddingTop: 5,
-    paddingBottom: 10,
-  },
-  checkoutContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    marginTop: 20,
-    borderTopWidth: 1,
-    borderColor: 'white',
-    paddingTop: 10,
-    paddingBottom: 20,
-    paddingHorizontal: 20, 
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 10,
-    backgroundColor: 'white',
-  },
-  totalText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  checkoutButton: {
-    backgroundColor: Colors.PRIMARY,
-    paddingVertical: 6,
-    paddingHorizontal: 20,
-    borderRadius: 5,
-    marginBottom: 10,
-    marginTop: 0,
-  },
-  checkoutButtonText: {
-    color: 'white',
-    fontSize: 20,
-    fontWeight: 'bold',
+    padding: 10,
   },
   itemContainer: {
     flexDirection: 'row',
     marginVertical: 10,
-    marginHorizontal: 1,
-    padding: 10,
-    backgroundColor: Colors.WHITE,
+    backgroundColor: 'white',
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 5,
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
   itemImage: {
-    position: 'relative',
-    width: 90,
+    width: 100,
     height: 100,
-    borderRadius: 10,
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
   },
   itemDetails: {
-    marginLeft: 10,
-    justifyContent
-: 'center',
     flex: 1,
+    padding: 10,
+    justifyContent: 'space-between',
   },
   itemText: {
-    fontSize: 15,
-
-    marginBottom: 10,
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  colorSizeContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginVertical: 5,
   },
   priceContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 5,
-  },
-  orgPrice: {
-    fontSize: 14,
-    color: 'red',
-    textDecorationLine: 'line-through',
-    marginRight: 5,
+    justifyContent: 'space-between',
   },
   itemPrice: {
-    fontSize: 17,
-    color: 'black',
-    fontWeight: '700',
-    fontFamily: 'Raleway',
-  },
-  colorSizeContainer: {
-    flexDirection: 'row',
-    gap: 5,
-    marginTop: 10,
-    marginBottom: 5,
-    alignItems: 'center',
-  },
-  itemColor: {
-    fontSize: 12,
-    color: Colors.LIGHTBLUE,
-    backgroundColor: '#E0F7FA',
-    borderRadius: 5,
-    padding: 2,
-    width: 54,
-    height: 25,
-    marginLeft: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center',
-  },
-  itemSize: {
-    fontSize: 12,
-    color: Colors.LIGHTBLUE,
-    backgroundColor: '#E0F7FA',
-    borderRadius: 5,
-    padding: 2,
-    width: 50,
-    height: 25,
-    alignContent: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center',
+    fontSize: 16,
+    fontWeight: '600',
   },
   quantityBox: {
-    width: 30,
-    height: 30,
-    backgroundColor: 'lightblue',
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  deleteButton: {
-    position: 'absolute',
-    top: 60,
-    right:10
-  },
-  flatList: {
-    paddingBottom: 20,
-  },
-  quantityIndicator: {
-    width: 30,
-    height: 30,
-    borderRadius: 99,
-    backgroundColor: 'lightblue',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop:60
-  },
-  quantityText: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: 'black',
-  },
-  modalContainer: {
-    backgroundColor: 'white',
-    padding: 20,
-    borderRadius: 10,
+    flexDirection: 'row',
     alignItems: 'center',
   },
-  modalTitle: {
+  text1: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginHorizontal: 20,
+    marginVertical: 10,
   },
-  input: {
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 5,
-    padding: 10,
-    width: '100%',
-    marginBottom: 20,
-  },
-  modalButtons: {
+  checkoutContainer: {
+    backgroundColor: 'white',
+    padding: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '100%',
+    alignItems: 'center',
+    borderTopColor: Colors.GRAY,
+    borderTopWidth: 1,
+  },
+  totalText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  checkoutButton: {
+    backgroundColor: Colors.PRIMARY,
+    borderRadius: 5,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  checkoutButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
   },
 });
