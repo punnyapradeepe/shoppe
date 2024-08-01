@@ -38,6 +38,7 @@ const JustForYouDetail = ({ route }) => {
         title: product.title,
         price: product.price,
         image:product.image,
+        Size:product.size,
         userId: userId 
       };
   

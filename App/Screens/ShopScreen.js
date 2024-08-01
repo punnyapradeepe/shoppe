@@ -9,6 +9,9 @@ import { useNavigation } from '@react-navigation/native';
 import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
 import imageMapping from './../../Components/imageMapping'; 
+import { useFocusEffect } from '@react-navigation/native';
+
+
 
 export default function ShopScreen() {
   const navigation = useNavigation();
@@ -16,6 +19,12 @@ export default function ShopScreen() {
   const [totalPrice, setTotalPrice] = useState(0);
   const [cartItems, setCartItems] = useState([]);
   const [userId, setUserId] = useState(null);
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchCartItems(userId); 
+
+    }, [userId])
+  );
 
   const fetchUserId = async () => {
     try {
@@ -105,30 +114,36 @@ export default function ShopScreen() {
         </View>
       </View>
       <ScrollView showsVerticalScrollIndicator={false} style={{ paddingLeft: 20, paddingRight: 20 }}>
-        {cartItems.map(item => (
-          <View style={styles.itemContainer} key={item.id}>
-            <Image source={imageMapping[item.image]} style={styles.itemImage} />
-            <View style={styles.itemDetails}>
-              <Text style={styles.itemText}>{item.text}</Text>
-              <View style={styles.colorSizeContainer}>
-                <Text>{item.color}</Text>
-                <Text>{item.size}</Text>
-              </View>
-              <View style={styles.priceContainer}>
-                <Text style={styles.itemPrice}>{item.price}</Text>
-                <TouchableOpacity onPress={() => handleQuantityChange(item.id, item.quantity - 1)} disabled={item.quantity <= 1}>
-                  <MinusImg />
-                </TouchableOpacity>
-                <View style={styles.quantityBox}>
-                  <Text>{item.quantity}</Text>
+        {cartItems.length === 0 ? (
+          <View style={styles.emptyCartContainer}>
+            <Text style={styles.emptyCartText}>Cart is empty!</Text>
+          </View>
+        ) : (
+          cartItems.map(item => (
+            <View style={styles.itemContainer} key={item.id}>
+              <Image source={imageMapping[item.image]} style={styles.itemImage} />
+              <View style={styles.itemDetails}>
+                <Text style={styles.itemText}>{item.title}</Text>
+                <View style={styles.colorSizeContainer}>
+                  <Text>{item.color}</Text>
+                  <Text>{item.size}</Text>
                 </View>
-                <TouchableOpacity onPress={() => handleQuantityChange(item.id, item.quantity + 1)}>
-                  <MoreImg />
-                </TouchableOpacity>
+                <View style={styles.priceContainer}>
+                  <Text style={styles.itemPrice}>{item.price}</Text>
+                  <TouchableOpacity onPress={() => handleQuantityChange(item.id, item.quantity - 1)} disabled={item.quantity <= 1}>
+                    <MinusImg />
+                  </TouchableOpacity>
+                  <View style={styles.quantityBox}>
+                    <Text></Text>
+                  </View>
+                  <TouchableOpacity onPress={() => handleQuantityChange(item.id, item.quantity + 1)}>
+                    <MoreImg />
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
-          </View>
-        ))}
+          ))
+        )}
         <Text style={styles.text1}>From Your WishList</Text>
         <WishList />
       </ScrollView>
@@ -224,10 +239,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   text: {
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: 'bold',
     marginLeft: 15,
-    marginTop: 60,
+    marginTop: 50,
   },
   quantityIndicator: {
     position: 'absolute',
@@ -248,7 +263,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     marginHorizontal: 20,
-    marginVertical: 10,
+    marginVertical: 5,
   },
   addressContainer: {
     flexDirection: 'row',
@@ -259,70 +274,62 @@ const styles = StyleSheet.create({
   },
   address: {
     fontSize: 16,
+    color: '#333',
     flex: 1,
-    flexWrap: 'wrap',
   },
   editButton: {
-    padding: 10,
+    marginLeft: 10,
   },
   itemContainer: {
     flexDirection: 'row',
-    marginVertical: 10,
-    backgroundColor: 'white',
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    marginBottom: 20,
   },
   itemImage: {
     width: 100,
     height: 100,
-    borderTopLeftRadius: 10,
-    borderBottomLeftRadius: 10,
+    borderRadius: 10,
   },
   itemDetails: {
     flex: 1,
-    padding: 10,
-    justifyContent: 'space-between',
+    marginLeft: 10,
   },
   itemText: {
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: 'bold',
   },
   colorSizeContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginVertical: 5,
   },
   priceContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    marginVertical: 10,
   },
   itemPrice: {
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: 'bold',
+    flex: 1,
   },
   quantityBox: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: Colors.GRAY,
+    borderRadius: 5,
+    padding: 5,
+    marginHorizontal: 10,
   },
   text1: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
-    marginHorizontal: 20,
+    marginLeft: 20,
     marginVertical: 10,
   },
   checkoutContainer: {
-    backgroundColor: 'white',
-    padding: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    borderTopColor: Colors.GRAY,
+    padding: 20,
     borderTopWidth: 1,
+    borderTopColor: Colors.GRAY,
   },
   totalText: {
     fontSize: 16,
@@ -330,12 +337,23 @@ const styles = StyleSheet.create({
   },
   checkoutButton: {
     backgroundColor: Colors.PRIMARY,
+    padding: 10,
     borderRadius: 5,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
   },
   checkoutButtonText: {
     color: 'white',
+    fontSize: 16,
     fontWeight: 'bold',
+  },
+  emptyCartContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 50,
+    marginBottom:50
+  },
+  emptyCartText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: Colors.GRAY,
   },
 });
