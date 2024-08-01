@@ -21,6 +21,7 @@ export default function ShopScreen() {
     }, [userId])
   );
 
+  
   useEffect(() => {
     if (userId) {
       fetchCartItems(userId);
