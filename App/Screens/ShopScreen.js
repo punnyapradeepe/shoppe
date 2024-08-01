@@ -18,7 +18,7 @@ export default function ShopScreen() {
   useFocusEffect(
     React.useCallback(() => {
       fetchUserId(userId);
-    }, [])
+    }, [userId])
   );
 
   useEffect(() => {
