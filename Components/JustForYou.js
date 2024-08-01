@@ -36,7 +36,7 @@ const JustForYou = () => {
                 <Image source={getImageSource(item.image)} style={styles.image} />
               </View>
               <Text style={styles.itemText}>{item.title}</Text>
-              <Text style={styles.itemPrice}>{item.price}</Text>
+              <Text style={styles.itemPrice}>{item.price}</Text> 
             </TouchableOpacity>
           ))}
         </View>

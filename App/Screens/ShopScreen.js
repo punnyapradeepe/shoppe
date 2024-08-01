@@ -3,28 +3,29 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, TextInput } from 'react-native';
 import WishList from '../../Components/WishList';
 import Colors from '../Utils/Colors';
-import { EditBtn, MinusImg, MoreImg } from '../Utils/SvgIcons';
-import CartItems from './../../Components/CartItems';
-import { useNavigation } from '@react-navigation/native';
-import Modal from 'react-native-modal';
+import { DeleteBtn, EditBtn, MinusImg, MoreImg } from '../Utils/SvgIcons';
 import { Ionicons } from '@expo/vector-icons';
-import imageMapping from './../../Components/imageMapping'; 
-import { useFocusEffect } from '@react-navigation/native';
-
-
+import imageMapping from './../../Components/imageMapping';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import Modal from 'react-native-modal';
 
 export default function ShopScreen() {
   const navigation = useNavigation();
-  const [totalQuantity, setTotalQuantity] = useState(0);
-  const [totalPrice, setTotalPrice] = useState(0);
   const [cartItems, setCartItems] = useState([]);
   const [userId, setUserId] = useState(null);
+  const [total, setTotal] = useState(0);
+
   useFocusEffect(
     React.useCallback(() => {
-      fetchCartItems(userId); 
-
-    }, [userId])
+      fetchUserId();
+    }, [])
   );
+
+  useEffect(() => {
+    if (userId) {
+      fetchCartItems(userId);
+    }
+  }, [userId]);
 
   const fetchUserId = async () => {
     try {
@@ -34,51 +35,53 @@ export default function ShopScreen() {
       console.error('Failed to fetch user ID from AsyncStorage:', error);
     }
   };
+;
 
+  
   const fetchCartItems = async (userId) => {
     try {
       const response = await fetch('http://192.168.1.40:5000/cart');
       const data = await response.json();
       const filteredItems = data.filter(item => item.userId === userId);
-      console.log('Filtered Cart Items:', filteredItems);
-      setCartItems(filteredItems);
-      updateTotalQuantityAndPrice(filteredItems);
+      
+      const updatedItems = [];
+      filteredItems.forEach(item => {
+        const existingItem = updatedItems.find(cartItem => cartItem.id === item.id);
+        if (existingItem) {
+          existingItem.quantity += 1;
+        } else {
+          updatedItems.push({ ...item, quantity: 1 });
+        }
+      });
+      
+      setCartItems(updatedItems);
+      calculateTotal(updatedItems);
     } catch (error) {
       console.error('Failed to fetch or filter cart items:', error);
     }
   };
 
-  useEffect(() => {
-    fetchUserId(); 
-  }, []);
-
-  useEffect(() => {
-    if (userId) {
-      fetchCartItems(userId); 
-    }
-  }, [userId]);
-
-  const updateTotalQuantityAndPrice = (items) => {
-    const totalQty = items.reduce((sum, item) => sum + (item.quantity || 0), 0);
-    const totalPr = items.reduce((sum, item) => sum + (parseFloat(item.price.replace('$', '')) * (item.quantity || 0)), 0);
-    setTotalQuantity(totalQty);
-    setTotalPrice(totalPr.toFixed(2));
-  };
-
-  const handleQuantityChange = (itemId, newQuantity) => {
-    const updatedItems = cartItems.map(item => {
-      if (item.id === itemId) {
-        return { ...item, quantity: newQuantity };
-      }
-      return item;
+  const calculateTotal = (items) => {
+    let totalAmount = 0;
+    items.forEach(item => {
+      const priceString = item.price.replace(/[^0-9,]/g, '');
+      const priceNumber = parseFloat(priceString.replace(',', '.')); 
+      totalAmount += priceNumber * item.quantity;
     });
-
-    setCartItems(updatedItems);
-    updateTotalQuantityAndPrice(updatedItems);
+    setTotal(totalAmount);
   };
 
-  const navigateToShippingAddress = () => {
-    navigation.navigate('shippingAddr', { totalQuantity, totalPrice });
+  const handleQuantityChange = (itemId, change) => {
+    setCartItems(prevItems => {
+      const updatedItems = prevItems.map(item => {
+        if (item.id === itemId) {
+          return { ...item, quantity: Math.max(item.quantity + change, 1) };
+        }
+        return item;
+      });
+      calculateTotal(updatedItems);
+      return updatedItems;
+    });
   };
 
   const [address, setAddress] = useState('26, Duong So 2, Thao Dien Ward, An Phu, District 2, Ho Chi Minh city');
@@ -98,11 +101,11 @@ export default function ShopScreen() {
   return (
     <View style={styles.container}>
       <View>
-        <View style={{ display: 'flex', flexDirection: 'row', gap: 0 }}>
+        <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start' }}>
           <Ionicons name="arrow-back-sharp" size={24} color="black" onPress={() => navigation.goBack()} style={{ marginTop: 60, marginLeft: 20 }} />
           <Text style={styles.text}>Cart</Text>
           <View style={styles.quantityIndicator}>
-            <Text style={styles.quantityText}>{totalQuantity}</Text>
+            <Text style={styles.quantityText}>{cartItems.reduce((sum, item) => sum + item.quantity, 0)}</Text>
           </View>
         </View>
         <Text style={styles.subText}>Shipping Address</Text>
@@ -119,39 +122,42 @@ export default function ShopScreen() {
             <Text style={styles.emptyCartText}>Cart is empty!</Text>
           </View>
         ) : (
-          cartItems.map(item => (
-            <View style={styles.itemContainer} key={item.id}>
-              <Image source={imageMapping[item.image]} style={styles.itemImage} />
-              <View style={styles.itemDetails}>
-                <Text style={styles.itemText}>{item.title}</Text>
-                <View style={styles.colorSizeContainer}>
-                  <Text>{item.color}</Text>
-                  <Text>{item.size}</Text>
-                </View>
-                <View style={styles.priceContainer}>
-                  <Text style={styles.itemPrice}>{item.price}</Text>
-                  <TouchableOpacity onPress={() => handleQuantityChange(item.id, item.quantity - 1)} disabled={item.quantity <= 1}>
-                    <MinusImg />
-                  </TouchableOpacity>
-                  <View style={styles.quantityBox}>
-                    <Text></Text>
-                  </View>
-                  <TouchableOpacity onPress={() => handleQuantityChange(item.id, item.quantity + 1)}>
-                    <MoreImg />
-                  </TouchableOpacity>
-                </View>
-              </View>
+           cartItems.map(item => (
+      <View style={styles.itemContainer} key={item.id}>
+        <Image source={imageMapping[item.image]} style={styles.itemImage} />
+        <View style={styles.itemDetails}>
+          <Text style={styles.itemText}>{item.title}</Text>
+          <View style={styles.colorSizeContainer}>
+            <Text>{item.color}</Text>
+            <Text>{item.size}</Text>
+          </View>
+          <View style={styles.priceContainer}>
+            <Text style={styles.itemPrice}>{item.price}</Text>
+            <TouchableOpacity style={{ marginRight: 5 }} onPress={() => handleQuantityChange(item.id, -1)}>
+              <MinusImg />
+            </TouchableOpacity>
+            <View style={styles.quantityBox}>
+              <Text>{item.quantity}</Text>
             </View>
-          ))
-        )}
+            <TouchableOpacity style={{ marginLeft: 5, marginRight: 5 }} onPress={() => handleQuantityChange(item.id, 1)}>
+              <MoreImg />
+            </TouchableOpacity>
+            <TouchableOpacity style={{ marginLeft: 'auto' }} onPress={() => handleDeleteItem(item.id)}>
+              <DeleteBtn />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    ))
+  )}
         <Text style={styles.text1}>From Your WishList</Text>
         <WishList />
       </ScrollView>
       <View style={styles.checkoutContainer}>
-        <Text style={styles.totalText}>Total ${totalPrice}</Text>
+        <Text style={styles.totalText}>Total: ${total.toFixed(2)}</Text>
         <TouchableOpacity
           style={styles.checkoutButton}
-          onPress={navigateToShippingAddress}
+          onPress={() => navigation.navigate('shippingAddr')}
         >
           <Text style={styles.checkoutButtonText}>CheckOut</Text>
         </TouchableOpacity>
@@ -261,99 +267,119 @@ const styles = StyleSheet.create({
   },
   subText: {
     fontSize: 16,
-    fontWeight: '600',
-    marginHorizontal: 20,
-    marginVertical: 5,
+    fontWeight: 'bold',
+    marginTop: 20,
+    marginLeft: 20,
   },
   addressContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
     marginHorizontal: 20,
     marginVertical: 10,
   },
   address: {
-    fontSize: 16,
-    color: '#333',
     flex: 1,
+    fontSize: 16,
   },
   editButton: {
-    marginLeft: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+  },
+  emptyCartContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  emptyCartText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: Colors.GRAY,
   },
   itemContainer: {
     flexDirection: 'row',
-    marginBottom: 20,
+    marginVertical: 10,
+    padding: 10,
+    backgroundColor: Colors.WHITE,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 5,
   },
   itemImage: {
     width: 100,
     height: 100,
     borderRadius: 10,
   },
+
   itemDetails: {
     flex: 1,
-    marginLeft: 10,
+    marginLeft: 20,
   },
   itemText: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
+    marginBottom: 5,
   },
   colorSizeContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginBottom: 5,
   },
   priceContainer: {
     flexDirection: 'row',
+    justifyContent: 'flex-start',
     alignItems: 'center',
-    marginVertical: 10,
   },
   itemPrice: {
     fontSize: 16,
     fontWeight: 'bold',
-    flex: 1,
+    marginRight:20
   },
   quantityBox: {
-    borderWidth: 1,
-    borderColor: Colors.GRAY,
-    borderRadius: 5,
+    width:30,
+    height:30,
+    backgroundColor:'lightblue',
+    borderRadius: 99,
     padding: 5,
-    marginHorizontal: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  quantityTextInput: {
+    textAlign: 'center',
+    fontSize: 16,
+    padding: 0,
   },
   text1: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginLeft: 20,
-    marginVertical: 10,
+    marginTop: 20,
+    marginBottom: 10,
   },
   checkoutContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 20,
+    alignItems: 'center',
+    paddingVertical: 15,
+    paddingHorizontal: 20,
     borderTopWidth: 1,
-    borderTopColor: Colors.GRAY,
+    borderColor: Colors.GRAY,
   },
   totalText: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
   },
   checkoutButton: {
     backgroundColor: Colors.PRIMARY,
-    padding: 10,
     borderRadius: 5,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
   },
   checkoutButtonText: {
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
-  },
-  emptyCartContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 50,
-    marginBottom:50
-  },
-  emptyCartText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: Colors.GRAY,
   },
 });
