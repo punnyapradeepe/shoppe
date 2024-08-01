@@ -28,8 +28,8 @@ export default function SigninScreen() {
     try {
       const response = await fetch(url);
       const users = await response.json();
-console.log("users",users[0].id);
-await AsyncStorage.setItem('userid',users[0].id)
+      console.log("users",users[0].id);
+      await AsyncStorage.setItem('userid',users[0].id)
       if (users.length > 0) {
   
 

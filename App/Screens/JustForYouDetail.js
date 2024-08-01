@@ -9,6 +9,7 @@ import { useNavigation } from '@react-navigation/core';
 import imageMapping from './../../Components/imageMapping'; 
 import FlashSale from './../../Components/FlashSale';
 import JustForYou from '../../Components/JustForYou';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const JustForYouDetail = ({ route }) => {
   const { id } = route.params;
@@ -29,12 +30,38 @@ const JustForYouDetail = ({ route }) => {
     return imageMapping[imageName];
   };
 
-  const handleAddToCartPress = (product) => {
-    console.log('Product added to cart:', {
-      id: product.id,
-      title: product.title,
-      price: product.price
-    });
+  const handleAddToCartPress = async (product) => {
+    try {
+      const userId = await AsyncStorage.getItem('userid');
+      const productData = {
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        userId: userId 
+      };
+  
+    
+      console.log('Product added to cart:', productData);
+  
+     
+      const response = await fetch('http://192.168.1.40:5000/cart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(productData),
+      });
+  
+      if (!response.ok) {
+   
+        const errorDetails = await response.text();
+        console.error('Failed to add product to cart:', errorDetails);
+      } else {
+        console.log('Product successfully added to cart');
+      }
+    } catch (error) {
+      console.error('Error adding product to cart:', error);
+    }
   };
 
   if (!product) {
