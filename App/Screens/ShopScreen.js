@@ -16,7 +16,7 @@ export default function ShopScreen() {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    fetchUserId();
+    fetchUserId(userId);
   }, []);
 
   const fetchUserId = async () => {

@@ -1,65 +1,123 @@
+import React, { useEffect, useState } from 'react';
 import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import React from 'react';
 import Colors from '../App/Utils/Colors';
 import { AddBtn, DeleteBtn } from '../App/Utils/SvgIcons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import imageMapping from './../Components/imageMapping'; 
+import { useFocusEffect } from '@react-navigation/core';
 
 const WishList = () => {
-  const type = [
-    {
-      id: '1',
-      images: require('./../assets/Images/dr1.png'),
-      text: 'Lorem ipsum dolor sit amet \n consectetur.',
-      price: '$17,00',
-      color: 'Black',
-      size: 'M',
-    },
-    {
-      id: '2',
-      images: require('./../assets/Images/hb2.png'),
-      text: 'Lorem ipsum dolor sit amet \n consectetur.',
-      orgPrice: '$17,00',
-      price: '$12,00',
-      color: 'Red',
-      size: 'S',
-    },
-    {
-      id: '3',
-      images: require('./../assets/Images/db1.png'),
-      text: 'Lorem ipsum dolor sit amet \n consectetur.',
-      price: '$21,00',
-      color: 'Blue',
-      size: 'M',
-    },
-    {
-      id: '4',
-      images: require('./../assets/Images/dy1.png'),
-      text: 'Lorem ipsum dolor sit amet \n consectetur.',
-      price: '$15,00',
-      color: 'Black',
-      size: 'S',
-    },
-  ];
+  const [favorites, setFavorites] = useState([]);
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    const fetchUserId = async () => {
+      try {
+        const storedUserId = await AsyncStorage.getItem('userid');
+        setUserId(storedUserId);
+      } catch (error) {
+        console.error('Error fetching user ID:', error);
+      }
+    };
+
+    fetchUserId();
+  }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      if (userId) {
+        fetchFavorites(userId);
+      }
+    }, [userId])
+  );
+
+
+
+  const handleAddToCart = async (item) => {
+    try {
+      const response = await fetch(`http://192.168.1.40:5000/cart?userId=${userId}`);
+      const cartItems = await response.json();
+      const existingItem = cartItems.find(cartItem => cartItem.id === item.id);
+
+      if (existingItem) {
+        await fetch(`http://192.168.1.40:5000/cart/${existingItem.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            ...existingItem,
+            quantity: existingItem.quantity + 1,
+          }),
+        });
+      } else {
+        await fetch('http://192.168.1.40:5000/cart', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            userId,
+            ...item,
+            quantity: 1, 
+          }),
+        });
+      }
+
+      await fetch(`http://192.168.1.40:5000/favorites/${item.id}`, {
+        method: 'DELETE',
+      });
+
+      fetchFavorites(userId);
+    } catch (error) {
+      console.error('Error updating favorites and cart:', error);
+    }
+  };
+
+  const handleDelete = async (itemId) => {
+    try {
+      await fetch(`http://192.168.1.40:5000/favorites/${itemId}`, {
+        method: 'DELETE',
+      });
+
+      setFavorites(prevItems => prevItems.filter(item => item.id !== itemId));
+    } catch (error) {
+      console.error('Failed to delete favorite item:', error);
+    }
+  };
+
+  const fetchFavorites = async (userId) => {
+    try {
+      const response = await fetch(`http://192.168.1.40:5000/favorites?userId=${userId}`);
+      const data = await response.json();
+      setFavorites(data);
+    } catch (error) {
+      console.error('Error fetching favorites:', error);
+    }
+  };
+
+  const getImageSource = (imageName) => {
+    return imageMapping[imageName];
+  };
 
   const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
-      <Image source={item.images} style={styles.itemImage} />
+      <Image
+        source={getImageSource(item.image)} 
+        style={styles.itemImage} 
+      />
       <View style={styles.itemDetails}>
-        <Text style={styles.itemText}>{item.text}</Text>
+        <Text style={styles.itemText}>{item.title}</Text>
         <View style={styles.priceContainer}>
-          {item.orgPrice && <Text style={styles.orgPrice}>{item.orgPrice}</Text>}
+          {item.originalPrice && <Text style={styles.orgPrice}>{item.originalPrice}</Text>}
           <Text style={styles.itemPrice}>{item.price}</Text>
         </View>
         <View style={styles.colorSizeContainer}>
-          <Text style={styles.itemColor}>{item.color}</Text>
+          <Text style={styles.itemColor}>{item.category}</Text>
           <Text style={styles.itemSize}>{item.size}</Text>
           <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.addButton}>
+            <TouchableOpacity style={styles.addButton} onPress={() => handleAddToCart(item)}>
               <AddBtn />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.deleteButton}>
+            <TouchableOpacity style={{ marginLeft: 'auto' }} onPress={() => handleDelete(item.id)}>
               <DeleteBtn />
             </TouchableOpacity>
-            
           </View>
         </View>
       </View>
@@ -69,9 +127,9 @@ const WishList = () => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={type}
+        data={favorites}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
         contentContainerStyle={styles.flatList}
         showsVerticalScrollIndicator={false}
       />
@@ -158,14 +216,14 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
+    marginLeft:'auto',
     marginTop: 5,
   },
   deleteButton: {
-    marginLeft:'auto'
-   
+    marginLeft: 'auto',
   },
-  addButton:{
+  addButton: {
+    marginRight:60
   },
   flatList: {
     paddingBottom: 20,

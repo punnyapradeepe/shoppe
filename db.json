@@ -883,13 +883,14 @@
   ],
   "cart": [
     {
-      "id": "7",
+      "id": "8",
       "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$25,00",
-      "image": "img107.png",
-      "size": "M",
-      "userId": "e98f",
-      "quantity": 3
+      "price": "$20,00",
+      "image": "img108.png",
+      "size": "L",
+      "userId": "33f0",
+      "quantity": 2
     }
-  ]
+  ],
+  "favorites": []
 }

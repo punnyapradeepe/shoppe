@@ -14,7 +14,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const JustForYouDetail = ({ route }) => {
   const { id } = route.params;
   const navigation = useNavigation();
-  const [product, setProduct] = useState(null); 
+  const [product, setProduct] = useState(null);
 
   useEffect(() => {
     fetch(`http://192.168.1.40:5000/products/${id}`)
@@ -42,14 +42,12 @@ const JustForYouDetail = ({ route }) => {
         userId: userId,
         quantity: 1
       };
-  
-     
+
       const response = await fetch('http://192.168.1.40:5000/cart');
       const cartItems = await response.json();
       const existingItem = cartItems.find(item => item.id === product.id && item.userId === userId);
-  
+
       if (existingItem) {
-        
         await fetch(`http://192.168.1.40:5000/cart/${existingItem.id}`, {
           method: 'PUT',
           headers: {
@@ -61,7 +59,6 @@ const JustForYouDetail = ({ route }) => {
           }),
         });
       } else {
-        
         await fetch('http://192.168.1.40:5000/cart', {
           method: 'POST',
           headers: {
@@ -74,8 +71,37 @@ const JustForYouDetail = ({ route }) => {
       console.error('Failed to add or update cart item:', error);
     }
   };
-  
-  
+
+  const handleFavPress = async (product) => {
+    try {
+      const userId = await AsyncStorage.getItem('userid');
+      const productData = {
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        image: product.image,
+        size: product.size,
+        userId: userId,
+        quantity:1
+      };
+
+      const response = await fetch('http://192.168.1.40:5000/favorites');
+      const favoriteItems = await response.json();
+      const existingItem = favoriteItems.find(item => item.id === product.id && item.userId === userId);
+
+      if (!existingItem) {
+        await fetch('http://192.168.1.40:5000/favorites', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(productData),
+        });
+      }
+    } catch (error) {
+      console.error('Failed to add favorite item:', error);
+    }
+  };
 
   if (!product) {
     return (
@@ -90,7 +116,7 @@ const JustForYouDetail = ({ route }) => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={{marginLeft:20}}>
+        <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: 20 }}>
           <AntDesign name="arrowleft" size={30} color={Colors.TEXT} />
         </TouchableOpacity>
       </View>
@@ -152,7 +178,7 @@ const JustForYouDetail = ({ route }) => {
         <JustForYou/>
         <FlashSale/>
       </ScrollView>
-      <AddToCart product={product} onAddToCartPress={handleAddToCartPress} />
+      <AddToCart product={product} onAddToCartPress={handleAddToCartPress} onFavPress={handleFavPress} />
     </SafeAreaView>
   );
 };
