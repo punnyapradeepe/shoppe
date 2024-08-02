@@ -37,34 +37,45 @@ const JustForYouDetail = ({ route }) => {
         id: product.id,
         title: product.title,
         price: product.price,
-        image:product.image,
-        Size:product.size,
-        userId: userId 
+        image: product.image,
+        size: product.size,
+        userId: userId,
+        quantity: 1
       };
   
-    
-      console.log('Product added to cart:', productData);
-  
      
-      const response = await fetch('http://192.168.1.40:5000/cart', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(productData),
-      });
+      const response = await fetch('http://192.168.1.40:5000/cart');
+      const cartItems = await response.json();
+      const existingItem = cartItems.find(item => item.id === product.id && item.userId === userId);
   
-      if (!response.ok) {
-   
-        const errorDetails = await response.text();
-        console.error('Failed to add product to cart:', errorDetails);
+      if (existingItem) {
+        
+        await fetch(`http://192.168.1.40:5000/cart/${existingItem.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            ...existingItem,
+            quantity: existingItem.quantity + 1
+          }),
+        });
       } else {
-        console.log('Product successfully added to cart');
+        
+        await fetch('http://192.168.1.40:5000/cart', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(productData),
+        });
       }
     } catch (error) {
-      console.error('Error adding product to cart:', error);
+      console.error('Failed to add or update cart item:', error);
     }
   };
+  
+  
 
   if (!product) {
     return (

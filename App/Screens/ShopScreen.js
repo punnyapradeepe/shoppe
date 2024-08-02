@@ -15,7 +15,6 @@ export default function ShopScreen() {
   const [userId, setUserId] = useState(null);
   const [total, setTotal] = useState(0);
 
-
   useEffect(() => {
     fetchUserId();
   }, []);
@@ -28,7 +27,6 @@ export default function ShopScreen() {
       console.error('Failed to fetch user ID from AsyncStorage:', error);
     }
   };
-
 
   useFocusEffect(
     React.useCallback(() => {
@@ -43,19 +41,10 @@ export default function ShopScreen() {
       const response = await fetch('http://192.168.1.40:5000/cart');
       const data = await response.json();
       const filteredItems = data.filter(item => item.userId === userId);
-
-      const updatedItems = [];
-      filteredItems.forEach(item => {
-        const existingItem = updatedItems.find(cartItem => cartItem.id === item.id);
-        if (existingItem) {
-          existingItem.quantity += 1;
-        } else {
-          updatedItems.push({ ...item, quantity: 1 });
-        }
-      });
-
-      setCartItems(updatedItems);
-      calculateTotal(updatedItems);
+      
+      setCartItems(filteredItems);
+      calculateTotal(filteredItems);
+  
     } catch (error) {
       console.error('Failed to fetch or filter cart items:', error);
     }
@@ -71,17 +60,49 @@ export default function ShopScreen() {
     setTotal(totalAmount);
   };
 
-  const handleQuantityChange = (itemId, change) => {
+  const handleQuantityChange = async (itemId, change) => {
     setCartItems(prevItems => {
       const updatedItems = prevItems.map(item => {
         if (item.id === itemId) {
-          return { ...item, quantity: Math.max(item.quantity + change, 1) };
+          const newQuantity = Math.max(item.quantity + change, 1);
+          const updatedItem = { ...item, quantity: newQuantity };
+
+          // Update the quantity in the server
+          fetch(`http://192.168.1.40:5000/cart/${itemId}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedItem),
+          })
+          .catch(error => console.error('Failed to update cart item:', error));
+          
+          return updatedItem;
         }
         return item;
       });
+
       calculateTotal(updatedItems);
       return updatedItems;
     });
+  };
+
+  const handleDelete = async (itemId) => {
+    try {
+      // Delete the item from the server
+      await fetch(`http://192.168.1.40:5000/cart/${itemId}`, {
+        method: 'DELETE',
+      });
+
+      // Remove the item from local state
+      setCartItems(prevItems => {
+        const updatedItems = prevItems.filter(item => item.id !== itemId);
+        calculateTotal(updatedItems);
+        return updatedItems;
+      });
+    } catch (error) {
+      console.error('Failed to delete cart item:', error);
+    }
   };
 
   const [address, setAddress] = useState('26, Duong So 2, Thao Dien Ward, An Phu, District 2, Ho Chi Minh city');
@@ -122,34 +143,34 @@ export default function ShopScreen() {
             <Text style={styles.emptyCartText}>Cart is empty!</Text>
           </View>
         ) : (
-           cartItems.map(item => (
-      <View style={styles.itemContainer} key={item.id}>
-        <Image source={imageMapping[item.image]} style={styles.itemImage} />
-        <View style={styles.itemDetails}>
-          <Text style={styles.itemText}>{item.title}</Text>
-          <View style={styles.colorSizeContainer}>
-            <Text>{item.color}</Text>
-            <Text>{item.size}</Text>
-          </View>
-          <View style={styles.priceContainer}>
-            <Text style={styles.itemPrice}>{item.price}</Text>
-            <TouchableOpacity style={{ marginRight: 5 }} onPress={() => handleQuantityChange(item.id, -1)}>
-              <MinusImg />
-            </TouchableOpacity>
-            <View style={styles.quantityBox}>
-              <Text>{item.quantity}</Text>
+          cartItems.map(item => (
+            <View style={styles.itemContainer} key={item.id}>
+              <Image source={imageMapping[item.image]} style={styles.itemImage} />
+              <View style={styles.itemDetails}>
+                <Text style={styles.itemText}>{item.title}</Text>
+                <View style={styles.colorSizeContainer}>
+                  <Text>{item.color}</Text>
+                  <Text>{item.size}</Text>
+                </View>
+                <View style={styles.priceContainer}>
+                  <Text style={styles.itemPrice}>{item.price}</Text>
+                  <TouchableOpacity style={{ marginRight: 5 }} onPress={() => handleQuantityChange(item.id, -1)}>
+                    <MinusImg />
+                  </TouchableOpacity>
+                  <View style={styles.quantityBox}>
+                    <Text>{item.quantity}</Text>
+                  </View>
+                  <TouchableOpacity style={{ marginLeft: 5, marginRight: 5 }} onPress={() => handleQuantityChange(item.id, 1)}>
+                    <MoreImg />
+                  </TouchableOpacity>
+                  <TouchableOpacity style={{ marginLeft: 'auto' }} onPress={() => handleDelete(item.id)}>
+                    <DeleteBtn />
+                  </TouchableOpacity>
+                </View>
+              </View>
             </View>
-            <TouchableOpacity style={{ marginLeft: 5, marginRight: 5 }} onPress={() => handleQuantityChange(item.id, 1)}>
-              <MoreImg />
-            </TouchableOpacity>
-            <TouchableOpacity style={{ marginLeft: 'auto' }} >
-              <DeleteBtn />
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-    ))
-  )}
+          ))
+        )}
         <Text style={styles.text1}>From Your WishList</Text>
         <WishList />
       </ScrollView>
@@ -252,8 +273,8 @@ const styles = StyleSheet.create({
   },
   quantityIndicator: {
     position: 'absolute',
-    right: 20,
-    top: 60,
+    right: 250,
+    top: 55,
     backgroundColor: Colors.PRIMARY,
     borderRadius: 50,
     width: 30,
@@ -319,14 +340,13 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   itemText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 5,
+    fontSize: 14,
+   
+  
   },
   colorSizeContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 5,
+
+    
   },
   priceContainer: {
     flexDirection: 'row',
