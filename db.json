@@ -890,7 +890,35 @@
       "size": "L",
       "userId": "33f0",
       "quantity": 2
+    },
+    {
+      "id": "3",
+      "userId": "33f0",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$21,00",
+      "image": "img103.png",
+      "size": "L",
+      "quantity": 1
+    },
+    {
+      "id": "1",
+      "userId": "33f0",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$17,00",
+      "image": "img101.png",
+      "size": "S",
+      "quantity": 1
     }
   ],
-  "favorites": []
+  "favorites": [
+    {
+      "id": "61",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$20,00",
+      "image": "img161.png",
+      "size": "S",
+      "userId": "33f0",
+      "quantity": 1
+    }
+  ]
 }
