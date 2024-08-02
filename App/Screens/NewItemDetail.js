@@ -9,6 +9,7 @@ import JustForYou from '../../Components/JustForYou';
 import { EllipsImg, Share, StarImgClr, StarImgLayout } from '../Utils/SvgIcons';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/core';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { width } = Dimensions.get('window');
 
@@ -16,6 +17,7 @@ const NewItemDetail = ({ route }) => {
   const navigation = useNavigation();
   const { item } = route.params;
   const [activeIndex, setActiveIndex] = useState(0);
+  const [product, setProduct] = useState(null); 
 
   const renderItem = ({ item }) => (
     <Image source={item} style={styles.image} />
@@ -26,7 +28,65 @@ const NewItemDetail = ({ route }) => {
     const index = Math.floor(event.nativeEvent.contentOffset.x / slideSize);
     setActiveIndex(index);
   };
+  const handleAddToCartPress = async (product) => {
+    try {
+      const userId = await AsyncStorage.getItem('userid');
+      const productData = {
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        image: product.image,
+        size: product.size,
+        userId: userId,
+        quantity: 1
+      };
+  
+     
+      const response = await fetch('http://192.168.1.40:5000/cart');
+      const cartItems = await response.json();
+      const existingItem = cartItems.find(item => item.id === product.id && item.userId === userId);
+  
+      if (existingItem) {
+        
+        await fetch(`http://192.168.1.40:5000/cart/${existingItem.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            ...existingItem,
+            quantity: existingItem.quantity + 1
+          }),
+        });
+      } else {
+        
+        await fetch('http://192.168.1.40:5000/cart', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(productData),
+        });
+      }
+    } catch (error) {
+      console.error('Failed to add or update cart item:', error);
+    }
 
+
+    
+  if (!product) {
+    return (
+      <SafeAreaView style={styles.safeArea}>
+        <ScrollView style={styles.container}>
+          <Text style={styles.loadingText}>Loading...</Text> 
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
+
+
+  
+  };
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={{ paddingBottom: 80 }}>
@@ -151,7 +211,7 @@ const NewItemDetail = ({ route }) => {
           <JustForYou/>
         </View>
       </ScrollView>
-      <AddToCart style={styles.addToCart} />
+      <AddToCart style={styles.addToCart} product={product} onAddToCartPress={handleAddToCartPress} />
     </SafeAreaView>
   );
 };

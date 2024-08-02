@@ -3,12 +3,12 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Colors from './../App/Utils/Colors';
 import { FavBtn } from '../App/Utils/SvgIcons';
 
-export default function AddToCart({ product, onAddToCartPress }) {
+export default function AddToCart({ product, onAddToCartPress ,onFavPress }) {
   return (
     <View style={styles.container}>
-      <View style={{ marginLeft: 20, marginTop: 7 }}>
+      <TouchableOpacity style={{ marginLeft: 20, marginTop: 7,}} onPress={() => onFavPress(product)}>
         <FavBtn />
-      </View>
+      </TouchableOpacity>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={() => onAddToCartPress(product)}>
           <Text style={styles.buttonText}>Add to Cart</Text>
