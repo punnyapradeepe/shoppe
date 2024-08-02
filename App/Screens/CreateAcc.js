@@ -5,9 +5,11 @@ import { ShowPassword } from '../Utils/SvgIcons';
 import { useNavigation } from '@react-navigation/core';
 
 const CreateAcc = () => {
+  const [name, setName] = useState('');  // Added state for name
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [nameError, setNameError] = useState('');  // Added error state for name
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [phoneNumberError, setPhoneNumberError] = useState('');
@@ -18,6 +20,13 @@ const CreateAcc = () => {
     let hasError = false;
 
     // Validate input fields
+    if (!name) {
+      setNameError('Name is required');
+      hasError = true;
+    } else {
+      setNameError('');
+    }
+
     if (!email) {
       setEmailError('Email is required');
       hasError = true;
@@ -50,7 +59,6 @@ const CreateAcc = () => {
     }
 
     try {
-    
       const checkEmailUrl = `http://192.168.1.40:5000/users?email=${encodeURIComponent(email)}`;
       const emailResponse = await fetch(checkEmailUrl);
       if (!emailResponse.ok) {
@@ -67,12 +75,11 @@ const CreateAcc = () => {
         setEmailExists(false);
       }
 
-     
       const createUserUrl = 'http://192.168.1.40:5000/users';
       const response = await fetch(createUserUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password, phoneNumber }),
+        body: JSON.stringify({ name, email, password, phoneNumber }), // Include name in request body
       });
 
       if (response.ok) {
@@ -98,6 +105,13 @@ const CreateAcc = () => {
           <Text style={styles.text}>Create</Text>
           <Text style={styles.text}>Account</Text>
           <Image style={styles.uploadPhoto} source={require('./../../assets/Images/Upload Photo.png')} />
+          <TextInput
+            placeholder='Name'
+            style={styles.textInput}
+            value={name}
+            onChangeText={(text) => setName(text)}
+          />
+          {nameError ? <Text style={styles.errorText}>{nameError}</Text> : null}
           <TextInput
             placeholder='Email'
             style={styles.textInput}

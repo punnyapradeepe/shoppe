@@ -879,26 +879,33 @@
       "email": "uthra@gmail.com",
       "password": "punnya",
       "phoneNumber": "8086658470"
+    },
+    {
+      "id": "e0cf",
+      "name": "Uthra Pradeep",
+      "email": "uthrapradeep1328@gmail.com",
+      "password": "uthra",
+      "phoneNumber": "8086658470"
     }
   ],
   "cart": [
     {
-      "id": "8",
+      "id": "4",
       "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$20,00",
-      "image": "img108.png",
-      "size": "L",
+      "price": "$15,00",
+      "image": "img104.png",
+      "size": "XS",
       "userId": "33f0",
-      "quantity": 2
+      "quantity": 1
     },
     {
-      "id": "3",
-      "userId": "33f0",
+      "id": "5",
       "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$21,00",
-      "image": "img103.png",
-      "size": "L",
-      "quantity": 1
+      "price": "$18,00",
+      "image": "img105.png",
+      "size": "XL",
+      "userId": "33f0",
+      "quantity": 2
     },
     {
       "id": "1",
@@ -908,16 +915,52 @@
       "image": "img101.png",
       "size": "S",
       "quantity": 1
-    }
-  ],
-  "favorites": [
+    },
     {
       "id": "61",
       "title": "Lorem ipsum dolor sit amet consectetur.",
       "price": "$20,00",
       "image": "img161.png",
       "size": "S",
+      "userId": "e0cf",
+      "quantity": 1
+    },
+    {
+      "id": "55",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$20,00",
+      "image": "img155.png",
+      "size": "M",
+      "userId": "e0cf",
+      "quantity": 1
+    },
+    {
+      "id": "68",
+      "userId": "e0cf",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$16,00",
+      "image": "img168.png",
+      "size": "XL",
+      "quantity": 2
+    }
+  ],
+  "favorites": [
+    {
+      "id": "3",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$21,00",
+      "image": "img103.png",
+      "size": "L",
       "userId": "33f0",
+      "quantity": 1
+    },
+    {
+      "id": "1",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$17,00",
+      "image": "img101.png",
+      "size": "S",
+      "userId": "e0cf",
       "quantity": 1
     }
   ]
