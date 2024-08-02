@@ -883,50 +883,18 @@
   ],
   "cart": [
     {
-      "id": "1",
+      "id": "19",
       "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$17,00",
-      "image": "img101.png",
-      "Size": "S",
-      "userId": "e98f"
-    },
-    {
-      "id": "3",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$21,00",
-      "image": "img103.png",
-      "Size": "L",
+      "price": "$30,00",
+      "image": "img119.png",
+      "Size": "XS",
       "userId": "33f0"
     },
     {
-      "id": "3",
+      "id": "17",
       "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$21,00",
-      "image": "img103.png",
-      "Size": "L",
-      "userId": "33f0"
-    },
-    {
-      "id": "3",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$21,00",
-      "image": "img103.png",
-      "Size": "L",
-      "userId": "33f0"
-    },
-    {
-      "id": "2",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$32,00",
-      "image": "img102.png",
-      "Size": "M",
-      "userId": "33f0"
-    },
-    {
-      "id": "2",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$32,00",
-      "image": "img102.png",
+      "price": "$25,00",
+      "image": "img117.png",
       "Size": "M",
       "userId": "33f0"
     },
@@ -936,31 +904,23 @@
       "price": "$16,00",
       "image": "img163.png",
       "Size": "L",
-      "userId": "33f0"
+      "userId": "6b35"
     },
     {
-      "id": "63",
+      "id": "9",
       "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$16,00",
-      "image": "img163.png",
-      "Size": "L",
-      "userId": "33f0"
+      "price": "$30,00",
+      "image": "img109.png",
+      "Size": "XS",
+      "userId": "6b35"
     },
     {
-      "id": "5",
+      "id": "9",
       "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$18,00",
-      "image": "img105.png",
-      "Size": "XL",
-      "userId": "33f0"
-    },
-    {
-      "id": "5",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$18,00",
-      "image": "img105.png",
-      "Size": "XL",
-      "userId": "33f0"
+      "price": "$30,00",
+      "image": "img109.png",
+      "Size": "XS",
+      "userId": "6b35"
     }
   ]
 }

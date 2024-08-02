@@ -15,18 +15,10 @@ export default function ShopScreen() {
   const [userId, setUserId] = useState(null);
   const [total, setTotal] = useState(0);
 
-  useFocusEffect(
-    React.useCallback(() => {
-      fetchCartItems(userId);
-    }, [userId])
-  );
 
-  
   useEffect(() => {
-    if (userId) {
-      fetchCartItems(userId);
-    }
-  }, [userId]);
+    fetchUserId();
+  }, []);
 
   const fetchUserId = async () => {
     try {
@@ -36,15 +28,22 @@ export default function ShopScreen() {
       console.error('Failed to fetch user ID from AsyncStorage:', error);
     }
   };
-;
 
-  
+
+  useFocusEffect(
+    React.useCallback(() => {
+      if (userId) {
+        fetchCartItems(userId);
+      }
+    }, [userId])
+  );
+
   const fetchCartItems = async (userId) => {
     try {
       const response = await fetch('http://192.168.1.40:5000/cart');
       const data = await response.json();
       const filteredItems = data.filter(item => item.userId === userId);
-      
+
       const updatedItems = [];
       filteredItems.forEach(item => {
         const existingItem = updatedItems.find(cartItem => cartItem.id === item.id);
@@ -54,7 +53,7 @@ export default function ShopScreen() {
           updatedItems.push({ ...item, quantity: 1 });
         }
       });
-      
+
       setCartItems(updatedItems);
       calculateTotal(updatedItems);
     } catch (error) {
@@ -66,7 +65,7 @@ export default function ShopScreen() {
     let totalAmount = 0;
     items.forEach(item => {
       const priceString = item.price.replace(/[^0-9,]/g, '');
-      const priceNumber = parseFloat(priceString.replace(',', '.')); 
+      const priceNumber = parseFloat(priceString.replace(',', '.'));
       totalAmount += priceNumber * item.quantity;
     });
     setTotal(totalAmount);
@@ -143,7 +142,7 @@ export default function ShopScreen() {
             <TouchableOpacity style={{ marginLeft: 5, marginRight: 5 }} onPress={() => handleQuantityChange(item.id, 1)}>
               <MoreImg />
             </TouchableOpacity>
-            <TouchableOpacity style={{ marginLeft: 'auto' }} onPress={() => handleDeleteItem(item.id)}>
+            <TouchableOpacity style={{ marginLeft: 'auto' }} >
               <DeleteBtn />
             </TouchableOpacity>
           </View>
