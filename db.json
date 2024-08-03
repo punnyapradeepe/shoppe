@@ -888,7 +888,17 @@
       "phoneNumber": "8086658470"
     }
   ],
-  "cart": [],
+  "cart": [
+    {
+      "id": "4",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$15,00",
+      "image": "img104.png",
+      "size": "XS",
+      "userId": "33f0",
+      "quantity": 1
+    }
+  ],
   "favorites": [
     {
       "id": "70",
