@@ -140,6 +140,7 @@ export default function ShopScreen() {
       <ScrollView showsVerticalScrollIndicator={false} style={{ paddingLeft: 20, paddingRight: 20 }}>
         {cartItems.length === 0 ? (
           <View style={styles.emptyCartContainer}>
+             <Image source={require('./../../assets/Images/Logo.png')} />
             <Text style={styles.emptyCartText}>Cart is empty!</Text>
           </View>
         ) : (
@@ -171,7 +172,7 @@ export default function ShopScreen() {
             </View>
           ))
         )}
-        <Text style={styles.text1}>From Your WishList</Text>
+        <Text style={styles.text1}>From Your WishList !</Text>
         <WishList />
       </ScrollView>
       <View style={styles.checkoutContainer}>

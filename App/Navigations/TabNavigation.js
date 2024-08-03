@@ -56,8 +56,8 @@ const TabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name='Categories'
-        component={CategoriesScreen}
+        name='Categoriesstack'
+        component={CategoriesStack}
         options={{
           tabBarIcon: ({ color, size, focused }) => (
             <Document width={size} height={size} fill={focused ? 'black' : 'blue'} />
@@ -120,6 +120,13 @@ const ProfileScreenStack=()=>(
 <Stack.Screen name="paymentMethod" component={PaymentMethod} options={{ headerShown:false}}/>
 <Stack.Screen name="Shipping" component={Shipping} options={{ headerShown:false}}/>
 <Stack.Screen name="myprofile" component={MyProfile} options={{ headerShown:false}}/>
+
+</Stack.Navigator>
+)
+
+const CategoriesStack=()=>(
+  <Stack.Navigator initialRouteName="Categoriesstack">
+<Stack.Screen name="allc" component={AllCategories} options={{ headerShown:false}}/>
 
 </Stack.Navigator>
 )

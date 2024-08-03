@@ -20,7 +20,7 @@ export default function MyProfile() {
         const userId = await AsyncStorage.getItem('userid');
         console.log('Retrieved userId from AsyncStorage:', userId);
         if (userId) {
-          const response = await fetch(`http://192.168.1.40:5000/users/${userId}`); // Update with your JSON server URL
+          const response = await fetch(`http://192.168.1.40:5000/users/${userId}`); 
           const data = await response.json();
           console.log('Fetched user data:', data);
           setUser(data);

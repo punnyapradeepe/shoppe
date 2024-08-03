@@ -43,7 +43,14 @@ const AllCategories = () => {
   ];
 
   const categoryTexts = ['Clothing', 'Shoes', 'Bags', 'Watch', 'Hoodies', 'Jeans'];
-
+  const categories = [
+    { text: 'Clothing', category: 'clothing' },
+    { text: 'Shoes', category: 'shoes' },
+    { text: 'Bags', category: 'bag' },
+    { text: 'Watch', category: 'watch' },
+    { text: 'Hoodie', category: 'hoodie' },
+    { text: 'Jens', category: 'jeans' },
+  ];
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -74,7 +81,11 @@ const AllCategories = () => {
           {Array.from({ length: 3 }).map((_, rowIndex) => (
             <View key={rowIndex} style={styles.row}>
               {Array.from({ length: 2 }).map((_, colIndex) => (
-                <TouchableOpacity key={colIndex} style={styles.whiteBackground}>
+                <TouchableOpacity 
+                  key={colIndex} 
+                  style={styles.whiteBackground} 
+                  onPress={() => navigation.navigate('clothing', { category: categories[rowIndex * 2 + colIndex].category })}
+                  >
                   <View style={styles.imageGrid}>
                     {Array.from({ length: 4 }).map((_, imgIndex) => (
                       <Image
@@ -104,12 +115,7 @@ const AllCategories = () => {
         <NewItems />
         <FlashSale />
         <MostPopular />
-        <Text style={{
-    flex: 1,
-    fontWeight: 'bold',
-    fontSize: 25,
-    padding:10
-  }}>Just For You</Text>
+        <Text style={styles.justForYouText}>Just For You</Text>
         <JustForYou />
       </ScrollView>
     </SafeAreaView>
@@ -204,15 +210,13 @@ const styles = StyleSheet.create({
     width: '48%',
     resizeMode: 'cover',
     borderRadius: 10,
-    borderWidth:4,
-    borderColor:'white'
-
+    borderWidth: 4,
+    borderColor: 'white'
   },
   categoryTextContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-   
   },
   categoryText: {
     fontSize: 16,
@@ -222,6 +226,12 @@ const styles = StyleSheet.create({
   categoryIcons: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  justForYouText: {
+    flex: 1,
+    fontWeight: 'bold',
+    fontSize: 25,
+    padding: 10,
   },
 });
 

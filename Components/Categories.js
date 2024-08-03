@@ -30,7 +30,7 @@ const Categories = () => {
   const categories = [
     { text: 'Clothing', category: 'clothing' },
     { text: 'Shoes', category: 'shoes' },
-    { text: 'Bags', category: 'bags' },
+    { text: 'Bags', category: 'bag' },
     { text: 'Watch', category: 'watch' },
   ];
 

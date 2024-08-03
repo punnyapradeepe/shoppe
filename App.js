@@ -58,7 +58,7 @@ export default function App() {
         <Stack.Screen name="home" component={HomeScreen} options={{ headerShown: false }}/>
         <Stack.Screen name="activity" component={TabNavigation} options={{ headerShown: false }}/>
         <Stack.Screen name="Categories" component={Categories} options={{ headerShown: false }}/>
-        <Stack.Screen name="allc" component={AllCategories} options={{ headerShown: false }}/>
+        <Stack.Screen name="allc" component={TabNavigation} options={{ headerShown: false }}/>
         <Stack.Screen name="NewItemDetail" component={TabNavigation} options={{ headerShown: false }}/>
         <Stack.Screen name="shippingAddr" component={TabNavigation} options={{ headerShown: false }}/>
         <Stack.Screen name="Shipping" component={TabNavigation} options={{ headerShown: false }}/>

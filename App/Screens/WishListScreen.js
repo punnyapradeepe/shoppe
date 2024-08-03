@@ -16,15 +16,17 @@ const WishListScreen = () => {
         <Ionicons name="arrow-back-sharp" size={24} color="black" onPress={() => navigation.goBack()} />
         <Text style={styles.text}>Wishlist</Text>
       </View>
-      
-      <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollView}>
-        <View style={styles.subHeader}>
+      <View style={styles.subHeader}>
           <Text style={styles.subText}>Recently viewed</Text>
           <TouchableOpacity style={styles.circleButton}>
             <AntDesign name="arrowright" size={24} color={Colors.WHITE} />
           </TouchableOpacity>
         </View>
+        <View>
         <RecentlyViewed />
+        </View>
+      <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollView}>
+       
         
         <View style={styles.subHeader}>
           <Text style={styles.subText}>Wishlist Items</Text>
@@ -46,7 +48,7 @@ const styles = StyleSheet.create({
     padding: 20
   },
   header: {
-
+paddingTop:20,
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 20,
@@ -66,7 +68,7 @@ const styles = StyleSheet.create({
   },
   subText: {
     fontWeight: 'bold',
-    fontSize: 25,
+    fontSize: 20,
   },
   circleButton: {
     width: 30,

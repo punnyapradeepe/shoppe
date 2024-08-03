@@ -31,8 +31,6 @@ const WishList = () => {
     }, [userId])
   );
 
-
-
   const handleAddToCart = async (item) => {
     try {
       const response = await fetch(`http://192.168.1.40:5000/cart?userId=${userId}`);
@@ -126,13 +124,17 @@ const WishList = () => {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={favorites}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
-        contentContainerStyle={styles.flatList}
-        showsVerticalScrollIndicator={false}
-      />
+      {favorites.length === 0 ? (
+        <Text style={styles.noItemsText}>No items in wishlist !</Text>
+      ) : (
+        <FlatList
+          data={favorites}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id.toString()}
+          contentContainerStyle={styles.flatList}
+          showsVerticalScrollIndicator={false}
+        />
+      )}
     </View>
   );
 };
@@ -216,16 +218,22 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'row',
-    marginLeft:'auto',
+    marginLeft: 'auto',
     marginTop: 5,
   },
-  deleteButton: {
-    marginLeft: 'auto',
-  },
   addButton: {
-    marginRight:60
+    marginRight: 60,
   },
   flatList: {
     paddingBottom: 20,
+  },
+  noItemsText: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: 18,
+    color: Colors.GRAY,
+    textAlign: 'center',
+    marginTop: 20,
   },
 });

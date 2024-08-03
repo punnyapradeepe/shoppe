@@ -49,7 +49,7 @@ export default function SigninScreen() {
       <View style={{ flex: 1 }}>
         <View style={{ position: 'relative' }}>
           <Image
-            style={{ position: 'absolute', resizeMode: 'contain' }}
+            style={{ position: 'absolute', resizeMode: 'contain',marginBottom:'auto' }}
             source={require('./../../assets/Images/bubble 02.png')}
           />
           <Image
