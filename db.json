@@ -847,6 +847,127 @@
       "type": "flashsale",
       "row": 3,
       "size": "XL"
+    },
+    {
+      "id": "713",
+      "image": "img53.png",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$19.00",
+      "category": "newitem",
+      "gender": "women",
+      "type": "newitem",
+      "row": 3,
+      "size": "L"
+    },
+    {
+      "id": "714",
+      "image": "img54.png",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$20.00",
+      "category": "newitem",
+      "gender": "women",
+      "type": "newitem",
+      "row": 3,
+      "size": "M"
+    },
+    {
+      "id": "715",
+      "image": "img55.png",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$21.00",
+      "category": "newitem",
+      "gender": "women",
+      "type": "newitem",
+      "row": 3,
+      "size": "S"
+    },
+    {
+      "id": "716",
+      "image": "img56.png",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$22.00",
+      "category": "newitem",
+      "gender": "women",
+      "type": "newitem",
+      "row": 3,
+      "size": "XL"
+    },
+    {
+      "id": "717",
+      "image": "img57.png",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$23.00",
+      "category": "newitem",
+      "gender": "women",
+      "type": "newitem",
+      "row": 3,
+      "size": "XXL"
+    },
+    {
+      "id": "718",
+      "image": "img58.png",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$24.00",
+      "category": "newitem",
+      "gender": "women",
+      "type": "newitem",
+      "row": 3,
+      "size": "L"
+    },
+    {
+      "id": "719",
+      "image": "img59.png",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$25.00",
+      "category": "newitem",
+      "gender": "women",
+      "type": "newitem",
+      "row": 3,
+      "size": "M"
+    },
+    {
+      "id": "720",
+      "image": "img60.png",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$26.00",
+      "category": "newitem",
+      "gender": "women",
+      "type": "newitem",
+      "row": 3,
+      "size": "S"
+    },
+    {
+      "id": "721",
+      "image": "img61.png",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$27.00",
+      "category": "newitem",
+      "gender": "women",
+      "type": "newitem",
+      "row": 3,
+      "size": "XL"
+    },
+    {
+      "id": "722",
+      "image": "img62.png",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$28.00",
+      "category": "newitem",
+      "gender": "women",
+      "type": "newitem",
+      "row": 3,
+      "size": "XXL"
+    },
+    {
+      "id": "723",
+      "image": "img63.png",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$29.00",
+      "category": "newitem",
+      "gender": "women",
+      "type": "newitem",
+      "row": 3,
+      "size": "L"
     }
   ],
   "users": [
@@ -874,15 +995,6 @@
       "size": "S",
       "userId": "33f0",
       "quantity": 2
-    },
-    {
-      "id": "61",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$20,00",
-      "image": "img161.png",
-      "size": "S",
-      "userId": "33f0",
-      "quantity": 1
     }
   ],
   "favorites": [
