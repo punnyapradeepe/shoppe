@@ -888,79 +888,15 @@
       "phoneNumber": "8086658470"
     }
   ],
-  "cart": [
-    {
-      "id": "4",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$15,00",
-      "image": "img104.png",
-      "size": "XS",
-      "userId": "33f0",
-      "quantity": 1
-    },
-    {
-      "id": "5",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$18,00",
-      "image": "img105.png",
-      "size": "XL",
-      "userId": "33f0",
-      "quantity": 2
-    },
-    {
-      "id": "1",
-      "userId": "33f0",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$17,00",
-      "image": "img101.png",
-      "size": "S",
-      "quantity": 1
-    },
-    {
-      "id": "61",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$20,00",
-      "image": "img161.png",
-      "size": "S",
-      "userId": "e0cf",
-      "quantity": 1
-    },
-    {
-      "id": "55",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$20,00",
-      "image": "img155.png",
-      "size": "M",
-      "userId": "e0cf",
-      "quantity": 1
-    },
-    {
-      "id": "68",
-      "userId": "e0cf",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$16,00",
-      "image": "img168.png",
-      "size": "XL",
-      "quantity": 2
-    }
-  ],
+  "cart": [],
   "favorites": [
     {
-      "id": "3",
+      "id": "70",
       "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$21,00",
-      "image": "img103.png",
-      "size": "L",
+      "price": "$15,00",
+      "image": "img170.png",
+      "size": "M",
       "userId": "33f0",
-      "quantity": 1
-    },
-    {
-      "id": "1",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$17,00",
-      "image": "img101.png",
-      "size": "S",
-      "userId": "e0cf",
       "quantity": 1
     }
   ]
