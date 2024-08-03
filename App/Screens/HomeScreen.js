@@ -105,7 +105,7 @@ export default function HomeScreen() {
         ))}
       </View>
       
-          <TouchableOpacity onPress={() => navigation.goBack()} style={{alignSelf:'center',marginBottom:40}}>
+          <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')} style={{alignSelf:'center',marginBottom:40}}>
           <Text>Cancel</Text>
           </TouchableOpacity>
         
