@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import RecentlyViewed from './../../Components/RecentlyViwed';
 import JustForYou from '../../Components/JustForYou';
@@ -6,6 +6,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/core';
 import imageMapping from './../../Components/imageMapping';
 import { AntDesign } from '@expo/vector-icons';
+import AddToCart from '../../Components/AddToCart';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const MostPopularDetail = ({ route }) => {
@@ -24,15 +26,96 @@ const MostPopularDetail = ({ route }) => {
   }, [id]);
 
   const getImageSource = (imageName) => {
-    return imageMapping[imageName]; 
+    return imageMapping[imageName];
+  };
+
+  const handleAddToCartPress = async (product) => {
+    try {
+      const userId = await AsyncStorage.getItem('userid');
+      const productData = {
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        image: product.image,
+        size: product.size,
+        userId: userId,
+        quantity: 1
+      };
+
+      const response = await fetch('http://192.168.1.40:5000/cart');
+      const cartItems = await response.json();
+      const existingItem = cartItems.find(item => item.id === product.id && item.userId === userId);
+
+      if (existingItem) {
+        await fetch(`http://192.168.1.40:5000/cart/${existingItem.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            ...existingItem,
+            quantity: existingItem.quantity + 1
+          }),
+        });
+      } else {
+        await fetch('http://192.168.1.40:5000/cart', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(productData),
+        });
+      }
+    } catch (error) {
+      console.error('Failed to add or update cart item:', error);
+    }
+  };
+
+  const handleFavPress = async (product) => {
+    try {
+      const userId = await AsyncStorage.getItem('userid');
+      const productData = {
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        image: product.image,
+        size: product.size,
+        userId: userId,
+        quantity:1
+      };
+
+      const response = await fetch('http://192.168.1.40:5000/favorites');
+      const favoriteItems = await response.json();
+      const existingItem = favoriteItems.find(item => item.id === product.id && item.userId === userId);
+
+      if (!existingItem) {
+        await fetch('http://192.168.1.40:5000/favorites', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(productData),
+        });
+      }
+    } catch (error) {
+      console.error('Failed to add favorite item:', error);
+    }
   };
 
   if (!product) {
-    return <View style={styles.container}><Text>Loading...</Text></View>;
+    return (
+      <SafeAreaView style={styles.safeArea}>
+        <ScrollView style={styles.container}>
+          <Text style={styles.loadingText}>Loading...</Text> 
+        </ScrollView>
+      </SafeAreaView>
+    );
   }
 
+
   return (
-    <View style={{ flex: 1, paddingTop: 30 }}>
+   
+    <SafeAreaView style={{ flex: 1, paddingTop: 30 }}>
       <ScrollView style={styles.container}>
         <Ionicons name="arrow-back" size={24} color="black" onPress={() => navigation.goBack()} />
         <Image source={getImageSource(product.image)} style={styles.image} />
@@ -68,7 +151,9 @@ const MostPopularDetail = ({ route }) => {
         <JustForYou />
     
       </ScrollView>
-    </View>
+      <AddToCart product={product} onAddToCartPress={handleAddToCartPress} onFavPress={handleFavPress} />
+
+      </SafeAreaView>
   );
 };
 

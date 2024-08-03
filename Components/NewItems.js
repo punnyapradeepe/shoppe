@@ -8,25 +8,7 @@ const NewItems = () => {
   const navigation = useNavigation();
 
   const type = [
-    {
-      id: '1',
-      images: [
-        require('./../assets/Images/j4.png'),
-
-      ],
-      text: 'Lorem ipsum dolor sit amet consectetur.',
-      price: '$15,00',
-      Dis: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.',
-      color: 'Black',
-      size: 'S',
-      variations: [
-        require('./../assets/Images/j1.png'),
-        require('./../assets/Images/j2.png'),
-      ],
-      Material: [
-        'Cotton 50%', 'Nylon 50%'
-      ]
-    },
+    
 
     {
       id: '4',
@@ -67,6 +49,26 @@ const NewItems = () => {
         'Cotton 95%', 'Nylon 5%'
       ]
     },
+    {
+      id: '1',
+      images: [
+        require('./../assets/Images/j4.png'),
+
+      ],
+      text: 'Lorem ipsum dolor sit amet consectetur.',
+      price: '$15,00',
+      Dis: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.',
+      color: 'Black',
+      size: 'S',
+      variations: [
+        require('./../assets/Images/j1.png'),
+        require('./../assets/Images/j2.png'),
+      ],
+      Material: [
+        'Cotton 50%', 'Nylon 50%'
+      ]
+    },
+  
     {
       id: '3',
       images: [

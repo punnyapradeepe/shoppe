@@ -22,6 +22,7 @@ import MostPopularDetail from '../Screens/MostPopularDetail';
 import JustForYou from '../../Components/JustForYou';
 import JustForYouDetail from '../Screens/JustForYouDetail';
 import clothingScreen from '../Screens/clothingScreen';
+import NewItemDetail from '../Screens/NewItemDetail';
 
 const Tab = createBottomTabNavigator();
 const Stack= createNativeStackNavigator();
@@ -98,6 +99,7 @@ const ActivityStack=()=>(
 <Stack.Screen name="justforyou" component={JustForYou} options={{ headerShown:false}}/>
 <Stack.Screen name="justforyoudetail" component={JustForYouDetail} options={{ headerShown:false}}/>
 <Stack.Screen name="clothing" component={clothingScreen} options={{ headerShown:false}}/>
+<Stack.Screen name="NewItemDetail" component={NewItemDetail} options={{ headerShown:false}}/>
 
 
 </Stack.Navigator>

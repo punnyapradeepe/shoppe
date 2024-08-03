@@ -863,10 +863,11 @@
       "phoneNumber": "9037111588"
     },
     {
-      "id": "33f0",
+      "name": "punnyapradeep",
       "email": "punnya123@gmail.com",
+      "phoneNumber": "8086658470",
       "password": "punnya",
-      "phoneNumber": "8086658470"
+      "id": "33f0"
     },
     {
       "id": "e98f",
@@ -890,22 +891,31 @@
   ],
   "cart": [
     {
-      "id": "4",
+      "id": "9",
       "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$15,00",
-      "image": "img104.png",
+      "price": "$30,00",
+      "image": "img109.png",
       "size": "XS",
+      "userId": "33f0",
+      "quantity": 1
+    },
+    {
+      "id": "3",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$21,00",
+      "image": "img103.png",
+      "size": "L",
       "userId": "33f0",
       "quantity": 1
     }
   ],
   "favorites": [
     {
-      "id": "70",
+      "id": "1",
       "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$15,00",
-      "image": "img170.png",
-      "size": "M",
+      "price": "$17,00",
+      "image": "img101.png",
+      "size": "S",
       "userId": "33f0",
       "quantity": 1
     }
