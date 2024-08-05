@@ -8,10 +8,141 @@ import { useNavigation } from '@react-navigation/core';
 
 const PaymentScreen = () => {
   const navigation= useNavigation();
-  
+  const [selectedShipping, setSelectedShipping] = useState('Standard');
+  const [address, setAddress] = useState('26, Duong So 2, Thao Dien Ward, An Phu, District 2, Ho Chi Minh city');
+  const [info, setInfo] = useState('punnyapradeep1328@gmail.com');
+  const [isAddressModalVisible, setAddressModalVisible] = useState(false);
+  const [isInfoModalVisible, setInfoModalVisible] = useState(false);
+  const [tempAddress, setTempAddress] = useState(address);
+  const [tempInfo, setTempInfo] = useState(info);
+  const [voucherCode, setVoucherCode] = useState('');
+  const [isVoucherModalVisible, 
+  setVoucherModalVisible] = useState(false);
+  const [totalAmount, setTotalAmount] = useState('29.00');
+  const [cardNumber, setCardNumber] = useState(['', '', '', '']);
+const [cardHolderName, setCardHolderName] = useState('');
+const [expiryDate, setExpiryDate] = useState('');
 
 
+  const type = [
+    {
+      id: '1',
+      images: require('./../../assets/Images/img40.png'),
+      text: 'Lorem ipsum dolor sit amet \n consectetur.',
+      price: '$17.00',
+      color: 'Black',
+      size: 'M',
+    },
+    {
+      id: '2',
+      images: require('./../../assets/Images/img21.png'),
+      text: 'Lorem ipsum dolor sit amet \n consectetur.',
+      price: '$12.00',
+      size: 'S',
+    },
+  ];
+
+  const renderItem = ({ item }) => (
+    <View style={styles.itemContainer}>
   
+        <View style={styles.imageWrapper}>
+          <Image source={item.images} style={styles.itemImage} />
+          <View style={styles.badge}>
+            <Text style={{ fontWeight: 'bold' }}>1</Text>
+          </View>
+        </View>
+        <Text style={styles.itemText}>{item.text}</Text>
+        <Text style={styles.textPrice}>{item.price}</Text>
+    
+    </View>
+  );
+ // State to control modal visibility
+ const [isModalVisible, setIsModalVisible] = useState(false);
+ const [isEditable, setIsEditable] = useState(false);
+ 
+
+ const openModal = () => {
+  setIsModalVisible(true);
+};
+
+const closeModal = () => {
+  setIsModalVisible(false);
+};
+const toggleEditable = () => {
+  setIsEditable(!isEditable);
+};
+
+const saveDetails = () => {
+  setIsEditable(false);
+  closeModal();
+};
+
+  const handleSaveAddress = () => {
+    setAddress(tempAddress);
+    setAddressModalVisible(false);
+  };
+
+  const handleCancelAddress = () => {
+    setTempAddress(address);
+    setAddressModalVisible(false);
+  };
+
+  const handleSaveInfo = () => {
+    setInfo(tempInfo);
+    setInfoModalVisible(false);
+  };
+
+  const handleCancelInfo = () => {
+    setTempInfo(info);
+    setInfoModalVisible(false);
+  };
+
+  const handleApplyVoucher = () => {
+    // Update total amount to 5 as an example
+    setTotalAmount(27.55);
+    setVoucherModalVisible(false);
+  };
+  
+  const handleApplyVoucher2 = () => {
+    // Update total amount to 5 as an example
+    setTotalAmount(24.65);
+    setVoucherModalVisible(false);
+  };
+  
+
+  const handleCancelVoucher = () => {
+    setVoucherModalVisible(false);
+  };
+
+    useEffect(() => {
+    if (selectedShipping === 'Express') {
+      if (totalAmount === '29.00') {
+        setTotalAmount("37.00");
+      } else if (totalAmount === 27.55) {
+        setTotalAmount(35.55);
+      } else if (totalAmount === 24.65) {
+        setTotalAmount(32.65);
+      }
+    }
+    else{
+      if (totalAmount === '29.00') {
+        setTotalAmount('29.00');
+      } else if (totalAmount === 27.55) {
+        setTotalAmount(27.55);
+      } else if (totalAmount === 24.65) {
+        setTotalAmount(24.65);
+      }
+      else if (totalAmount === '37.00') {
+        setTotalAmount('29.00');
+      } else if (totalAmount === 35.55) {
+        setTotalAmount(27.55);
+      }else if (totalAmount === 32.65) {
+        setTotalAmount(24.65);
+      }
+    }
+  }, [selectedShipping, totalAmount]);
+  
+
   return (
     
     <View style={styles.container}>
@@ -450,7 +581,7 @@ const PaymentScreen = () => {
 
  
       <View style={styles.footer}>
-          <Text style={styles.totalText}>Total: $</Text>
+          <Text style={styles.totalText}>Total: ${totalAmount}</Text>
           <TouchableOpacity style={styles.checkoutButton}>
             <Text style={styles.checkoutButtonText}>Pay</Text>
           </TouchableOpacity>
