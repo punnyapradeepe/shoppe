@@ -101,10 +101,12 @@ const imageMapping = {
   'img174.png': require('./../assets/Images/Img8.png'),
   'img175.png': require('./../assets/Images/img175.png'),
   'img176.png': require('./../assets/Images/img176.png'),
-  // 'img177.png': require('./../assets/Images/img177.png'),
-  // 'img178.png': require('./../assets/Images/img178.png'),
-  // 'img179.png': require('./../assets/Images/img179.png'),
-  // 'img180.png': require('./../assets/Images/img180.png'),
+  'img190.png': require('./../assets/Images/img190.png'),
+  'img191.png': require('./../assets/Images/img191.png'),
+  'img192.png': require('./../assets/Images/img192.png'),
+  'img193.png': require('./../assets/Images/img193.png'),
+  'imgj1.png': require('./../assets/Images/imgj1.png'),
+
   };
   
   export default imageMapping;

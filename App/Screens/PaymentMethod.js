@@ -8,26 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function PaymentMethod() {
   const navigation= useNavigation();
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isEditModalVisible ,setIsEditModalVisible] = useState(false);
- const [isEditable, setIsEditable] = useState(false);
- const [cardNumber, setCardNumber] = useState(['', '', '', '']);
- const [cardHolderName, setCardHolderName] = useState('');
- const [expiryDate, setExpiryDate] = useState('');
 
-const [storedCardNumber, setStoredCardNumber] = useState(['* * * *', '* * * *', '* * * *', '1579']);
-  const [storedCardHolderName, setStoredCardHolderName] = useState('AMANDA MORGAN');
-  const [storedExpiryDate, setStoredExpiryDate] = useState('12/22');
-  const [backupCardNumber, setBackupCardNumber] = useState(['', '', '', '']);
-  const [backupCardHolderName, setBackupCardHolderName] = useState('');
-  const [backupExpiryDate, setBackupExpiryDate] = useState('');
-  const [isCardNumberEdited, setIsCardNumberEdited] = useState(false);
-  const [isCardHolderNameEdited, setIsCardHolderNameEdited] = useState(false);
-  const [isExpiryDateEdited, setIsExpiryDateEdited] = useState(false);
-  const [isDetailsSaved, setIsDetailsSaved] = useState(false);
-  const [hasChangesBeenSaved, setHasChangesBeenSaved] = useState(false); 
-  
-  
   const openModal = () => {
     if (!hasChangesBeenSaved) {
       setBackupCardNumber(storedCardNumber);

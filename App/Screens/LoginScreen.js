@@ -8,22 +8,20 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function LoginScreen() {
   const navigation = useNavigation();
 
-  useEffect(() => {
-    const checkUserId = async () => {
-      try {
-        const userId = await AsyncStorage.getItem('userid');
-        if (userId) {
-          // Navigate to Home screen if userId is found
-          navigation.navigate('home');
-        } else {
-          // Navigate to SignIn screen if userId is not found
-          navigation.navigate('signIn');
-        }
-      } catch (error) {
-        console.error('Error retrieving userId from AsyncStorage:', error);
+  const checkUserId = async () => {
+    try {
+      const userId = await AsyncStorage.getItem('userid');
+      if (userId) {
+        navigation.navigate('activity');
+      } else {
+        navigation.navigate('signIn');
       }
-    };
+    } catch (error) {
+      console.error('Error retrieving userId from AsyncStorage:', error);
+    }
+  };
 
+  useEffect(() => {
     checkUserId();
   }, [navigation]);
 
@@ -44,7 +42,7 @@ export default function LoginScreen() {
           </TouchableOpacity>
           <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingLeft: 50 }}>
             <Text style={{ padding: 10, marginLeft: '5%' }}>I already have an account</Text>
-            <TouchableOpacity style={styles.circleButton} onPress={() => navigation.navigate('signIn')}>
+            <TouchableOpacity style={styles.circleButton} onPress={checkUserId}>
               <AntDesign name="arrowright" size={24} color={Colors.WHITE} />
             </TouchableOpacity>
           </View>

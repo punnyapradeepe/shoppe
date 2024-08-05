@@ -4,6 +4,7 @@ import Colors from '../Utils/Colors';
 import { useNavigation } from '@react-navigation/core';
 import { HeartImg } from './../../App/Utils/SvgIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 export default function SigninScreen() {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -28,13 +29,12 @@ export default function SigninScreen() {
     try {
       const response = await fetch(url);
       const users = await response.json();
-      console.log("users",users[0].id);
-      await AsyncStorage.setItem('userid',users[0].id)
       if (users.length > 0) {
-  
-
         const userId = users[0].id;
-        navigation.navigate('password'); 
+        await AsyncStorage.setItem('userid', userId);
+        Alert.alert('Success', 'Logged in successfully', [
+          { text: 'OK', onPress: () => navigation.navigate('password') },
+        ]);
       } else {
         setEmailError('Email does not exist');
       }
@@ -49,7 +49,7 @@ export default function SigninScreen() {
       <View style={{ flex: 1 }}>
         <View style={{ position: 'relative' }}>
           <Image
-            style={{ position: 'absolute', resizeMode: 'contain',marginBottom:'auto' }}
+            style={{ position: 'absolute', resizeMode: 'contain', marginBottom: 'auto' }}
             source={require('./../../assets/Images/bubble 02.png')}
           />
           <Image
@@ -69,7 +69,6 @@ export default function SigninScreen() {
           source={require('./../../assets/Images/bubble 05.png')}
         />
       </View>
-
       <View style={{ position: 'absolute', top: 350, width: '90%', marginHorizontal: 20 }}>
         <Text style={styles.text}>Login</Text>
         <View style={{ display: 'flex', flexDirection: 'row' }}>

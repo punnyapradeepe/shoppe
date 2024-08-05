@@ -5,11 +5,11 @@ import { ShowPassword } from '../Utils/SvgIcons';
 import { useNavigation } from '@react-navigation/core';
 
 const CreateAcc = () => {
-  const [name, setName] = useState('');  // Added state for name
+  const [name, setName] = useState('');  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [nameError, setNameError] = useState('');  // Added error state for name
+  const [nameError, setNameError] = useState('');  
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [phoneNumberError, setPhoneNumberError] = useState('');
@@ -19,7 +19,7 @@ const CreateAcc = () => {
   const handleCreateAccount = async () => {
     let hasError = false;
 
-    // Validate input fields
+    
     if (!name) {
       setNameError('Name is required');
       hasError = true;
@@ -79,7 +79,7 @@ const CreateAcc = () => {
       const response = await fetch(createUserUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password, phoneNumber }), // Include name in request body
+        body: JSON.stringify({ name, email, password, phoneNumber }),
       });
 
       if (response.ok) {
@@ -171,7 +171,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   container: {
-    marginBottom: 80,
+    marginBottom:'auto',
+
     paddingHorizontal: '10%',
     width: '100%',
   },
@@ -237,12 +238,12 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     alignItems: 'center',
-    marginBottom: 80,
+    marginBottom: 100,
   },
   button: {
     height: 61,
     width: 330,
-    marginTop: 30,
+    marginTop: 0,
     backgroundColor: Colors.PRIMARY,
     justifyContent: 'center',
     alignItems: 'center',

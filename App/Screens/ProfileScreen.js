@@ -12,44 +12,62 @@ export default function ProfileScreen() {
 
   const handleLogout = async () => {
     try {
-      await AsyncStorage.removeItem('userId');
+      await AsyncStorage.removeItem('userid');
       Alert.alert('Success', 'You have successfully logged out.', [
         { text: 'OK', onPress: () => navigation.navigate('LoginScreen') },
       ]);
     } catch (error) {
-      console.error('Error removing userId from AsyncStorage', error);
+      console.error('Error removing userid from AsyncStorage', error);
     }
   };
 
+  const handleDeleteAccount = async () => {
+    try {
+      const userId = await AsyncStorage.getItem('userid');
+      if (!userId) {
+        Alert.alert('Error', 'User ID not found.');
+        return;
+      }
+
+      const response = await fetch(`http://192.168.1.40:5000/users/${userId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete user');
+      }
+
+      await AsyncStorage.removeItem('userid');
+      Alert.alert('Success', 'Your account has been deleted.', [
+        { text: 'OK', onPress: () => navigation.navigate('LoginScreen') },
+      ]);
+    } catch (error) {
+      console.error('Error deleting account:', error);
+      Alert.alert('Error', 'Failed to delete account.');
+    }
+  };
+
+  const renderRow = (text, navigateTo) => (
+    <TouchableOpacity style={styles.row} onPress={() => navigation.navigate(navigateTo)}>
+      <Text style={styles.Text2}>{text}</Text>
+      <View style={styles.arrowContainer}>
+        <SideArrow />
+      </View>
+    </TouchableOpacity>
+  );
+
   return (
     <View style={styles.container}>
-      <View style={{ flexDirection: 'row' }}>
-        <View style={{ marginTop: 23, marginRight: 0 }}>
-          <Ionicons name="arrow-back-sharp" size={34} color="black" onPress={() => navigation.goBack()} />
-        </View>
+      <View style={styles.header}>
+        <Ionicons name="arrow-back-sharp" size={34} color="black" onPress={() => navigation.goBack()} />
         <Text style={styles.SettingsText}>Settings</Text>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.contentContainer}>
           <Text style={styles.Text}>Personal</Text>
-          <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('myprofile')}>
-            <Text style={styles.Text2}>Profile</Text>
-            <TouchableOpacity style={styles.arrowContainer}>
-              <SideArrow />
-            </TouchableOpacity>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('Shipping')}>
-            <Text style={styles.Text2}>Shipping Address</Text>
-            <TouchableOpacity style={styles.arrowContainer}>
-              <SideArrow />
-            </TouchableOpacity>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('paymentMethod')}>
-            <Text style={styles.Text2}>Payment Method</Text>
-            <TouchableOpacity style={styles.arrowContainer}>
-              <SideArrow />
-            </TouchableOpacity>
-          </TouchableOpacity>
+          {renderRow('Profile', 'myprofile')}
+          {renderRow('Shipping Address', 'Shipping')}
+          {renderRow('Payment Method', 'paymentMethod')}
         </View>
 
         <View style={styles.contentContainer}>
@@ -58,35 +76,24 @@ export default function ProfileScreen() {
             <Text style={styles.Text2}>Country</Text>
             <View style={styles.rowRight}>
               <Text>Vietnam</Text>
-              <TouchableOpacity style={styles.arrowContainer} onPress={() => navigation.navigate('myprofile')}>
-                <SideArrow />
-              </TouchableOpacity>
+              <SideArrow />
             </View>
           </View>
           <View style={styles.row}>
             <Text style={styles.Text2}>Currency</Text>
             <View style={styles.rowRight}>
               <Text>$ USD</Text>
-              <TouchableOpacity style={styles.arrowContainer}>
-                <SideArrow />
-              </TouchableOpacity>
+              <SideArrow />
             </View>
           </View>
           <View style={styles.row}>
             <Text style={styles.Text2}>Sizes</Text>
             <View style={styles.rowRight}>
               <Text>UK</Text>
-              <TouchableOpacity style={styles.arrowContainer}>
-                <SideArrow />
-              </TouchableOpacity>
+              <SideArrow />
             </View>
           </View>
-          <View style={styles.row}>
-            <Text style={styles.Text2}>Terms and Conditions</Text>
-            <TouchableOpacity style={styles.arrowContainer}>
-              <SideArrow />
-            </TouchableOpacity>
-          </View>
+          {renderRow('Terms and Conditions', 'terms')}
         </View>
 
         <View style={styles.contentContainer}>
@@ -95,29 +102,27 @@ export default function ProfileScreen() {
             <Text style={styles.Text2}>Language</Text>
             <View style={styles.rowRight}>
               <Text>English</Text>
-              <TouchableOpacity style={styles.arrowContainer}>
-                <SideArrow />
-              </TouchableOpacity>
+              <SideArrow />
             </View>
           </View>
-          <View style={styles.row}>
-            <Text style={styles.Text2}>About Slada</Text>
-            <TouchableOpacity style={styles.arrowContainer}>
-              <SideArrow />
-            </TouchableOpacity>
-          </View>
+          {renderRow('About Slada', 'about')}
         </View>
 
         <TouchableOpacity
-          style={{ padding: 10, backgroundColor: Colors.PRIMARY, borderRadius: 20, paddingVertical: 10, paddingHorizontal: 10 }}
+          style={styles.logoutButton}
           onPress={handleLogout}
         >
-          <Text style={{ color: 'white', alignSelf: 'center' }}>Logout</Text>
+          <Text style={styles.logoutButtonText}>Logout</Text>
         </TouchableOpacity>
-        <Text style={{ fontSize: 15, color: 'darkred', marginBottom: 10, marginLeft: 10, marginTop: 10 }}>Delete My Account</Text>
+        <TouchableOpacity 
+          style={styles.deleteButton} 
+          onPress={handleDeleteAccount}
+        >
+          <Text style={styles.deleteButtonText}>Delete My Account</Text>
+        </TouchableOpacity>
 
-        <Text style={{ fontSize: 20, fontWeight: '700', marginLeft: 10 }}>Slada</Text>
-        <Text style={{ marginLeft: 10 }}>version 1.0 April, 2020</Text>
+        <Text style={styles.footerText}>Slada</Text>
+        <Text style={styles.footerVersion}>version 1.0 April, 2020</Text>
       </ScrollView>
     </View>
   );
@@ -130,11 +135,16 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingBottom: 0,
   },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   SettingsText: {
     fontSize: 30,
     fontWeight: '700',
     marginTop: 20,
     marginBottom: 10,
+    marginLeft: 10,
   },
   contentContainer: {
     flex: 1,
@@ -166,6 +176,36 @@ const styles = StyleSheet.create({
   },
   arrowContainer: {
     marginRight: 5,
+    marginLeft: 10,
+  },
+  logoutButton: {
+    padding: 10,
+    backgroundColor: Colors.PRIMARY,
+    borderRadius: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+  },
+  logoutButtonText: {
+    color: 'white',
+    alignSelf: 'center',
+  },
+  deleteButton: {
+    fontSize: 15,
+    color: 'darkred',
+    marginBottom: 10,
+    marginLeft: 10,
+    marginTop: 10,
+  },
+  deleteButtonText: {
+    color: 'darkred',
+    alignSelf: 'center',
+  },
+  footerText: {
+    fontSize: 20,
+    fontWeight: '700',
+    marginLeft: 10,
+  },
+  footerVersion: {
     marginLeft: 10,
   },
 });

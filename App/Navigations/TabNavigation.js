@@ -100,8 +100,6 @@ const ActivityStack=()=>(
 <Stack.Screen name="justforyoudetail" component={JustForYouDetail} options={{ headerShown:false}}/>
 <Stack.Screen name="clothing" component={clothingScreen} options={{ headerShown:false}}/>
 <Stack.Screen name="NewItemDetail" component={NewItemDetail} options={{ headerShown:false}}/>
-
-
 </Stack.Navigator>
 
 )
@@ -115,20 +113,22 @@ const ShopScreenStack=()=>(
 )
 
 const ProfileScreenStack=()=>(
-  <Stack.Navigator initialRouteName="Profile">
+<Stack.Navigator initialRouteName="Profile">
 <Stack.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }}/>
 <Stack.Screen name="paymentMethod" component={PaymentMethod} options={{ headerShown:false}}/>
 <Stack.Screen name="Shipping" component={Shipping} options={{ headerShown:false}}/>
 <Stack.Screen name="myprofile" component={MyProfile} options={{ headerShown:false}}/>
-
 </Stack.Navigator>
 )
 
 const CategoriesStack=()=>(
-  <Stack.Navigator initialRouteName="Categoriesstack">
+<Stack.Navigator initialRouteName="Categoriesstack">
 <Stack.Screen name="allc" component={AllCategories} options={{ headerShown:false}}/>
 <Stack.Screen name="clothing" component={clothingScreen} options={{ headerShown:false}}/>
-
+<Stack.Screen name="justforyoudetail" component={JustForYouDetail} options={{ headerShown:false}}/>
+<Stack.Screen name="populardetail" component={MostPopularDetail} options={{ headerShown:false}}/>
+<Stack.Screen name="flashSale" component={FlashSaleScreen} options={{ headerShown:false}}/>
+<Stack.Screen name="NewItemDetail" component={NewItemDetail} options={{ headerShown:false}}/>
 </Stack.Navigator>
 )
 

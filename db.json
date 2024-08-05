@@ -7,6 +7,7 @@
       "price": "$17,00",
       "category": "clothing",
       "gender": "women",
+      "color": "white",
       "size": "S"
     },
     {
@@ -968,71 +969,97 @@
       "type": "newitem",
       "row": 3,
       "size": "L"
+    },
+    {
+      "id": "724",
+      "image": "img190.png",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$29.00",
+      "category": "hoodie",
+      "gender": "men",
+      "type": "newitem",
+      "row": 3,
+      "size": "L"
+    },
+    {
+      "id": "725",
+      "image": "img191.png",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$29.00",
+      "category": "hoodie",
+      "gender": "men",
+      "type": "newitem",
+      "row": 3,
+      "size": "L"
+    },
+    {
+      "id": "726",
+      "image": "img192.png",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$29.00",
+      "category": "hoodie",
+      "gender": "men",
+      "type": "newitem",
+      "row": 3,
+      "size": "L"
+    },
+    {
+      "id": "727",
+      "image": "img193.png",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$29.00",
+      "category": "hoodie",
+      "gender": "women",
+      "type": "newitem",
+      "row": 3,
+      "size": "L"
+    },
+    {
+      "id": "726",
+      "image": "imgj1.png",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$29.00",
+      "category": "jeans",
+      "gender": "women",
+      "type": "newitem",
+      "row": 3,
+      "size": "L"
     }
   ],
   "users": [
-    {
-      "name": "Punnya",
-      "email": "punnya123@gmail.com",
-      "phoneNumber": "8086658470",
-      "password": "punnya",
-      "id": "33f0"
-    },
     {
       "id": "cf01",
       "name": "Uthra Pradeep",
       "email": "uthra@gmail.com",
       "password": "uthra123@",
       "phoneNumber": "9037111588"
+    },
+    {
+      "id": "96ff",
+      "name": "punnya",
+      "email": "punnya@gmail.com",
+      "password": "punnya",
+      "phoneNumber": "8086658470"
     }
   ],
   "cart": [
     {
-      "id": "69",
+      "id": "2",
       "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$15,00",
-      "image": "img169.png",
-      "size": "S",
-      "userId": "33f0",
-      "quantity": 2
+      "price": "$32,00",
+      "image": "img102.png",
+      "size": "M",
+      "userId": "cf01",
+      "quantity": 1
     },
-    {
-      "id": "6",
-      "userId": "33f0",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$22,00",
-      "image": "img106.png",
-      "size": "S",
-      "quantity": 2
-    }
-  ],
-  "favorites": [
     {
       "id": "1",
       "title": "Lorem ipsum dolor sit amet consectetur.",
       "price": "$17,00",
       "image": "img101.png",
       "size": "S",
-      "userId": "33f0",
-      "quantity": 1
-    },
-    {
-      "id": "7",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$25,00",
-      "image": "img107.png",
-      "size": "M",
-      "userId": "33f0",
-      "quantity": 1
-    },
-    {
-      "id": "8",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$20,00",
-      "image": "img108.png",
-      "size": "L",
-      "userId": "33f0",
-      "quantity": 1
+      "userId": "96ff",
+      "quantity": 3
     },
     {
       "id": "9",
@@ -1040,43 +1067,45 @@
       "price": "$30,00",
       "image": "img109.png",
       "size": "XS",
-      "userId": "33f0",
+      "userId": "96ff",
       "quantity": 1
-    },
+    }
+  ],
+  "favorites": [
     {
-      "id": "10",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$16,00",
-      "image": "img110.png",
-      "size": "XL",
-      "userId": "33f0",
-      "quantity": 1
-    },
-    {
-      "id": "5",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$18,00",
-      "image": "img105.png",
-      "size": "XL",
-      "userId": "33f0",
-      "quantity": 1
-    },
-    {
-      "id": "17",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$25,00",
-      "image": "img117.png",
-      "size": "M",
-      "userId": "33f0",
-      "quantity": 1
-    },
-    {
-      "id": "18",
+      "id": "65",
       "title": "Lorem ipsum dolor sit amet consectetur.",
       "price": "$20,00",
-      "image": "img118.png",
+      "image": "img165.png",
+      "size": "S",
+      "userId": "96ff",
+      "quantity": 1
+    },
+    {
+      "id": "61",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$20,00",
+      "image": "img161.png",
+      "size": "S",
+      "userId": "cf01",
+      "quantity": 1
+    },
+    {
+      "id": "67",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$15,00",
+      "image": "img167.png",
       "size": "L",
-      "userId": "33f0",
+      "userId": "cf01",
+      "quantity": 1
+    },
+    {
+      "id": "1",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$17,00",
+      "image": "img101.png",
+      "size": "S",
+      "userId": "96ff",
       "quantity": 1
     }
   ]
