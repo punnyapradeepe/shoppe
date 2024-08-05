@@ -17,7 +17,7 @@ const PaymentScreen = () => {
   const [address, setAddress] = useState('');
   const [voucherCode, setVoucherCode] = useState('');
   const [isVoucherModalVisible, setVoucherModalVisible] = useState(false);
-  const [totalAmount, setTotalAmount] = useState('29.00');
+  const [totalAmount, setTotalAmount] = useState(0);
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
   const [cardHolderName, setCardHolderName] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
@@ -31,11 +31,11 @@ const PaymentScreen = () => {
         if (userID) {
           const response = await axios.get('http://192.168.1.40:5000/mycart');
           if (response.data) {
-            console.log('Server response:', response.data); // Log the response data
             const userCart = response.data.find(cart => cart.userId === userID);
             if (userCart) {
               setCartItems(userCart.products);
               setAddress(userCart.address);
+              setTotalAmount(userCart.total); // Set the total from the response
             } else {
               console.log('No cart found for user ID:', userID);
             }
@@ -89,7 +89,18 @@ const PaymentScreen = () => {
         <Text style={styles.productTitle}>{item.title}</Text>
         <Text style={styles.productPrice}>{item.price}</Text>
         <Text style={styles.productQuantity}>Quantity: {item.quantity}</Text>
+        
       </View>
+    </View>
+  );
+
+  
+  const renderProducttotal = ({ total }) => (
+    <View style={styles.productItem}>
+        
+        <Text style={styles.productQuantity}> Total:{total.total}</Text>
+        
+      
     </View>
   );
 
@@ -366,12 +377,12 @@ const PaymentScreen = () => {
 
 
  
-      <View style={styles.footer}>
-          <Text style={styles.totalText}>Total: ${totalAmount}</Text>
-          <TouchableOpacity style={styles.checkoutButton}>
-            <Text style={styles.checkoutButtonText}>Pay</Text>
-          </TouchableOpacity>
-        </View>
+    <View style={styles.footer}>
+        <Text style={styles.totalText}>Total: ${totalAmount.toFixed(2)}</Text>
+        <TouchableOpacity style={styles.checkoutButton}>
+          <Text style={styles.checkoutButtonText}>Pay</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
