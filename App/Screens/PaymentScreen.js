@@ -23,6 +23,7 @@ const PaymentScreen = () => {
   const [expiryDate, setExpiryDate] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isEditable, setIsEditable] = useState(false);
+  const [wasExpress, setWasExpress] = useState(false); 
 
   useEffect(() => {
     const fetchUserIDAndCartItems = async () => {
@@ -54,7 +55,24 @@ const PaymentScreen = () => {
   }, []);
   
 
-  
+
+
+  const handleShippingOptionSelect = (option) => {
+  if (option === 'Express') {
+    if (!wasExpress) {
+      setTotalAmount(prevTotal => prevTotal + 80); // Add $80 for express shipping
+      setWasExpress(true); // Mark as Express
+    }
+  } else {
+    if (wasExpress) {
+      setTotalAmount(prevTotal => prevTotal - 80); // Subtract $80 if switching from Express to Standard
+      setWasExpress(false); // Mark as not Express
+    }
+  }
+  setSelectedShipping(option);
+};
+
+
   const saveDetails = () => {
     setIsEditable(false);
     closeModal();
@@ -154,39 +172,41 @@ const PaymentScreen = () => {
           <Text style={styles.text1}>Shipping Options</Text>
           <View style={styles.container}>
             <View style={styles.rowContainer}>
-              <TouchableOpacity
-                style={[
-                  styles.deliveryContainer,
-                  selectedShipping === 'Standard' ? styles.selectedDelivery : styles.unselectedDelivery
-                ]}
-              
-              >
-                <View>
-                  {selectedShipping === 'Standard' ? <TickImg /> : <TickW />}
-                </View>
-                <Text style={styles.text2}>Standard</Text>
-                <View style={styles.infoContainer}>
-                  <Text style={styles.deliveryText1}>6-7 days</Text>
-                </View>
-                <Text style={styles.text3}>FREE</Text>
-              </TouchableOpacity>
+            <TouchableOpacity
+  style={[
+    styles.deliveryContainer,
+    selectedShipping === 'Standard' ? styles.selectedDelivery : styles.unselectedDelivery
+  ]}
+  onPress={() => handleShippingOptionSelect('Standard')}
+>
+  <View>
+    {selectedShipping === 'Standard' ? <TickImg /> : <TickW />}
+  </View>
+  <Text style={styles.text2}>Standard</Text>
+  <View style={styles.infoContainer}>
+    <Text style={styles.deliveryText1}>6-7 days</Text>
+  </View>
+  <Text style={styles.text3}>FREE</Text>
+</TouchableOpacity>
 
-              <TouchableOpacity
-                style={[
-                  styles.deliveryContainer,
-                  selectedShipping === 'Express' ? styles.selectedDelivery : styles.unselectedDelivery
-                ]}
-               
-              >
-                <View>
-                  {selectedShipping === 'Express' ? <TickImg /> : <TickW />}
-                </View>
-                <Text style={styles.text2}>Express</Text>
-                <View style={styles.infoContainer}>
-                  <Text style={styles.deliveryText1}>1-2 days</Text>
-                </View>
-                <Text style={styles.text3}>$8.00</Text>
-              </TouchableOpacity>
+<TouchableOpacity
+  style={[
+    styles.deliveryContainer,
+    selectedShipping === 'Express' ? styles.selectedDelivery : styles.unselectedDelivery
+  ]}
+  onPress={() => handleShippingOptionSelect('Express')}
+>
+  <View>
+    {selectedShipping === 'Express' ? <TickImg /> : <TickW />}
+  </View>
+  <Text style={styles.text2}>Express</Text>
+  <View style={styles.infoContainer}>
+    <Text style={styles.deliveryText1}>1-2 days</Text>
+  </View>
+  <Text style={styles.text3}>$80.00</Text>
+</TouchableOpacity>
+
+
             </View>
           </View>
 

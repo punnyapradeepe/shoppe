@@ -1050,16 +1050,7 @@
       "image": "img103.png",
       "size": "L",
       "userId": "96ff",
-      "quantity": 4
-    },
-    {
-      "id": "1",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$17,00",
-      "image": "img101.png",
-      "size": "S",
-      "userId": "96ff",
-      "quantity": 1
+      "quantity": 3
     },
     {
       "id": "6",
@@ -1102,16 +1093,7 @@
           "image": "img103.png",
           "size": "L",
           "userId": "96ff",
-          "quantity": 4
-        },
-        {
-          "id": "1",
-          "title": "Lorem ipsum dolor sit amet consectetur.",
-          "price": "$17,00",
-          "image": "img101.png",
-          "size": "S",
-          "userId": "96ff",
-          "quantity": 1
+          "quantity": 3
         },
         {
           "id": "6",
@@ -1123,8 +1105,8 @@
           "quantity": 1
         }
       ],
-      "address": "26, Duong So 2, Thao Dien Ward, An Phu, District 2, Ho Chi Minh city",
-      "total": 123,
+      "address": "26, Duong So 2, Thao Dien Ward, An Phu, District 2,thalassert",
+      "total": 85,
       "id": "b07f"
     }
   ]
