@@ -23,24 +23,34 @@ const PaymentScreen = () => {
   const [isEditable, setIsEditable] = useState(false);
 
   useEffect(() => {
-    // Fetch user ID from AsyncStorage
     const fetchUserIDAndCartItems = async () => {
       try {
-        const userID = await AsyncStorage.getItem('userID');
+        const userID = await AsyncStorage.getItem('userid');
         if (userID) {
-          // Fetch cart items and address from server
-          const response = await axios.get(`http://192.168.1.40:5000/mycart?userID=${userID}`);
-          const { items, address } = response.data;
-          setCartItems(items);
-          setAddress(address);
+          const response = await axios.get('http://192.168.1.40:5000/mycart');
+          if (response.data) {
+            console.log('Server response:', response.data); // Log the response data
+            const userCart = response.data.find(cart => cart.userId === userID);
+            if (userCart) {
+              setCartItems(userCart.products);
+              setAddress(userCart.address);
+            } else {
+              console.log('No cart found for user ID:', userID);
+            }
+          } else {
+            console.log('No data returned from server');
+          }
+        } else {
+          console.log('User ID not found in AsyncStorage');
         }
       } catch (error) {
-        console.error(error);
+        console.error('Error fetching user ID and cart items:', error);
       }
     };
-
+  
     fetchUserIDAndCartItems();
   }, []);
+  
 
   
   const saveDetails = () => {
@@ -70,7 +80,6 @@ const PaymentScreen = () => {
   };
 
  
- 
 
   return (
     <View style={styles.container}>
@@ -90,7 +99,7 @@ const PaymentScreen = () => {
           <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 0 }}>
             <Text style={[styles.text1, { marginRight: 6 }]}>Items</Text>
             <View style={{ width: 30, height: 30, borderRadius: 99, backgroundColor: '#F0F8FF', alignItems: 'center', justifyContent: 'center' }}>
-              <Text style={{ fontWeight: 'bold' }}>{cartItems.length}</Text>
+              <Text style={{ fontWeight: 'bold' }}>{cartItems.reduce((sum, item) => sum + item.quantity, 0)}</Text>
             </View>
             <TouchableOpacity
               style={{
