@@ -1044,43 +1044,16 @@
   ],
   "cart": [
     {
-      "id": "2",
+      "id": "3",
       "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$32,00",
-      "image": "img102.png",
-      "size": "M",
-      "userId": "cf01",
-      "quantity": 1
-    },
-    {
-      "id": "1",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$17,00",
-      "image": "img101.png",
-      "size": "S",
+      "price": "$21,00",
+      "image": "img103.png",
+      "size": "L",
       "userId": "96ff",
       "quantity": 3
-    },
-    {
-      "id": "9",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$30,00",
-      "image": "img109.png",
-      "size": "XS",
-      "userId": "96ff",
-      "quantity": 1
     }
   ],
   "favorites": [
-    {
-      "id": "65",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$20,00",
-      "image": "img165.png",
-      "size": "S",
-      "userId": "96ff",
-      "quantity": 1
-    },
     {
       "id": "61",
       "title": "Lorem ipsum dolor sit amet consectetur.",
@@ -1098,15 +1071,25 @@
       "size": "L",
       "userId": "cf01",
       "quantity": 1
-    },
+    }
+  ],
+  "mycart": [
     {
-      "id": "1",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$17,00",
-      "image": "img101.png",
-      "size": "S",
       "userId": "96ff",
-      "quantity": 1
+      "products": [
+        {
+          "id": "3",
+          "title": "Lorem ipsum dolor sit amet consectetur.",
+          "price": "$21,00",
+          "image": "img103.png",
+          "size": "L",
+          "userId": "96ff",
+          "quantity": 3
+        }
+      ],
+      "address": "26, Duong So 2, Thao Dien Ward, An Phu, District 2, Ho Chi Minh city",
+      "total": 63,
+      "id": "b07f"
     }
   ]
 }

@@ -14,9 +14,12 @@ export default function ShopScreen() {
   const [cartItems, setCartItems] = useState([]);
   const [userId, setUserId] = useState(null);
   const [total, setTotal] = useState(0);
+  const [address, setAddress] = useState('26, Duong So 2, Thao Dien Ward, An Phu, District 2, Ho Chi Minh city');
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [tempAddress, setTempAddress] = useState(address);
 
   useEffect(() => {
-    fetchUserId(userId);
+    fetchUserId();
   }, []);
 
   const fetchUserId = async () => {
@@ -41,10 +44,8 @@ export default function ShopScreen() {
       const response = await fetch('http://192.168.1.40:5000/cart');
       const data = await response.json();
       const filteredItems = data.filter(item => item.userId === userId);
-      
       setCartItems(filteredItems);
       calculateTotal(filteredItems);
-  
     } catch (error) {
       console.error('Failed to fetch or filter cart items:', error);
     }
@@ -105,9 +106,45 @@ export default function ShopScreen() {
     }
   };
 
-  const [address, setAddress] = useState('26, Duong So 2, Thao Dien Ward, An Phu, District 2, Ho Chi Minh city');
-  const [isModalVisible, setModalVisible] = useState(false);
-  const [tempAddress, setTempAddress] = useState(address);
+  const handleSaveToMyCart = async () => {
+    try {
+      const response = await fetch('http://192.168.1.40:5000/mycart');
+      const data = await response.json();
+      const existingEntry = data.find(entry => entry.userId === userId);
+
+      const newEntry = {
+        userId,
+        products: cartItems,
+        address,
+        total,
+      };
+
+      if (existingEntry) {
+        // Update existing entry
+        await fetch(`http://192.168.1.40:5000/mycart/${existingEntry.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newEntry),
+        });
+      } else {
+        // Create new entry
+        await fetch('http://192.168.1.40:5000/mycart', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newEntry),
+        });
+      }
+
+      navigation.navigate('payment');
+
+    } catch (error) {
+      console.error('Failed to save data to mycart:', error);
+    }
+  };
 
   const handleSave = () => {
     setAddress(tempAddress);
@@ -179,7 +216,7 @@ export default function ShopScreen() {
         <Text style={styles.totalText}>Total: ${total.toFixed(2)}</Text>
         <TouchableOpacity
           style={styles.checkoutButton}
-          onPress={() => navigation.navigate('shippingAddr')}
+          onPress={handleSaveToMyCart}
         >
           <Text style={styles.checkoutButtonText}>CheckOut</Text>
         </TouchableOpacity>
@@ -205,53 +242,32 @@ export default function ShopScreen() {
             }}>Edit Address</Text>
             <TextInput
               style={{
-                borderColor: Colors.GRAY,
+                height: 100,
+                borderColor: Colors.PRIMARY,
                 borderWidth: 1,
-                borderRadius: 5,
-                padding: 10,
+                borderRadius: 10,
+                paddingHorizontal: 10,
                 marginBottom: 20,
               }}
               value={tempAddress}
               onChangeText={setTempAddress}
-              placeholder="Enter your address"
+              multiline
             />
-            <View style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}>
-              <TouchableOpacity
-                style={[{
-                  flex: 1,
-                  marginHorizontal: 5,
-                  padding: 10,
-                  borderRadius: 5,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  backgroundColor: Colors.PRIMARY,
-                }]}
-                onPress={handleCancel}
-              >
-                <Text style={{
-                  color: 'white',
-                  fontWeight: 'bold',
-                }}>Cancel</Text>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <TouchableOpacity onPress={handleSave} style={{
+                backgroundColor: Colors.PRIMARY,
+                padding: 10,
+                borderRadius: 5,
+                marginRight: 10,
+              }}>
+                <Text style={{ color: 'white' }}>Save</Text>
               </TouchableOpacity>
-              <TouchableOpacity
-                style={[{
-                  flex: 1,
-                  marginHorizontal: 5,
-                  padding: 10,
-                  borderRadius: 5,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  backgroundColor: Colors.PRIMARY,
-                }]}
-                onPress={handleSave}
-              >
-                <Text style={{
-                  color: 'white',
-                  fontWeight: 'bold',
-                }}>Save</Text>
+              <TouchableOpacity onPress={handleCancel} style={{
+                backgroundColor: 'grey',
+                padding: 10,
+                borderRadius: 5,
+              }}>
+                <Text style={{ color: 'white' }}>Cancel</Text>
               </TouchableOpacity>
             </View>
           </View>

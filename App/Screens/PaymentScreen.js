@@ -1,416 +1,176 @@
 import React, { useEffect, useState } from 'react';
-import { Button, FlatList, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View ,TouchableWithoutFeedback} from 'react-native';
-import { ClrImg, EditBtn, Gift, GiftBox, Plus, SettingImg,  TickImg, TickW } from '../Utils/SvgIcons';
-import Colors from '../Utils/Colors';
+import { Button, FlatList, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
+import axios from 'axios';
 import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
+import Colors from '../Utils/Colors';
+import { ClrImg, EditBtn, Gift, GiftBox, Plus, SettingImg, TickImg, TickW } from '../Utils/SvgIcons';
 import { useNavigation } from '@react-navigation/core';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const PaymentScreen = () => {
-  const navigation= useNavigation();
+  const navigation = useNavigation();
+  const [cartItems, setCartItems] = useState([]);
   const [selectedShipping, setSelectedShipping] = useState('Standard');
-  const [address, setAddress] = useState('26, Duong So 2, Thao Dien Ward, An Phu, District 2, Ho Chi Minh city');
-  const [info, setInfo] = useState('punnyapradeep1328@gmail.com');
-  const [isAddressModalVisible, setAddressModalVisible] = useState(false);
-  const [isInfoModalVisible, setInfoModalVisible] = useState(false);
-  const [tempAddress, setTempAddress] = useState(address);
-  const [tempInfo, setTempInfo] = useState(info);
+  const [address, setAddress] = useState('');
   const [voucherCode, setVoucherCode] = useState('');
-  const [isVoucherModalVisible, 
-  setVoucherModalVisible] = useState(false);
+  const [isVoucherModalVisible, setVoucherModalVisible] = useState(false);
   const [totalAmount, setTotalAmount] = useState('29.00');
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
-const [cardHolderName, setCardHolderName] = useState('');
-const [expiryDate, setExpiryDate] = useState('');
+  const [cardHolderName, setCardHolderName] = useState('');
+  const [expiryDate, setExpiryDate] = useState('');
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isEditable, setIsEditable] = useState(false);
 
+  useEffect(() => {
+    // Fetch user ID from AsyncStorage
+    const fetchUserIDAndCartItems = async () => {
+      try {
+        const userID = await AsyncStorage.getItem('userID');
+        if (userID) {
+          // Fetch cart items and address from server
+          const response = await axios.get(`http://192.168.1.40:5000/mycart?userID=${userID}`);
+          const { items, address } = response.data;
+          setCartItems(items);
+          setAddress(address);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-  const type = [
-    {
-      id: '1',
-      images: require('./../../assets/Images/img40.png'),
-      text: 'Lorem ipsum dolor sit amet \n consectetur.',
-      price: '$17.00',
-      color: 'Black',
-      size: 'M',
-    },
-    {
-      id: '2',
-      images: require('./../../assets/Images/img21.png'),
-      text: 'Lorem ipsum dolor sit amet \n consectetur.',
-      price: '$12.00',
-      size: 'S',
-    },
-  ];
+    fetchUserIDAndCartItems();
+  }, []);
 
-  const renderItem = ({ item }) => (
-    <View style={styles.itemContainer}>
   
-        <View style={styles.imageWrapper}>
-          <Image source={item.images} style={styles.itemImage} />
-          <View style={styles.badge}>
-            <Text style={{ fontWeight: 'bold' }}>1</Text>
-          </View>
-        </View>
-        <Text style={styles.itemText}>{item.text}</Text>
-        <Text style={styles.textPrice}>{item.price}</Text>
-    
-    </View>
-  );
- // State to control modal visibility
- const [isModalVisible, setIsModalVisible] = useState(false);
- const [isEditable, setIsEditable] = useState(false);
- 
-
- const openModal = () => {
-  setIsModalVisible(true);
-};
-
-const closeModal = () => {
-  setIsModalVisible(false);
-};
-const toggleEditable = () => {
-  setIsEditable(!isEditable);
-};
-
-const saveDetails = () => {
-  setIsEditable(false);
-  closeModal();
-};
-
-  const handleSaveAddress = () => {
-    setAddress(tempAddress);
-    setAddressModalVisible(false);
+  const saveDetails = () => {
+    setIsEditable(false);
+    closeModal();
   };
-
-  const handleCancelAddress = () => {
-    setTempAddress(address);
-    setAddressModalVisible(false);
+  const toggleEditable = () => {
+    setIsEditable(!isEditable);
   };
-
-  const handleSaveInfo = () => {
-    setInfo(tempInfo);
-    setInfoModalVisible(false);
-  };
-
-  const handleCancelInfo = () => {
-    setTempInfo(info);
-    setInfoModalVisible(false);
-  };
-
-  const handleApplyVoucher = () => {
-    // Update total amount to 5 as an example
-    setTotalAmount(27.55);
+  const handleCancelVoucher = () => {
     setVoucherModalVisible(false);
   };
+ 
   
+  const closeModal = () => {
+    setIsModalVisible(false);
+  };
   const handleApplyVoucher2 = () => {
     // Update total amount to 5 as an example
     setTotalAmount(24.65);
     setVoucherModalVisible(false);
   };
-  
 
-  const handleCancelVoucher = () => {
+  const handleApplyVoucher = (amount) => {
+    setTotalAmount(amount);
     setVoucherModalVisible(false);
   };
 
-    useEffect(() => {
-    if (selectedShipping === 'Express') {
-      if (totalAmount === '29.00') {
-        setTotalAmount("37.00");
-      } else if (totalAmount === 27.55) {
-        setTotalAmount(35.55);
-      } else if (totalAmount === 24.65) {
-        setTotalAmount(32.65);
-      }
-    }
-    else{
-      if (totalAmount === '29.00') {
-        setTotalAmount('29.00');
-      } else if (totalAmount === 27.55) {
-        setTotalAmount(27.55);
-      } else if (totalAmount === 24.65) {
-        setTotalAmount(24.65);
-      }
-      else if (totalAmount === '37.00') {
-        setTotalAmount('29.00');
-      } else if (totalAmount === 35.55) {
-        setTotalAmount(27.55);
-      }else if (totalAmount === 32.65) {
-        setTotalAmount(24.65);
-      }
-    }
-  }, [selectedShipping, totalAmount]);
-  
+ 
+ 
 
   return (
-    
     <View style={styles.container}>
-      <View style={{ padding: 20 ,flex:1}}>
-        <View style={{flexDirection:'row',}}>
-      <Ionicons name="arrow-back-sharp" size={24} color="black" style={{marginTop:30}} onPress={()=>navigation.goBack()}/>
-        <Text style={styles.text}>Payment</Text>
+      <View style={{ padding: 20, flex: 1 }}>
+        <View style={{ flexDirection: 'row' }}>
+          <Ionicons name="arrow-back-sharp" size={24} color="black" style={{ marginTop: 30 }} onPress={() => navigation.goBack()} />
+          <Text style={styles.text}>Payment</Text>
         </View>
         <Text style={styles.subText}>Shipping Address</Text>
         <View style={styles.addressContainer}>
           <Text style={styles.address1}>{address}</Text>
-          <TouchableOpacity style={styles.editButton} onPress={() => setAddressModalVisible(true)}>
-            <EditBtn />
-          </TouchableOpacity>
+        
         </View>
 
-        <Text style={styles.subText}>Contact Information</Text>
-        <View style={styles.addressContainer}>
-          <Text style={styles.address1}>{info}</Text>
-          <TouchableOpacity style={styles.editButton} onPress={() => setInfoModalVisible(true)}>
-            <EditBtn />
-          </TouchableOpacity>
-        </View>
 
-        <ScrollView showsVerticalScrollIndicator={false} style={{marginLeft:-10,marginRight:-10}} >
-        <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 0 }}>
-  <Text style={[styles.text1, { marginRight: 6 }]}>Items</Text>
-  
-  <View style={{ width: 30, height: 30, borderRadius: 99, backgroundColor: '#F0F8FF', alignItems: 'center', justifyContent: 'center' }}>
-    <Text style={{ fontWeight: 'bold' }}>2</Text>
-  </View>
-  
- 
-  <TouchableOpacity 
-    style={{ 
-      paddingHorizontal: 20, 
-      backgroundColor: 'white', 
-      borderWidth: 3, 
-      borderColor: 'blue', 
-      alignItems: 'center', 
-      borderRadius: 20, 
-      justifyContent: 'center', 
-      marginLeft: 'auto',  
-      marginRight: 10      
-    }}
-    onPress={() => setVoucherModalVisible(true)}
-  >
-    <Text style={{ color: 'blue' }}>Add Voucher</Text>
-  </TouchableOpacity>
-  
-</View>
+        <ScrollView showsVerticalScrollIndicator={false} style={{ marginLeft: -10, marginRight: -10 }}>
+          <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 0 }}>
+            <Text style={[styles.text1, { marginRight: 6 }]}>Items</Text>
+            <View style={{ width: 30, height: 30, borderRadius: 99, backgroundColor: '#F0F8FF', alignItems: 'center', justifyContent: 'center' }}>
+              <Text style={{ fontWeight: 'bold' }}>{cartItems.length}</Text>
+            </View>
+            <TouchableOpacity
+              style={{
+                paddingHorizontal: 20,
+                backgroundColor: 'white',
+                borderWidth: 3,
+                borderColor: 'blue',
+                alignItems: 'center',
+                borderRadius: 20,
+                justifyContent: 'center',
+                marginLeft: 'auto',
+                marginRight: 10
+              }}
+              onPress={() => setVoucherModalVisible(true)}
+            >
+              <Text style={{ color: 'blue' }}>Add Voucher</Text>
+            </TouchableOpacity>
+          </View>
 
           <View style={{ paddingLeft: 20, paddingRight: 20 }}>
-            <FlatList
-              data={type}
-              renderItem={renderItem}
-              keyExtractor={(item) => item.id}
-              contentContainerStyle={styles.flatList}
-              showsVerticalScrollIndicator={false}
-            />
+         
           </View>
 
           <Text style={styles.text1}>Shipping Options</Text>
-
-         
-
-
-    <View style={styles.container}>
-      <View style={styles.rowContainer}>
-       
-        <TouchableOpacity
-          style={[
-            styles.deliveryContainer,
-            selectedShipping === 'Standard' ? styles.selectedDelivery : styles.unselectedDelivery
-          ]}
-          onPress={() => setSelectedShipping('Standard')}
-        >
-          <View>
-            {selectedShipping === 'Standard' ? <TickImg /> : <TickW />}
-          </View>
-          <Text style={styles.text2}>Standard</Text>
-          <View style={styles.infoContainer}>
-            <Text style={styles.deliveryText1}>6-7 days</Text>
-          </View>
-          <Text style={styles.text3}>FREE</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={[
-            styles.deliveryContainer,
-            selectedShipping === 'Express' ? styles.selectedDelivery : styles.unselectedDelivery
-          ]}
-          onPress={() => setSelectedShipping('Express')}
-        >
-          <View>
-            {selectedShipping === 'Express' ? <TickImg /> : <TickW />}
-          </View>
-          <Text style={styles.text2}>Express</Text>
-          <View style={styles.infoContainer}>
-            <Text style={styles.deliveryText1}>1-2 days</Text>
-          </View>
-          <Text style={styles.text3}>$8.00</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-
-            <Text style={{ marginLeft: 18, marginRight: 20 }}>Delivered on or before Thursday, 23 April 2020</Text>
-        
-
-            <View style={styles.addressContainer}>
-          <Text style={styles.address}>Payment Method</Text>
-          <TouchableOpacity style={styles.editButton} onPress={() => setAddressModalVisible(true)}>
-            <EditBtn />
-          </TouchableOpacity>
-        </View>
-
-          <TouchableOpacity style={{ width: 73, height: 30, backgroundColor: '#F0F8FF', alignItems: 'center', borderRadius: 20, marginLeft: 20, marginTop: 0, marginBottom: 10 }} onPress={openModal}>
-            <Text style={{ fontSize: 15, fontWeight: '500', color: 'blue', top: 5 }}>Card</Text>
-          </TouchableOpacity>
-
-        </ScrollView>
-     
-        </View>
-        
-
-        
-
-        <Modal isVisible={isAddressModalVisible}>
-        <View style={ {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  }}>
-          <View style={ {
-    backgroundColor: 'white',
-    borderColor: Colors.PRIMARY,
-    borderWidth: 1,
-    borderRadius: 10,
-    padding: 20,
-    width: '80%',
-  }}>
-            <Text style={{
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  }}>Edit Address</Text>
-            <TextInput
-              style={ {
-                borderColor: Colors.GRAY,
-                borderWidth: 1,
-                borderRadius: 5,
-                padding: 10,
-                marginBottom: 20,
-              }}
-              value={tempAddress}
-              onChangeText={setTempAddress}
-              placeholder="Enter your address"
-            />
-            <View style={styles.modalButtons}>
-              <TouchableOpacity style={[ {
-    flex: 1,
-    marginHorizontal: 5,
-    padding: 10,
-    borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-  }, { backgroundColor: Colors.PRIMARY }]} onPress={handleCancelAddress}>
-                <Text style={ {
-    color: 'white',
-    fontWeight: 'bold',
-  }}>Cancel</Text>
+          <View style={styles.container}>
+            <View style={styles.rowContainer}>
+              <TouchableOpacity
+                style={[
+                  styles.deliveryContainer,
+                  selectedShipping === 'Standard' ? styles.selectedDelivery : styles.unselectedDelivery
+                ]}
+              
+              >
+                <View>
+                  {selectedShipping === 'Standard' ? <TickImg /> : <TickW />}
+                </View>
+                <Text style={styles.text2}>Standard</Text>
+                <View style={styles.infoContainer}>
+                  <Text style={styles.deliveryText1}>6-7 days</Text>
+                </View>
+                <Text style={styles.text3}>FREE</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={[{
-    flex: 1,
-    marginHorizontal: 5,
-    padding: 10,
-    borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-  }, { backgroundColor: Colors.PRIMARY }]} onPress={handleSaveAddress}>
-                <Text style={ {
-    color: 'white',
-    fontWeight: 'bold',
-  }}>Save</Text>
+
+              <TouchableOpacity
+                style={[
+                  styles.deliveryContainer,
+                  selectedShipping === 'Express' ? styles.selectedDelivery : styles.unselectedDelivery
+                ]}
+               
+              >
+                <View>
+                  {selectedShipping === 'Express' ? <TickImg /> : <TickW />}
+                </View>
+                <Text style={styles.text2}>Express</Text>
+                <View style={styles.infoContainer}>
+                  <Text style={styles.deliveryText1}>1-2 days</Text>
+                </View>
+                <Text style={styles.text3}>$8.00</Text>
               </TouchableOpacity>
             </View>
           </View>
-        </View>
-      </Modal>
 
+          <Text style={{ marginLeft: 18, marginRight: 20 }}>Delivered on or before Thursday, 23 April 2020</Text>
 
+          <View style={styles.addressContainer}>
+            <Text style={styles.address}>Payment Method</Text>
+            <TouchableOpacity style={styles.editButton}>
+              <EditBtn />
+            </TouchableOpacity>
+          </View>
 
-
-      <Modal isVisible={isInfoModalVisible}>
-  <View style={{
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  
-  }}>
-    <View style={{
-      backgroundColor: 'white',
-      borderColor: Colors.PRIMARY,
-      borderWidth: 1,
-      borderRadius: 10,
-      padding: 20,
-      width: '80%',
-    }}>
-      <Text style={{
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 10,
-      }}>Edit Contact Information</Text>
-      <TextInput
-        style={{
-          borderColor: Colors.GRAY,
-          borderWidth: 1,
-          borderRadius: 5,
-          padding: 10,
-          marginBottom: 20,
-        }}
-        value={tempInfo}
-        onChangeText={setTempInfo}
-        placeholder="Enter your information"
-      />
-      <View style={{
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-      }}>
-        <TouchableOpacity
-          style={[{
-            flex: 1,
-            marginHorizontal: 5,
-            padding: 10,
-            borderRadius: 5,
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: Colors.PRIMARY,
-          }]}
-          onPress={handleCancelInfo}
-        >
-          <Text style={{
-            color: 'white',
-            fontWeight: 'bold',
-          }}>Cancel</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[{
-            flex: 1,
-            marginHorizontal: 5,
-            padding: 10,
-            borderRadius: 5,
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: Colors.PRIMARY,
-          }]}
-          onPress={handleSaveInfo}
-        >
-          <Text style={{
-            color: 'white',
-            fontWeight: 'bold',
-          }}>Save </Text>
-        </TouchableOpacity>
+          <TouchableOpacity style={{backgroundColor:'lightblue',padding:20,borderRadius:20}} onPress={() => setIsModalVisible(true)}>
+          <Text>Card</Text>
+          </TouchableOpacity>
+        </ScrollView>
       </View>
-    </View>
-  </View>
-</Modal>
 
+        
+
+        
      
         <View>
       <TouchableOpacity onPress={() => setVoucherModalVisible(true)}>
@@ -490,7 +250,7 @@ const saveDetails = () => {
             <View style={styles.cardContainer}>
               <View style={styles.cardIcons}>
                 <View style={styles.iconWrapper}>
-                  <ClrImg />
+                  <ClrImg/>
                 </View>
                 <View style={styles.iconWrapper}>
                   <SettingImg />
