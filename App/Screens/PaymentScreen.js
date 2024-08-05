@@ -8,7 +8,7 @@ import { ClrImg, EditBtn, Gift, GiftBox, Plus, SettingImg, TickImg, TickW } from
 import { useNavigation } from '@react-navigation/core';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import imageMapping from './../../Components/imageMapping';
-
+import { Alert } from 'react-native'; // Import Alert
 
 const PaymentScreen = () => {
   const navigation = useNavigation();
@@ -55,6 +55,8 @@ const PaymentScreen = () => {
   }, []);
   
 
+
+ 
 
   const handlePayment = async () => {
     try {
@@ -117,6 +119,8 @@ const PaymentScreen = () => {
       Alert.alert('Error', 'Failed to place order: ' + (error.message || 'Unknown error'));
     }
   };
+  
+  
   
   
 
