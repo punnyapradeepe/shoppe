@@ -56,6 +56,73 @@ const PaymentScreen = () => {
   
 
 
+  const handlePayment = async () => {
+    try {
+      const userId = await AsyncStorage.getItem('userid');
+      if (userId) {
+        // Fetch all orders
+        const response = await fetch('http://192.168.1.40:5000/myorder');
+        const data = await response.json();
+        const existingOrder = data.find(order => order.userId === userId);
+  
+        const newOrder = {
+          userId,
+          products: cartItems,
+          total: totalAmount
+        };
+  
+        let requestOptions;
+        if (existingOrder) {
+          // Update existing order
+          requestOptions = {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newOrder),
+          };
+          await fetch(`http://192.168.1.40:5000/myorder/${existingOrder.id}`, requestOptions);
+        } else {
+          // Create new order
+          requestOptions = {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newOrder),
+          };
+          await fetch('http://192.168.1.40:5000/myorder', requestOptions);
+        }
+  
+        Alert.alert(
+          'Success',
+          'Order placed successfully!',
+          [
+            {
+              text: 'OK',
+              onPress: () => {
+                // Navigate or reset state
+                navigation.navigate('OrderConfirmation'); // Example navigation
+              }
+            }
+          ],
+          { cancelable: false }
+        );
+      } else {
+        console.log('User ID not found in AsyncStorage');
+        Alert.alert('Error', 'User ID not found.');
+      }
+    } catch (error) {
+      console.error('Error placing order:', error);
+      Alert.alert('Error', 'Failed to place order: ' + (error.message || 'Unknown error'));
+    }
+  };
+  
+  
+
+
+
+
 
   const handleShippingOptionSelect = (option) => {
   if (option === 'Express') {
@@ -399,8 +466,9 @@ const PaymentScreen = () => {
  
     <View style={styles.footer}>
         <Text style={styles.totalText}>Total: ${totalAmount.toFixed(2)}</Text>
-        <TouchableOpacity style={styles.checkoutButton}>
-          <Text style={styles.checkoutButtonText}>Pay</Text>
+        
+        <TouchableOpacity style={styles.checkoutButton} onPress={handlePayment}>
+        <Text style={styles.checkoutButtonText}>Pay</Text>
         </TouchableOpacity>
       </View>
     </View>
