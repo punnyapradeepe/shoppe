@@ -70,7 +70,6 @@ export default function HomeScreen() {
           renderItem={({ item }) => (
             <View style={{ width, height: height * 0.85, justifyContent: 'center', alignItems: 'center' }}>
               <View style={styles.cardContainer}>
-                {/*<Image style={styles.cardImage} source={require('./../../assets/Images/Card Shape.png')} />*/}
                 <View style={styles.contentContainer}>
                   <Image style={styles.homeImage} source={item.imageSource} />
                   <View style={styles.textContainer}>

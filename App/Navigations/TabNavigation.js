@@ -127,6 +127,7 @@ const ProfileScreenStack=()=>(
 const CategoriesStack=()=>(
   <Stack.Navigator initialRouteName="Categoriesstack">
 <Stack.Screen name="allc" component={AllCategories} options={{ headerShown:false}}/>
+<Stack.Screen name="clothing" component={clothingScreen} options={{ headerShown:false}}/>
 
 </Stack.Navigator>
 )
