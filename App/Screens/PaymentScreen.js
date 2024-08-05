@@ -7,6 +7,8 @@ import Colors from '../Utils/Colors';
 import { ClrImg, EditBtn, Gift, GiftBox, Plus, SettingImg, TickImg, TickW } from '../Utils/SvgIcons';
 import { useNavigation } from '@react-navigation/core';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import imageMapping from './../../Components/imageMapping';
+
 
 const PaymentScreen = () => {
   const navigation = useNavigation();
@@ -69,7 +71,7 @@ const PaymentScreen = () => {
     setIsModalVisible(false);
   };
   const handleApplyVoucher2 = () => {
-    // Update total amount to 5 as an example
+   
     setTotalAmount(24.65);
     setVoucherModalVisible(false);
   };
@@ -79,7 +81,17 @@ const PaymentScreen = () => {
     setVoucherModalVisible(false);
   };
 
- 
+  const renderProductItem = ({ item }) => (
+    <View style={styles.productItem}>
+              <Image source={imageMapping[item.image]} style={styles.itemImage} />
+
+      <View style={styles.productDetails}>
+        <Text style={styles.productTitle}>{item.title}</Text>
+        <Text style={styles.productPrice}>{item.price}</Text>
+        <Text style={styles.productQuantity}>Quantity: {item.quantity}</Text>
+      </View>
+    </View>
+  );
 
   return (
     <View style={styles.container}>
@@ -122,7 +134,12 @@ const PaymentScreen = () => {
           <View style={{ paddingLeft: 20, paddingRight: 20 }}>
          
           </View>
-
+          <FlatList
+            data={cartItems}
+            renderItem={renderProductItem}
+            keyExtractor={item => item.id}
+            style={{ paddingLeft: 20, paddingRight: 20 }}
+          />
           <Text style={styles.text1}>Shipping Options</Text>
           <View style={styles.container}>
             <View style={styles.rowContainer}>
@@ -480,9 +497,9 @@ const styles = StyleSheet.create({
   },
   itemImage: {
     position: 'relative',
-    width: 70,
-    height: 70,
-    borderRadius: 99,
+    width: 80,
+    height:80,
+    borderRadius: 10,
     borderWidth: 5,
     borderColor: 'white'
   },
@@ -532,6 +549,85 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 10,
     backgroundColor: 'white',
+  },
+  productItem: {
+    flexDirection: 'row',
+    marginVertical: 10,
+    alignItems: 'center',
+    padding: 10,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 10,
+    backgroundColor: '#fff',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3
+  },
+  productImage: {
+    width: 80,
+    height: 80,
+    marginRight: 10,
+    borderRadius: 10
+  },
+  productDetails: {
+    flex: 1
+  },
+  productTitle: {
+    fontSize: 16,
+    fontWeight: 'bold'
+  },
+  productPrice: {
+    fontSize: 14,
+    color: '#888'
+  },
+  productQuantity: {
+    fontSize: 14,
+    color: '#555'
+  },
+  text1: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginLeft: 20,
+    marginBottom: 10
+  },
+  shippingOptionsContainer: {
+    paddingLeft: 20,
+    paddingRight: 20
+  },
+
+  deliveryContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10,
+    marginVertical: 5,
+    borderRadius: 10,
+    backgroundColor: '#f8f8f8'
+  },
+  selectedDelivery: {
+    borderColor: Colors.PRIMARY,
+    borderWidth: 2
+  },
+  unselectedDelivery: {
+    borderColor: '#ddd',
+    borderWidth: 1
+  },
+  text2: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginLeft: 10
+  },
+  infoContainer: {
+    marginLeft: 'auto'
+  },
+  deliveryText1: {
+    fontSize: 14,
+    color: '#888'
+  },
+  text3: {
+    fontSize: 14,
+    color: '#333'
   },
   totalText: {
     fontSize: 20,
