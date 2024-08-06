@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, FlatList, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import imageMapping from './../../Components/imageMapping'; 
+
 export default function OrderDetailScreen() {
   const [orderDetails, setOrderDetails] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const getImageSource = (imageName) => {
+    return imageMapping[imageName]; 
+  };
 
   useEffect(() => {
     const fetchOrderDetails = async () => {
@@ -40,7 +46,7 @@ export default function OrderDetailScreen() {
   if (loading) {
     return (
       <View style={styles.container}>
-        <Text>Loading...</Text>
+        <Text style={styles.loadingText}>Loading...</Text>
       </View>
     );
   }
@@ -48,58 +54,70 @@ export default function OrderDetailScreen() {
   if (!orderDetails) {
     return (
       <View style={styles.container}>
-        <Text>No order details found.</Text>
+        <Text style={styles.noDataText}>No order details found.</Text>
       </View>
     );
   }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Orders</Text>
+      <Text style={styles.heading}>Order Details</Text>
       <FlatList
         data={orderDetails.products}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View style={styles.productContainer}>
-            <Image source={{ uri: item.image }} style={styles.productImage} />
+            <Image
+              source={getImageSource(item.image)}
+              style={styles.image}
+            />
             <View style={styles.productDetails}>
               <Text style={styles.productTitle}>{item.title}</Text>
-              <Text>Price: {item.price}</Text>
-              <Text>Size: {item.size}</Text>
-              <Text>Quantity: {item.quantity}</Text>
+              <Text style={styles.productText}>Price: {item.price}</Text>
+              <Text style={styles.productText}>Size: {item.size}</Text>
+              <Text style={styles.productText}>Quantity: {item.quantity}</Text>
             </View>
           </View>
         )}
       />
-    
+
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#fff',
-  
+    backgroundColor: '#f5f5f5',
+    marginTop:20
   },
   heading: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 16,
-    marginTop:20
+    marginBottom: 20,
+    color: '#333',
+  },
+  loadingText: {
+    fontSize: 18,
+    color: '#888',
+  },
+  noDataText: {
+    fontSize: 18,
+    color: '#888',
   },
   productContainer: {
     flexDirection: 'row',
-    marginBottom: 16,
     padding: 16,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#fff',
     borderRadius: 8,
+    marginBottom: 16,
+    elevation: 2,
   },
-  productImage: {
-    width: 80,
-    height: 80,
+  image: {
+    width: 100,
+    height: 100,
+    borderRadius: 8,
     marginRight: 16,
   },
   productDetails: {
@@ -109,19 +127,28 @@ const styles = StyleSheet.create({
   productTitle: {
     fontSize: 18,
     fontWeight: 'bold',
+    marginBottom: 8,
+    color: '#333',
+  },
+  productText: {
+    fontSize: 16,
+    color: '#666',
   },
   orderSummary: {
-    marginTop: 16,
     padding: 16,
-    backgroundColor: '#f1f1f1',
+    backgroundColor: '#fff',
     borderRadius: 8,
+    marginTop: 20,
+    elevation: 2,
   },
   address: {
     fontSize: 16,
     marginBottom: 8,
+    color: '#333',
   },
   total: {
     fontSize: 18,
     fontWeight: 'bold',
+    color: '#333',
   },
 });
