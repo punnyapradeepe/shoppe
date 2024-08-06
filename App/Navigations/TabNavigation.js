@@ -23,6 +23,7 @@ import JustForYou from '../../Components/JustForYou';
 import JustForYouDetail from '../Screens/JustForYouDetail';
 import clothingScreen from '../Screens/clothingScreen';
 import NewItemDetail from '../Screens/NewItemDetail';
+import orderDetailScreen from '../Screens/orderDetailScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack= createNativeStackNavigator();
@@ -109,6 +110,8 @@ const ShopScreenStack=()=>(
 <Stack.Screen name="shop" component={ShopScreen} options={{ headerShown: false }}/>
 <Stack.Screen name="shippingAddr" component={ShippingAddressScreen} options={{ headerShown:false}}/>
 <Stack.Screen name="payment" component={PaymentScreen} options={{ headerShown:false}}/>
+<Stack.Screen name="orderscreen" component={orderDetailScreen} options={{ headerShown:false}}/>
+
 </Stack.Navigator>
 )
 

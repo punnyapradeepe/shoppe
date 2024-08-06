@@ -63,13 +63,20 @@ const PaymentScreen = () => {
       const userId = await AsyncStorage.getItem('userid');
       if (userId) {
         // Fetch all orders
-        const response = await fetch('http://192.168.1.40:5000/myorder');
-        const data = await response.json();
-        const existingOrder = data.find(order => order.userId === userId);
+        const orderResponse = await fetch('http://192.168.1.40:5000/myorder');
+        const orderData = await orderResponse.json();
+        const existingOrder = orderData.find(order => order.userId === userId);
+  
+        // Fetch the address from mycart
+        const cartResponse = await fetch(`http://192.168.1.40:5000/mycart?userId=${userId}`);
+        const cartData = await cartResponse.json();
+        const cartItem = cartData.find(item => item.userId === userId);
+        const address = cartItem ? cartItem.address : '';
   
         const newOrder = {
           userId,
           products: cartItems,
+          address, // Add address to the new order
           total: totalAmount
         };
   
@@ -104,7 +111,7 @@ const PaymentScreen = () => {
               text: 'OK',
               onPress: () => {
                 // Navigate or reset state
-                navigation.navigate('OrderConfirmation'); // Example navigation
+                navigation.navigate('orderscreen'); // Example navigation
               }
             }
           ],
