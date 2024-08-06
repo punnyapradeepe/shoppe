@@ -54,7 +54,6 @@ const AllCategories = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <AntDesign name="arrowleft" size={24} color="black" onPress={() => navigation.goBack()} />
         <Text style={styles.headerTitle}>Shop</Text>
         <TextInput placeholder='Search' style={styles.textInput} />
         <View style={styles.cameraIcon}>

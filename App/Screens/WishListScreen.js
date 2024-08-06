@@ -13,7 +13,6 @@ const WishListScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Ionicons name="arrow-back-sharp" size={24} color="black" onPress={() => navigation.goBack()} />
         <Text style={styles.text}>Wishlist</Text>
       </View>
       <View style={styles.subHeader}>
@@ -57,7 +56,7 @@ paddingTop:20,
     fontFamily: 'RalewayB',
     fontSize: 30,
     fontWeight: 'bold',
-    paddingLeft: 10,
+   
   paddingTop:0
   },
   subHeader: {

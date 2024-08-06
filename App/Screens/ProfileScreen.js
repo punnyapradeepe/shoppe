@@ -59,7 +59,6 @@ export default function ProfileScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Ionicons name="arrow-back-sharp" size={34} color="black" onPress={() => navigation.goBack()} />
         <Text style={styles.SettingsText}>Settings</Text>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>

@@ -48,7 +48,6 @@ export default function ActivityScreen() {
     <View style={styles.screen}>
       <View style={styles.headerContainer}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Ionicons name="arrow-back-sharp" size={24} color="black" onPress={() => navigation.navigate('home')} />
           <Image source={require('./../../assets/Images/Image.png')} style={styles.image} />
         </View>
         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}>

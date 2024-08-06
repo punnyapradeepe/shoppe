@@ -160,7 +160,6 @@ export default function ShopScreen() {
     <View style={styles.container}>
       <View>
         <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start' }}>
-          <Ionicons name="arrow-back-sharp" size={24} color="black" onPress={() => navigation.goBack()} style={{ marginTop: 60, marginLeft: 20 }} />
           <Text style={styles.text}>Cart</Text>
           <View style={styles.quantityIndicator}>
             <Text style={styles.quantityText}>{cartItems.reduce((sum, item) => sum + item.quantity, 0)}</Text>
@@ -290,7 +289,7 @@ const styles = StyleSheet.create({
   },
   quantityIndicator: {
     position: 'absolute',
-    right: 250,
+    right: 300,
     top: 55,
     backgroundColor: Colors.PRIMARY,
     borderRadius: 50,
