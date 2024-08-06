@@ -67,6 +67,9 @@ const PaymentScreen = () => {
     fetchUserIDAndCartItems();
   }, []);
   
+
+
+  
   const handlePayment = async () => {
     try {
       const userId = await AsyncStorage.getItem('userid');
@@ -268,31 +271,66 @@ const closeModal = () => {
 
 
 
-const saveDetails = () => {
-  // Update stored values only for fields that were edited
-  if (isCardNumberEdited) {
-    setStoredCardNumber(cardNumber);
+const saveDetails = async () => {
+  try {
+    const userId = await AsyncStorage.getItem('userid');
+    if (!userId) {
+      console.error('User ID not found');
+      return;
+    }
+
+    // Create an object with the updated payment details
+    const updatedPaymentDetails = {
+      userId,
+      cardNumber,
+      cardHolderName,
+      expiryDate
+    };
+
+    // Check if the payment details already exist
+    const existingDetailsResponse = await fetch(`http://192.168.1.40:5000/cardDetails?userId=${userId}`);
+    const existingDetails = await existingDetailsResponse.json();
+
+    let response;
+    if (existingDetails && existingDetails.length > 0) {
+      // Update existing payment details
+      response = await fetch(`http://192.168.1.40:5000/cardDetails/${existingDetails[0].id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedPaymentDetails),
+      });
+    } else {
+      // Create new payment details
+      response = await fetch('http://192.168.1.40:5000/cardDetails', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedPaymentDetails),
+      });
+    }
+
+    if (response.ok) {
+      console.log('Payment details updated/created successfully');
+    } else {
+      console.error('Failed to update/create payment details:', response.statusText);
+    }
+  } catch (error) {
+    console.error('Error updating/creating payment details:', error);
   }
 
-  if (isCardHolderNameEdited) {
-    setStoredCardHolderName(cardHolderName);
-  }
-
-  if (isExpiryDateEdited) {
-    setStoredExpiryDate(expiryDate);
-  }
-
-  // Reset the edit tracking flags
+  // Update stored values and reset the edit tracking flags
+  setStoredCardNumber(cardNumber);
+  setStoredCardHolderName(cardHolderName);
+  setStoredExpiryDate(expiryDate);
   setIsCardNumberEdited(false);
   setIsCardHolderNameEdited(false);
   setIsExpiryDateEdited(false);
-
-  // Disable editing and close the modal
-  
   setIsEditable(false);
   setHasChangesBeenSaved(true);
   closeModal();
-
 };
 
 
@@ -319,8 +357,9 @@ const cancelChanges = () => {
   }
 
   setHasChangesBeenSaved(false); // Allow modal to be opened again
-    closeModal();
+  closeModal();
 };
+
 
 
   const renderProductItem = ({ item }) => (

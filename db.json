@@ -1138,5 +1138,15 @@
       "id": "26cf"
     }
   ],
-  "cardDetail": []
+  "cardDetails": [
+    {
+      "id": "01f5",
+      "userId": "96ff",
+      "cardNumber": [
+        "8545125469254565"
+      ],
+      "cardHolderName": "Punnya Pradeep E",
+      "expiryDate": "12/23"
+    }
+  ]
 }
