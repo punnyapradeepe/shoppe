@@ -8,7 +8,7 @@ import { ClrImg, EditBtn, Gift, GiftBox, Plus, SettingImg, TickImg, TickW } from
 import { useNavigation } from '@react-navigation/core';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import imageMapping from './../../Components/imageMapping';
-import { Alert } from 'react-native'; // Import Alert
+import { Alert } from 'react-native'; 
 
 const PaymentScreen = () => {
   const navigation = useNavigation();
@@ -18,12 +18,25 @@ const PaymentScreen = () => {
   const [voucherCode, setVoucherCode] = useState('');
   const [isVoucherModalVisible, setVoucherModalVisible] = useState(false);
   const [totalAmount, setTotalAmount] = useState(0);
-  const [cardNumber, setCardNumber] = useState(['', '', '', '']);
-  const [cardHolderName, setCardHolderName] = useState('');
-  const [expiryDate, setExpiryDate] = useState('');
+ 
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isEditable, setIsEditable] = useState(false);
-  const [wasExpress, setWasExpress] = useState(false); 
+  const [isEditModalVisible ,setIsEditModalVisible] = useState(false);
+ const [isEditable, setIsEditable] = useState(false);
+ const [cardNumber, setCardNumber] = useState(['', '', '', '']);
+ const [cardHolderName, setCardHolderName] = useState('');
+ const [expiryDate, setExpiryDate] = useState('');
+ const [wasExpress, setWasExpress] = useState(false); 
+  const [storedCardNumber, setStoredCardNumber] = useState(['* * * *', '* * * *', '* * * *', '1579']);
+  const [storedCardHolderName, setStoredCardHolderName] = useState('AMANDA MORGAN');
+  const [storedExpiryDate, setStoredExpiryDate] = useState('12/22');
+  const [backupCardNumber, setBackupCardNumber] = useState(['', '', '', '']);
+  const [backupCardHolderName, setBackupCardHolderName] = useState('');
+  const [backupExpiryDate, setBackupExpiryDate] = useState('');
+  const [isCardNumberEdited, setIsCardNumberEdited] = useState(false);
+  const [isCardHolderNameEdited, setIsCardHolderNameEdited] = useState(false);
+  const [isExpiryDateEdited, setIsExpiryDateEdited] = useState(false);
+  const [hasChangesBeenSaved, setHasChangesBeenSaved] = useState(false); 
+
 
   useEffect(() => {
     const fetchUserIDAndCartItems = async () => {
@@ -36,7 +49,7 @@ const PaymentScreen = () => {
             if (userCart) {
               setCartItems(userCart.products);
               setAddress(userCart.address);
-              setTotalAmount(userCart.total); // Set the total from the response
+              setTotalAmount(userCart.total);
             } else {
               console.log('No cart found for user ID:', userID);
             }
@@ -54,10 +67,6 @@ const PaymentScreen = () => {
     fetchUserIDAndCartItems();
   }, []);
   
-
-
- 
-
   const handlePayment = async () => {
     try {
       const userId = await AsyncStorage.getItem('userid');
@@ -151,10 +160,7 @@ const PaymentScreen = () => {
 };
 
 
-  const saveDetails = () => {
-    setIsEditable(false);
-    closeModal();
-  };
+
   const toggleEditable = () => {
     setIsEditable(!isEditable);
   };
@@ -163,19 +169,93 @@ const PaymentScreen = () => {
   };
  
   
-  const closeModal = () => {
-    setIsModalVisible(false);
-  };
+
   const handleApplyVoucher2 = () => {
    
-    setTotalAmount(24.65);
+    setTotalAmount(totalAmount-((5/100)*totalAmount));
     setVoucherModalVisible(false);
   };
 
-  const handleApplyVoucher = (amount) => {
-    setTotalAmount(amount);
+  const handleApplyVoucher = () => {
+    setTotalAmount(totalAmount-((15/100)*totalAmount));
     setVoucherModalVisible(false);
   };
+
+
+
+  const openModal = () => {
+    if (!hasChangesBeenSaved) {
+      setBackupCardNumber(storedCardNumber);
+      setBackupCardHolderName(storedCardHolderName);
+      setBackupExpiryDate(storedExpiryDate);
+      setCardNumber(storedCardNumber);
+      setCardHolderName(storedCardHolderName);
+      setExpiryDate(storedExpiryDate);
+      setIsModalVisible(true);
+    }
+  };
+
+const closeModal = () => {
+  setIsModalVisible(false);
+};
+
+
+
+
+const saveDetails = () => {
+  // Update stored values only for fields that were edited
+  if (isCardNumberEdited) {
+    setStoredCardNumber(cardNumber);
+  }
+
+  if (isCardHolderNameEdited) {
+    setStoredCardHolderName(cardHolderName);
+  }
+
+  if (isExpiryDateEdited) {
+    setStoredExpiryDate(expiryDate);
+  }
+
+  // Reset the edit tracking flags
+  setIsCardNumberEdited(false);
+  setIsCardHolderNameEdited(false);
+  setIsExpiryDateEdited(false);
+
+  // Disable editing and close the modal
+  
+  setIsEditable(false);
+  setHasChangesBeenSaved(true);
+  closeModal();
+
+};
+
+
+const cancelChanges = () => {
+  // Check if the card number was edited
+  if (isCardNumberEdited) {
+    setCardNumber(backupCardNumber);
+  } else {
+    setCardNumber(storedCardNumber);
+  }
+
+  // Check if the card holder name was edited
+  if (isCardHolderNameEdited) {
+    setCardHolderName(backupCardHolderName);
+  } else {
+    setCardHolderName(storedCardHolderName);
+  }
+
+  // Check if the expiry date was edited
+  if (isExpiryDateEdited) {
+    setExpiryDate(backupExpiryDate);
+  } else {
+    setExpiryDate(storedExpiryDate);
+  }
+
+  setHasChangesBeenSaved(false); // Allow modal to be opened again
+    closeModal();
+};
+
 
   const renderProductItem = ({ item }) => (
     <View style={styles.productItem}>
@@ -292,13 +372,30 @@ const PaymentScreen = () => {
 
           <View style={styles.addressContainer}>
             <Text style={styles.address}>Payment Method</Text>
-            <TouchableOpacity style={styles.editButton}>
+            <TouchableOpacity style={styles.editButton}  onPress={openModal}>
               <EditBtn />
             </TouchableOpacity>
           </View>
+          <TouchableOpacity style={styles.Card} >
+            <View style={styles.cardIcons}>
+              <View style={styles.iconLeft}>
+                <ClrImg />
+              </View>
+              <View style={styles.iconRight}>
+                <SettingImg />
+              </View>
+            </View>
 
-          <TouchableOpacity style={{backgroundColor:'lightblue',padding:20,borderRadius:20}} onPress={() => setIsModalVisible(true)}>
-          <Text>Card</Text>
+            <View style={styles.cardNumbers}>
+            {storedCardNumber.map((num, index) => (
+                <Text key={index}>{num}</Text>
+              ))}
+            </View>
+
+            <View style={styles.cardDetails}>
+            <Text>{storedCardHolderName}</Text>
+            <Text>{storedExpiryDate}</Text>
+            </View>
           </TouchableOpacity>
         </ScrollView>
       </View>
@@ -373,101 +470,75 @@ const PaymentScreen = () => {
 
       <TouchableWithoutFeedback onPress={closeModal}>
       <Modal
-      visible={isModalVisible}
-      onRequestClose={closeModal}
-      onBackdropPress={closeModal}
-    >
-      <View style={{marginTop:'auto',paddingHorizontal:100}}>
-      <View style={styles.modalContainer1}>
+        isVisible={isModalVisible}
+        onBackdropPress={closeModal}
+        onBackButtonPress={closeModal}
+        style={styles.modalContainer}
+      >
         <View style={styles.modalContent}>
-          <Text style={styles.modalTitle}>Payment Methods</Text>
-          <View style={styles.paymentContainer}>
-            <View style={styles.cardContainer}>
-              <View style={styles.cardIcons}>
-                <View style={styles.iconWrapper}>
-                  <ClrImg/>
-                </View>
-                <View style={styles.iconWrapper}>
-                  <SettingImg />
-                </View>
-              </View>
-
-              <View style={styles.cardNumberContainer}>
-                {cardNumber.map((num, index) => (
-                  <TextInput
-                    key={index}
-                    style={[
-                      styles.cardInput,
-                      {
-                        borderBottomColor: isEditable ? 'black' : 'transparent',
-                      },
-                    ]}
-                    editable={isEditable}
-                    value={num}
-                    placeholder="* * * *"
-                    keyboardType="numeric"
-                    maxLength={4}
-                    onChangeText={(text) => {
-                      if (/^\d*$/.test(text)) {
-                        const newCardNumber = [...cardNumber];
-                        newCardNumber[index] = text;
-                        setCardNumber(newCardNumber);
-                      }
-                    }}
-                  />
-                ))}
-              </View>
-
-              <View style={styles.cardHolderContainer}>
-                <TextInput
-                  style={[
-                    styles.cardHolderInput,
-                    {
-                      borderBottomColor: isEditable ? 'black' : 'transparent',
-                    },
-                  ]}
-                  editable={isEditable}
-                  value={cardHolderName}
-                  placeholder="AMANDA MORGAN"
-                  onChangeText={setCardHolderName}
-                />
-                <TextInput
-                  style={[
-                    styles.expiryDateInput,
-                    {
-                      borderBottomColor: isEditable ? 'black' : 'transparent',
-                    },
-                  ]}
-                  editable={isEditable}
-                  value={expiryDate}
-                  placeholder="MM/YY"
-                  keyboardType="numeric"
-                  maxLength={5}
-                  onChangeText={(text) => {
-                    let cleanedText = text.replace(/\D/g, '');
-                    if (cleanedText.length > 2) {
-                      cleanedText = cleanedText.slice(0, 2) + '/' + cleanedText.slice(2, 4);
-                    }
-                    setExpiryDate(cleanedText);
-                  }}
-                />
-              </View>
+          <Text style={styles.modalTitle}>Add Card</Text>
+          <Text style={styles.label}>Card Holder</Text>
+          <TextInput
+            style={styles.input}
+           placeholder='required'
+            onChangeText={(text) => {
+              setCardHolderName(text);
+              setIsCardHolderNameEdited(true);
+            }}
+          />
+          <Text style={styles.label}>Card Number</Text>
+          <TextInput
+            style={styles.input}
+           placeholder='required'
+           keyboardType="numeric"
+           maxLength={16}
+            onChangeText={(text) => {
+              const num = text.split(' ');
+              setCardNumber(num);
+              setIsCardNumberEdited(true);
+              
+            }}
+          />
+          <View style={styles.row}>
+            <View style={styles.column}>
+              <Text style={styles.label}>Expiry Date</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="MM/YY"
+                keyboardType="numeric"
+                maxLength={5}
+                onChangeText={(text) => {
+                  // Remove non-digit characters
+                  let cleanedText = text.replace(/\D/g, '');
+              
+                  // Format as MM/YY
+                  if (cleanedText.length > 2) {
+                    cleanedText = cleanedText.slice(0, 2) + '/' + cleanedText.slice(2, 4);
+                  }
+              
+                  // Set the formatted text
+                  setExpiryDate(cleanedText);
+                }}
+              />
             </View>
-
-            <TouchableOpacity style={styles.addButton} onPress={toggleEditable}>
-              <View style={styles.plusIcon}>
-                <Plus />
-              </View>
-            </TouchableOpacity>
+            <View style={styles.column}>
+              <Text style={styles.label}>CVV</Text>
+              <TextInput
+                style={styles.input}
+                placeholder='required'
+                keyboardType="numeric"
+                maxLength={3}
+                secureTextEntry
+             
+              />
+            </View>
           </View>
-
           <TouchableOpacity style={styles.saveButton} onPress={saveDetails}>
-            <Text style={styles.saveButtonText}>Save</Text>
+            <Text style={styles.saveButtonText}>Save Changes</Text>
           </TouchableOpacity>
+       
         </View>
-      </View>
-      </View>
-    </Modal>
+      </Modal>
 </TouchableWithoutFeedback> 
     </View>
 
@@ -531,6 +602,64 @@ const styles = StyleSheet.create({
   },
   editButton1: {
     marginLeft: 75,
+  },
+  Cardcontainer: {
+    flexDirection: 'row',
+    marginBottom: 20,
+    margin:30
+  },
+  Card: {
+    backgroundColor: '#f8f8ff',
+    paddingHorizontal: 30,
+    paddingVertical: 30,
+    borderRadius: 20,
+    flex: 1,
+  },
+  cardIcons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 50,
+  },
+  iconLeft: {
+    position: 'absolute',
+    left: -10,
+    top: -10,
+  },
+  iconRight: {
+    position: 'absolute',
+    right: -10,
+    top: -10,
+  },
+  cardNumbers: {
+    flexDirection: 'row',
+    gap:40,
+    marginBottom: 30,
+    marginTop:30
+  },
+  cardDetails: {
+    flexDirection: 'row',
+    gap:100,
+  },
+  Add: {
+    backgroundColor: Colors.PRIMARY,
+    paddingHorizontal: 20,
+    paddingVertical:20,
+    marginLeft: 5,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+   
+  },
+  addIcon: {
+    marginTop: 0,
+  },
+  subViews: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 10,
+    backgroundColor: '#f8f8ff',
+    marginBottom: 10,
+    borderRadius: 20,
   },
   editButton2: {
     marginLeft: 95,
@@ -652,7 +781,7 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     paddingTop: 10,
     paddingBottom: 20,
-    paddingHorizontal: 20, // Apply padding left and right here
+    paddingHorizontal: 20, 
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
@@ -977,4 +1106,58 @@ const styles = StyleSheet.create({
     alignSelf:'center',
     marginTop:6
   },
+  modalContainer: {
+    justifyContent:'flex-end',
+    margin:0
+    },
+    modalContent: {
+      backgroundColor: 'white',
+      padding: 20,
+      borderRadius: 10,
+    },
+    modalTitle: {
+      fontSize: 18,
+      fontWeight: 'bold',
+      marginBottom: 10,
+    },
+    label: {
+      marginBottom: 5,
+      color: '#333',
+    },
+    input: {
+      backgroundColor: '#f1f1f1',
+      padding: 10,
+      borderRadius: 5,
+      marginBottom: 10,
+    },
+    row: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+    column: {
+      flex: 1,
+      marginRight: 10,
+    },
+    saveButton: {
+      backgroundColor: Colors.PRIMARY,
+      padding: 10,
+      borderRadius: 5,
+      alignItems: 'center',
+      marginTop: 10,
+    },
+    saveButtonText: {
+      color: 'white',
+      fontWeight: 'bold',
+    },
+    cancelButton: {
+      backgroundColor: 'grey',
+      padding: 10,
+      borderRadius: 5,
+      alignItems: 'center',
+      marginTop: 10,
+    },
+    cancelButtonText: {
+      color: 'white',
+      fontWeight: 'bold',
+    },
 });

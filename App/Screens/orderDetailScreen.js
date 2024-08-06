@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, FlatList, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import imageMapping from './../../Components/imageMapping'; 
+import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/core';
+
 
 export default function OrderDetailScreen() {
   const [orderDetails, setOrderDetails] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const navigation = useNavigation();
   const getImageSource = (imageName) => {
     return imageMapping[imageName]; 
   };
@@ -61,7 +64,10 @@ export default function OrderDetailScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Order Details</Text>
+      <View style={{display:'flex', flexDirection:'row'}}>
+        <Ionicons name="arrow-back-sharp" size={34} color="black" onPress={() => navigation.goBack()} />
+     <Text style={styles.heading}>Order Details</Text>
+     </View>
       <FlatList
         data={orderDetails.products}
         keyExtractor={(item) => item.id}

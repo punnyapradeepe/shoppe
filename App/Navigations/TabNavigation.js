@@ -121,6 +121,8 @@ const ProfileScreenStack=()=>(
 <Stack.Screen name="paymentMethod" component={PaymentMethod} options={{ headerShown:false}}/>
 <Stack.Screen name="Shipping" component={Shipping} options={{ headerShown:false}}/>
 <Stack.Screen name="myprofile" component={MyProfile} options={{ headerShown:false}}/>
+<Stack.Screen name="orderscreen" component={orderDetailScreen} options={{ headerShown:false}}/>
+
 </Stack.Navigator>
 )
 

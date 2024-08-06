@@ -68,6 +68,9 @@ export default function ProfileScreen() {
           {renderRow('Profile', 'myprofile')}
           {renderRow('Shipping Address', 'Shipping')}
           {renderRow('Payment Method', 'paymentMethod')}
+          {renderRow('My orders', 'orderscreen')}
+         
+
         </View>
 
         <View style={styles.contentContainer}>
