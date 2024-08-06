@@ -68,7 +68,6 @@ export default function ProfileScreen() {
           {renderRow('Shipping Address', 'Shipping')}
           {renderRow('My orders', 'orderscreen')}
          
-
         </View>
 
         <View style={styles.contentContainer}>
