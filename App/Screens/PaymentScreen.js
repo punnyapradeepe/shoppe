@@ -67,6 +67,32 @@ const PaymentScreen = () => {
     fetchUserIDAndCartItems();
   }, []);
   
+  useEffect(() => {
+    const fetchCardDetails = async () => {
+      try {
+        const userId = await AsyncStorage.getItem('userid');
+        if (!userId) {
+          console.log('User ID not found in AsyncStorage');
+          return;
+        }
+
+        const response = await axios.get('http://192.168.1.40:5000/cardDetails');
+        const userCardDetails = response.data.find(details => details.userId === userId);
+
+        if (userCardDetails) {
+          setStoredCardNumber(userCardDetails.cardNumber);
+          setStoredCardHolderName(userCardDetails.cardHolderName);
+          setStoredExpiryDate(userCardDetails.expiryDate);
+        } else {
+          console.log('No card details found for user ID:', userId);
+        }
+      } catch (error) {
+        console.error('Error fetching card details:', error);
+      }
+    };
+
+    fetchCardDetails();
+  }, []);
 
 
   
@@ -492,10 +518,12 @@ const cancelChanges = () => {
             </View>
 
             <View style={styles.cardNumbers}>
-            {storedCardNumber.map((num, index) => (
-                <Text key={index}>{num}</Text>
-              ))}
-            </View>
+      {storedCardNumber.map((num, index) => (
+        <View key={index} style={styles.cardNumberGroup}>
+          <Text style={styles.cardNumberText}>{num}</Text>
+        </View>
+      ))}
+    </View>
 
             <View style={styles.cardDetails}>
             <Text>{storedCardHolderName}</Text>
@@ -1124,6 +1152,19 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 10,
     alignSelf:'baseline'
+  },
+   cardNumbers: {
+    flexDirection: 'row', // Aligns items horizontally
+    justifyContent: 'space-between', // Spaces out the groups
+  },
+  cardNumberGroup: {
+  marginBottom:40,
+    marginTop:40 // Adjusts space between groups
+  },
+  cardNumberText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    letterSpacing: 2, // Adds space between letters for readability
   },
   modalTitle: {
     fontSize: 20,
