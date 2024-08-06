@@ -1044,41 +1044,23 @@
   ],
   "cart": [
     {
-      "id": "15",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$18,00",
-      "image": "img115.png",
-      "size": "XL",
+      "id": "3",
       "userId": "96ff",
-      "quantity": 2
-    },
-    {
-      "id": "9",
       "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$30,00",
-      "image": "img109.png",
-      "size": "XS",
-      "userId": "96ff",
-      "quantity": 2
+      "price": "$21,00",
+      "image": "img103.png",
+      "size": "L",
+      "quantity": 1
     }
   ],
   "favorites": [
     {
-      "id": "61",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$20,00",
-      "image": "img161.png",
-      "size": "S",
-      "userId": "cf01",
-      "quantity": 1
-    },
-    {
-      "id": "67",
+      "id": "4",
       "title": "Lorem ipsum dolor sit amet consectetur.",
       "price": "$15,00",
-      "image": "img167.png",
-      "size": "L",
-      "userId": "cf01",
+      "image": "img104.png",
+      "size": "XS",
+      "userId": "96ff",
       "quantity": 1
     }
   ],
@@ -1087,27 +1069,18 @@
       "userId": "96ff",
       "products": [
         {
-          "id": "15",
-          "title": "Lorem ipsum dolor sit amet consectetur.",
-          "price": "$18,00",
-          "image": "img115.png",
-          "size": "XL",
+          "id": "3",
           "userId": "96ff",
-          "quantity": 2
-        },
-        {
-          "id": "9",
           "title": "Lorem ipsum dolor sit amet consectetur.",
-          "price": "$30,00",
-          "image": "img109.png",
-          "size": "XS",
-          "userId": "96ff",
-          "quantity": 2
+          "price": "$21,00",
+          "image": "img103.png",
+          "size": "L",
+          "quantity": 1
         }
       ],
       "address": "26, Duong So 2, Thao Dien Ward, An Phu, District 2, Ho Chi Minh city",
-      "total": 96,
-      "id": "b07f"
+      "total": 21,
+      "id": "ee25"
     }
   ],
   "myorder": [
@@ -1115,38 +1088,29 @@
       "userId": "96ff",
       "products": [
         {
-          "id": "15",
-          "title": "Lorem ipsum dolor sit amet consectetur.",
-          "price": "$18,00",
-          "image": "img115.png",
-          "size": "XL",
+          "id": "3",
           "userId": "96ff",
-          "quantity": 2
-        },
-        {
-          "id": "9",
           "title": "Lorem ipsum dolor sit amet consectetur.",
-          "price": "$30,00",
-          "image": "img109.png",
-          "size": "XS",
-          "userId": "96ff",
+          "price": "$21,00",
+          "image": "img103.png",
+          "size": "L",
           "quantity": 1
         }
       ],
       "address": "26, Duong So 2, Thao Dien Ward, An Phu, District 2, Ho Chi Minh city",
-      "total": 104.65,
-      "id": "26cf"
+      "total": 21,
+      "id": "a0b2"
     }
   ],
   "cardDetails": [
     {
+      "id": "8b7a",
       "userId": "96ff",
       "cardNumber": [
-        "8524657582565555"
+        "8521546665333333"
       ],
       "cardHolderName": "Punnya Pradeep E",
-      "expiryDate": "12/23",
-      "id": "01f5"
+      "expiryDate": "12/23"
     }
   ]
 }

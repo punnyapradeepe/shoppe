@@ -149,7 +149,7 @@ const PaymentScreen = () => {
               text: 'OK',
               onPress: () => {
                 // Navigate or reset state
-                navigation.navigate('orderscreen'); // Example navigation
+                 // Example navigation
               }
             }
           ],
