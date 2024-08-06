@@ -67,7 +67,6 @@ export default function ProfileScreen() {
           <Text style={styles.Text}>Personal</Text>
           {renderRow('Profile', 'myprofile')}
           {renderRow('Shipping Address', 'Shipping')}
-          {renderRow('Payment Method', 'paymentMethod')}
           {renderRow('My orders', 'orderscreen')}
          
 
