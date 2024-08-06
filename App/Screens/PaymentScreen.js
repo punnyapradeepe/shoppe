@@ -137,27 +137,7 @@ const PaymentScreen = () => {
   };
   
   
-  
-  
 
-
-
-
-
-  const handleShippingOptionSelect = (option) => {
-  if (option === 'Express') {
-    if (!wasExpress) {
-      setTotalAmount(prevTotal => prevTotal + 80); // Add $80 for express shipping
-      setWasExpress(true); // Mark as Express
-    }
-  } else {
-    if (wasExpress) {
-      setTotalAmount(prevTotal => prevTotal - 80); // Subtract $80 if switching from Express to Standard
-      setWasExpress(false); // Mark as not Express
-    }
-  }
-  setSelectedShipping(option);
-};
 
 
 
@@ -170,16 +150,102 @@ const PaymentScreen = () => {
  
   
 
-  const handleApplyVoucher2 = () => {
-   
-    setTotalAmount(totalAmount-((5/100)*totalAmount));
-    setVoucherModalVisible(false);
+  const handleShippingOptionSelect = (option) => {
+    let newTotalAmount = totalAmount;
+  
+    if (option === 'Express') {
+      if (!wasExpress) {
+        newTotalAmount += 80; // Add $80 for express shipping
+        setWasExpress(true); // Mark as Express
+      }
+    } else {
+      if (wasExpress) {
+        newTotalAmount -= 80; // Subtract $80 if switching from Express to Standard
+        setWasExpress(false); // Mark as not Express
+      }
+    }
+    setSelectedShipping(option);
+    setTotalAmount(newTotalAmount);
   };
+  
+  const [appliedVoucherType, setAppliedVoucherType] = useState(null); // Track the currently applied voucher
 
-  const handleApplyVoucher = () => {
-    setTotalAmount(totalAmount-((15/100)*totalAmount));
+const handleApplyVoucher2 = () => {
+  if (appliedVoucherType !== 'voucher2') {
+    // Revert the previously applied voucher
+    revertVoucher();
+
+    // Calculate the total amount before voucher discount
+    let adjustedTotalAmount = totalAmount;
+    if (wasExpress) {
+      adjustedTotalAmount -= 80; // Subtract $80 for express shipping
+    }
+
+    // Apply voucher discount
+    const voucherDiscount = 5 / 100;
+    const discount = voucherDiscount * adjustedTotalAmount;
+    const newTotalAmount = adjustedTotalAmount - discount;
+
+    // Add express shipping cost back if applicable
+    if (wasExpress) {
+      setTotalAmount(newTotalAmount + 80);
+    } else {
+      setTotalAmount(newTotalAmount);
+    }
+
+    // Mark this voucher as applied
+    setAppliedVoucherType('voucher2');
     setVoucherModalVisible(false);
-  };
+  }
+};
+
+const handleApplyVoucher = () => {
+  if (appliedVoucherType !== 'voucher') {
+    // Revert the previously applied voucher
+    revertVoucher();
+
+    // Calculate the total amount before voucher discount
+    let adjustedTotalAmount = totalAmount;
+    if (wasExpress) {
+      adjustedTotalAmount -= 80; // Subtract $80 for express shipping
+    }
+
+    // Apply voucher discount
+    const voucherDiscount = 15 / 100;
+    const discount = voucherDiscount * adjustedTotalAmount;
+    const newTotalAmount = adjustedTotalAmount - discount;
+
+    // Add express shipping cost back if applicable
+    if (wasExpress) {
+      setTotalAmount(newTotalAmount + 80);
+    } else {
+      setTotalAmount(newTotalAmount);
+    }
+
+    // Mark this voucher as applied
+    setAppliedVoucherType('voucher');
+    setVoucherModalVisible(false);
+  }
+};
+
+// Function to revert any previously applied voucher
+const revertVoucher = () => {
+  if (appliedVoucherType === 'voucher2') {
+    // If voucher2 was applied, revert its discount
+    setTotalAmount(prevTotal => {
+      const revertedAmount = prevTotal + (5 / 100) * (prevTotal - 80);
+      return wasExpress ? revertedAmount - 80 : revertedAmount;
+    });
+  } else if (appliedVoucherType === 'voucher') {
+    // If voucher was applied, revert its discount
+    setTotalAmount(prevTotal => {
+      const revertedAmount = prevTotal + (15 / 100) * (prevTotal - 80);
+      return wasExpress ? revertedAmount - 80 : revertedAmount;
+    });
+  }
+  setAppliedVoucherType(null); // Reset the applied voucher type
+};
+
 
 
 

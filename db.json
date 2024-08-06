@@ -1059,7 +1059,7 @@
       "image": "img109.png",
       "size": "XS",
       "userId": "96ff",
-      "quantity": 1
+      "quantity": 2
     }
   ],
   "favorites": [
@@ -1102,11 +1102,11 @@
           "image": "img109.png",
           "size": "XS",
           "userId": "96ff",
-          "quantity": 1
+          "quantity": 2
         }
       ],
       "address": "26, Duong So 2, Thao Dien Ward, An Phu, District 2, Ho Chi Minh city",
-      "total": 66,
+      "total": 96,
       "id": "b07f"
     }
   ],
