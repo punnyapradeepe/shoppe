@@ -206,12 +206,12 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
-    marginHorizontal: 5,
+  
   },
   deleteButton: {
     position: 'absolute',
     top: 60,
-    right: 260,
+    marginLeft:'auto'
   },
   flatList: {
     paddingBottom: 20,
