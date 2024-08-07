@@ -323,7 +323,7 @@ export const DeleteBtn =() =>(
 )
 
 export const MinusImg =() =>(
-  <Svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 30 30" fill="none">
+  <Svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 30 30" fill="none">
 <Path d="M29 15C29 22.732 22.732 29 15 29C7.26801 29 1 22.732 1 15C1 7.26801 7.26801 1 15 1C22.732 1 29 7.26801 29 15Z" stroke="#004BFE" strokeWidth="2"/>
 <Path d="M10.5 15.5H19.5" stroke="#004CFF" strokeWidth="2" strokeLinecap="round"/>
 </Svg>
@@ -344,7 +344,7 @@ export const Quantity =() =>(
 )
 
 export const MoreImg =()=>(
-  <Svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 30 30" fill="none">
+  <Svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 30 30" fill="none">
 <Path d="M29 15C29 22.732 22.732 29 15 29C7.26801 29 1 22.732 1 15C1 7.26801 7.26801 1 15 1C22.732 1 29 7.26801 29 15Z" stroke="#004BFE" strokeWidth="2"/>
 <G clipPath="url(#clip0_0_7297)">
 <Path d="M15 9.5V20.5" stroke="#004BFE" strokeWidth="2" strokeLinecap="round"/>

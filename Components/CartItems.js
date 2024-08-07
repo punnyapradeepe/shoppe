@@ -57,6 +57,7 @@ const CartItems = ({ updateTotalQuantity }) => {
           <Text>{item.size}</Text>
         </View>
         <View style={styles.priceContainer}>
+          <Text style={styles.itemPrice}>{item.price}</Text>
           <TouchableOpacity onPress={() => decreaseQuantity(item.id)} disabled={quantities[item.id] <= 1}>
             <MinusImg style={styles.icon} />
           </TouchableOpacity>
@@ -154,19 +155,18 @@ const styles = StyleSheet.create({
   priceContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-   
   },
   orgPrice: {
     fontSize: 14,
     color: 'red',
     textDecorationLine: 'line-through',
-  
   },
   itemPrice: {
     fontSize: 17,
     color: 'black',
     fontWeight: '700',
     fontFamily: 'Raleway',
+    marginRight: 5,
   },
   colorSizeContainer: {
     flexDirection: 'row',
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
   },
   itemSize: {
     fontSize: 12,
-    color:  'lightblue',
+    color: Colors.LIGHTBLUE,
     backgroundColor: '#E0F7FA',
     borderRadius: 5,
     width: 50,
@@ -201,17 +201,17 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   quantityBox: {
-
     backgroundColor: 'lightblue',
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
-  
+    paddingHorizontal: 5,
+    marginHorizontal: 5,
   },
   deleteButton: {
     position: 'absolute',
     top: 60,
-    marginLeft:'auto'
+    marginLeft: 'auto'
   },
   flatList: {
     paddingBottom: 20,
