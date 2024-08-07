@@ -1038,15 +1038,6 @@
   "cart": [],
   "favorites": [
     {
-      "id": "15",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$18,00",
-      "image": "img115.png",
-      "size": "XL",
-      "userId": "34a9",
-      "quantity": 1
-    },
-    {
       "id": "14",
       "title": "Lorem ipsum dolor sit amet consectetur.",
       "price": "$15,00",
@@ -1061,17 +1052,26 @@
       "userId": "34a9",
       "products": [
         {
-          "id": "69",
+          "id": "15",
           "userId": "34a9",
           "title": "Lorem ipsum dolor sit amet consectetur.",
-          "price": "$15,00",
-          "image": "img169.png",
+          "price": "$18,00",
+          "image": "img115.png",
+          "size": "XL",
+          "quantity": 1
+        },
+        {
+          "id": "11",
+          "title": "Lorem ipsum dolor sit amet consectetur.",
+          "price": "$17,00",
+          "image": "img111.png",
           "size": "S",
-          "quantity": 2
+          "userId": "34a9",
+          "quantity": 1
         }
       ],
       "address": "26, Duong So 2, Thao Dien Ward, An Phu, District 2, Ho Chi Minh city",
-      "total": 30,
+      "total": 35,
       "id": "bfca"
     }
   ],
@@ -1103,19 +1103,35 @@
           "price": "$15,00",
           "size": "S",
           "quantity": 2
+        },
+        {
+          "id": "15",
+          "image": "img115.png",
+          "title": "Lorem ipsum dolor sit amet consectetur.",
+          "price": "$18,00",
+          "size": "XL",
+          "quantity": 1
+        },
+        {
+          "id": "11",
+          "image": "img111.png",
+          "title": "Lorem ipsum dolor sit amet consectetur.",
+          "price": "$17,00",
+          "size": "S",
+          "quantity": 1
         }
       ]
     }
   ],
   "cardDetails": [
     {
-      "id": "3df5",
       "userId": "34a9",
       "cardNumber": [
         "8524645855552167"
       ],
       "cardHolderName": "Punnya Pradeep E",
-      "expiryDate": "12/23"
+      "expiryDate": "12/23",
+      "id": "3df5"
     }
   ],
   "buynow": [
@@ -1124,6 +1140,15 @@
       "title": "Lorem ipsum dolor sit amet consectetur.",
       "price": "$17,00",
       "image": "img101.png",
+      "size": "S",
+      "userId": "34a9",
+      "quantity": 1
+    },
+    {
+      "id": "11",
+      "title": "Lorem ipsum dolor sit amet consectetur.",
+      "price": "$17,00",
+      "image": "img111.png",
       "size": "S",
       "userId": "34a9",
       "quantity": 1

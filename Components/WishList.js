@@ -222,7 +222,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   addButton: {
-    marginRight: 60,
+ 
   },
   flatList: {
     paddingBottom: 20,
