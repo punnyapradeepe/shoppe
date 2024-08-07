@@ -1035,17 +1035,7 @@
       "phoneNumber": "8086658470"
     }
   ],
-  "cart": [
-    {
-      "id": "69",
-      "userId": "34a9",
-      "title": "Lorem ipsum dolor sit amet consectetur.",
-      "price": "$15,00",
-      "image": "img169.png",
-      "size": "S",
-      "quantity": 2
-    }
-  ],
+  "cart": [],
   "favorites": [
     {
       "id": "15",
@@ -1069,9 +1059,19 @@
   "mycart": [
     {
       "userId": "34a9",
-      "products": [],
+      "products": [
+        {
+          "id": "69",
+          "userId": "34a9",
+          "title": "Lorem ipsum dolor sit amet consectetur.",
+          "price": "$15,00",
+          "image": "img169.png",
+          "size": "S",
+          "quantity": 2
+        }
+      ],
       "address": "26, Duong So 2, Thao Dien Ward, An Phu, District 2, Ho Chi Minh city",
-      "total": 0,
+      "total": 30,
       "id": "bfca"
     }
   ],
@@ -1095,6 +1095,14 @@
           "price": "$21,00",
           "size": "S",
           "quantity": 1
+        },
+        {
+          "id": "69",
+          "image": "img169.png",
+          "title": "Lorem ipsum dolor sit amet consectetur.",
+          "price": "$15,00",
+          "size": "S",
+          "quantity": 2
         }
       ]
     }
