@@ -1,5 +1,5 @@
-import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useState, useEffect } from 'react'
+import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
 import { DeleteBtn, MinusImg, MoreImg } from '../App/Utils/SvgIcons';
 import Colors from '../App/Utils/Colors';
 
@@ -57,15 +57,14 @@ const CartItems = ({ updateTotalQuantity }) => {
           <Text>{item.size}</Text>
         </View>
         <View style={styles.priceContainer}>
-          <Text style={styles.itemPrice}>{item.price}</Text>
           <TouchableOpacity onPress={() => decreaseQuantity(item.id)} disabled={quantities[item.id] <= 1}>
-            <MinusImg />
+            <MinusImg style={styles.icon} />
           </TouchableOpacity>
           <View style={styles.quantityBox}>
             <Text>{quantities[item.id] || 1}</Text>
           </View>
           <TouchableOpacity onPress={() => increaseQuantity(item.id)}>
-            <MoreImg />
+            <MoreImg style={styles.icon} />
           </TouchableOpacity>
         </View>
         <TouchableOpacity style={styles.deleteButton}>
@@ -127,7 +126,7 @@ const styles = StyleSheet.create({
   itemContainer: {
     flexDirection: 'row',
     marginVertical: 10,
-    marginHorizontal:1,
+    marginHorizontal: 1,
     padding: 10,
     backgroundColor: Colors.WHITE,
     borderRadius: 10,
@@ -203,12 +202,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   quantityBox: {
-    width: 30,
-    height: 30,
+    width: 10,
+    height: 10,
     backgroundColor: 'lightblue',
-    borderRadius: 10,
+    borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
+    marginHorizontal: 5,
   },
   deleteButton: {
     position: 'absolute',
@@ -218,6 +218,8 @@ const styles = StyleSheet.create({
   flatList: {
     paddingBottom: 20,
   },
+  icon: {
+    width: 10,
+    height: 10,
+  },
 });
-
-

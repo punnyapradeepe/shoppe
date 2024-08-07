@@ -1035,18 +1035,18 @@
       "phoneNumber": "8086658470"
     }
   ],
-  "cart": [],
-  "favorites": [
+  "cart": [
     {
       "id": "14",
+      "userId": "34a9",
       "title": "Lorem ipsum dolor sit amet consectetur.",
       "price": "$15,00",
       "image": "img114.png",
       "size": "XS",
-      "userId": "34a9",
       "quantity": 1
     }
   ],
+  "favorites": [],
   "mycart": [
     {
       "userId": "34a9",
