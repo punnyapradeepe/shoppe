@@ -105,9 +105,11 @@ const styles = StyleSheet.create({
   },
   profileImageContainer: {
     position: 'relative',
+     marginTop:100
   },
   profileImage: {
     borderRadius: 99,
+    
   },
   greetingText: {
     fontSize: 30,
@@ -137,15 +139,14 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   continueButton: {
-    marginTop: 50,
+    marginTop: 100,
     backgroundColor: Colors.PRIMARY,
     borderRadius: 99,
-    paddingVertical: 10,
-    paddingHorizontal: 40,
+    paddingVertical: 20,
+    paddingHorizontal: 150,
     alignItems: 'center',
     justifyContent: 'center',
-    height: 60,
-    width: 300,
+  
   },
   continueButtonText: {
     color: Colors.WHITE,
@@ -154,7 +155,7 @@ const styles = StyleSheet.create({
   notYouContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: '25%',
+    marginTop: 20,
   },
   circleButton: {
     width: 30,

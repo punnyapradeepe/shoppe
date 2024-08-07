@@ -160,10 +160,12 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: 'white',
     marginBottom: 10,
+    
   },
   rowRight: {
     flexDirection: 'row',
     alignItems: 'center',
+  
   },
   Text: {
     fontSize: 20,

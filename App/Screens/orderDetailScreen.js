@@ -1,50 +1,53 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, FlatList, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import imageMapping from './../../Components/imageMapping'; 
 import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/core';
-
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
 export default function OrderDetailScreen() {
   const [orderDetails, setOrderDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
+
   const getImageSource = (imageName) => {
     return imageMapping[imageName]; 
   };
 
-  useEffect(() => {
-    const fetchOrderDetails = async () => {
-      try {
-        const userId = await AsyncStorage.getItem('userid');
-        console.log('Retrieved User ID:', userId);
-        
-        if (userId) {
-          const response = await fetch(`http://192.168.1.40:5000/myorder`);
-          const data = await response.json();
-          console.log('Fetched Data:', data);
+  const fetchOrderDetails = async () => {
+    try {
+      const userId = await AsyncStorage.getItem('userid');
+      console.log('Retrieved User ID:', userId);
 
-          const userOrder = data.find(order => order.userId === userId);
-          console.log('User Order:', userOrder);
+      if (userId) {
+        const response = await fetch(`http://192.168.1.40:5000/myorder`);
+        const data = await response.json();
+        console.log('Fetched Data:', data);
 
-          if (userOrder) {
-            setOrderDetails(userOrder);
-          } else {
-            console.log('No order found for this user.');
-          }
+        const userOrder = data.find(order => order.userId === userId);
+        console.log('User Order:', userOrder);
+
+        if (userOrder) {
+          setOrderDetails(userOrder);
         } else {
-          console.log('User ID not found in AsyncStorage');
+          console.log('No order found for this user.');
         }
-      } catch (error) {
-        console.error('Error fetching order details:', error);
-      } finally {
-        setLoading(false);
+      } else {
+        console.log('User ID not found in AsyncStorage');
       }
-    };
+    } catch (error) {
+      console.error('Error fetching order details:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchOrderDetails();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      setLoading(true);
+      fetchOrderDetails();
+    }, [])
+  );
 
   if (loading) {
     return (
@@ -64,11 +67,13 @@ export default function OrderDetailScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={{display:'flex', flexDirection:'row'}}>
+      <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
         <Ionicons name="arrow-back-sharp" size={34} color="black" onPress={() => navigation.goBack()} />
-     <Text style={styles.heading}>Order Details</Text>
-     </View>
+        <Text style={styles.heading}>Order Details</Text>
+      </View>
       <FlatList
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}
         data={orderDetails.products}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
@@ -86,7 +91,6 @@ export default function OrderDetailScreen() {
           </View>
         )}
       />
-
     </View>
   );
 }
@@ -96,12 +100,12 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: '#f5f5f5',
-    marginTop:20
+    marginTop: 20,
   },
   heading: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginLeft: 10,
     color: '#333',
   },
   loadingText: {

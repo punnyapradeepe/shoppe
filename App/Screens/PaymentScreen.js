@@ -96,72 +96,68 @@ const PaymentScreen = () => {
 
 
   
-  const handlePayment = async () => {
+  const saveOrderAndClearCart = async () => {
     try {
+      // Retrieve the user ID from AsyncStorage
       const userId = await AsyncStorage.getItem('userid');
-      if (userId) {
-        // Fetch all orders
-        const orderResponse = await fetch('http://192.168.1.40:5000/myorder');
-        const orderData = await orderResponse.json();
-        const existingOrder = orderData.find(order => order.userId === userId);
-  
-        // Fetch the address from mycart
-        const cartResponse = await fetch(`http://192.168.1.40:5000/mycart?userId=${userId}`);
-        const cartData = await cartResponse.json();
-        const cartItem = cartData.find(item => item.userId === userId);
-        const address = cartItem ? cartItem.address : '';
-  
-        const newOrder = {
-          userId,
-          products: cartItems,
-          address, // Add address to the new order
-          total: totalAmount
-        };
-  
-        let requestOptions;
-        if (existingOrder) {
-          // Update existing order
-          requestOptions = {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(newOrder),
-          };
-          await fetch(`http://192.168.1.40:5000/myorder/${existingOrder.id}`, requestOptions);
-        } else {
-          // Create new order
-          requestOptions = {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(newOrder),
-          };
-          await fetch('http://192.168.1.40:5000/myorder', requestOptions);
-        }
-  
-        Alert.alert(
-          'Success',
-          'Order placed successfully!',
-          [
-            {
-              text: 'OK',
-              onPress: () => {
-                // Navigate or reset state
-                 // Example navigation
-              }
-            }
-          ],
-          { cancelable: false }
-        );
-      } else {
+      if (!userId) {
         console.log('User ID not found in AsyncStorage');
-        Alert.alert('Error', 'User ID not found.');
+        return;
       }
+  
+      // Fetch cart items for the user
+      const cartResponse = await axios.get('http://192.168.1.40:5000/cart');
+      const userCart = cartResponse.data.filter(item => item.userId === userId);
+  
+      if (userCart.length === 0) {
+        console.log('No items in cart for this user.');
+        return;
+      }
+  
+      // Create order details from cart items
+      const orderDetails = {
+        userId,
+        products: userCart.map(item => ({
+          id: item.id,
+          image: item.image,
+          title: item.title,
+          price: item.price,
+          size: item.size,
+          quantity: item.quantity,
+        })),
+      };
+  
+      // Check if an order for the user already exists
+      const orderResponse = await axios.get('http://192.168.1.40:5000/myorder');
+      const existingOrder = orderResponse.data.find(order => order.userId === userId);
+  
+      if (existingOrder) {
+        // Update the existing order using PUT
+        await axios.put(`http://192.168.1.40:5000/myorder/${existingOrder.id}`, {
+          ...existingOrder,
+          products: [...existingOrder.products, ...orderDetails.products]
+        });
+        console.log('Order updated successfully!');
+      } else {
+        // Save the new order using POST
+        await axios.post('http://192.168.1.40:5000/myorder', orderDetails);
+        console.log('Order placed successfully!');
+      }
+  
+      // Show success alert
+      Alert.alert(
+        "Order Placed",
+        "Your order has been placed successfully!",
+        [{ text: "OK" }]
+      );
+  
+      // Remove cart items
+      for (const item of userCart) {
+        await axios.delete(`http://192.168.1.40:5000/cart/${item.id}`);
+      }
+      console.log('Cart items removed successfully!');
     } catch (error) {
-      console.error('Error placing order:', error);
-      Alert.alert('Error', 'Failed to place order: ' + (error.message || 'Unknown error'));
+      console.error('Error saving order and clearing cart:', error);
     }
   };
   
@@ -682,7 +678,7 @@ const cancelChanges = () => {
     <View style={styles.footer}>
         <Text style={styles.totalText}>Total: ${totalAmount.toFixed(2)}</Text>
         
-        <TouchableOpacity style={styles.checkoutButton} onPress={handlePayment}>
+        <TouchableOpacity style={styles.checkoutButton} onPress={saveOrderAndClearCart}>
         <Text style={styles.checkoutButtonText}>Pay</Text>
         </TouchableOpacity>
       </View>
