@@ -103,6 +103,36 @@ const JustForYouDetail = ({ route }) => {
     }
   };
 
+
+  const handleBuyNowPress = async (product) => {
+    try {
+      const userId = await AsyncStorage.getItem('userid');
+      const productData = {
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        image: product.image,
+        size: product.size,
+        userId: userId,
+        quantity: 1
+      };
+
+      // Save product details to the server
+      await fetch('http://192.168.1.40:5000/buynow', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(productData),
+      });
+
+      // Optionally, handle navigation or show a success message
+      console.log('Product saved for Buy Now');
+    } catch (error) {
+      console.error('Failed to save product for Buy Now:', error);
+    }
+  };
+
   if (!product) {
     return (
       <SafeAreaView style={styles.safeArea}>
@@ -178,7 +208,7 @@ const JustForYouDetail = ({ route }) => {
         <JustForYou/>
         <FlashSale/>
       </ScrollView>
-      <AddToCart product={product} onAddToCartPress={handleAddToCartPress} onFavPress={handleFavPress} />
+      <AddToCart product={product} onAddToCartPress={handleAddToCartPress} onFavPress={handleFavPress} onBuyNowPress={handleBuyNowPress} />
     </SafeAreaView>
   );
 };
