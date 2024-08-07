@@ -68,7 +68,7 @@ const TabNavigation = () => {
         component={CategoriesStack}
         listeners={({ navigation }) => ({
           tabPress: e => {
-            e.preventDefault(); // Prevent default behavior
+            e.preventDefault(); 
             navigation.navigate('Categoriesstack');
             navigation.reset({
               index: 0,
