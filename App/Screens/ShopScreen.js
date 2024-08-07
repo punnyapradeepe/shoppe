@@ -289,7 +289,7 @@ const styles = StyleSheet.create({
   },
   quantityIndicator: {
     position: 'absolute',
-    right: 300,
+  marginLeft:80,
     top: 55,
     backgroundColor: Colors.PRIMARY,
     borderRadius: 50,
