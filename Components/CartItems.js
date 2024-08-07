@@ -190,10 +190,9 @@ const styles = StyleSheet.create({
   },
   itemSize: {
     fontSize: 12,
-    color: Colors.LIGHTBLUE,
+    color:  'lightblue',
     backgroundColor: '#E0F7FA',
     borderRadius: 5,
-    padding: 2,
     width: 50,
     height: 25,
     alignContent: 'center',
@@ -202,8 +201,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   quantityBox: {
-    width: 10,
-    height: 10,
+
     backgroundColor: 'lightblue',
     borderRadius: 5,
     alignItems: 'center',

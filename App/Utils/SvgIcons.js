@@ -323,14 +323,14 @@ export const DeleteBtn =() =>(
 )
 
 export const MinusImg =() =>(
-  <Svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+  <Svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 30 30" fill="none">
 <Path d="M29 15C29 22.732 22.732 29 15 29C7.26801 29 1 22.732 1 15C1 7.26801 7.26801 1 15 1C22.732 1 29 7.26801 29 15Z" stroke="#004BFE" strokeWidth="2"/>
 <Path d="M10.5 15.5H19.5" stroke="#004CFF" strokeWidth="2" strokeLinecap="round"/>
 </Svg>
 )
 
 export const Quantity =() =>(
-  <Svg xmlns="http://www.w3.org/2000/svg" width="37" height="30" viewBox="0 0 37 30" fill="none">
+  <Svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 37 30" fill="none">
 <G clip-path="url(#clip0_0_7289)">
 <Rect width="37" height="30" rx="7" fill="#E5EBFC"/>
 <Path d="M22.816 20.72V22H17.072V20.72H19.344V14.48C19.248 14.608 19.0987 14.7467 18.896 14.896C18.6933 15.0347 18.464 15.168 18.208 15.296C17.9627 15.4133 17.7067 15.5147 17.44 15.6C17.1733 15.6853 16.9387 15.728 16.736 15.728V14.384C16.9707 14.384 17.232 14.32 17.52 14.192C17.808 14.0533 18.08 13.8987 18.336 13.728C18.6027 13.5467 18.8267 13.376 19.008 13.216C19.2 13.0453 19.312 12.928 19.344 12.864H20.784V20.72H22.816Z" fill="black"/>
@@ -344,7 +344,7 @@ export const Quantity =() =>(
 )
 
 export const MoreImg =()=>(
-  <Svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+  <Svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 30 30" fill="none">
 <Path d="M29 15C29 22.732 22.732 29 15 29C7.26801 29 1 22.732 1 15C1 7.26801 7.26801 1 15 1C22.732 1 29 7.26801 29 15Z" stroke="#004BFE" strokeWidth="2"/>
 <G clipPath="url(#clip0_0_7297)">
 <Path d="M15 9.5V20.5" stroke="#004BFE" strokeWidth="2" strokeLinecap="round"/>
