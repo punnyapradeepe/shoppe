@@ -372,7 +372,7 @@ const styles = StyleSheet.create({
   itemPrice: {
     fontSize: 16,
     fontWeight: 'bold',
-    marginRight:20
+    marginRight:2
   },
   quantityBox: {
     width:30,
