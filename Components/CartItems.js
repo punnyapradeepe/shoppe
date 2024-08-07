@@ -154,13 +154,13 @@ const styles = StyleSheet.create({
   priceContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 5,
+   
   },
   orgPrice: {
     fontSize: 14,
     color: 'red',
     textDecorationLine: 'line-through',
-    marginRight: 5,
+  
   },
   itemPrice: {
     fontSize: 17,
