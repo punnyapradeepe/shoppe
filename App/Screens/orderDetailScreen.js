@@ -20,7 +20,7 @@ export default function OrderDetailScreen() {
       console.log('Retrieved User ID:', userId);
 
       if (userId) {
-        const response = await fetch(`http://192.168.1.40:5000/myorder`);
+        const response = await fetch(`https://json-shoppe.onrender.com/myorder`);
         const data = await response.json();
         console.log('Fetched Data:', data);
 

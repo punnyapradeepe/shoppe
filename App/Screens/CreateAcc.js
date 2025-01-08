@@ -59,7 +59,7 @@ const CreateAcc = () => {
     }
 
     try {
-      const checkEmailUrl = `http://192.168.1.40:5000/users?email=${encodeURIComponent(email)}`;
+      const checkEmailUrl = `https://json-shoppe.onrender.com/users?email=${encodeURIComponent(email)}`;
       const emailResponse = await fetch(checkEmailUrl);
       if (!emailResponse.ok) {
         throw new Error('Failed to check email existence');
@@ -75,7 +75,7 @@ const CreateAcc = () => {
         setEmailExists(false);
       }
 
-      const createUserUrl = 'http://192.168.1.40:5000/users';
+      const createUserUrl = 'https://json-shoppe.onrender.com/users';
       const response = await fetch(createUserUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

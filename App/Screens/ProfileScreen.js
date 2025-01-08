@@ -29,7 +29,7 @@ export default function ProfileScreen() {
         return;
       }
 
-      const response = await fetch(`http://192.168.1.40:5000/users/${userId}`, {
+      const response = await fetch(`https://json-shoppe.onrender.com/users/${userId}`, {
         method: 'DELETE',
       });
 

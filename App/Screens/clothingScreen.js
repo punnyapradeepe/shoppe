@@ -12,7 +12,7 @@ const CategoryScreen = () => {
   const { category } = route.params;
 
   useEffect(() => {
-    fetch(`http://192.168.1.40:5000/products?category=${category}`)
+    fetch(`https://json-shoppe.onrender.com/products?category=${category}`)
       .then(response => response.json())
       .then(data => setProducts(data))
       .catch(error => console.error('Error fetching data:', error));

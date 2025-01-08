@@ -33,12 +33,12 @@ const WishList = () => {
 
   const handleAddToCart = async (item) => {
     try {
-      const response = await fetch(`http://192.168.1.40:5000/cart?userId=${userId}`);
+      const response = await fetch(`https://json-shoppe.onrender.com/cart?userId=${userId}`);
       const cartItems = await response.json();
       const existingItem = cartItems.find(cartItem => cartItem.id === item.id);
 
       if (existingItem) {
-        await fetch(`http://192.168.1.40:5000/cart/${existingItem.id}`, {
+        await fetch(`https://json-shoppe.onrender.com/cart/${existingItem.id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -47,7 +47,7 @@ const WishList = () => {
           }),
         });
       } else {
-        await fetch('http://192.168.1.40:5000/cart', {
+        await fetch('https://json-shoppe.onrender.com/cart', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -58,7 +58,7 @@ const WishList = () => {
         });
       }
 
-      await fetch(`http://192.168.1.40:5000/favorites/${item.id}`, {
+      await fetch(`https://json-shoppe.onrender.com/favorites/${item.id}`, {
         method: 'DELETE',
       });
 
@@ -70,7 +70,7 @@ const WishList = () => {
 
   const handleDelete = async (itemId) => {
     try {
-      await fetch(`http://192.168.1.40:5000/favorites/${itemId}`, {
+      await fetch(`https://json-shoppe.onrender.com/favorites/${itemId}`, {
         method: 'DELETE',
       });
 
@@ -82,7 +82,7 @@ const WishList = () => {
 
   const fetchFavorites = async (userId) => {
     try {
-      const response = await fetch(`http://192.168.1.40:5000/favorites?userId=${userId}`);
+      const response = await fetch(`https://json-shoppe.onrender.com/favorites?userId=${userId}`);
       const data = await response.json();
       setFavorites(data);
     } catch (error) {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, Alert, Modal } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import Colors from '../Utils/Colors';
 import { StarImgClr, StarImgLayout } from '../Utils/SvgIcons';
@@ -11,13 +11,14 @@ import FlashSale from './../../Components/FlashSale';
 import JustForYou from '../../Components/JustForYou';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+
 const JustForYouDetail = ({ route }) => {
   const { id } = route.params;
   const navigation = useNavigation();
   const [product, setProduct] = useState(null);
 
   useEffect(() => {
-    fetch(`http://192.168.1.40:5000/products/${id}`)
+    fetch(`https://json-shoppe.onrender.com/products/${id}`)
       .then(response => response.json())
       .then(data => setProduct(data))
       .catch(error => {
@@ -43,12 +44,12 @@ const JustForYouDetail = ({ route }) => {
         quantity: 1
       };
 
-      const response = await fetch('http://192.168.1.40:5000/cart');
+      const response = await fetch('https://json-shoppe.onrender.com/cart');
       const cartItems = await response.json();
       const existingItem = cartItems.find(item => item.id === product.id && item.userId === userId);
 
       if (existingItem) {
-        await fetch(`http://192.168.1.40:5000/cart/${existingItem.id}`, {
+        await fetch(`https://json-shoppe.onrender.com/cart/${existingItem.id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -59,7 +60,7 @@ const JustForYouDetail = ({ route }) => {
           }),
         });
       } else {
-        await fetch('http://192.168.1.40:5000/cart', {
+        await fetch('https://json-shoppe.onrender.com/cart', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -67,39 +68,10 @@ const JustForYouDetail = ({ route }) => {
           body: JSON.stringify(productData),
         });
       }
+
+      navigation.navigate('Shop')
     } catch (error) {
       console.error('Failed to add or update cart item:', error);
-    }
-  };
-
-  const handleFavPress = async (product) => {
-    try {
-      const userId = await AsyncStorage.getItem('userid');
-      const productData = {
-        id: product.id,
-        title: product.title,
-        price: product.price,
-        image: product.image,
-        size: product.size,
-        userId: userId,
-        quantity:1
-      };
-
-      const response = await fetch('http://192.168.1.40:5000/favorites');
-      const favoriteItems = await response.json();
-      const existingItem = favoriteItems.find(item => item.id === product.id && item.userId === userId);
-
-      if (!existingItem) {
-        await fetch('http://192.168.1.40:5000/favorites', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(productData),
-        });
-      }
-    } catch (error) {
-      console.error('Failed to add favorite item:', error);
     }
   };
 
@@ -117,19 +89,57 @@ const JustForYouDetail = ({ route }) => {
         quantity: 1
       };
 
-      // Save product details to the server
-      await fetch('http://192.168.1.40:5000/buynow', {
+      await fetch('https://json-shoppe.onrender.com/buynow', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(productData),
       });
-
-      // Optionally, handle navigation or show a success message
       console.log('Product saved for Buy Now');
+      console.log('Product Data:', productData);
+      navigation.navigate('shop');
     } catch (error) {
       console.error('Failed to save product for Buy Now:', error);
+    }
+  };
+
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const handleFavPress = async (product) => {
+    try {
+      const userId = await AsyncStorage.getItem('userid');
+      const productData = {
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        image: product.image,
+        size: product.size,
+        userId: userId,
+        quantity: 1,
+      };
+
+      const response = await fetch('https://json-shoppe.onrender.com/favorites');
+      const favoriteItems = await response.json();
+      const existingItem = favoriteItems.find(
+        (item) => item.id === product.id && item.userId === userId
+      );
+
+      if (!existingItem) {
+        await fetch('https://json-shoppe.onrender.com/favorites', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(productData),
+        });
+      }
+
+      setIsModalVisible(true);
+      setTimeout(() => setIsModalVisible(false), 2000); 
+    } catch (error) {
+      console.error('Failed to add favorite item:', error);
     }
   };
 
@@ -164,7 +174,7 @@ const JustForYouDetail = ({ route }) => {
           alignItems: 'center',
         }}>
           <Text style={{
-            fontSize: 18,
+            fontSize: 18, 
             fontWeight: 'bold',
             color: '#000' 
           }}>
@@ -209,6 +219,21 @@ const JustForYouDetail = ({ route }) => {
         <FlashSale/>
       </ScrollView>
       <AddToCart product={product} onAddToCartPress={handleAddToCartPress} onFavPress={handleFavPress} onBuyNowPress={handleBuyNowPress} />
+      
+
+      <Modal
+        visible={isModalVisible}
+        transparent={true}
+        animationType="fade"
+        onRequestClose={() => setIsModalVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <AntDesign name="heart" size={25} color="red" />
+            <Text style={styles.modalText}>Item added to Favorites!</Text>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 };
@@ -304,6 +329,23 @@ const styles = StyleSheet.create({
     color: '#333',
     textAlign: 'center',
     marginTop: 50,
+  },
+  modalOverlay: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  modalText: {
+    marginTop: 10,
+    fontSize: 18,
+    color: 'black',
   },
 });
 

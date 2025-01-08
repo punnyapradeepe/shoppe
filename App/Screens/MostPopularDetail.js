@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, Modal } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import RecentlyViewed from './../../Components/RecentlyViwed';
 import JustForYou from '../../Components/JustForYou';
@@ -14,9 +14,10 @@ const MostPopularDetail = ({ route }) => {
   const { id } = route.params;
   const navigation = useNavigation();
   const [product, setProduct] = useState(null);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
-    fetch(`http://192.168.1.40:5000/products/${id}`)
+    fetch(`https://json-shoppe.onrender.com/products/${id}`)
       .then(response => response.json())
       .then(data => setProduct(data))
       .catch(error => {
@@ -42,12 +43,12 @@ const MostPopularDetail = ({ route }) => {
         quantity: 1
       };
 
-      const response = await fetch('http://192.168.1.40:5000/cart');
+      const response = await fetch('https://json-shoppe.onrender.com/cart');
       const cartItems = await response.json();
       const existingItem = cartItems.find(item => item.id === product.id && item.userId === userId);
 
       if (existingItem) {
-        await fetch(`http://192.168.1.40:5000/cart/${existingItem.id}`, {
+        await fetch(`https://json-shoppe.onrender.com/cart/${existingItem.id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -58,7 +59,7 @@ const MostPopularDetail = ({ route }) => {
           }),
         });
       } else {
-        await fetch('http://192.168.1.40:5000/cart', {
+        await fetch('https://json-shoppe.onrender.com/cart', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -66,6 +67,7 @@ const MostPopularDetail = ({ route }) => {
           body: JSON.stringify(productData),
         });
       }
+      navigation.navigate('shop')
     } catch (error) {
       console.error('Failed to add or update cart item:', error);
     }
@@ -81,15 +83,17 @@ const MostPopularDetail = ({ route }) => {
         image: product.image,
         size: product.size,
         userId: userId,
-        quantity:1
+        quantity: 1,
       };
 
-      const response = await fetch('http://192.168.1.40:5000/favorites');
+      const response = await fetch('https://json-shoppe.onrender.com/favorites');
       const favoriteItems = await response.json();
-      const existingItem = favoriteItems.find(item => item.id === product.id && item.userId === userId);
+      const existingItem = favoriteItems.find(
+        (item) => item.id === product.id && item.userId === userId
+      );
 
       if (!existingItem) {
-        await fetch('http://192.168.1.40:5000/favorites', {
+        await fetch('https://json-shoppe.onrender.com/favorites', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -97,6 +101,9 @@ const MostPopularDetail = ({ route }) => {
           body: JSON.stringify(productData),
         });
       }
+
+      setIsModalVisible(true);
+      setTimeout(() => setIsModalVisible(false), 2000); 
     } catch (error) {
       console.error('Failed to add favorite item:', error);
     }
@@ -152,7 +159,19 @@ const MostPopularDetail = ({ route }) => {
     
       </ScrollView>
       <AddToCart product={product} onAddToCartPress={handleAddToCartPress} onFavPress={handleFavPress} />
-
+      <Modal
+        visible={isModalVisible}
+        transparent={true}
+        animationType="fade"
+        onRequestClose={() => setIsModalVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <AntDesign name="heart" size={25} color="red" />
+            <Text style={styles.modalText}>Item added to Favorites!</Text>
+          </View>
+        </View>
+      </Modal>
       </SafeAreaView>
   );
 };

@@ -43,7 +43,7 @@ const PaymentScreen = () => {
       try {
         const userID = await AsyncStorage.getItem('userid');
         if (userID) {
-          const response = await axios.get('http://192.168.1.40:5000/mycart');
+          const response = await axios.get('https://json-shoppe.onrender.com/mycart');
           if (response.data) {
             const userCart = response.data.find(cart => cart.userId === userID);
             if (userCart) {
@@ -76,7 +76,7 @@ const PaymentScreen = () => {
           return;
         }
 
-        const response = await axios.get('http://192.168.1.40:5000/cardDetails');
+        const response = await axios.get('https://json-shoppe.onrender.com/cardDetails');
         const userCardDetails = response.data.find(details => details.userId === userId);
 
         if (userCardDetails) {
@@ -106,7 +106,7 @@ const PaymentScreen = () => {
       }
   
       // Fetch cart items for the user
-      const cartResponse = await axios.get('http://192.168.1.40:5000/cart');
+      const cartResponse = await axios.get('https://json-shoppe.onrender.com/cart');
       const userCart = cartResponse.data.filter(item => item.userId === userId);
   
       if (userCart.length === 0) {
@@ -128,19 +128,19 @@ const PaymentScreen = () => {
       };
   
       // Check if an order for the user already exists
-      const orderResponse = await axios.get('http://192.168.1.40:5000/myorder');
+      const orderResponse = await axios.get('https://json-shoppe.onrender.com/myorder');
       const existingOrder = orderResponse.data.find(order => order.userId === userId);
   
       if (existingOrder) {
         // Update the existing order using PUT
-        await axios.put(`http://192.168.1.40:5000/myorder/${existingOrder.id}`, {
+        await axios.put(`https://json-shoppe.onrender.com/myorder/${existingOrder.id}`, {
           ...existingOrder,
           products: [...existingOrder.products, ...orderDetails.products]
         });
         console.log('Order updated successfully!');
       } else {
         // Save the new order using POST
-        await axios.post('http://192.168.1.40:5000/myorder', orderDetails);
+        await axios.post('https://json-shoppe.onrender.com/myorder', orderDetails);
         console.log('Order placed successfully!');
       }
   
@@ -153,7 +153,7 @@ const PaymentScreen = () => {
   
       // Remove cart items
       for (const item of userCart) {
-        await axios.delete(`http://192.168.1.40:5000/cart/${item.id}`);
+        await axios.delete(`https://json-shoppe.onrender.com/cart/${item.id}`);
       }
       console.log('Cart items removed successfully!');
     } catch (error) {
@@ -310,13 +310,13 @@ const saveDetails = async () => {
     };
 
     // Check if the payment details already exist
-    const existingDetailsResponse = await fetch(`http://192.168.1.40:5000/cardDetails?userId=${userId}`);
+    const existingDetailsResponse = await fetch(`https://json-shoppe.onrender.com/cardDetails?userId=${userId}`);
     const existingDetails = await existingDetailsResponse.json();
 
     let response;
     if (existingDetails && existingDetails.length > 0) {
       // Update existing payment details
-      response = await fetch(`http://192.168.1.40:5000/cardDetails/${existingDetails[0].id}`, {
+      response = await fetch(`https://json-shoppe.onrender.com/cardDetails/${existingDetails[0].id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -325,7 +325,7 @@ const saveDetails = async () => {
       });
     } else {
       // Create new payment details
-      response = await fetch('http://192.168.1.40:5000/cardDetails', {
+      response = await fetch('https://json-shoppe.onrender.com/cardDetails', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -495,7 +495,7 @@ const cancelChanges = () => {
             </View>
           </View>
 
-          <Text style={{ marginLeft: 18, marginRight: 20 }}>Delivered on or before Thursday, 23 April 2020</Text>
+          <Text style={{ marginLeft: 18, marginRight: 20 }}> on or before Thursday, 23 April 2020</Text>
 
           <View style={styles.addressContainer}>
             <Text style={styles.address}>Payment Method</Text>

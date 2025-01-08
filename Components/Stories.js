@@ -9,7 +9,7 @@ const Stories = () => {
   
 
  useEffect(() => {
-    fetch('http://192.168.1.40:5000/products?category=clothing')
+    fetch('https://json-shoppe.onrender.com/products?category=clothing')
       .then(response => response.json())
       .then(data => {
         const filteredProducts = data.filter(product => product.type === 'stories');

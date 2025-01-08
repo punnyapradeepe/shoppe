@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, StyleSheet, FlatList, Dimensions, ScrollView, TouchableOpacity, Platform } from 'react-native';
+import { View, Text, Image, StyleSheet, FlatList, Dimensions, ScrollView, TouchableOpacity, Platform ,Modal } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Colors from './../Utils/Colors';
 import AddToCart from '../../Components/AddToCart';
@@ -17,7 +17,8 @@ const NewItemDetail = ({ route }) => {
   const navigation = useNavigation();
   const { item } = route.params;
   const [activeIndex, setActiveIndex] = useState(0);
-  const [product, setProduct] = useState(item); // Initialize product with item from route params
+  const [product, setProduct] = useState(item); 
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const renderItem = ({ item }) => (
     <Image source={item} style={styles.image} />
@@ -39,37 +40,51 @@ const NewItemDetail = ({ route }) => {
         image: product.image,
         size: product.size,
         userId: userId,
-        quantity: 1
+        quantity: 1,
       };
-
-      const response = await fetch('http://192.168.1.40:5000/cart');
+  
+      console.log("Product Data to Add or Update:", productData);
+  
+      const response = await fetch('https://json-shoppe.onrender.com/cart');
       const cartItems = await response.json();
       const existingItem = cartItems.find(item => item.id === product.id && item.userId === userId);
-
+  
       if (existingItem) {
-        await fetch(`http://192.168.1.40:5000/cart/${existingItem.id}`, {
+        console.log("Existing Item Found, Updating Quantity:", {
+          ...existingItem,
+          quantity: existingItem.quantity + 1,
+        });
+  
+        await fetch(`https://json-shoppe.onrender.com/cart/${existingItem.id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             ...existingItem,
-            quantity: existingItem.quantity + 1
+            quantity: existingItem.quantity + 1,
           }),
         });
+  
+        navigation.navigate('shop');
       } else {
-        await fetch('http://192.168.1.40:5000/cart', {
+        console.log("New Product Data to Add to Cart:", productData);
+  
+        await fetch('https://json-shoppe.onrender.com/cart', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(productData),
         });
+  
+        navigation.navigate('shop');
       }
     } catch (error) {
       console.error('Failed to add or update cart item:', error);
     }
   };
+  
   const handleFavPress = async (product) => {
     try {
       const userId = await AsyncStorage.getItem('userid');
@@ -80,15 +95,17 @@ const NewItemDetail = ({ route }) => {
         image: product.image,
         size: product.size,
         userId: userId,
-        quantity:1
+        quantity: 1,
       };
 
-      const response = await fetch('http://192.168.1.40:5000/favorites');
+      const response = await fetch('https://json-shoppe.onrender.com/favorites');
       const favoriteItems = await response.json();
-      const existingItem = favoriteItems.find(item => item.id === product.id && item.userId === userId);
+      const existingItem = favoriteItems.find(
+        (item) => item.id === product.id && item.userId === userId
+      );
 
       if (!existingItem) {
-        await fetch('http://192.168.1.40:5000/favorites', {
+        await fetch('https://json-shoppe.onrender.com/favorites', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -96,10 +113,14 @@ const NewItemDetail = ({ route }) => {
           body: JSON.stringify(productData),
         });
       }
+
+      setIsModalVisible(true);
+      setTimeout(() => setIsModalVisible(false), 2000); 
     } catch (error) {
       console.error('Failed to add favorite item:', error);
     }
   };
+
 
   if (!product) {
     return (
@@ -225,7 +246,19 @@ const NewItemDetail = ({ route }) => {
         </View>
       </ScrollView>
       <AddToCart product={product} onAddToCartPress={handleAddToCartPress} onFavPress={handleFavPress} />
-
+      <Modal
+        visible={isModalVisible}
+        transparent={true}
+        animationType="fade"
+        onRequestClose={() => setIsModalVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <AntDesign name="heart" size={25} color="red" />
+            <Text style={styles.modalText}>Item added to Favorites!</Text>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 };
@@ -363,6 +396,23 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
+  },
+  modalOverlay: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  modalText: {
+    marginTop: 10,
+    fontSize: 18,
+    color: 'black',
   },
 });
 

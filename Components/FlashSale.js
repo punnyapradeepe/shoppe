@@ -10,7 +10,7 @@ const FlashSale = () => {
   const [flashSaleRow2, setFlashSaleRow2] = useState([]);
 
   useEffect(() => {
-    fetch('http://192.168.1.40:5000/products?category=clothing1')
+    fetch('https://json-shoppe.onrender.com/products?category=clothing1')
       .then(response => response.json())
       .then(data => {
         const row1Items = data.filter(product => product.type === 'flashsale' && product.row === 1);

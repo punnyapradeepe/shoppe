@@ -13,7 +13,8 @@ import { ClockImg, Notification, RectangleImg, StartImg } from '../Utils/SvgIcon
 import TopProductScreen from '../../Components/TopProductScreen';
 import JustForYou from '../../Components/JustForYou';
 import { useNavigation, useFocusEffect } from '@react-navigation/core';
-import AsyncStorage from '@react-native-async-storage/async-storage'; // Make sure to import AsyncStorage
+import AsyncStorage from '@react-native-async-storage/async-storage'; 
+import { server_api } from '../../Constants/ServerApi';
 
 export default function ActivityScreen() {
   const navigation = useNavigation();
@@ -27,11 +28,12 @@ export default function ActivityScreen() {
           const userId = await AsyncStorage.getItem('userid');
           console.log('Retrieved userId from AsyncStorage:', userId);
           if (userId) {
-            const response = await fetch(`http://192.168.1.40:5000/users/${userId}`); 
+            const response = await fetch(`${server_api}/users/${userId}`); 
             const data = await response.json();
             console.log('Fetched user data:', data);
             setUser(data);
             setName(data.name);
+            console.log(data.name)
           } else {
             console.warn('No userId found in AsyncStorage');
           }
@@ -46,7 +48,7 @@ export default function ActivityScreen() {
 
   return (
     <View style={styles.screen}>
-      <View style={styles.headerContainer}>
+      {/* <View style={styles.headerContainer}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Image source={require('./../../assets/Images/Image.png')} style={styles.image} />
         </View>
@@ -55,7 +57,7 @@ export default function ActivityScreen() {
           <Image source={require('./../../assets/Images/Top Menu.png')} style={styles.image1} />
           <Image source={require('./../../assets/Images/Settings.png')} style={styles.image1} />
         </View>
-      </View>
+      </View> */}
 
       <Text style={styles.helloText}>Hello, {name}</Text>
         <View style={styles.announcementWrapper}>
@@ -70,7 +72,6 @@ export default function ActivityScreen() {
           </View>
         </View>
 
-        
       <ScrollView 
         contentContainerStyle={styles.scrollViewContent}
         showsHorizontalScrollIndicator={false}
@@ -78,10 +79,10 @@ export default function ActivityScreen() {
       >
      
         
-        <Text style={styles.recentlyViewedText}>Recently Viewed</Text>
-        <RecentlyViewed />
-        
-        <Text style={styles.recentlyViewedText}>My Orders</Text>
+        {/* <Text style={styles.recentlyViewedText}>Recently Viewed</Text>
+        <RecentlyViewed /> */}
+    
+        {/* <Text style={styles.recentlyViewedText}>My Orders</Text>
         <View style={styles.orderContainer}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             <TouchableOpacity onPress={() => navigation.navigate('Activity', { screen: 'allc', params: {} })} style={styles.orderButton}>
@@ -99,12 +100,12 @@ export default function ActivityScreen() {
               <Text style={styles.orderButtonText}>To Review</Text>
             </TouchableOpacity>
           </ScrollView>
-        </View>
+        </View> */}
         
         <Text style={styles.recentlyViewedText}>Stories</Text>
         <Stories style={{ position: 'relative' }} />
         
-        <NewItems />
+        {/* <NewItems /> */}
         <MostPopular />
         <Categories />
         <FlashSale />
@@ -171,6 +172,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Raleway',
     fontWeight: '700',
     marginBottom: 10,
+    paddingTop:20
   },
   announcementWrapper: {
     marginLeft: 10,

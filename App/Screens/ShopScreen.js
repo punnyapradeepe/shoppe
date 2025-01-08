@@ -41,7 +41,7 @@ export default function ShopScreen() {
 
   const fetchCartItems = async (userId) => {
     try {
-      const response = await fetch('http://192.168.1.40:5000/cart');
+      const response = await fetch('https://json-shoppe.onrender.com/cart');
       const data = await response.json();
       const filteredItems = data.filter(item => item.userId === userId);
       setCartItems(filteredItems);
@@ -69,7 +69,7 @@ export default function ShopScreen() {
           const updatedItem = { ...item, quantity: newQuantity };
 
           // Update the quantity in the server
-          fetch(`http://192.168.1.40:5000/cart/${itemId}`, {
+          fetch(`https://json-shoppe.onrender.com/cart/${itemId}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ export default function ShopScreen() {
   const handleDelete = async (itemId) => {
     try {
       // Delete the item from the server
-      await fetch(`http://192.168.1.40:5000/cart/${itemId}`, {
+      await fetch(`https://json-shoppe.onrender.com/cart/${itemId}`, {
         method: 'DELETE',
       });
 
@@ -108,7 +108,7 @@ export default function ShopScreen() {
 
   const handleSaveToMyCart = async () => {
     try {
-      const response = await fetch('http://192.168.1.40:5000/mycart');
+      const response = await fetch('https://json-shoppe.onrender.com/mycart');
       const data = await response.json();
       const existingEntry = data.find(entry => entry.userId === userId);
 
@@ -121,7 +121,7 @@ export default function ShopScreen() {
 
       if (existingEntry) {
         // Update existing entry
-        await fetch(`http://192.168.1.40:5000/mycart/${existingEntry.id}`, {
+        await fetch(`https://json-shoppe.onrender.com/mycart/${existingEntry.id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -130,7 +130,7 @@ export default function ShopScreen() {
         });
       } else {
         // Create new entry
-        await fetch('http://192.168.1.40:5000/mycart', {
+        await fetch('https://json-shoppe.onrender.com/mycart', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -192,16 +192,16 @@ export default function ShopScreen() {
                 <View style={styles.priceContainer}>
                   <Text style={styles.itemPrice}>{item.price}</Text>
                   <TouchableOpacity style={{ marginRight: 5 }} onPress={() => handleQuantityChange(item.id, -1)}>
-                    <MinusImg />
+                  <MinusImg />
                   </TouchableOpacity>
                   <View style={styles.quantityBox}>
-                    <Text>{item.quantity}</Text>
+                  <Text>{item.quantity}</Text>
                   </View>
                   <TouchableOpacity style={{ marginLeft: 5, marginRight: 5 }} onPress={() => handleQuantityChange(item.id, 1)}>
-                    <MoreImg />
+                  <MoreImg />
                   </TouchableOpacity>
                   <TouchableOpacity style={{ marginLeft: 'auto' }} onPress={() => handleDelete(item.id)}>
-                    <DeleteBtn />
+                  <DeleteBtn />
                   </TouchableOpacity>
                 </View>
               </View>

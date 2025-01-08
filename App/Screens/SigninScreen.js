@@ -7,6 +7,8 @@ import Colors from '../Utils/Colors';
 import { useNavigation } from '@react-navigation/core';
 import { HeartImg } from './../../App/Utils/SvgIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { SignIn } from '../../Constants/Api';
+import { server_api } from '../../Constants/ServerApi';
 
 export default function SigninScreen() {
   const [email, setEmail] = useState('');
@@ -14,7 +16,10 @@ export default function SigninScreen() {
   const navigation = useNavigation();
 
   const handleLogin = async () => {
-    const url = `http://192.168.1.40:5000/users?email=${encodeURIComponent(email)}`; 
+    const url = `https://json-shoppe.onrender.com/users?email=${encodeURIComponent(email)}`;
+    // const url = `https://json-shoppe.onrender.com/users?email=${encodeURIComponent(email)}`; 
+    //  const url = `${server_api}/httusers?email=${encodeURIComponent(email)}`;
+     console.log('API URL:', url);
 
     let hasError = false;
 
@@ -110,7 +115,7 @@ const styles = StyleSheet.create({
   scrollViewContainer: {
     flexGrow: 1,
     justifyContent: 'center',
-    paddingBottom: 20, // Adjust this padding if needed
+  
   },
   content: {
     backgroundColor: Colors.WHITE,
@@ -189,5 +194,6 @@ const styles = StyleSheet.create({
   },
   cancelText: {
     alignSelf: 'center',
+    marginBottom:100
   },
 });
